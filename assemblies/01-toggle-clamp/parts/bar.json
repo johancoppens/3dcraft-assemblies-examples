@@ -1,0 +1,737 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "plate_thickness",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_thickness",
+   "label": "Plate thickness",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 1,
+   "min": "2.4 mm",
+   "max": "2.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_bore",
+   "label": "Pivot bore",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 2,
+   "min": "4.1 mm",
+   "max": "5.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leg_inner_y",
+   "expr": "3.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "leg_inner_y",
+   "label": "Leg inner y",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 3,
+   "min": "3.1 mm",
+   "max": "3.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_arm",
+   "expr": "13.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "bar_arm",
+   "label": "Bar arm",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 4,
+   "min": "13 mm",
+   "max": "15 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "arm_angle",
+   "expr": "73.5739 deg"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "arm_angle",
+   "label": "Arm angle",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 5,
+   "min": "70 deg",
+   "max": "78 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "strip_bottom",
+   "expr": "-7.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "strip_bottom",
+   "label": "Strip bottom",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 6,
+   "min": "-8 mm",
+   "max": "-6.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "strip_top",
+   "expr": "5.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "strip_top",
+   "label": "Strip top",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 7,
+   "min": "4.5 mm",
+   "max": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_x",
+   "expr": "-71.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "tip_x",
+   "label": "Tip x",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 8,
+   "min": "-73 mm",
+   "max": "-71 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stop_x",
+   "expr": "6.6545 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "stop_x",
+   "label": "Stop x",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 9,
+   "min": "5.2 mm",
+   "max": "8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spindle_reach",
+   "expr": "28.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "spindle_reach",
+   "label": "Spindle reach",
+   "description": "Set by the assembly",
+   "group": "U-bar",
+   "order": 10,
+   "min": "24 mm",
+   "max": "68 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bend_radius",
+   "expr": "plate_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "k_factor",
+   "expr": "(0.65 + 0.5 * ln(bend_radius / plate_thickness) / ln(10)) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flat_start_x",
+   "expr": "tip_x + plate_thickness + bend_radius"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "web_half",
+   "expr": "leg_inner_y - bend_radius"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_pivot_x",
+   "expr": "bar_arm * cos(arm_angle)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_pivot_z",
+   "expr": "bar_arm * sin(arm_angle)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_radius",
+   "expr": "5.65 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_corner",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "corner",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Tip web",
+   "plane": "yz",
+   "offset": "tip_x"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Tip web",
+   "start": [
+    "-web_half",
+    "strip_bottom"
+   ],
+   "segments": [
+    {
+     "line": [
+      "web_half",
+      "strip_bottom"
+     ]
+    },
+    {
+     "line": [
+      "web_half",
+      "strip_top"
+     ]
+    },
+    {
+     "line": [
+      "-web_half",
+      "strip_top"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Near leg",
+   "plane": "yz",
+   "offset": "tip_x"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Near leg",
+   "start": [
+    "web_half + ((flat_start_x) - flat_start_x)",
+    "strip_bottom"
+   ],
+   "segments": [
+    {
+     "line": [
+      "web_half + ((stop_x) - flat_start_x) + -1.000000 * (0.6 mm)",
+      "strip_bottom + 0.000000 * (0.6 mm)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((stop_x) - flat_start_x) + 0.000000 * (0.6 mm)",
+      "strip_bottom + 1.000000 * (0.6 mm)"
+     ],
+     "radius": "0.6 mm"
+    },
+    {
+     "line": [
+      "web_half + ((stop_x) - flat_start_x) + 0.000000 * (corner)",
+      "strip_top + -0.269584 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((stop_x) - flat_start_x) + 0.135504 * (corner)",
+      "strip_top + 0.233055 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "web_half + ((handle_pivot_x + boss_radius) - flat_start_x) + -0.135504 * (corner)",
+      "handle_pivot_z - 3 mm + -0.233055 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((handle_pivot_x + boss_radius) - flat_start_x) + 0.000000 * (corner)",
+      "handle_pivot_z - 3 mm + 0.269584 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "web_half + ((handle_pivot_x + boss_radius) - flat_start_x) + 0.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + -1.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((handle_pivot_x + boss_radius) - flat_start_x) + -1.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + 0.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner"
+    },
+    {
+     "line": [
+      "web_half + ((handle_pivot_x - boss_radius) - flat_start_x) + 1.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + 0.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((handle_pivot_x - boss_radius) - flat_start_x) + 0.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + -1.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner"
+    },
+    {
+     "line": [
+      "web_half + ((handle_pivot_x - boss_radius) - flat_start_x) + 0.000000 * (corner)",
+      "strip_top + 1.000000 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "web_half + ((handle_pivot_x - boss_radius) - flat_start_x) + -1.000000 * (corner)",
+      "strip_top + 0.000000 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "web_half + ((flat_start_x) - flat_start_x)",
+      "strip_top"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Near leg",
+   "center": [
+    "web_half + ((0 mm) - flat_start_x)",
+    "0 mm"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Near leg",
+   "center": [
+    "web_half + ((handle_pivot_x) - flat_start_x)",
+    "handle_pivot_z"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Far leg",
+   "plane": "yz",
+   "offset": "tip_x"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Far leg",
+   "start": [
+    "-web_half - ((flat_start_x) - flat_start_x)",
+    "strip_bottom"
+   ],
+   "segments": [
+    {
+     "line": [
+      "-web_half - ((stop_x) - flat_start_x) + 1.000000 * (0.6 mm)",
+      "strip_bottom + 0.000000 * (0.6 mm)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((stop_x) - flat_start_x) + 0.000000 * (0.6 mm)",
+      "strip_bottom + 1.000000 * (0.6 mm)"
+     ],
+     "radius": "0.6 mm",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-web_half - ((stop_x) - flat_start_x) + 0.000000 * (corner)",
+      "strip_top + -0.269584 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((stop_x) - flat_start_x) + -0.135504 * (corner)",
+      "strip_top + 0.233055 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "-web_half - ((handle_pivot_x + boss_radius) - flat_start_x) + 0.135504 * (corner)",
+      "handle_pivot_z - 3 mm + -0.233055 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((handle_pivot_x + boss_radius) - flat_start_x) + 0.000000 * (corner)",
+      "handle_pivot_z - 3 mm + 0.269584 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-web_half - ((handle_pivot_x + boss_radius) - flat_start_x) + 0.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + -1.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((handle_pivot_x + boss_radius) - flat_start_x) + 1.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + 0.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-web_half - ((handle_pivot_x - boss_radius) - flat_start_x) + -1.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + 0.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((handle_pivot_x - boss_radius) - flat_start_x) + 0.000000 * (boss_corner)",
+      "handle_pivot_z + boss_radius + -1.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-web_half - ((handle_pivot_x - boss_radius) - flat_start_x) + 0.000000 * (corner)",
+      "strip_top + 1.000000 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-web_half - ((handle_pivot_x - boss_radius) - flat_start_x) + 1.000000 * (corner)",
+      "strip_top + 0.000000 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "-web_half - ((flat_start_x) - flat_start_x)",
+      "strip_top"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Far leg",
+   "center": [
+    "-web_half - ((0 mm) - flat_start_x)",
+    "0 mm"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Far leg",
+   "center": [
+    "-web_half - ((handle_pivot_x) - flat_start_x)",
+    "handle_pivot_z"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "feature.sheetMetal",
+  {
+   "sketch": "Tip web",
+   "name": "U-bar",
+   "thickness": "plate_thickness",
+   "radius": "bend_radius",
+   "kFactor": "k_factor",
+   "flanges": [
+    {
+     "edge": "e5",
+     "angle": "90 deg",
+     "outline": "Near leg"
+    },
+    {
+     "edge": "e8",
+     "angle": "90 deg",
+     "outline": "Far leg"
+    }
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "U-bar",
+   "preset": "steel",
+   "color": "#9eaec6",
+   "metallic": 0.6,
+   "roughness": 0.62
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot A",
+   "through": [
+    [
+     "0 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     0,
+     "0 mm - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot B",
+   "through": [
+    [
+     "handle_pivot_x",
+     0,
+     "handle_pivot_z"
+    ],
+    [
+     "handle_pivot_x + 1 mm",
+     0,
+     "handle_pivot_z"
+    ],
+    [
+     "handle_pivot_x",
+     0,
+     "handle_pivot_z - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.point",
+  {
+   "name": "B point",
+   "at": [
+    "handle_pivot_x",
+    0,
+    "handle_pivot_z"
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Spindle axis",
+   "through": [
+    [
+     "-spindle_reach",
+     0,
+     "strip_top"
+    ],
+    [
+     "-spindle_reach + 1 mm",
+     0,
+     "strip_top"
+    ],
+    [
+     "-spindle_reach",
+     "1 mm",
+     "strip_top"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Lower seat",
+   "through": [
+    [
+     "-spindle_reach",
+     0,
+     "strip_bottom"
+    ],
+    [
+     "-spindle_reach + 1 mm",
+     0,
+     "strip_bottom"
+    ],
+    [
+     "-spindle_reach",
+     "-1 mm",
+     "strip_bottom"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Inner bend radius at least the thickness",
+   "measure": "bendRadius",
+   "of": "U-bar",
+   "min": "plate_thickness"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bores clear the bends by 2.5 t + r",
+   "measure": "holeToBend",
+   "of": "U-bar",
+   "min": "2.5 * plate_thickness + bend_radius"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Overall width of the two legs",
+   "measure": "extent",
+   "of": "U-bar",
+   "axis": "y",
+   "eq": "2 * (leg_inner_y + plate_thickness)",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Toggle clamp U-bar",
+   "description": "Formed U-bar from one blank: a narrow web at the tip and two legs, the spindle slot between them, carrying the bar pivot and the handle pivot.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

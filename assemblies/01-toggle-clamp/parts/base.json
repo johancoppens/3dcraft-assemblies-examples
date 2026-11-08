@@ -1,0 +1,850 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "plate_thickness",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_thickness",
+   "label": "Plate thickness",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 1,
+   "min": "2.4 mm",
+   "max": "2.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_bore",
+   "label": "Pivot bore",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 2,
+   "min": "4.1 mm",
+   "max": "5.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_inner_y",
+   "expr": "5.8 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "ear_inner_y",
+   "label": "Ear inner y",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 3,
+   "min": "5.7 mm",
+   "max": "5.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_a_x",
+   "expr": "13.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_a_x",
+   "label": "Pivot a x",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 4,
+   "min": "12.5 mm",
+   "max": "14.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_a_z",
+   "expr": "30.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_a_z",
+   "label": "Pivot a z",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 5,
+   "min": "29.5 mm",
+   "max": "31.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_d_x",
+   "expr": "30.92 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_d_x",
+   "label": "Pivot d x",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 6,
+   "min": "30 mm",
+   "max": "32 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_d_z",
+   "expr": "9.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_d_z",
+   "label": "Pivot d z",
+   "description": "Set by the assembly",
+   "group": "Base",
+   "order": 7,
+   "min": "8.8 mm",
+   "max": "10.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hand",
+   "expr": "1"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "hand",
+   "label": "Hand",
+   "description": "1 for the half at +y, -1 for its mirror image at -y",
+   "group": "Base",
+   "order": 8,
+   "kind": "integer",
+   "min": "-1",
+   "max": "1",
+   "step": "2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bend_radius",
+   "expr": "plate_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "k_factor",
+   "expr": "(0.65 + 0.5 * ln(bend_radius / plate_thickness) / ln(10)) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_length",
+   "expr": "37 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_half_width",
+   "expr": "19.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_corner",
+   "expr": "3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "slot_width",
+   "expr": "5.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "slot_length",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "slot_spacing_x",
+   "expr": "26.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "slot_spacing_y",
+   "expr": "28.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "centre_hole",
+   "expr": "4.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_corner",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_top_z",
+   "expr": "pivot_a_z + 7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_low_z",
+   "expr": "pivot_d_z + 6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_front_x",
+   "expr": "pivot_a_x - 7.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_rear_x",
+   "expr": "pivot_a_x + 6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "edge_y",
+   "expr": "ear_inner_y + plate_thickness + bend_radius"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tangent_z",
+   "expr": "plate_thickness + bend_radius"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Flange",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Flange",
+   "start": [
+    "0 mm",
+    "edge_y"
+   ],
+   "segments": [
+    {
+     "line": [
+      "flange_length",
+      "edge_y"
+     ]
+    },
+    {
+     "line": [
+      "flange_length + 0.000000 * (flange_corner)",
+      "flange_half_width + -1.000000 * (flange_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "flange_length + -1.000000 * (flange_corner)",
+      "flange_half_width + 0.000000 * (flange_corner)"
+     ],
+     "radius": "flange_corner"
+    },
+    {
+     "line": [
+      "0 mm + 1.000000 * (flange_corner)",
+      "flange_half_width + 0.000000 * (flange_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "0 mm + 0.000000 * (flange_corner)",
+      "flange_half_width + -1.000000 * (flange_corner)"
+     ],
+     "radius": "flange_corner"
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Flange",
+   "start": [
+    "(flange_length - slot_spacing_x) / 2 + slot_width / 2",
+    "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      "(flange_length - slot_spacing_x) / 2 + slot_width / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "arc": [
+      "(flange_length - slot_spacing_x) / 2 - slot_width / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ],
+     "center": [
+      "(flange_length - slot_spacing_x) / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "line": [
+      "(flange_length - slot_spacing_x) / 2 - slot_width / 2",
+      "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "(flange_length - slot_spacing_x) / 2",
+      "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+     ]
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Flange",
+   "start": [
+    "(flange_length + slot_spacing_x) / 2 + slot_width / 2",
+    "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      "(flange_length + slot_spacing_x) / 2 + slot_width / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "arc": [
+      "(flange_length + slot_spacing_x) / 2 - slot_width / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ],
+     "center": [
+      "(flange_length + slot_spacing_x) / 2",
+      "slot_spacing_y / 2 + (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "line": [
+      "(flange_length + slot_spacing_x) / 2 - slot_width / 2",
+      "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "(flange_length + slot_spacing_x) / 2",
+      "slot_spacing_y / 2 - (slot_length - slot_width) / 2"
+     ]
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Flange",
+   "center": [
+    "flange_length / 2",
+    "slot_spacing_y / 2"
+   ],
+   "radius": "centre_hole / 2"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Ear outline",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Ear outline",
+   "start": [
+    "flange_length",
+    "edge_y"
+   ],
+   "segments": [
+    {
+     "line": [
+      "0 mm",
+      "edge_y"
+     ]
+    },
+    {
+     "line": [
+      "0 mm + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z - 12 mm) - tangent_z) + 0.369924 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "0 mm + 0.240743 * (ear_corner)",
+      "edge_y - ((ear_top_z - 12 mm) - tangent_z) + -0.280867 * (ear_corner)"
+     ],
+     "radius": "ear_corner"
+    },
+    {
+     "line": [
+      "ear_front_x + -0.240743 * (ear_corner)",
+      "edge_y - ((ear_top_z - 5 mm) - tangent_z) + 0.280867 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "ear_front_x + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z - 5 mm) - tangent_z) + -0.369924 * (ear_corner)"
+     ],
+     "radius": "ear_corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "ear_front_x + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z) - tangent_z) + 1.000000 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "ear_front_x + 1.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z) - tangent_z) + 0.000000 * (ear_corner)"
+     ],
+     "radius": "ear_corner"
+    },
+    {
+     "line": [
+      "ear_rear_x + -1.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z) - tangent_z) + 0.000000 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "ear_rear_x + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_top_z) - tangent_z) + 1.000000 * (ear_corner)"
+     ],
+     "radius": "ear_corner"
+    },
+    {
+     "line": [
+      "ear_rear_x + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_low_z + 3 mm) - tangent_z) + -0.414214 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "ear_rear_x + 0.292893 * (ear_corner)",
+      "edge_y - ((ear_low_z + 3 mm) - tangent_z) + 0.292893 * (ear_corner)"
+     ],
+     "radius": "ear_corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "ear_rear_x + 3 mm + -0.292893 * (ear_corner)",
+      "edge_y - ((ear_low_z) - tangent_z) + -0.292893 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "ear_rear_x + 3 mm + 0.414214 * (ear_corner)",
+      "edge_y - ((ear_low_z) - tangent_z) + 0.000000 * (ear_corner)"
+     ],
+     "radius": "ear_corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "flange_length + -1.000000 * (ear_corner)",
+      "edge_y - ((ear_low_z) - tangent_z) + 0.000000 * (ear_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "flange_length + 0.000000 * (ear_corner)",
+      "edge_y - ((ear_low_z) - tangent_z) + 1.000000 * (ear_corner)"
+     ],
+     "radius": "ear_corner"
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Ear outline",
+   "center": [
+    "pivot_a_x",
+    "edge_y - ((pivot_a_z) - tangent_z)"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Ear outline",
+   "center": [
+    "pivot_d_x",
+    "edge_y - ((pivot_d_z) - tangent_z)"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "feature.sheetMetal",
+  {
+   "sketch": "Flange",
+   "name": "Base half",
+   "thickness": "plate_thickness",
+   "radius": "bend_radius",
+   "kFactor": "k_factor",
+   "flanges": [
+    {
+     "edge": "e3",
+     "angle": "90 deg",
+     "outline": "Ear outline"
+    }
+   ]
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "die_opening",
+   "expr": "16 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tool_angle",
+   "expr": "88 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "punch_tip_radius",
+   "expr": "2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "punch_flank",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "punch_height",
+   "expr": "80 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "die_shoulder",
+   "expr": "2 mm"
+  }
+ ],
+ [
+  "feature.mirror",
+  {
+   "name": "Base mirrored",
+   "source": "Base half",
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "when": "hand < 0"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Base mirrored",
+   "preset": "steel",
+   "color": "#9eaec6",
+   "metallic": 0.6,
+   "roughness": 0.62
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Mounting",
+   "through": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     "1 mm",
+     0,
+     0
+    ],
+    [
+     0,
+     "1 mm",
+     0
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot A",
+   "through": [
+    [
+     "pivot_a_x",
+     0,
+     "pivot_a_z"
+    ],
+    [
+     "pivot_a_x + 1 mm",
+     0,
+     "pivot_a_z"
+    ],
+    [
+     "pivot_a_x",
+     0,
+     "pivot_a_z - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot D",
+   "through": [
+    [
+     "pivot_d_x",
+     0,
+     "pivot_d_z"
+    ],
+    [
+     "pivot_d_x + 1 mm",
+     0,
+     "pivot_d_z"
+    ],
+    [
+     "pivot_d_x",
+     0,
+     "pivot_d_z - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Inner bend radius at least the thickness",
+   "measure": "bendRadius",
+   "of": "Base half",
+   "min": "plate_thickness"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Folded width of one half",
+   "measure": "extent",
+   "of": "Base mirrored",
+   "axis": "y",
+   "eq": "flange_half_width - ear_inner_y",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Nearest hole keeps clear of the bend tangent line",
+   "measure": "holeToBend",
+   "of": "Base half",
+   "min": "0.1 mm"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bendable on a press brake",
+   "measure": "bendable",
+   "of": "Base half",
+   "punch": [
+    [
+     "-(punch_tip_radius * cos(tool_angle / 2) + (punch_flank + punch_tip_radius * sin(tool_angle / 2)) * tan(tool_angle / 2))",
+     "punch_height"
+    ],
+    [
+     "-(punch_tip_radius * cos(tool_angle / 2) + (punch_flank + punch_tip_radius * sin(tool_angle / 2)) * tan(tool_angle / 2))",
+     "punch_flank"
+    ],
+    [
+     "-punch_tip_radius * cos(tool_angle / 2)",
+     "-punch_tip_radius * sin(tool_angle / 2)"
+    ],
+    {
+     "through": [
+      0,
+      "-punch_tip_radius"
+     ]
+    },
+    [
+     "punch_tip_radius * cos(tool_angle / 2)",
+     "-punch_tip_radius * sin(tool_angle / 2)"
+    ],
+    [
+     "punch_tip_radius * cos(tool_angle / 2) + (punch_flank + punch_tip_radius * sin(tool_angle / 2)) * tan(tool_angle / 2)",
+     "punch_flank"
+    ],
+    [
+     "punch_tip_radius * cos(tool_angle / 2) + (punch_flank + punch_tip_radius * sin(tool_angle / 2)) * tan(tool_angle / 2)",
+     "punch_height"
+    ]
+   ],
+   "die": [
+    [
+     "-die_opening",
+     "-die_opening * 3"
+    ],
+    [
+     "die_opening",
+     "-die_opening * 3"
+    ],
+    [
+     "die_opening",
+     0
+    ],
+    [
+     "die_opening / 2 + die_shoulder * tan(45 deg - tool_angle / 4)",
+     0
+    ],
+    {
+     "through": [
+      "die_opening / 2 + die_shoulder * tan(45 deg - tool_angle / 4) - die_shoulder * sin(45 deg - tool_angle / 4)",
+      "die_shoulder * (cos(45 deg - tool_angle / 4) - 1)"
+     ]
+    },
+    [
+     "die_opening / 2 - die_shoulder * tan(45 deg - tool_angle / 4) * sin(tool_angle / 2)",
+     "-die_shoulder * tan(45 deg - tool_angle / 4) * cos(tool_angle / 2)"
+    ],
+    [
+     0,
+     "-die_opening / 2 / tan(tool_angle / 2)"
+    ],
+    [
+     "-(die_opening / 2 - die_shoulder * tan(45 deg - tool_angle / 4) * sin(tool_angle / 2))",
+     "-die_shoulder * tan(45 deg - tool_angle / 4) * cos(tool_angle / 2)"
+    ],
+    {
+     "through": [
+      "-(die_opening / 2 + die_shoulder * tan(45 deg - tool_angle / 4) - die_shoulder * sin(45 deg - tool_angle / 4))",
+      "die_shoulder * (cos(45 deg - tool_angle / 4) - 1)"
+     ]
+    },
+    [
+     "-(die_opening / 2 + die_shoulder * tan(45 deg - tool_angle / 4))",
+     0
+    ],
+    [
+     "-die_opening",
+     0
+    ]
+   ],
+   "is": true
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Toggle clamp base half",
+   "description": "One formed L of the base: a flange with four mounting slots and a round hole, and an ear carrying the bar and link pivots. One source, placed twice, the second mirrored by the Hand parameter.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

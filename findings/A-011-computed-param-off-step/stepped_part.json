@@ -1,0 +1,9 @@
+[
+ ["variable.set", {"name": "length", "expr": "10 mm"}],
+ ["variable.publish", {"name": "length", "label": "Length", "min": "5 mm", "max": "15 mm", "step": "0.1 mm"}],
+ ["sketch.create", {"name": "Bar", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Bar", "from": [0, 0], "to": ["length", 5]}],
+ ["feature.extrude", {"name": "Block", "sketch": "Bar", "distance": 5}],
+ ["document.info", {"title": "t", "description": "d", "author": "x", "licence": "CC-BY-4.0"}],
+ ["document.check", {}]
+]

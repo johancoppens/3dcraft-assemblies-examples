@@ -222,7 +222,8 @@ independently computed:
   ranges. A joint's solved value against a closed form (`jointAngle`, `jointDistance`, `position`, `rotation`); the
   ratio you see is the ratio asked; the extremes that matter (stroke, height, reach); `clearance` where a gap is the
   point. No dead point unless the README says why.
-- **No collisions:** `motion.bake {"frames": 120, "collisions": true}` finds none but the contacts in `meta.json`.
+- **No collisions:** over 121 moments at the defaults and 31 at each corner of the public ranges, none but the contacts
+  in `meta.json` (`view.motion` with `collisions`, which names the pairs; `tools/assemblies.py check` runs it).
 - **Formula-driven contact is measured:** a follower driven by a formula is shown to touch and not to penetrate.
 - **It holds for the model, not the formula.** An assertion that compares a formula with itself proves nothing: remove
   it. Do a mutation test in a scratch copy: a moved pivot, a wrong ratio, a loosened fit must fail something.

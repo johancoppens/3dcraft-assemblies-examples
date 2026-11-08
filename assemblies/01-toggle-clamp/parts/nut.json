@@ -1,0 +1,237 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "width_across_flats",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nut_height",
+   "expr": "5.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tap_drill",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "corner_radius",
+   "expr": "width_across_flats / 2 / cos(30 deg)"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Hexagon",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Hexagon",
+   "start": [
+    "width_across_flats / 2",
+    "-corner_radius / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      "width_across_flats / 2",
+      "corner_radius / 2"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "corner_radius"
+     ]
+    },
+    {
+     "line": [
+      "-width_across_flats / 2",
+      "corner_radius / 2"
+     ]
+    },
+    {
+     "line": [
+      "-width_across_flats / 2",
+      "-corner_radius / 2"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "-corner_radius"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Hexagon",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "tap_drill / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "name": "Hex prism",
+   "sketch": "Hexagon",
+   "distance": "nut_height"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Chamfer turn",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Chamfer turn",
+   "start": [
+    "0 mm",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "0 mm",
+      "corner_radius - 0.8 mm"
+     ]
+    },
+    {
+     "line": [
+      "0.46 mm",
+      "corner_radius"
+     ]
+    },
+    {
+     "line": [
+      "nut_height - 0.46 mm",
+      "corner_radius"
+     ]
+    },
+    {
+     "line": [
+      "nut_height",
+      "corner_radius - 0.8 mm"
+     ]
+    },
+    {
+     "line": [
+      "nut_height",
+      "0 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "name": "Nut envelope",
+   "sketch": "Chamfer turn",
+   "axis": "x"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "intersect",
+   "target": "Hex prism",
+   "tool": "Nut envelope",
+   "name": "Chamfered nut"
+  }
+ ],
+ [
+  "feature.thread",
+  {
+   "name": "Hex nut",
+   "face": "F5:copy(0)/F2:side(e14)",
+   "start": "F5:copy(0)/F2:startCap(e3,e5,e7,e9,e11,e12)",
+   "size": "M6",
+   "length": "nut_height - 1.2 mm"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Hex nut",
+   "preset": "steel",
+   "color": "#d5dde3",
+   "metallic": 0.7,
+   "roughness": 0.42
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Seat",
+   "through": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     "1 mm",
+     0,
+     0
+    ],
+    [
+     0,
+     "1 mm",
+     0
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Height to ISO 4032",
+   "measure": "extent",
+   "of": "Hex nut",
+   "axis": "z",
+   "eq": "nut_height",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "M6 hexagon nut",
+   "description": "ISO 4032 M6 hexagon nut, width across flats 10 mm, height 5.2 mm.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

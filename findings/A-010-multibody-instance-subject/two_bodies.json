@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "A", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "A", "from": [0, 0], "to": [10, 10]}],
+ ["feature.extrude", {"name": "First body", "sketch": "A", "distance": 5}],
+ ["sketch.create", {"name": "B", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "B", "from": [20, 0], "to": [30, 10]}],
+ ["feature.extrude", {"name": "Second body", "sketch": "B", "distance": 5}],
+ ["document.info", {"title": "t", "description": "d", "author": "x", "licence": "CC-BY-4.0"}],
+ ["document.check", {}]
+]

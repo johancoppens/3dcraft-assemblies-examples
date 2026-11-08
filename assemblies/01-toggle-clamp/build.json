@@ -1,0 +1,1222 @@
+[
+ [
+  "assembly.new",
+  {
+   "units": "mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "t",
+   "expr": "0.5"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "workpiece_height",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_opening",
+   "expr": "41 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spindle_reach",
+   "expr": "28.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "workpiece_height",
+   "label": "Workpiece height",
+   "description": "Height of the workpiece above the mounting surface; the spindle is set so the rubber cap meets it at the clamped pose",
+   "group": "Clamp",
+   "order": 1,
+   "min": "3 mm",
+   "max": "8 mm",
+   "step": "0.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "handle_opening",
+   "label": "Handle opening at rest",
+   "description": "How far the handle has turned from its clamped position at the start and end of the motion",
+   "group": "Clamp",
+   "order": 2,
+   "min": "30 deg",
+   "max": "42 deg",
+   "step": "1 deg",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "spindle_reach",
+   "label": "Spindle reach",
+   "description": "Distance from the bar pivot forward to the spindle along the slot; the catalogue's X1 is 28.6 mm",
+   "group": "Clamp",
+   "order": 3,
+   "min": "28.6 mm",
+   "max": "66 mm",
+   "step": "0.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_thickness",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spindle_slot",
+   "expr": "6.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "layer_gap",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rivet_shank",
+   "expr": "4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "fit_clearance_min",
+   "expr": "0.02 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "fit_clearance_max",
+   "expr": "0.18 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rivet_head_gap",
+   "expr": "0.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_a_x",
+   "expr": "13.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_a_z",
+   "expr": "30.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_d_x",
+   "expr": "30.92 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_d_z",
+   "expr": "9.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_ab",
+   "expr": "13.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_bc",
+   "expr": "21.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_cd",
+   "expr": "15.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "over_centre_angle",
+   "expr": "3 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_underside_z",
+   "expr": "23.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_height",
+   "expr": "12.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_tip_ahead",
+   "expr": "58.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_boss_radius",
+   "expr": "4.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stop_gap",
+   "expr": "0.05 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_force_arm",
+   "expr": "74.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_centre_z",
+   "expr": "27.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_end_position",
+   "expr": "108.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leg_inner_y",
+   "expr": "spindle_slot / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ear_inner_y",
+   "expr": "leg_inner_y + plate_thickness + layer_gap"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_inner_y",
+   "expr": "leg_inner_y - plate_thickness - layer_gap"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rivet_span_base",
+   "expr": "2 * (ear_inner_y + plate_thickness + rivet_head_gap)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rivet_span_handle",
+   "expr": "2 * (leg_inner_y + plate_thickness + rivet_head_gap)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "toggle_bd",
+   "expr": "sqrt(link_bc^2 + link_cd^2 + 2 * link_bc * link_cd * cos(over_centre_angle))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "span_ad",
+   "expr": "hypot(pivot_d_x - pivot_a_x, pivot_d_z - pivot_a_z)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "angle_ad",
+   "expr": "atan2(pivot_d_z - pivot_a_z, pivot_d_x - pivot_a_x)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "angle_ab",
+   "expr": "angle_ad + acos((link_ab^2 + span_ad^2 - toggle_bd^2) / (2 * link_ab * span_ad))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_b_x",
+   "expr": "pivot_a_x + link_ab * cos(angle_ab)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_b_z",
+   "expr": "pivot_a_z + link_ab * sin(angle_ab)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "angle_bd",
+   "expr": "atan2(pivot_d_z - pivot_b_z, pivot_d_x - pivot_b_x)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "angle_bc",
+   "expr": "angle_bd - acos((link_bc^2 + toggle_bd^2 - link_cd^2) / (2 * link_bc * toggle_bd))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_c_x",
+   "expr": "pivot_b_x + link_bc * cos(angle_bc)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_c_z",
+   "expr": "pivot_b_z + link_bc * sin(angle_bc)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "closed_link_direction",
+   "expr": "atan2(pivot_c_z - pivot_d_z, pivot_c_x - pivot_d_x)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stop_face_x",
+   "expr": "pivot_c_x - link_boss_radius - stop_gap - pivot_a_x"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_wx",
+   "expr": "(pivot_c_x - pivot_b_x) * cos(handle_opening) - (pivot_c_z - pivot_b_z) * sin(handle_opening)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_wz",
+   "expr": "(pivot_c_x - pivot_b_x) * sin(handle_opening) + (pivot_c_z - pivot_b_z) * cos(handle_opening)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_px",
+   "expr": "pivot_d_x - pivot_a_x - open_wx"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_pz",
+   "expr": "pivot_d_z - pivot_a_z - open_wz"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_p",
+   "expr": "hypot(open_px, open_pz)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_link_direction",
+   "expr": "atan2(-open_pz, -open_px) - acos((link_cd^2 + open_p^2 - link_ab^2) / (2 * link_cd * open_p))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_link_angle",
+   "expr": "closed_link_direction - open_link_direction"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "open_bar_angle",
+   "expr": "angle_ab - atan2(open_pz + link_cd * sin(open_link_direction), open_px + link_cd * cos(open_link_direction))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "reference_sample",
+   "expr": "30 / 72"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_open_limit",
+   "expr": "88.9 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "clamped_tolerance",
+   "expr": "1e-6"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_drive_angle",
+   "expr": "open_link_angle * (1 + cos(360 deg * t)) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_cf_x",
+   "expr": "pivot_d_x + link_cd * cos(closed_link_direction - link_drive_angle)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_cf_z",
+   "expr": "pivot_d_z + link_cd * sin(closed_link_direction - link_drive_angle)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_to_a",
+   "expr": "hypot(knee_cf_x - pivot_a_x, knee_cf_z - pivot_a_z)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_cf_direction",
+   "expr": "atan2(knee_cf_z - pivot_a_z, knee_cf_x - pivot_a_x) + acos((link_ab^2 + knee_to_a^2 - link_bc^2) / (2 * link_ab * knee_to_a))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hinge_cf_x",
+   "expr": "pivot_a_x + link_ab * cos(bar_cf_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hinge_cf_z",
+   "expr": "pivot_a_z + link_ab * sin(bar_cf_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_cf_rate",
+   "expr": "((knee_cf_z - pivot_d_z) * (knee_cf_x - hinge_cf_x) - (knee_cf_x - pivot_d_x) * (knee_cf_z - hinge_cf_z)) / ((hinge_cf_z - pivot_a_z) * (knee_cf_x - hinge_cf_x) - (hinge_cf_x - pivot_a_x) * (knee_cf_z - hinge_cf_z))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_cf_rate",
+   "expr": "(((knee_cf_z - pivot_d_z) - bar_cf_rate * (hinge_cf_z - pivot_a_z)) * (knee_cf_z - hinge_cf_z) + ((knee_cf_x - pivot_d_x) - bar_cf_rate * (hinge_cf_x - pivot_a_x)) * (knee_cf_x - hinge_cf_x)) / link_bc^2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_cf_turn",
+   "expr": "atan2(knee_cf_z - hinge_cf_z, knee_cf_x - hinge_cf_x) - angle_bc"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_cf_x",
+   "expr": "hinge_cf_x + grip_force_arm * cos(handle_cf_turn) - (grip_centre_z - pivot_b_z) * sin(handle_cf_turn)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_cf_turn",
+   "expr": "angle_ab - bar_cf_direction"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_cf_x",
+   "expr": "pivot_a_x - spindle_reach * cos(bar_cf_turn) + (workpiece_height - pivot_a_z) * sin(bar_cf_turn)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "advantage_inverse_cf",
+   "expr": "abs(bar_cf_rate * (tip_cf_x - pivot_a_x)) / abs(-bar_cf_rate * (hinge_cf_x - pivot_a_x) - handle_cf_rate * (grip_cf_x - hinge_cf_x))"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/base.3dcraft",
+   "name": "Base[1]",
+   "params": {
+    "plate_thickness": "plate_thickness",
+    "pivot_bore": "pivot_bore",
+    "ear_inner_y": "ear_inner_y",
+    "pivot_a_x": "pivot_a_x",
+    "pivot_a_z": "pivot_a_z",
+    "pivot_d_x": "pivot_d_x",
+    "pivot_d_z": "pivot_d_z",
+    "hand": "1"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/base.3dcraft",
+   "name": "Base[2]",
+   "params": {
+    "plate_thickness": "plate_thickness",
+    "pivot_bore": "pivot_bore",
+    "ear_inner_y": "ear_inner_y",
+    "pivot_a_x": "pivot_a_x",
+    "pivot_a_z": "pivot_a_z",
+    "pivot_d_x": "pivot_d_x",
+    "pivot_d_z": "pivot_d_z",
+    "hand": "-1"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/bar.3dcraft",
+   "name": "Bar",
+   "position": [
+    13.5,
+    0,
+    30.6
+   ],
+   "params": {
+    "plate_thickness": "plate_thickness",
+    "pivot_bore": "pivot_bore",
+    "leg_inner_y": "leg_inner_y",
+    "bar_arm": "link_ab",
+    "arm_angle": "angle_ab",
+    "strip_bottom": "bar_underside_z - pivot_a_z",
+    "strip_top": "bar_underside_z + bar_height - pivot_a_z",
+    "tip_x": "-(pivot_a_x + bar_tip_ahead)",
+    "stop_x": "stop_face_x",
+    "spindle_reach": "spindle_reach"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/handle.3dcraft",
+   "name": "Handle",
+   "position": [
+    17.43,
+    0,
+    43.93
+   ],
+   "params": {
+    "plate_thickness": "plate_thickness",
+    "pivot_bore": "pivot_bore",
+    "plate_inner_y": "handle_inner_y",
+    "handle_lever": "link_bc",
+    "lever_direction": "angle_bc",
+    "grip_axis_z": "grip_centre_z - pivot_b_z",
+    "grip_end_x": "grip_end_position - pivot_b_x",
+    "force_arm": "grip_force_arm"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/link.3dcraft",
+   "name": "Link",
+   "position": [
+    30.92,
+    0,
+    9.6
+   ],
+   "params": {
+    "plate_thickness": "plate_thickness",
+    "pivot_bore": "pivot_bore",
+    "plate_inner_y": "leg_inner_y",
+    "link_length": "link_cd",
+    "link_direction": "closed_link_direction",
+    "boss_radius": "link_boss_radius"
+   }
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Near_half_mounted",
+   "a": "world/xy",
+   "b": "Base[1]/Mounting",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Far_half_mounted",
+   "a": "world/xy",
+   "b": "Base[2]/Mounting",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Bar_pivot",
+   "a": "Base[1]/Pivot A",
+   "b": "Bar/Pivot A",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Link_pivot",
+   "a": "Base[1]/Pivot D",
+   "b": "Link/Pivot D",
+   "flip": true,
+   "limits": [
+    "0 deg",
+    "link_open_limit"
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Handle_pivot",
+   "a": "Bar/Pivot B",
+   "b": "Handle/Pivot B",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Knee",
+   "a": "Handle/Pivot C",
+   "b": "Link/Pivot C",
+   "flip": true
+  }
+ ],
+ [
+  "joint.set",
+  {
+   "mate": "Link_pivot",
+   "value": "link_drive_angle"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/workpiece.3dcraft",
+   "name": "Workpiece",
+   "params": {
+    "block_height": "workpiece_height",
+    "spindle_x": "pivot_a_x - spindle_reach"
+   }
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Workpiece_on_bench",
+   "a": "world/xy",
+   "b": "Workpiece/Datum",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/rivet.3dcraft",
+   "name": "Bar rivet",
+   "params": {
+    "span": "rivet_span_base",
+    "shank_diameter": "rivet_shank"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/rivet.3dcraft",
+   "name": "Link rivet",
+   "params": {
+    "span": "rivet_span_base",
+    "shank_diameter": "rivet_shank"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/rivet.3dcraft",
+   "name": "Handle rivet",
+   "params": {
+    "span": "rivet_span_handle",
+    "shank_diameter": "rivet_shank"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/rivet.3dcraft",
+   "name": "Knee rivet",
+   "params": {
+    "span": "rivet_span_handle",
+    "shank_diameter": "rivet_shank"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spindle.3dcraft",
+   "name": "Spindle"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/nut.3dcraft",
+   "name": "Upper nut"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/nut.3dcraft",
+   "name": "Lower nut"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Bar_rivet_in_base",
+   "a": "Base[1]/Pivot A",
+   "b": "Bar rivet/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Link_rivet_in_base",
+   "a": "Base[1]/Pivot D",
+   "b": "Link rivet/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Handle_rivet_in_bar",
+   "a": "Bar/Pivot B",
+   "b": "Handle rivet/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Knee_rivet_in_link",
+   "a": "Link/Pivot C",
+   "b": "Knee rivet/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Spindle_in_bar",
+   "a": "Bar/Spindle axis",
+   "b": "Spindle/Tip",
+   "flip": true,
+   "offset": "workpiece_height - bar_underside_z - bar_height"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Upper_nut_seated",
+   "a": "Bar/Spindle axis",
+   "b": "Upper nut/Seat",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Lower_nut_seated",
+   "a": "Bar/Lower seat",
+   "b": "Lower nut/Seat",
+   "flip": true
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "handle_pivot_x",
+   "measure": "position",
+   "point": "Bar/B point",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "handle_pivot_z",
+   "measure": "position",
+   "point": "Bar/B point",
+   "axis": "z"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "knee_x",
+   "measure": "position",
+   "point": "Handle/C point",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "knee_z",
+   "measure": "position",
+   "point": "Handle/C point",
+   "axis": "z"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "grip_x",
+   "measure": "position",
+   "point": "Handle/Grip centre",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "tip_x",
+   "measure": "position",
+   "point": "Spindle/Tip point",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "knee_angle",
+   "measure": "jointAngle",
+   "mate": "Knee",
+   "label": "Knee angle past the toggle line",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "bar_angle",
+   "measure": "jointAngle",
+   "mate": "Bar_pivot",
+   "label": "Bar opening",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "handle_joint",
+   "measure": "jointAngle",
+   "mate": "Handle_pivot",
+   "label": "Handle joint on the bar",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "workpiece_top",
+   "measure": "boxMax",
+   "of": "Workpiece",
+   "axis": "z"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cap_bottom",
+   "measure": "boxMin",
+   "of": "Spindle/Rubber cap",
+   "axis": "z"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "bar_rate",
+   "expr": "((knee_z - pivot_d_z) * (knee_x - handle_pivot_x) - (knee_x - pivot_d_x) * (knee_z - handle_pivot_z)) / ((handle_pivot_z - pivot_a_z) * (knee_x - handle_pivot_x) - (handle_pivot_x - pivot_a_x) * (knee_z - handle_pivot_z))"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "handle_rate",
+   "expr": "(((knee_z - pivot_d_z) - bar_rate * (handle_pivot_z - pivot_a_z)) * (knee_z - handle_pivot_z) + ((knee_x - pivot_d_x) - bar_rate * (handle_pivot_x - pivot_a_x)) * (knee_x - handle_pivot_x)) / ((knee_x - handle_pivot_x)^2 + (knee_z - handle_pivot_z)^2)"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "mechanical_advantage",
+   "expr": "abs(-bar_rate * (handle_pivot_x - pivot_a_x) - handle_rate * (grip_x - handle_pivot_x)) / abs(bar_rate * (tip_x - pivot_a_x))",
+   "label": "Mechanical advantage at the spindle"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knee is past the toggle line at the clamped pose",
+   "measure": "jointAngle",
+   "mate": "Knee",
+   "eq": "over_centre_angle",
+   "tol": "0.05 deg",
+   "when": "abs(t - 0.5) < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Rubber cap meets the workpiece at the clamped pose",
+   "measure": "value",
+   "expr": "workpiece_top - cap_bottom",
+   "min": "-0.02 mm",
+   "max": "0.02 mm",
+   "when": "abs(t - 0.5) < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Link rests on the bar's stop pad at the clamped pose",
+   "measure": "clearance",
+   "from": "Bar",
+   "to": "Link",
+   "min": "0.02 mm",
+   "max": "0.12 mm",
+   "when": "abs(t - 0.5) < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar and link clear each other over the motion",
+   "measure": "clearance",
+   "from": "Bar",
+   "to": "Link",
+   "min": "0.02 mm"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar pivot in the bar has its running fit",
+   "measure": "clearance",
+   "from": "Bar rivet",
+   "to": "Bar",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar pivot in the near base half has its running fit",
+   "measure": "clearance",
+   "from": "Bar rivet",
+   "to": "Base[1]",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar pivot in the far base half has its running fit",
+   "measure": "clearance",
+   "from": "Bar rivet",
+   "to": "Base[2]",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Link pivot in the link has its running fit",
+   "measure": "clearance",
+   "from": "Link rivet",
+   "to": "Link",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Link pivot in the near base half has its running fit",
+   "measure": "clearance",
+   "from": "Link rivet",
+   "to": "Base[1]",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Link pivot in the far base half has its running fit",
+   "measure": "clearance",
+   "from": "Link rivet",
+   "to": "Base[2]",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Handle pivot in the handle has its running fit",
+   "measure": "clearance",
+   "from": "Handle rivet",
+   "to": "Handle/Handle",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Handle pivot in the bar has its running fit",
+   "measure": "clearance",
+   "from": "Handle rivet",
+   "to": "Bar",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knee pivot in the handle has its running fit",
+   "measure": "clearance",
+   "from": "Knee rivet",
+   "to": "Handle/Handle",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knee pivot in the link has its running fit",
+   "measure": "clearance",
+   "from": "Knee rivet",
+   "to": "Link",
+   "min": "fit_clearance_min",
+   "max": "fit_clearance_max"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar opening matches the closed form at the open pose",
+   "measure": "jointAngle",
+   "mate": "Bar_pivot",
+   "eq": "open_bar_angle",
+   "tol": "0.02 deg",
+   "when": "t < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Handle opening at the open pose is the parameter",
+   "measure": "value",
+   "expr": "-(bar_angle + handle_joint)",
+   "eq": "handle_opening",
+   "tol": "0.02 deg",
+   "when": "t < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knee is short of the toggle line while closing",
+   "measure": "jointAngle",
+   "mate": "Knee",
+   "min": "-40 deg",
+   "max": "-0.5 deg",
+   "when": "abs(t - reference_sample) < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Advantage at the stop, independently computed",
+   "measure": "value",
+   "expr": "mechanical_advantage * spindle_reach",
+   "eq": "601.57 mm",
+   "tol": "0.3 mm",
+   "when": "abs(t - 0.5) < clamped_tolerance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Spindle to grip ratio matches the closed form of the drive",
+   "measure": "value",
+   "expr": "1 / mechanical_advantage",
+   "eq": "advantage_inverse_cf",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar opens wide enough to load a workpiece",
+   "measure": "position",
+   "instance": "Spindle",
+   "axis": "z",
+   "min": "workpiece_height + 30 mm",
+   "when": "t < clamped_tolerance"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Horizontal toggle clamp",
+   "description": "A horizontal hold-down toggle clamp of the M6, 900 N class: a formed L-section base in two halves, a formed U-bar with an M6 spindle and rubber cap, a link and a handle with a red PVC grip, all on pivot rivets.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

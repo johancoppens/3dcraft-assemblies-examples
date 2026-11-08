@@ -1,0 +1,127 @@
+{
+  "id": "toggle-clamp",
+  "title": "Horizontal toggle clamp",
+  "summary": "four-bar toggle, over-centre stop, closed loop",
+  "description": "A horizontal hold-down toggle clamp of the M6, 900 N class: a formed base in two mirrored L halves held by the pivot rivets, a formed U-bar with an M6 spindle and rubber cap, a stamped link and handle with a red PVC grip, all on rivet pivots.",
+  "domain": "Workshop, sheet metal",
+  "process": "Laser cutting and press forming, zinc plating, riveting, spot welding, PVC dipping",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 5,
+    "rationale": "One closed four-bar, but four real sheet parts with a joggle, flat patterns, own-frame configurations and an independent closed form over the motion."
+  },
+  "standards": [
+    "ISO 4032 (M6 hexagon nut)",
+    "ISO 261 (M6 coarse pitch)"
+  ],
+  "materials": [
+    "Low-carbon steel, press-formed, bright zinc plated (base, U-bar, link, handle)",
+    "Steel rivets and M6 spindle, zinc plated",
+    "Black rubber (pressure cap)",
+    "Red PVC (grip)",
+    "Beech (workpiece, a prop)"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "there and back: open, through the toggle line, to the stop just past it, and open again",
+    "samples": 73,
+    "dof": 0
+  },
+  "contacts": [
+    {
+      "pair": [
+        "Upper nut",
+        "Bar"
+      ],
+      "why": "the upper lock nut is tightened against the top of the bar"
+    },
+    {
+      "pair": [
+        "Lower nut",
+        "Bar"
+      ],
+      "why": "the lower lock nut is tightened against the underside of the bar"
+    },
+    {
+      "pair": [
+        "Upper nut",
+        "Spindle/Rod"
+      ],
+      "why": "the thread is the joint: the nut's bore is the tap drill and the rod is at the major diameter (F-014)"
+    },
+    {
+      "pair": [
+        "Lower nut",
+        "Spindle/Rod"
+      ],
+      "why": "the thread is the joint: the nut's bore is the tap drill and the rod is at the major diameter (F-014)"
+    },
+    {
+      "pair": [
+        "Spindle/Rubber cap",
+        "Workpiece"
+      ],
+      "why": "the rubber cap presses the workpiece: it touches at the stop and compresses by a few hundredths of a millimetre passing the toggle line (the clamping preload)"
+    }
+  ],
+  "preview": {
+    "zoom": 1.05,
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/toggle-clamp.step"
+    },
+    {
+      "part": "base",
+      "path": "exports/base-half.dxf",
+      "sheetMetal": "Base half"
+    },
+    {
+      "part": "bar",
+      "path": "exports/u-bar.dxf",
+      "sheetMetal": "U-bar"
+    },
+    {
+      "part": "handle",
+      "path": "exports/handle-half.dxf",
+      "sheetMetal": "Handle half"
+    },
+    {
+      "part": "link",
+      "path": "exports/link-plate.dxf",
+      "sheetMetal": "Outer plate"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-08",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed every Acceptance line on the numbers: 0 dof, knee 3.0000° past the toggle line, cap at the block, every fit 0.15 mm, bar 90.99° at handle 40.99°, advantage 20.90 against its closed form to 0.0005 %. It guessed the reference frame and where the reach is measured from; the prompt now states them. About 400 commands in 55 CLI calls."
+  },
+  "stats": {
+    "steps": 411,
+    "parts": 8,
+    "instances": 13,
+    "configurations": 10,
+    "mates": 14,
+    "couplings": 0,
+    "dof": 0,
+    "parameters": 3,
+    "assertions": 20,
+    "part_assertions": 12,
+    "warnings": 0,
+    "build_s": 0.87,
+    "load_s": 0.27,
+    "load_cpu_s": 0.58,
+    "bake_s": 1.12,
+    "bake_mb": 0.7,
+    "file_bytes": 393336,
+    "range_worst_s": 0.239
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  }
+}

@@ -1,0 +1,735 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "plate_thickness",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_thickness",
+   "label": "Plate thickness",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 1,
+   "min": "2.3 mm",
+   "max": "2.7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_bore",
+   "label": "Pivot bore",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 2,
+   "min": "3.8 mm",
+   "max": "5.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_inner_y",
+   "expr": "0.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_inner_y",
+   "label": "Plate inner y",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 3,
+   "min": "0.3 mm",
+   "max": "1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "handle_lever",
+   "expr": "21.1 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "handle_lever",
+   "label": "Handle lever",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 4,
+   "min": "19 mm",
+   "max": "24 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lever_direction",
+   "expr": "-69.8345 deg"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "lever_direction",
+   "label": "Lever direction",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 5,
+   "min": "-82 deg",
+   "max": "-58 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_axis_z",
+   "expr": "-16.4327 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "grip_axis_z",
+   "label": "Grip axis z",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 6,
+   "min": "-20 mm",
+   "max": "-12 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_end_x",
+   "expr": "91.3694 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "grip_end_x",
+   "label": "Grip end x",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 7,
+   "min": "85 mm",
+   "max": "98 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "force_arm",
+   "expr": "74.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "force_arm",
+   "label": "Force arm",
+   "description": "Set by the assembly",
+   "group": "Handle",
+   "order": 8,
+   "min": "60 mm",
+   "max": "100 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bend_radius",
+   "expr": "plate_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "k_factor",
+   "expr": "(0.65 + 0.5 * ln(bend_radius / plate_thickness) / ln(10)) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_x",
+   "expr": "handle_lever * cos(lever_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_z",
+   "expr": "handle_lever * sin(lever_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_radius",
+   "expr": "5.65 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_corner",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_radius",
+   "expr": "4.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "corner",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tang_half",
+   "expr": "3.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_start_x",
+   "expr": "grip_end_x - 46 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tang_end_x",
+   "expr": "grip_end_x - 10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "joggle_x",
+   "expr": "grip_start_x - 4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "joggle_angle",
+   "expr": "15 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_diameter",
+   "expr": "14.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "grip_bulb_diameter",
+   "expr": "19 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Handle half blank",
+   "plane": "zx",
+   "offset": "plate_inner_y"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Handle half blank",
+   "start": [
+    "boss_radius + 0.000000 * (boss_corner)",
+    "-boss_radius + 1.000000 * (boss_corner)"
+   ],
+   "segments": [
+    {
+     "line": [
+      "boss_radius + 0.000000 * (boss_corner)",
+      "boss_radius + -1.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "boss_radius + -1.000000 * (boss_corner)",
+      "boss_radius + 0.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner"
+    },
+    {
+     "line": [
+      "-3 mm + 0.551942 * (corner)",
+      "boss_radius + 0.000000 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-3 mm + -0.294180 * (corner)",
+      "boss_radius + 0.467010 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-7 mm + 0.099769 * (corner)",
+      "12 mm + -0.158383 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-7 mm + -0.035727 * (corner)",
+      "12 mm + 0.183746 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "grip_axis_z + tang_half + 1 mm + 0.006462 * (corner)",
+      "grip_start_x - 8 mm + -0.033233 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "grip_axis_z + tang_half + 1 mm + -0.004199 * (corner)",
+      "grip_start_x - 8 mm + 0.033593 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "grip_axis_z + tang_half + 0.007722 * (corner)",
+      "grip_start_x + -0.061777 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "grip_axis_z + tang_half + 0.000000 * (corner)",
+      "grip_start_x + 0.062258 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "grip_axis_z + tang_half",
+      "tang_end_x"
+     ]
+    },
+    {
+     "line": [
+      "grip_axis_z - tang_half",
+      "tang_end_x"
+     ]
+    },
+    {
+     "line": [
+      "grip_axis_z - tang_half + 0.000000 * (corner)",
+      "grip_start_x + 0.057047 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "grip_axis_z - tang_half + -0.006488 * (corner)",
+      "grip_start_x + -0.056677 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "knee_z - knee_radius + 1 mm + 0.007460 * (corner)",
+      "knee_x + 6 mm + 0.065172 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "knee_z - knee_radius + 1 mm + -0.015910 * (corner)",
+      "knee_x + 6 mm + -0.063639 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "knee_z - knee_radius + 0.029857 * (corner)",
+      "knee_x + 2 mm + 0.119430 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "knee_z - knee_radius + 0.000000 * (corner)",
+      "knee_x + 2 mm + -0.123106 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "knee_z - knee_radius + 0.000000 * (corner)",
+      "knee_x - knee_radius + 1.000000 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "knee_z - knee_radius + 1.000000 * (corner)",
+      "knee_x - knee_radius + 0.000000 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "knee_z + 6 mm + -0.380269 * (corner)",
+      "knee_x - knee_radius + 0.000000 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "knee_z + 6 mm + 0.284186 * (corner)",
+      "knee_x - knee_radius + -0.252672 * (corner)"
+     ],
+     "radius": "corner",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-boss_radius - 2 mm + -0.001208 * (corner)",
+      "-3 mm + 0.001074 * (corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-boss_radius - 2 mm + 0.001212 * (corner)",
+      "-3 mm + -0.001071 * (corner)"
+     ],
+     "radius": "corner"
+    },
+    {
+     "line": [
+      "-boss_radius + 1 mm + -0.283615 * (boss_corner)",
+      "-boss_radius + 0.250527 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": [
+      "-boss_radius + 1 mm + 0.378419 * (boss_corner)",
+      "-boss_radius + 0.000000 * (boss_corner)"
+     ],
+     "radius": "boss_corner"
+    },
+    {
+     "line": [
+      "boss_radius + -1.000000 * (boss_corner)",
+      "-boss_radius + 0.000000 * (boss_corner)"
+     ]
+    },
+    {
+     "arc": "start",
+     "radius": "boss_corner"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Handle half blank",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Handle half blank",
+   "center": [
+    "knee_z",
+    "knee_x"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.line",
+  {
+   "sketch": "Handle half blank",
+   "from": [
+    "grip_axis_z + 12 mm",
+    "joggle_x"
+   ],
+   "to": [
+    "grip_axis_z - 12 mm",
+    "joggle_x"
+   ],
+   "construction": true
+  }
+ ],
+ [
+  "feature.sheetMetal",
+  {
+   "sketch": "Handle half blank",
+   "name": "Handle half",
+   "thickness": "plate_thickness",
+   "radius": "bend_radius",
+   "kFactor": "k_factor",
+   "jogs": [
+    {
+     "line": "e76",
+     "offset": "plate_inner_y",
+     "angle": "joggle_angle",
+     "direction": "down"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.mirror",
+  {
+   "name": "Second half",
+   "source": "Handle half",
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "keep": true
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Handle half",
+   "tool": "Second half",
+   "name": "Handle"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Handle",
+   "preset": "steel",
+   "color": "#9eaec6",
+   "metallic": 0.6,
+   "roughness": 0.62
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Grip profile",
+   "plane": "xy",
+   "offset": "grip_axis_z"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Grip profile",
+   "start": [
+    "grip_start_x",
+    0
+   ],
+   "segments": [
+    {
+     "line": [
+      "grip_start_x",
+      "grip_diameter / 2 - 1.6 mm"
+     ]
+    },
+    {
+     "arc": [
+      "grip_start_x + 1.6 mm",
+      "grip_diameter / 2"
+     ],
+     "center": [
+      "grip_start_x + 1.6 mm",
+      "grip_diameter / 2 - 1.6 mm"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "grip_end_x - grip_bulb_diameter / 2",
+      "grip_bulb_diameter / 2"
+     ]
+    },
+    {
+     "arc": [
+      "grip_end_x",
+      0
+     ],
+     "center": [
+      "grip_end_x - grip_bulb_diameter / 2",
+      0
+     ],
+     "clockwise": true
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "name": "Grip blank",
+   "sketch": "Grip profile",
+   "axis": "x"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "subtract",
+   "target": "Grip blank",
+   "tool": "Handle",
+   "keepTool": true,
+   "name": "Grip"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Grip",
+   "preset": "abs",
+   "color": "#b5161d",
+   "metallic": 0,
+   "roughness": 0.45
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot B",
+   "through": [
+    [
+     "0 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     0,
+     "0 mm - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot C",
+   "through": [
+    [
+     "knee_x",
+     0,
+     "knee_z"
+    ],
+    [
+     "knee_x - cos(lever_direction) * 1 mm",
+     0,
+     "knee_z - sin(lever_direction) * 1 mm"
+    ],
+    [
+     "knee_x + sin(lever_direction) * 1 mm",
+     0,
+     "knee_z - cos(lever_direction) * 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.point",
+  {
+   "name": "C point",
+   "at": [
+    "knee_x",
+    0,
+    "knee_z"
+   ]
+  }
+ ],
+ [
+  "datum.point",
+  {
+   "name": "Grip centre",
+   "at": [
+    "force_arm",
+    0,
+    "grip_axis_z"
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Inner bend radius at least the thickness",
+   "measure": "bendRadius",
+   "of": "Handle half",
+   "min": "plate_thickness"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bores clear the joggle by 2.5 t + r",
+   "measure": "holeToBend",
+   "of": "Handle half",
+   "min": "2.5 * plate_thickness + bend_radius"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Toggle clamp handle",
+   "description": "Two stamped halves joggled together under the red grip, spot-welded at the tang, with the handle and knee pivots.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

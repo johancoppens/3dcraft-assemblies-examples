@@ -1,0 +1,5 @@
+[
+ ["sketch.create", {"name": "Outline", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Outline", "start": [0, 0], "segments": [{"line": [30, 0]}, {"line": [30, 20]}, {"line": [0, 20]}, {"line": "start"}]}],
+ ["sketch.fillet", {"sketch": "Outline", "corner": "e3", "radius": 3}]
+]

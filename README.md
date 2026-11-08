@@ -18,6 +18,9 @@ From simple to complex, each with the difficulty an independent reviewer scored 
 from are in [`CATALOGUE.md`](CATALOGUE.md).
 
 <!-- gallery:start -->
+| | Assembly | Domain | Difficulty |
+|---|---|---|---|
+| <img src="assemblies/01-toggle-clamp/preview.png" width="240" alt="Horizontal toggle clamp"> | **[Horizontal toggle clamp](assemblies/01-toggle-clamp/)**<br>A horizontal hold-down toggle clamp of the M6, 900 N class: a formed base in two mirrored L halves held by the pivot rivets, a formed U-bar with an M6 spindle and rubber cap, a stamped link and handle with a red PVC grip, all on rivet pivots. | Workshop, sheet metal | 5/10 |
 <!-- gallery:end -->
 
 ## Licences

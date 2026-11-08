@@ -1,0 +1,277 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "rod_diameter",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rod_length",
+   "expr": "38 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rod_chamfer",
+   "expr": "0.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_length",
+   "expr": "33 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cap_base_diameter",
+   "expr": "15 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cap_top_diameter",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cap_height",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cap_bore_depth",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Rod profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Rod profile",
+   "start": [
+    0,
+    "cap_height - cap_bore_depth"
+   ],
+   "segments": [
+    {
+     "line": [
+      "rod_diameter / 2 - rod_chamfer",
+      "cap_height - cap_bore_depth"
+     ]
+    },
+    {
+     "line": [
+      "rod_diameter / 2",
+      "cap_height - cap_bore_depth + rod_chamfer"
+     ]
+    },
+    {
+     "line": [
+      "rod_diameter / 2",
+      "cap_height - cap_bore_depth + rod_length - rod_chamfer"
+     ]
+    },
+    {
+     "line": [
+      "rod_diameter / 2 - rod_chamfer",
+      "cap_height - cap_bore_depth + rod_length"
+     ]
+    },
+    {
+     "line": [
+      0,
+      "cap_height - cap_bore_depth + rod_length"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "name": "Rod blank",
+   "sketch": "Rod profile",
+   "axis": "y"
+  }
+ ],
+ [
+  "feature.thread",
+  {
+   "name": "Rod",
+   "face": "F2:side(e7)",
+   "start": "F2:side(e11)",
+   "size": "M6",
+   "length": "thread_length"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Rod",
+   "preset": "steel",
+   "color": "#d5dde3",
+   "metallic": 0.7,
+   "roughness": 0.45
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Cap profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Cap profile",
+   "start": [
+    "rod_diameter / 2",
+    "cap_height"
+   ],
+   "segments": [
+    {
+     "line": [
+      "cap_top_diameter / 2 - 1 mm",
+      "cap_height"
+     ]
+    },
+    {
+     "arc": [
+      "cap_top_diameter / 2",
+      "cap_height - 1 mm"
+     ],
+     "center": [
+      "cap_top_diameter / 2 - 1 mm",
+      "cap_height - 1 mm"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "cap_base_diameter / 2",
+      "1.2 mm"
+     ]
+    },
+    {
+     "arc": [
+      "cap_base_diameter / 2 - 1.2 mm",
+      0
+     ],
+     "center": [
+      "cap_base_diameter / 2 - 1.2 mm",
+      "1.2 mm"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      0,
+      0
+     ]
+    },
+    {
+     "line": [
+      0,
+      "cap_height - cap_bore_depth"
+     ]
+    },
+    {
+     "line": [
+      "rod_diameter / 2",
+      "cap_height - cap_bore_depth"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "name": "Rubber cap",
+   "sketch": "Cap profile",
+   "axis": "y"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Rubber cap",
+   "preset": "abs",
+   "color": "#18191b",
+   "metallic": 0,
+   "roughness": 0.72
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Tip",
+   "through": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     "1 mm",
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     "-1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.point",
+  {
+   "name": "Tip point",
+   "at": [
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Spindle",
+   "description": "M6 spindle with a black rubber pressure cap.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

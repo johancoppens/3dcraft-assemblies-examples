@@ -1,0 +1,7 @@
+[
+ ["assembly.new", {"units": "mm"}],
+ ["variable.set", {"name": "computed_length", "expr": "sqrt(2) * 7 mm"}],
+ ["instance.add", {"source": "stepped_part.3dcraft", "name": "Bar", "params": {"length": "computed_length"}}],
+ ["assembly.solve", {}],
+ ["document.check", {}]
+]

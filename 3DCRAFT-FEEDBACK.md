@@ -18,6 +18,11 @@ All entries are against 3DCraft `45233bdc` unless they say otherwise.
 | [A-006](#a-006) | Missing capability | A part's own assertions are not checked per configuration | every assembly | a configured instance is proven only by the part's own range check |
 | [A-007](#a-007) | Agent friction | Measures name their subjects differently, and a subassembly is not a subject | building the tool | a retry per measure |
 | [A-008](#a-008) | Missing capability | `craft3d-cli replay` cannot make a video of a motion | writing the guide for this repository | a motion video needs `view.replay` and ffmpeg by hand |
+| [A-009](#a-009) | Bug | `motion.check` with an inline measure is refused after `param.set` in the same run | toggle-clamp (review) | a probe assertion instead |
+| [A-010](#a-010) | Agent friction | A multi-body instance is not a measure subject by its own name | toggle-clamp | measured body by body |
+| [A-011](#a-011) | Agent friction | An instance parameter from a formula is refused when off the part's step | toggle-clamp | parameters published without a step |
+| [A-014](#a-014) | Bug | The window's camera refits at every moment of a motion | seen by the developer while playing the assemblies | the view jumps while it plays |
+| [A-015](#a-015) | Bug | A solid texture does not turn with an instance's placement | task-lamp, jansen-walker, seen by the developer while playing | wood grain crosses moving parts; workaround: no texture on moving wood |
 
 ## A-001
 
@@ -67,3 +72,49 @@ a subassembly as a subject, meaning its bodies.
 
 **Missing capability.** `craft3d-cli replay` makes a video of how a document is built, with no way to ask for its motion;
 `view.replay {motion}` writes frames that have to be encoded by hand. **Should:** a `--motion` option.
+
+## A-009
+
+**Bug.** `motion.check` with an inline `measure` answers "assert.add: there is no assertion named `overMotion1`" when a
+`param.set` ran before it in the same run; without the `param.set` it works. **Should:** work the same after a change of
+parameters. Reproducer: [`findings/A-009-motion-check-after-param-set/`](findings/A-009-motion-check-after-param-set/).
+**Workaround:** `assert.add` a probe instead.
+
+## A-010
+
+**Agent friction.** A measure on a plain instance of a part with two bodies answers "there is no feature named `Handle`",
+though `Handle` is the instance; `Handle/First body` works, one body at a time. It extends A-007. **Should:** the
+instance's name means all its bodies. Reproducer:
+[`findings/A-010-multibody-instance-subject/`](findings/A-010-multibody-instance-subject/).
+
+## A-011
+
+**Agent friction.** A value computed in `instance.add` `params` fails when it is off the part's published `step` ("its
+value 9.899… mm is not on its step of 0.1 mm"). A step is what a form or slider offers, not a limit on a value a parent
+computes. **Should:** a step limits interactive input and `param.set`, not a parent's `params`; or the refusal says to
+remove the step. Reproducer: [`findings/A-011-computed-param-off-step/`](findings/A-011-computed-param-off-step/).
+**Workaround:** publish such a parameter without a step.
+
+## A-014
+
+**Bug.** While a motion plays in the window the view keeps refitting, so the model appears to zoom and shift. With the
+camera on automatic fit (the default for a new tab), `Shell::sync` (`crates/ui-egui/src/shell.rs`, the `auto_fit` test
+after `sync_joint_handles`) refits whenever `scene.frame_box()` differs from the box last framed. Each moment of a motion
+is a scene of its own whose box is that of the bodies where they are at that moment (`frame_of`, `crates/engine/src/scene.rs`),
+so a handle swinging out or a deck sliding changes it at nearly every moment. Nothing in the player holds it. `view.replay`
+already avoids this ("framed on the box around every state so the camera does not jump", `docs/design/motion.md`). The
+assembly cannot prevent it: the camera is not part of the document. **Should:** while a moment of the motion is shown, frame
+on the box over the whole motion, or hold the camera as it was when the play started. **Reproduce:** open any assembly
+with a large motion (`assemblies/01-toggle-clamp/toggle-clamp.3dcraftasm`) and play it without having zoomed or panned.
+**Workaround:** zoom or pan once before playing (either turns the automatic fit off; orbiting does not).
+
+## A-015
+
+**Bug.** A body with a solid texture (`material.preset` `oak`, `walnut`, ...) placed by an instance's rotation keeps its
+texture in the unrotated frame: the grain of a bar turned 60° still runs along the world's x axis and crosses the bar. A
+part that a joint turns therefore shows grain that does not belong to it, and over a motion its grain should change as
+it turns, so it would not stay on the wood. Seen in the task lamp's oak arms and the Jansen walker's walnut triangles (the
+same material reading two ways). **Should:** the texture's frame follows the instance's placement and every moment of a
+motion, in every renderer. Reproducer:
+[`findings/A-015-solid-texture-ignores-placement/`](findings/A-015-solid-texture-ignores-placement/).
+**Workaround:** `{"preset": "oak", "pattern": null}` on moving parts: oak's colour and density without the texture.

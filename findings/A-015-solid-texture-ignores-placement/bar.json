@@ -1,0 +1,1 @@
+[["feature.block", {"size": ["200 mm", "15 mm", "9 mm"], "position": ["-100 mm", "-7.5 mm", "0 mm"], "name": "Bar"}], ["material.preset", {"body": "Bar", "preset": "oak"}], ["document.check", {}]]

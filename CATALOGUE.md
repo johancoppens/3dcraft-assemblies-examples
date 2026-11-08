@@ -10,9 +10,10 @@ its palette line only with the coordinator.
 ## Simple
 
 ### 1. Horizontal toggle clamp · `toggle-clamp` · workshop, sheet metal
-- **Real thing:** a horizontal hold-down toggle clamp of the common 100 to 200 kgf class: a pressed and laser-cut
-  zinc-plated steel base with a mounting flange, a U-bar clamp arm carrying an M6 spindle with a rubber pressure cap and
-  two lock nuts, a handle with a red PVC grip, a link, and rivet pivots. A real clamp's proportions, cited.
+- **Real thing:** a horizontal hold-down toggle clamp of the common 100 to 200 kgf class, stamped and formed from
+  zinc-plated steel sheet: a base of two mirrored L-halves, a U-bar clamp arm carrying an M6 spindle with a rubber
+  pressure cap and two lock nuts, a stamped handle with a red PVC grip, a stamped link, and rivet pivots. A real clamp's
+  proportions, cited. The steel parts are real sheet metal in 3DCraft (`feature.sheetMetal`, flat patterns as DXF).
 - **Motion:** a four-bar: base, clamp arm, handle, link. `t` drives the link's joint from open, through the strekpunt
   (the line through the three toggle pivots), to the stop just past it, and back.
 - **Shows:** one closed loop, `limits` on a joint, the over-centre position, one pivot part in several configurations,
@@ -24,16 +25,17 @@ its palette line only with the coordinator.
   rests on its stop; the arm opens wide enough to load a workpiece; pivots have real fits.
 - **Risks:** the toggle geometry decides everything: work it out first, on paper, against a real clamp.
 
-## Difficult
+## Difficult and complex
 
-### 2. Jansen linkage walker · `jansen-walker` · kinetic art, laser cutting
+### 2. Jansen linkage walker · `jansen-walker` · kinetic art, laser cutting · complex (reviewer's score 7)
 - **Real thing:** a hand-cranked walking model in laser-cut 4 mm birch plywood with brass pins, after the linkage of
   Theo Jansen, from his published proportions (the eleven "holy numbers"), credited. Twelve legs on one crankshaft. The
   title says "Jansen linkage": "Strandbeest" is his name for his works.
 - **Motion:** `t` is one crank turn. It should visibly walk: a floor of boards that moves back under the feet by exactly
   one board per turn loops without a jump, and the feet stand still on it during the stance.
-- **Shows:** a leg as a flexible subassembly placed many times with its phase in `params`, `t` passed down; one bar part
-  in several configurations; many closed loops in one solve; the foot's path as a trace.
+- **Shows:** a leg as a flexible subassembly placed many times, undriven, on one real crankshaft of keyed segments that
+  sets the phases; one bar part in several configurations; many closed loops in one solve; the foot's path as a trace.
+  (A phase through `params` works but rebuilds the leg at every moment: A-012.)
 - **Look:** birch plywood bars, walnut triangles, brass pins, a dark floor.
 - **Parameters:** overall scale, crank start angle; a third if it earns its place.
 - **Proves:** a foot's position at a key moment against the linkage's own circle intersections; stride and lift; at
@@ -131,3 +133,4 @@ What each assembly must carry, so that the six together show what assemblies can
 | Formula-driven contact | | | | | | stage 2: cam |
 | Trace | | foot | | | nozzle | |
 | Forces from the model | advantage | balance | screw force | spring balance | | |
+| Sheet metal with flat patterns | base, U-bar, stampings | | arms | | | |

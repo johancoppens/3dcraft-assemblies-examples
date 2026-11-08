@@ -1,0 +1,377 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "plate_thickness",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_thickness",
+   "label": "Plate thickness",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 1,
+   "min": "2.3 mm",
+   "max": "2.7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_bore",
+   "label": "Pivot bore",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 2,
+   "min": "3.8 mm",
+   "max": "5.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_inner_y",
+   "expr": "3.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "plate_inner_y",
+   "label": "Plate inner y",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 3,
+   "min": "3 mm",
+   "max": "3.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_length",
+   "expr": "15.8 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_length",
+   "label": "Link length",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 4,
+   "min": "14 mm",
+   "max": "18 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_direction",
+   "expr": "113.1655 deg"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_direction",
+   "label": "Link direction",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 5,
+   "min": "95 deg",
+   "max": "130 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_radius",
+   "expr": "4.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "boss_radius",
+   "label": "Boss radius",
+   "description": "Set by the assembly",
+   "group": "Link",
+   "order": 6,
+   "min": "4 mm",
+   "max": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_x",
+   "expr": "link_length * cos(link_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "knee_z",
+   "expr": "link_length * sin(link_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "normal_x",
+   "expr": "-sin(link_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "normal_z",
+   "expr": "cos(link_direction)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spacer_diameter",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spacer_fraction",
+   "expr": "0.34"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Link side",
+   "plane": "zx",
+   "offset": "plate_inner_y"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Link side",
+   "start": [
+    "boss_radius * normal_z",
+    "boss_radius * normal_x"
+   ],
+   "segments": [
+    {
+     "line": [
+      "knee_z + boss_radius * normal_z",
+      "knee_x + boss_radius * normal_x"
+     ]
+    },
+    {
+     "arc": [
+      "knee_z - boss_radius * normal_z",
+      "knee_x - boss_radius * normal_x"
+     ],
+     "center": [
+      "knee_z",
+      "knee_x"
+     ]
+    },
+    {
+     "line": [
+      "-boss_radius * normal_z",
+      "-boss_radius * normal_x"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "0 mm",
+      "0 mm"
+     ]
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Link side",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Link side",
+   "center": [
+    "knee_z",
+    "knee_x"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "feature.sheetMetal",
+  {
+   "sketch": "Link side",
+   "name": "Outer plate",
+   "thickness": "plate_thickness",
+   "radius": "plate_thickness",
+   "kFactor": "0.325"
+  }
+ ],
+ [
+  "feature.mirror",
+  {
+   "name": "Inner plate",
+   "source": "Outer plate",
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "keep": true
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Spacer",
+   "plane": "zx",
+   "offset": "-plate_inner_y - 0.2 mm"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Spacer",
+   "center": [
+    "knee_z * spacer_fraction",
+    "knee_x * spacer_fraction"
+   ],
+   "radius": "spacer_diameter / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "name": "Staked spacer",
+   "sketch": "Spacer",
+   "distance": "2 * plate_inner_y + 0.4 mm"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Outer plate",
+   "tool": "Staked spacer",
+   "name": "Plate with spacer"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Plate with spacer",
+   "tool": "Inner plate",
+   "name": "Link"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Link",
+   "preset": "steel",
+   "color": "#9eaec6",
+   "metallic": 0.6,
+   "roughness": 0.62
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot D",
+   "through": [
+    [
+     "0 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     0,
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     0,
+     "0 mm - 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot C",
+   "through": [
+    [
+     "knee_x",
+     0,
+     "knee_z"
+    ],
+    [
+     "knee_x + cos(link_direction) * 1 mm",
+     0,
+     "knee_z + sin(link_direction) * 1 mm"
+    ],
+    [
+     "knee_x - sin(link_direction) * 1 mm",
+     0,
+     "knee_z + cos(link_direction) * 1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Plates are of stock thickness and apart by the spacer",
+   "measure": "extent",
+   "of": "Link",
+   "axis": "y",
+   "eq": "2 * (plate_inner_y + plate_thickness)",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Toggle clamp link",
+   "description": "Two flat stamped plates of stock thickness joined by a staked spacer.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

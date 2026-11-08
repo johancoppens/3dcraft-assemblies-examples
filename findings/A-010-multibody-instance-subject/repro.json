@@ -1,0 +1,7 @@
+[
+ ["assembly.new", {"units": "mm"}],
+ ["instance.add", {"source": "two_bodies.3dcraft", "name": "Handle"}],
+ ["instance.add", {"source": "two_bodies.3dcraft", "name": "Other", "position": [0, 0, 20]}],
+ ["assert.add", {"name": "A multi-body instance by its own name", "measure": "clearance", "from": "Handle", "to": "Other", "min": "1 mm"}],
+ ["document.check", {}]
+]

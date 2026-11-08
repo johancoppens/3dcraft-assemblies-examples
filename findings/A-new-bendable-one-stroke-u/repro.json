@@ -1,0 +1,11 @@
+[
+ ["sketch.create", {"name": "Web", "plane": "yz"}],
+ ["sketch.path", {"sketch": "Web", "start": ["-0.7 mm", "0 mm"], "segments": [{"line": ["0.7 mm", "0 mm"]}, {"line": ["0.7 mm", "12 mm"]}, {"line": ["-0.7 mm", "12 mm"]}, {"line": "start"}]}],
+ ["feature.sheetMetal", {"sketch": "Web", "name": "U", "thickness": "2.5 mm", "radius": "2.5 mm", "kFactor": "0.33", "flanges": [
+   {"edge": "e5", "angle": "90 deg", "length": "50 mm"}, {"edge": "e8", "angle": "90 deg", "length": "50 mm"}]}],
+ ["assert.add", {"name": "U-forming in one stroke", "measure": "bendable", "of": "U", "order": [[0, 1]], "is": true,
+   "punch": [[-3.2, 90], [-3.2, 2.5], {"through": [-2.468, 0.732]}, [-0.7, 0], [0.7, 0], {"through": [2.468, 0.732]}, [3.2, 2.5], [3.2, 90]],
+   "die": [[-25.9, -90], [25.9, -90], [25.9, 0], [5.9, 0], [5.9, -2.7], [-5.9, -2.7], [-5.9, 0], [-25.9, 0]]}],
+ ["assert.list", {}],
+ ["document.check", {}]
+]

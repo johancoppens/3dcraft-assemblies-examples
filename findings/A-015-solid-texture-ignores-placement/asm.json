@@ -1,0 +1,1 @@
+[["assembly.new", {"units": "mm"}], ["instance.add", {"source": "bar.3dcraft", "name": "Straight", "position": [0, -40, 0]}], ["instance.add", {"source": "bar.3dcraft", "name": "Turned", "position": [0, 40, 0], "rotation": [0, 0, 60]}], ["assembly.pack", {}], ["document.check", {}]]

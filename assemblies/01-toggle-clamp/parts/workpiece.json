@@ -1,0 +1,211 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "block_height",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "block_height",
+   "label": "Height",
+   "description": "Height of the block",
+   "group": "Workpiece",
+   "order": 1,
+   "min": "3 mm",
+   "max": "8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spindle_x",
+   "expr": "-15.1 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "spindle_x",
+   "label": "Spindle x",
+   "description": "Where the spindle stands, from the base's front edge",
+   "group": "Workpiece",
+   "order": 2,
+   "min": "-56 mm",
+   "max": "-10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "block_ahead",
+   "expr": "22 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "block_behind",
+   "expr": "16 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "block_width",
+   "expr": "44 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_clearance",
+   "expr": "2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "edge_break",
+   "expr": "0.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "block_rear_x",
+   "expr": "min(spindle_x + block_behind, -flange_clearance)"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Block outline",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.rect",
+  {
+   "sketch": "Block outline",
+   "from": [
+    "spindle_x - block_ahead",
+    "-block_width / 2"
+   ],
+   "to": [
+    "block_rear_x",
+    "block_width / 2"
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "name": "Block body",
+   "sketch": "Block outline",
+   "distance": "block_height"
+  }
+ ],
+ [
+  "feature.chamfer",
+  {
+   "name": "Workpiece block",
+   "edges": [
+    [
+     "F2:side(e5)",
+     "F2:startCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e6)",
+     "F2:startCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e7)",
+     "F2:startCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e8)",
+     "F2:startCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e5)",
+     "F2:endCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e6)",
+     "F2:endCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e7)",
+     "F2:endCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e8)",
+     "F2:endCap(e5,e6,e7,e8)"
+    ],
+    [
+     "F2:side(e5)",
+     "F2:side(e8)"
+    ],
+    [
+     "F2:side(e5)",
+     "F2:side(e6)"
+    ],
+    [
+     "F2:side(e6)",
+     "F2:side(e7)"
+    ],
+    [
+     "F2:side(e7)",
+     "F2:side(e8)"
+    ]
+   ],
+   "distance": "edge_break"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Workpiece block",
+   "preset": "beech"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Datum",
+   "through": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     "1 mm",
+     0,
+     0
+    ],
+    [
+     0,
+     "1 mm",
+     0
+    ]
+   ]
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Workpiece",
+   "description": "A beech block, the thing being clamped, standing under the spindle.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

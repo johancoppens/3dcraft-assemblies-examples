@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 .scratch/
 assemblies/00-*/
+assemblies/*/toggle-clamp*/

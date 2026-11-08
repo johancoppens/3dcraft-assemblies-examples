@@ -1,0 +1,204 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "shank_diameter",
+   "expr": "4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "span",
+   "expr": "16.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shank_diameter",
+   "label": "Shank",
+   "description": "Shank diameter",
+   "group": "Rivet",
+   "order": 1,
+   "min": "3.8 mm",
+   "max": "4.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "span",
+   "label": "Span",
+   "description": "Length of the shank between the heads",
+   "group": "Rivet",
+   "order": 2,
+   "min": "11 mm",
+   "max": "18 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_diameter",
+   "expr": "7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_height",
+   "expr": "1.8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_rim",
+   "expr": "0.5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Rivet profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Rivet profile",
+   "start": [
+    0,
+    0
+   ],
+   "segments": [
+    {
+     "line": [
+      "shank_diameter / 2",
+      0
+     ]
+    },
+    {
+     "line": [
+      "shank_diameter / 2",
+      "span / 2"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "span / 2"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "span / 2 + head_rim"
+     ]
+    },
+    {
+     "arc": [
+      0,
+      "span / 2 + head_height"
+     ],
+     "center": [
+      0,
+      "span / 2 + head_rim + ((head_height - head_rim)^2 - (head_diameter / 2)^2) / (2 * (head_height - head_rim))"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "name": "Half rivet",
+   "sketch": "Rivet profile",
+   "axis": "y"
+  }
+ ],
+ [
+  "feature.mirror",
+  {
+   "name": "Other half",
+   "source": "Half rivet",
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "keep": true
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Half rivet",
+   "tool": "Other half",
+   "name": "Rivet"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Rivet",
+   "preset": "steel",
+   "color": "#d5dde3",
+   "metallic": 0.7,
+   "roughness": 0.45
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Centre",
+   "through": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     "1 mm",
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     "-1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Overall length",
+   "measure": "extent",
+   "of": "Rivet",
+   "axis": "y",
+   "eq": "span + 2 * head_height",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Pivot rivet",
+   "description": "Steel pivot rivet with domed heads, one part in two configurations by its span.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

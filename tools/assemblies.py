@@ -51,6 +51,7 @@ BUDGET_BYTES = 1_000_000
 STEP_GUIDE = {"simple": 120, "difficult": 300, "complex": 600}
 BAKE_FRAMES = 120
 COLLISION_MOMENTS = 120
+CORNER_MOMENTS = 30
 MIN_SAMPLES = 73
 MAX_CORNERS = 8
 MIN_ASSERTIONS = 3
@@ -534,14 +535,14 @@ def contact_allowed(a, b, contacts):
     return False
 
 
-def check_collisions(final, meta, target):
-    """Collisions at COLLISION_MOMENTS moments of the motion, named. Returns (problems, notes)."""
-    steps = [["view.motion", {"t": k / COLLISION_MOMENTS, "collisions": True}] for k in range(COLLISION_MOMENTS + 1)]
+def collisions_over(final, meta, target, where, moments, setup=()):
+    """Runs the motion at moments + 1 moments with collisions on. Returns (problems, listed pairs, seconds)."""
+    steps = list(setup) + [["view.motion", {"t": k / moments, "collisions": True}] for k in range(moments + 1)]
     script = target / "collisions.json"
     script.write_text(json.dumps(steps))
     result, seconds = run_cli(["run", final, "--script", script], cwd=target, memory="3G", timeout=3000)
     if result.returncode != 0:
-        return [explain_failure(result, "the collision run failed")], []
+        return [explain_failure(result, f"the collision run failed {where}")], 0, seconds
     pairs, unknown, dead = {}, {}, []
     for moment in json_lines(result):
         if moment.get("deadPoint") is not None:
@@ -555,14 +556,28 @@ def check_collisions(final, meta, target):
                 if hit["volume"] > worst[0]:
                     worst[0], worst[1] = hit["volume"], moment.get("t")
     contacts = meta.get("contacts") or []
-    problems = [f"{a} and {b} collide, up to {v:.3g} mm³ (t = {t:.3f}): clear them or list them in meta.json contacts"
+    problems = [f"{a} and {b} collide {where}, up to {v:.3g} mm³ (t = {t:.3f}): clear them or list them in meta.json contacts"
                 for (a, b), (v, t) in sorted(pairs.items()) if not contact_allowed(a, b, contacts)]
-    problems += [f"{a} and {b}: collision unknown ({why})" for (a, b), why in sorted(unknown.items())
+    problems += [f"{a} and {b}: collision unknown {where} ({why})" for (a, b), why in sorted(unknown.items())
                  if not contact_allowed(a, b, contacts)]
     if dead and not (meta.get("motion") or {}).get("dead_points"):
-        problems.append(f"a dead point in the motion at t = {dead[:5]}")
-    allowed = sum(1 for (a, b) in pairs if contact_allowed(a, b, contacts))
-    return problems, [f"collisions at {COLLISION_MOMENTS + 1} moments in {seconds:.0f} s: {allowed} listed contact pair(s)"]
+        problems.append(f"a dead point in the motion {where} at t = {dead[:5]}")
+    return problems, sum(1 for (a, b) in pairs if contact_allowed(a, b, contacts)), seconds
+
+
+def check_collisions(final, meta, target, quick):
+    """Named collisions over the motion at the defaults and at the corners of the public ranges. Returns (problems, notes)."""
+    problems, allowed, seconds = collisions_over(final, meta, target, "at the defaults", COLLISION_MOMENTS)
+    notes = [f"collisions at {COLLISION_MOMENTS + 1} moments in {seconds:.0f} s: {allowed} listed contact pair(s)"]
+    if not quick:
+        corners = range_corners(final, target)
+        for values in corners:
+            setup = [["param.set", {"values": values, "clamp": True}]]
+            found, _, _ = collisions_over(final, meta, target, f"at {values}", CORNER_MOMENTS, setup)
+            problems += found
+        if corners:
+            notes.append(f"collisions at {len(corners)} corners of the ranges, {CORNER_MOMENTS + 1} moments each")
+    return problems, notes
 
 
 def scratch_folder(aid):
@@ -676,7 +691,7 @@ def cmd_check(ids, quick):
                 found, said = check_motion(rebuilt, meta, target, quick)
                 problems += found
                 notes += said
-                found, said = check_collisions(rebuilt, meta, target)
+                found, said = check_collisions(rebuilt, meta, target, quick)
                 problems += found
                 notes += said
                 if not quick:
