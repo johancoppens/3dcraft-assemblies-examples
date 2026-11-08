@@ -1,0 +1,42 @@
+[
+[
+"variable.set",
+{
+"name": "bar_length",
+"expr": "80 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"bar_length",
+"8 mm",
+"4 mm"
+],
+"name": "Bar"
+}
+],
+[
+"datum.axis",
+{
+"name": "Pivot",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

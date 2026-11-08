@@ -1,0 +1,62 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "swing",
+"expr": "10 deg"
+}
+],
+[
+"variable.publish",
+{
+"name": "swing",
+"label": "Swing",
+"min": "0 deg",
+"max": "30 deg",
+"step": "1 deg"
+}
+],
+[
+"instance.add",
+{
+"source": "bar.3dcraft",
+"name": "Bar"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Hinge",
+"a": "world/z",
+"b": "Bar/Pivot",
+"flip": true
+}
+],
+[
+"joint.set",
+{
+"mate": "Hinge",
+"value": "swing"
+}
+],
+[
+"assert.add",
+{
+"name": "Hinge in range",
+"measure": "jointAngle",
+"mate": "Hinge",
+"max": "31 deg"
+}
+],
+[
+"document.check",
+{}
+]
+]

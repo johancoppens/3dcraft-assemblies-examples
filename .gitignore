@@ -1,0 +1,7 @@
+NOTES.md
+log/
+plan/
+__pycache__/
+*.pyc
+.scratch/
+assemblies/00-*/
