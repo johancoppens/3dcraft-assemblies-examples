@@ -1,0 +1,17 @@
+[
+ ["table.set", {"name": "sizes", "columns": ["row", {"name": "head_diameter", "unit": "mm"}, {"name": "head_height", "unit": "mm"}, {"name": "head_chamfer", "unit": "mm"}], "rows": [["all", 16, 3, 0.8]]}],
+ ["variable.set", {"name": "span", "expr": "56 mm"}],
+ ["variable.set", {"name": "shank_diameter", "expr": "10 mm"}],
+ ["variable.publish", {"name": "span", "label": "Span", "group": "Rivet", "order": 1, "description": "Between the heads", "min": "40 mm", "max": "80 mm"}],
+ ["variable.publish", {"name": "shank_diameter", "label": "Shank", "group": "Rivet", "order": 2, "description": "Shank diameter", "min": "8 mm", "max": "12 mm"}],
+ ["sketch.create", {"name": "Rivet half profile", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Rivet half profile", "start": [0, 0], "segments": [{"line": ["shank_diameter / 2", 0]}, {"line": ["shank_diameter / 2", "span / 2"]}, {"line": ["sizes[\"all\"].head_diameter / 2", "span / 2"]}, {"line": ["sizes[\"all\"].head_diameter / 2", "span / 2 + sizes[\"all\"].head_height - sizes[\"all\"].head_chamfer"]}, {"line": ["sizes[\"all\"].head_diameter / 2 - sizes[\"all\"].head_chamfer", "span / 2 + sizes[\"all\"].head_height"]}, {"line": [0, "span / 2 + sizes[\"all\"].head_height"]}, {"line": "start"}]}],
+ ["feature.revolve", {"name": "Half rivet", "sketch": "Rivet half profile", "axis": "y"}],
+ ["feature.mirror", {"name": "Other half", "source": "Half rivet", "normal": [0, 1, 0], "keep": true}],
+ ["feature.boolean", {"op": "union", "target": "Half rivet", "tool": "Other half", "name": "Rivet"}],
+ ["material.preset", {"body": "Rivet", "preset": "steel", "color": "#b6bcc3", "metallic": 0.7, "roughness": 0.42}],
+ ["datum.plane", {"name": "Centre", "through": [[0, 0, 0], ["1 mm", 0, 0], [0, 0, "-1 mm"]]}],
+ ["assert.add", {"name": "Overall length", "measure": "extent", "of": "Rivet", "axis": "y", "eq": "span + 2 * sizes[\"all\"].head_height", "tol": "0.001"}],
+ ["document.info", {"title": "Pivot rivet", "description": "Steel pivot rivet, 10 mm shank with two formed heads; one part in two configurations by its span.", "tags": ["fastener"], "author": "3DCraft assemblies", "licence": "CC-BY-4.0"}],
+ ["document.check", {}]
+]

@@ -1,0 +1,17 @@
+[
+ ["table.set", {"name": "sizes", "columns": ["row", {"name": "washer_chamfer", "unit": "mm"}], "rows": [["all", 0.4]]}],
+ ["variable.set", {"name": "washer_od", "expr": "21.5 mm"}],
+ ["variable.set", {"name": "washer_id", "expr": "14.6 mm"}],
+ ["variable.set", {"name": "washer_thickness", "expr": "2 mm"}],
+ ["variable.publish", {"name": "washer_od", "label": "Outside", "group": "Washer", "order": 1, "description": "Outside diameter", "min": "20 mm", "max": "23 mm"}],
+ ["variable.publish", {"name": "washer_id", "label": "Inside", "group": "Washer", "order": 2, "description": "Inside diameter", "min": "13 mm", "max": "15.5 mm"}],
+ ["variable.publish", {"name": "washer_thickness", "label": "Thickness", "group": "Washer", "order": 3, "description": "Thickness", "min": "1.5 mm", "max": "2.5 mm"}],
+ ["sketch.create", {"name": "Washer profile", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Washer profile", "start": ["washer_id / 2", "-washer_thickness / 2"], "segments": [{"line": ["washer_od / 2 - sizes[\"all\"].washer_chamfer", "-washer_thickness / 2"]}, {"line": ["washer_od / 2", "-washer_thickness / 2 + sizes[\"all\"].washer_chamfer"]}, {"line": ["washer_od / 2", "washer_thickness / 2 - sizes[\"all\"].washer_chamfer"]}, {"line": ["washer_od / 2 - sizes[\"all\"].washer_chamfer", "washer_thickness / 2"]}, {"line": ["washer_id / 2", "washer_thickness / 2"]}, {"line": "start"}]}],
+ ["feature.revolve", {"name": "Thrust washer", "sketch": "Washer profile", "axis": "y"}],
+ ["material.preset", {"body": "Thrust washer", "preset": "steel", "color": "#c49a3a", "metallic": 0.85, "roughness": 0.3}],
+ ["datum.plane", {"name": "Seat", "through": [[0, "-washer_thickness / 2", 0], [0, "-washer_thickness / 2", "1 mm"], ["1 mm", "-washer_thickness / 2", 0]]}],
+ ["assert.add", {"name": "Washer thickness", "measure": "extent", "of": "Thrust washer", "axis": "y", "eq": "washer_thickness", "tol": "0.001"}],
+ ["document.info", {"title": "Thrust washer", "description": "Brass thrust washer between the screw's collar and the bearing trunnion.", "tags": ["fastener"], "author": "3DCraft assemblies", "licence": "CC-BY-4.0"}],
+ ["document.check", {}]
+]

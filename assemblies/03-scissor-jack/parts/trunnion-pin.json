@@ -1,0 +1,15 @@
+[
+ ["table.set", {"name": "sizes", "columns": ["row", {"name": "head_diameter", "unit": "mm"}, {"name": "head_height", "unit": "mm"}, {"name": "head_chamfer", "unit": "mm"}, {"name": "tip_chamfer", "unit": "mm"}], "rows": [["all", 19, 4, 1, 0.8]]}],
+ ["variable.set", {"name": "shank_length", "expr": "16.5 mm"}],
+ ["variable.set", {"name": "shank_diameter", "expr": "12 mm"}],
+ ["variable.publish", {"name": "shank_length", "label": "Shank length", "group": "Pin", "order": 1, "description": "From under the head to the inner end", "min": "10 mm", "max": "28 mm"}],
+ ["variable.publish", {"name": "shank_diameter", "label": "Shank", "group": "Pin", "order": 2, "description": "Shank diameter", "min": "10 mm", "max": "14 mm"}],
+ ["sketch.create", {"name": "Pin profile", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Pin profile", "start": [0, "-shank_length"], "segments": [{"line": ["shank_diameter / 2 - sizes[\"all\"].tip_chamfer", "-shank_length"]}, {"line": ["shank_diameter / 2", "-shank_length + sizes[\"all\"].tip_chamfer"]}, {"line": ["shank_diameter / 2", 0]}, {"line": ["sizes[\"all\"].head_diameter / 2", 0]}, {"line": ["sizes[\"all\"].head_diameter / 2", "sizes[\"all\"].head_height - sizes[\"all\"].head_chamfer"]}, {"line": ["sizes[\"all\"].head_diameter / 2 - sizes[\"all\"].head_chamfer", "sizes[\"all\"].head_height"]}, {"line": [0, "sizes[\"all\"].head_height"]}, {"line": "start"}]}],
+ ["feature.revolve", {"name": "Trunnion pin", "sketch": "Pin profile", "axis": "y"}],
+ ["material.preset", {"body": "Trunnion pin", "preset": "steel", "color": "#b6bcc3", "metallic": 0.7, "roughness": 0.42}],
+ ["datum.plane", {"name": "Under head", "through": [[0, 0, 0], [0, 0, "1 mm"], ["1 mm", 0, 0]]}],
+ ["assert.add", {"name": "Overall length", "measure": "extent", "of": "Trunnion pin", "axis": "y", "eq": "shank_length + sizes[\"all\"].head_height", "tol": "0.001"}],
+ ["document.info", {"title": "Trunnion pin", "description": "Steel headed pin that carries the arms on a trunnion; driven in from outside and pressed into the trunnion's blind hole.", "tags": ["fastener"], "author": "3DCraft assemblies", "licence": "CC-BY-4.0"}],
+ ["document.check", {}]
+]

@@ -1,0 +1,5 @@
+[
+ ["feature.block", {"name": "Block", "size": ["20 mm", "20 mm", "20 mm"]}],
+ ["datum.plane", {"name": "Axis", "through": [[0, 0, 0], ["1 mm", 0, 0], [0, "1 mm", 0]]}],
+ ["document.check", {}]
+]

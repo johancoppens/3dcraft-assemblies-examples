@@ -1,0 +1,161 @@
+{
+  "id": "scissor-jack",
+  "title": "Scissor car jack",
+  "summary": "screw, gear teeth, closed loop",
+  "description": "A pressed-steel scissor jack sized after jacks sold as 1 t: four U-section arms with gear-tooth ends, a screw between a nut trunnion and a bearing trunnion, a saddle held level by the gears, and a tilted folding crank on a Hooke joint.",
+  "domain": "Automotive, sheet metal",
+  "process": "Pressing, welding, thread rolling, turning",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "A closed rhombus with screw and gear couplings plus a spherical Hooke loop, four sheet-metal arm configurations with involute teeth, process and motion checks, and kernel limits to work around."
+  },
+  "standards": [
+    "EN 1494 (mobile jacks; scope and contents read only, no requirement or value; no compliance claimed)"
+  ],
+  "materials": [
+    "Cold-rolled steel 3 mm, safety-yellow powder coat",
+    "Steel screw and trunnions, bright zinc",
+    "Black-painted crank on a Hooke joint with a zinc-plated cross, rubber grip and saddle pad",
+    "Brass thrust washer"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "there and back: the screw turns from the lowest position to the highest and back",
+    "samples": 73,
+    "dof": 0
+  },
+  "contacts": [
+    {
+      "pair": [
+        "Screw",
+        "Nut trunnion"
+      ],
+      "why": "the thread is the joint: the nut's bore is the tap drill and the screw is at the major diameter (F-014)"
+    },
+    {
+      "pair": [
+        "Nut pin *",
+        "Nut trunnion"
+      ],
+      "why": "the headed pin is pressed into the nut trunnion's blind hole, a drawn line-on-line press fit"
+    },
+    {
+      "pair": [
+        "Bearing pin *",
+        "Bearing trunnion"
+      ],
+      "why": "the headed pin is pressed into the bearing trunnion's blind hole, a drawn line-on-line press fit"
+    },
+    {
+      "pair": [
+        "Saddle/Saddle frame",
+        "Saddle/Saddle pad"
+      ],
+      "why": "the rubber pad is bonded to the saddle's top face"
+    }
+  ],
+  "preview": {
+    "camera": {
+      "eye": [
+        880,
+        -1020,
+        620
+      ],
+      "target": [
+        190,
+        0,
+        190
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 24
+    },
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/scissor-jack.step"
+    },
+    {
+      "path": "exports/arm-lower-right-flat.dxf",
+      "part": "arm",
+      "sheetMetal": "Arm",
+      "values": {
+        "inner_width": 41.5,
+        "tooth_hand": 0
+      }
+    },
+    {
+      "path": "exports/arm-lower-left-flat.dxf",
+      "part": "arm",
+      "sheetMetal": "Arm",
+      "values": {
+        "inner_width": 41.5,
+        "tooth_hand": 1
+      }
+    },
+    {
+      "path": "exports/arm-upper-left-flat.dxf",
+      "part": "arm",
+      "sheetMetal": "Arm",
+      "values": {
+        "inner_width": 34,
+        "tooth_hand": 0
+      }
+    },
+    {
+      "path": "exports/arm-upper-right-flat.dxf",
+      "part": "arm",
+      "sheetMetal": "Arm",
+      "values": {
+        "inner_width": 34,
+        "tooth_hand": 1
+      }
+    },
+    {
+      "path": "exports/base-channel-flat.dxf",
+      "part": "base",
+      "sheetMetal": "Base channel"
+    },
+    {
+      "path": "exports/saddle-frame-flat.dxf",
+      "part": "saddle",
+      "sheetMetal": "Saddle frame"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-08",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed the Acceptance on the numbers: 0 dof, saddle 121.9 to 378.0 mm against the rhombus to 1e-9 mm, level to 6e-15°, span to 1.4e-10 mm, handle 17.6 mm above the ground, no dead point, 73 samples. It had to guess many sizes (arm section, module, crank tilt), so the arms' sizes and teeth, the crank and the friction were added to the prompt afterwards; that wording was not retested. The Hooke closed form held only modulo pi over 67.5 turns in that rebuild."
+  },
+  "stats": {
+    "steps": 510,
+    "parts": 9,
+    "instances": 23,
+    "configurations": 14,
+    "mates": 26,
+    "couplings": 3,
+    "dof": 0,
+    "parameters": 4,
+    "assertions": 26,
+    "part_assertions": 22,
+    "warnings": 0,
+    "build_s": 4.68,
+    "load_s": 2.16,
+    "load_cpu_s": 1.92,
+    "bake_s": 1.94,
+    "bake_mb": 1.6,
+    "file_bytes": 576361,
+    "range_worst_s": 5.468
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  }
+}

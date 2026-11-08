@@ -1,0 +1,8 @@
+[
+ ["assembly.new", {"units": "mm"}],
+ ["instance.add", {"source": "parts/block.3dcraft", "name": "Nut"}],
+ ["instance.add", {"source": "parts/block.3dcraft", "name": "Screw", "position": [0, 0, 30]}],
+ ["mate.add", {"kind": "fixed", "name": "Grounded", "a": "world/xy", "b": "Nut/Axis", "flip": true}],
+ ["mate.add", {"kind": "cylindrical", "name": "Thread", "a": "Nut/Axis", "b": "Screw/Axis", "flip": true}],
+ ["coupling.add", {"kind": "screw", "name": "Lead", "mates": ["Thread", "Thread"], "value": "3 mm"}]
+]
