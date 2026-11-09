@@ -8,7 +8,7 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `45233bdc` unless they say otherwise.
 
-**Status (2026-11-09):** 39 entries: 14 bugs (one also performance), 11 missing capabilities, 7 performance, 7 agent
+**Status (2026-11-09):** 40 entries: 14 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
 friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps
 while a motion plays), A-013 and A-012 (solve and rebuild cost in machines with many legs), A-016 (an unreported branch
 jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
@@ -54,6 +54,7 @@ jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
 | [A-037](#a-037) | Missing capability | No assertion of a measure's minimum, maximum or range over the motion; `measure.ray` cannot be asserted | radial-engine | strokes checked against an independent table |
 | [A-038](#a-038) | Missing capability | `feature.thread` knows only ISO metric threads | scissor-jack | nominal size and pitch; thread cosmetic |
 | [A-039](#a-039) | Agent friction | `motion.check` reports an angle's least and greatest value in radians beside an expectation in degrees | every assembly | convert by hand |
+| [A-040](#a-040) | Performance (file size) | A packed assembly carries the thumbnail of every part with public parameters | radial engine (valve train) | barrel fins redrawn as a chained pattern to stay under 1 MB |
 
 ## A-001
 
@@ -114,8 +115,10 @@ parameters. Reproducer: [`findings/A-009-motion-check-after-param-set/`](finding
 ## A-010
 
 **Agent friction.** A measure on a plain instance of a part with two bodies answers "there is no feature named `Handle`",
-though `Handle` is the instance; `Handle/First body` works, one body at a time. It extends A-007. **Should:** the
-instance's name means all its bodies. Reproducer:
+though `Handle` is the instance; `Handle/First body` works, one body at a time. The other way round, on an instance of
+a one-body part the body's path is refused (`Box/Bar`: "there is no feature named `Box/Bar`", in `assert.add` and
+`variable.measure` alike), so how a subject is named depends on how many bodies its part has. It extends A-007.
+**Should:** the instance's name means all its bodies, and `Instance/Body` always works. Reproducer:
 [`findings/A-010-multibody-instance-subject/`](findings/A-010-multibody-instance-subject/).
 
 ## A-011
@@ -232,7 +235,7 @@ motion, in every renderer. Reproducer:
 
 ## A-034
 
-**Performance (precision).** `clearance` reports its proven lower bound beside the value it finds. On simple coaxial cylinders the bound is close (found 0.5 mm, at least 0.45, so a fit bounded at 0.2 mm fails as it should). On some bodies the bound is coarse: a printer carriage found 0.5 mm with at least 0.256 mm against a 0.35 mm maximum, a walker key 0.2 with at least 0.0525, a radial piston 0.16 with at least 0. A two-sided fit then reads *not proven* rather than failed or passed, and `document.check` only warns. **Should:** a bound tight enough to decide a fit of tenths of a millimetre on turned and printed parts. No minimal reproducer: the coarse cases are in the assemblies named.
+**Performance (precision).** `clearance` reports its proven lower bound beside the value it finds. On simple coaxial cylinders the bound is close (found 0.5 mm, at least 0.45, so a fit bounded at 0.2 mm fails as it should). On some bodies the bound is coarse: a printer carriage found 0.5 mm with at least 0.256 mm against a 0.35 mm maximum, a walker key 0.2 with at least 0.0525, a radial piston 0.16 with at least 0. A two-sided fit then reads *not proven* rather than failed or passed, and `document.check` only warns. The same holds between the flat faces of coaxial washers: in the task lamp's review a leather washer moved to 0.15 mm from its bar read "at least 0.089 mm" against a 0.1 mm maximum, so the upper bound of a thin gap cannot fail, and a loosened fit passes a mutation test. **Should:** a bound tight enough to decide a fit of tenths of a millimetre on turned and printed parts. No minimal reproducer: the coarse cases are in the assemblies named.
 
 ## A-035
 
@@ -253,3 +256,7 @@ motion, in every renderer. Reproducer:
 ## A-039
 
 **Agent friction.** `motion.check` of a joint angle gives `expected` in degrees and the least and greatest values with `"unit": "rad"`, so a reader compares numbers in two units. **Should:** the values in the expectation's unit.
+
+## A-040
+
+**Performance (file size).** `assembly.pack` stores each part's document as it was saved, and a document with public parameters is saved with its 400 × 300 `thumb.png`. Inside a packed assembly nobody shows those pictures, but they count against the file: in the radial engine with its valve train they took about 216 KB of 1,007,330 bytes (the assembly's own 37.6 KB, the crankcase half 29.8, the piston 28.7, the barrel 23.6, and so on), and a subassembly packs its parts' thumbnails with its own. Together with the uncompressed, pretty-printed archive (examples [F-080](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md#f-080), [F-138](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md#f-138)) that took the file over its 1 MB budget. **Should:** pack the parts without their thumbnails (they can be drawn again when a part is unpacked), or compress the archive. Reproducer: [`findings/A-040-packed-part-thumbnails/`](findings/A-040-packed-part-thumbnails/). **Workaround:** the barrel's sixteen fins redrawn as one chained pattern (48 KB less), which brings the file to 965 KB.
