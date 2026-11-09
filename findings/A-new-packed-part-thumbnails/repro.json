@@ -1,7 +1,0 @@
-[
-["assembly.new",{"units":"mm"}],
-["instance.add",{"source":"part.3dcraft","name":"Bar[1]","params":{"length":"40 mm"}}],
-["instance.add",{"source":"part.3dcraft","name":"Bar[2]","params":{"length":"60 mm"},"position":[0,20,0]}],
-["mate.add",{"kind":"fixed","name":"Ground","a":"world/xy","b":"Bar[1]/F1:face(0)","flip":true}],
-["document.check",{}]
-]
