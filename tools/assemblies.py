@@ -299,7 +299,7 @@ def build_into(aid, target, meta):
     source = ASSEMBLIES / aid
     new = json.dumps({"units": meta.get("units", "mm")})
     (target / "parts").mkdir(parents=True, exist_ok=True)
-    documents, steps, part_assertions = {}, 0, 0
+    documents, steps, part_assertions, unproven = {}, 0, 0, []
     for path, part_steps, is_subassembly in scripts_of(source):
         out = Path("parts") / (path.stem + (".3dcraftasm" if is_subassembly else ".3dcraft"))
         result, _ = run_cli(["run", "--new", new, "--script", path, "--out", out], cwd=target)
@@ -307,6 +307,8 @@ def build_into(aid, target, meta):
             raise CheckError(explain_failure(result, f"parts/{path.name} failed"))
         report = check_report(json_lines(result), f"parts/{path.name}")
         part_assertions += (report.get("assertionSummary") or {}).get("count", 0)
+        unproven += [f"{path.stem}: {a.get('name')}"
+                     for a in (report.get("assertionSummary") or {}).get("unproven", [])]
         documents[path.stem] = (manifest(target / out), part_steps)
         steps += len(part_steps)
 
@@ -352,9 +354,11 @@ def build_into(aid, target, meta):
         raise CheckError("the bake failed to build configurations: " + json.dumps(bake)[:1000])
     ids = Counter(step_id(s) for s in script)
     assertions = report.get("assertionSummary") or {}
+    unproven += [a.get("name") for a in assertions.get("unproven", [])]
     doc = manifest(final)
     documents[None] = (doc, script)
     return {
+        **({"unproven": unproven} if unproven else {}),
         "steps": steps,
         "parts": len(documents) - 1,
         "instances": count_of(inspect.get("instances")),
@@ -365,7 +369,7 @@ def build_into(aid, target, meta):
         "parameters": ids["variable.publish"],
         "assertions": assertions.get("count", ids["assert.add"]),
         "part_assertions": part_assertions,
-        "warnings": len(assertions.get("unproven", [])),
+        "warnings": len(unproven),
         "build_s": round(seconds, 2),
         "load_s": round(load_s, 2),
         "load_cpu_s": round(load_cpu_s, 2),
@@ -460,8 +464,17 @@ def lint(aid, meta, documents, stats):
         warnings.append(f"{stats['parameters']} public parameters (AGENTS.md asks 2 to 4)")
     if stats["assertions"] < MIN_ASSERTIONS:
         errors.append(f"{stats['assertions']} assertions on the assembly, at least {MIN_ASSERTIONS}")
-    if stats["warnings"]:
-        warnings.append(f"{stats['warnings']} assertion(s) not proven: explain in the README")
+    # An assertion not proven at rest neither passes nor fails, so a loosened fit could slip through a mutation
+    # test unseen (A-034). Each one is an error unless meta.json "unproven" names it with why (and the README says so).
+    explained = {entry.get("name"): entry.get("why") for entry in meta.get("unproven", [])}
+    for name in stats.get("unproven", []):
+        if explained.get(name):
+            warnings.append(f"assertion {name!r} is not proven at rest: {explained[name]}")
+        else:
+            errors.append(f"assertion {name!r} is not proven at rest: make it decide, or list it in meta.json "
+                          "unproven with why and explain it in the README")
+    for name in set(explained) - set(stats.get("unproven", [])):
+        warnings.append(f"meta.json unproven lists {name!r}, which is proven now: remove it")
     return errors, warnings
 
 

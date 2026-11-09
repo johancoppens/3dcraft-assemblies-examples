@@ -216,8 +216,12 @@ the reason).
 ### 4.7 Proven at rest and over the motion
 End with assertions that make the assembly prove itself; never fewer than three, and at least one closed-form or
 independently computed:
-- **At rest:** `document.check` is `ok` (every mate and coupling solved, every part valid, no broken assertion), any
-  unproven assertion explained in the README. The check over the public ranges is `check-range`.
+- **At rest:** `document.check` is `ok` (every mate and coupling solved, every part valid, no broken assertion). An
+  assertion that is not proven neither passes nor fails, so it cannot catch a mutation: make it decide, or name it in
+  `meta.json` `unproven` with why and explain it in the README. The tool fails any other. For a fit, assert the
+  `clearance`'s `min` (its lower bound is proven) and the `max` on an output of the same clearance with a `value`
+  assertion: the gap found is a real pair of points, so that passes when the clearance's own `max` would and fails
+  where that one only reads not proven ([A-041](3DCRAFT-FEEDBACK.md#a-041)). The check over the public ranges is `check-range`.
 - **Over the motion:** `motion.check` at no fewer than 73 samples, at the defaults and at the corners of the public
   ranges. A joint's solved value against a closed form (`jointAngle`, `jointDistance`, `position`, `rotation`); the
   ratio you see is the ratio asked; the extremes that matter (stroke, height, reach); `clearance` where a gap is the
@@ -273,7 +277,8 @@ what is free, what drives what); *Parameters*; *Checks* (at rest, over the motio
 
 `summary` is the card's line (a few words). `motion.dof` is the degrees of freedom `assembly.solve` must report; each
 is named in the README. `contacts` lists every pair that may overlap, each with its reason (`*` matches any text in a
-name); everything else must be clear. `stats` (load, bake, file, steps, parts, instances, degrees of freedom) and
+name); everything else must be clear. `unproven` (only when needed) lists `{"name", "why"}` for each assertion
+that reads not proven at rest (a part's as `"<part>: <name>"`). `stats` (load, bake, file, steps, parts, instances, degrees of freedom) and
 `craft3d` are written by the tool.
 
 **`prompt.md`**: the chat a person could paste, turn by turn, into an AI connected to 3DCraft over MCP to build the

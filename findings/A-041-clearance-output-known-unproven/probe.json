@@ -1,0 +1,7 @@
+[
+["variable.measure", {"name": "probe_side_play", "measure": "clearance", "from": "Turret", "to": "Lower main bar"}],
+["assert.add", {"name": "Probe side play on the output", "measure": "value", "expr": "probe_side_play", "min": "0.2 mm", "max": "0.6 mm"}],
+["assert.add", {"name": "Probe side play direct", "measure": "clearance", "from": "Turret", "to": "Lower main bar", "min": "0.2 mm", "max": "0.6 mm"}],
+["output.list", {}],
+["assert.list", {"details": true}]
+]

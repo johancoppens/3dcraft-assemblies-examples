@@ -8,7 +8,7 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `45233bdc` unless they say otherwise.
 
-**Status (2026-11-09):** 40 entries: 14 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
+**Status (2026-11-09):** 41 entries: 15 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
 friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps
 while a motion plays), A-013 and A-012 (solve and rebuild cost in machines with many legs), A-016 (an unreported branch
 jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
@@ -55,6 +55,7 @@ jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
 | [A-038](#a-038) | Missing capability | `feature.thread` knows only ISO metric threads | scissor-jack | nominal size and pitch; thread cosmetic |
 | [A-039](#a-039) | Agent friction | `motion.check` reports an angle's least and greatest value in radians beside an expectation in degrees | every assembly | convert by hand |
 | [A-040](#a-040) | Performance (file size) | A packed assembly carries the thumbnail of every part with public parameters | radial engine (valve train) | barrel fins redrawn as a chained pattern to stay under 1 MB |
+| [A-041](#a-041) | Bug | An output of `clearance` is known at the gap found where the same assertion reads not proven | task-lamp (review) | used deliberately: a fit's upper side asserted on the output |
 
 ## A-001
 
@@ -260,3 +261,7 @@ motion, in every renderer. Reproducer:
 ## A-040
 
 **Performance (file size).** `assembly.pack` stores each part's document as it was saved, and a document with public parameters is saved with its 400 × 300 `thumb.png`. Inside a packed assembly nobody shows those pictures, but they count against the file: in the radial engine with its valve train they took about 216 KB of 1,007,330 bytes (the assembly's own 37.6 KB, the crankcase half 29.8, the piston 28.7, the barrel 23.6, and so on), and a subassembly packs its parts' thumbnails with its own. Together with the uncompressed, pretty-printed archive (examples [F-080](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md#f-080), [F-138](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md#f-138)) that took the file over its 1 MB budget. **Should:** pack the parts without their thumbnails (they can be drawn again when a part is unpacked), or compress the archive. Reproducer: [`findings/A-040-packed-part-thumbnails/`](findings/A-040-packed-part-thumbnails/). **Workaround:** the barrel's sixteen fins redrawn as one chained pattern (48 KB less), which brings the file to 965 KB.
+
+## A-041
+
+**Bug.** `clearance` finds a gap between a pair of points (an upper bound of the true gap) and proves a lower bound. Where the two are far apart (A-034), an assertion with a `max` reads *not proven*, as it should. The same measure as an output (`variable.measure`) is `known` at the gap found, with no bound, though `variable.measure` says an output is unknown when "what it proves is wider than the document's tolerance". In the task lamp with its turret slot 1 mm wider, one gap reads `known` 0.9 mm as an output, `failed` as a `value` assertion on that output, and `notProven` (at least 0.416 mm) as a `clearance` assertion. **Should:** one contract: the output unknown as documented, or carrying the interval it proves, with an assertion on it saying what the interval decides. Reproducer: [`findings/A-041-clearance-output-known-unproven/`](findings/A-041-clearance-output-known-unproven/). **Used deliberately:** a `value` assertion with a `max` on the output passes exactly when the clearance assertion's `max` would, and fails where that one only reads not proven, so a loosened fit fails a mutation test; the lower side stays with the `clearance` assertion, whose bound is proven.
