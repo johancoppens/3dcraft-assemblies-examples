@@ -1,0 +1,110 @@
+[
+[
+"sketch.create",
+{
+"name": "Gear profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Gear profile",
+"start": [
+"27.02 mm",
+"-146 mm"
+],
+"segments": [
+{
+"line": [
+"35.9 mm",
+"-146 mm"
+]
+},
+{
+"line": [
+"35.9 mm",
+"-130 mm"
+]
+},
+{
+"line": [
+"27.02 mm",
+"-130 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Gear profile",
+"axis": "y",
+"name": "Crank gear"
+}
+],
+[
+"material.preset",
+{
+"body": "Crank gear",
+"preset": "steel",
+"color": "#b8bdc4",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Pitch radius of 24 teeth at module 3",
+"measure": "extent",
+"of": "Crank gear",
+"axis": "x",
+"eq": "71.8 mm",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Crank gear",
+"description": "Crank gear of the cam reduction, drawn as its pitch cylinder without teeth.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

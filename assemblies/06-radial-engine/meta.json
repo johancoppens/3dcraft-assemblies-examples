@@ -1,49 +1,57 @@
 {
   "id": "radial-engine",
-  "title": "Seven-cylinder radial engine",
-  "summary": "seven closed loops, articulated rods, finned cylinders",
-  "description": "A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class, with a master rod and six articulated rods on knuckle pins in a cut-away crankcase.",
+  "title": "Seven-cylinder radial engine with its valve train",
+  "summary": "cam ring at 1/6, seven closed loops, valve gear",
+  "description": "The seven-cylinder radial with its valve train: a double-track cam ring turned at one sixth of the crank speed through reduction gears, roller tappets, pushrods, rockers and poppet valves in a cut-away crankcase and opened cylinders.",
   "domain": "Aviation, engines",
   "process": "Casting, forging, machining",
   "tier": "complex",
   "difficulty": {
-    "score": 7,
-    "rationale": "Seven closed loops on one master rod solved as one, a rigid cylinder subassembly placed seven times, a built-up crank and a halved case placed twice by configuration, and closed-form proofs over the motion; no couplings or configurations that follow t."
+    "score": 8,
+    "rationale": "Seven articulated loops plus fourteen pushrod–rocker loops, a two-stage gear coupling, lobes drawn from a law with formula-driven followers proven by measure, multi-body fitted parts, and expert engine knowledge."
   },
   "standards": [],
   "materials": [
     "Cast grey crankcase",
     "Finned steel barrels, dark",
     "Cast aluminium heads",
-    "Polished steel rods and crank",
+    "Polished steel rods, crank and valve gear",
     "Aluminium pistons",
-    "Copper-plated propeller hub"
+    "Copper pushrods and spark plugs, copper-plated hub"
   ],
   "units": "mm",
   "motion": {
-    "cycle": "one full crank turn: the mechanism closes on itself",
-    "samples": 73,
+    "cycle": "one engine cycle, two crank turns: the four strokes of every cylinder and one third of a turn of the cam ring; it closes on itself",
+    "samples": 145,
     "dof": 0
   },
-  "contacts": [],
+  "contacts": [
+    {
+      "pair": [
+        "Valve[*]/Valve retainer",
+        "Cylinder[*]/Spring *"
+      ],
+      "why": "the valve spring is drawn at its installed height and does not compress: while the valve is open the retainer passes into it (compression not drawn)"
+    }
+  ],
   "preview": {
     "camera": {
       "eye": [
-        -980,
-        -1560,
-        560
+        -1180,
+        -1880,
+        640
       ],
       "target": [
-        -20,
-        0,
-        60
+        -30,
+        -60,
+        40
       ],
       "up": [
         0,
         0,
         1
       ],
-      "fovY": 31
+      "fovY": 33
     },
     "look": {
       "rotation": 270
@@ -57,27 +65,27 @@
   "prompt_test": {
     "date": "2026-11-09",
     "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
-    "result": "Built and checked: 39 instances, 0 dof, firing interval 102.86° measured, every piston within 0.1 mm of the closed form at 73 samples, strokes 117.500, 117.563, 118.611 and 118.262 mm (equal to this model's), no collisions at 121 moments and at the range corners (8 moments each). It invented the link-rod length, the piston skirt, the head chamber and the case sizes; these were added to the prompt afterwards, and that wording was not retested. About 60 CLI calls."
+    "result": "Built and checked the engine with its valve train: 0 dof, document.check ok, every piston within 0.001 mm of the closed form at 721 samples, strokes 117.500, 117.563, 118.615 and 118.266 mm and compression ratios 5.40, 5.10, 5.03 and 5.35 (as this model's), cam ring at crank/6 reversed, tappets on the law, rollers 0.01 mm off their lobes, spigot fit 0.04 mm, least piston-to-valve 26.0 mm. It chose its own valve lash (0.25 mm, so the pad gap missed the 0.13 mm bound), compressing springs (a heavy bake) and a split cam ring, and left a piston-to-case overlap of its own unexplained; collisions were run at 25 moments only. It had to guess the valve layout, the gear train, the chamber datum, the lash, the spring and which cylinders to open; those were added to the prompt afterwards, and that wording was not retested. About 80 CLI calls."
   },
   "stats": {
-    "steps": 732,
-    "parts": 12,
-    "instances": 39,
-    "configurations": 12,
-    "mates": 46,
-    "couplings": 0,
+    "steps": 1334,
+    "parts": 23,
+    "instances": 100,
+    "configurations": 22,
+    "mates": 121,
+    "couplings": 2,
     "dof": 0,
     "parameters": 4,
-    "assertions": 79,
-    "part_assertions": 17,
+    "assertions": 140,
+    "part_assertions": 39,
     "warnings": 0,
-    "build_s": 16.89,
-    "load_s": 2.16,
-    "load_cpu_s": 6.75,
-    "bake_s": 3.84,
-    "bake_mb": 5.4,
-    "file_bytes": 814407,
-    "range_worst_s": 5.653
+    "build_s": 45.53,
+    "load_s": 6.75,
+    "load_cpu_s": 15.27,
+    "bake_s": 16.65,
+    "bake_mb": 8.2,
+    "file_bytes": 988454,
+    "range_worst_s": 1.503
   },
   "craft3d": {
     "commit": "45233bdc84c4",

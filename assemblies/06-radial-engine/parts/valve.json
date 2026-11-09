@@ -1,0 +1,500 @@
+[
+[
+"variable.set",
+{
+"name": "valve_length",
+"expr": "113.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stem_radius",
+"expr": "6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "head_radius",
+"expr": "28 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_radius",
+"expr": "5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_low",
+"expr": "valve_length - 10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_high",
+"expr": "valve_length - 7 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "lock_low",
+"expr": "valve_length - 12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "lock_high",
+"expr": "valve_length - 5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "lock_gap",
+"expr": "0.02 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bead_gap",
+"expr": "0.05 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "lock_split",
+"expr": "10 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "retainer_radius",
+"expr": "19 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "retainer_inner",
+"expr": "17.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "skirt_depth",
+"expr": "10 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Valve profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Valve profile",
+"start": [
+"0 mm",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"head_radius - 1 mm",
+"0 mm"
+]
+},
+{
+"line": [
+"head_radius",
+"1 mm"
+]
+},
+{
+"line": [
+"head_radius",
+"2.5 mm"
+]
+},
+{
+"line": [
+"head_radius - 4 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"stem_radius + 3 mm",
+"11 mm"
+]
+},
+{
+"line": [
+"stem_radius",
+"14 mm"
+]
+},
+{
+"line": [
+"stem_radius",
+"groove_low"
+]
+},
+{
+"line": [
+"groove_radius",
+"groove_low"
+]
+},
+{
+"line": [
+"groove_radius",
+"groove_high"
+]
+},
+{
+"line": [
+"stem_radius",
+"groove_high"
+]
+},
+{
+"line": [
+"stem_radius",
+"valve_length - 0.5 mm"
+]
+},
+{
+"line": [
+"stem_radius - 0.5 mm",
+"valve_length"
+]
+},
+{
+"line": [
+"0 mm",
+"valve_length"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Valve profile",
+"axis": "y",
+"name": "Valve"
+}
+],
+[
+"sketch.create",
+{
+"name": "Lock profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Lock profile",
+"start": [
+"stem_radius + lock_gap",
+"lock_low"
+],
+"segments": [
+{
+"line": [
+"stem_radius + 2 mm",
+"lock_low"
+]
+},
+{
+"line": [
+"stem_radius + 3 mm",
+"lock_high"
+]
+},
+{
+"line": [
+"stem_radius + lock_gap",
+"lock_high"
+]
+},
+{
+"line": [
+"stem_radius + lock_gap",
+"groove_high - bead_gap"
+]
+},
+{
+"line": [
+"groove_radius + bead_gap",
+"groove_high - bead_gap"
+]
+},
+{
+"line": [
+"groove_radius + bead_gap",
+"groove_low + bead_gap"
+]
+},
+{
+"line": [
+"stem_radius + lock_gap",
+"groove_low + bead_gap"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Lock profile",
+"axis": "y",
+"angle": "180 deg - lock_split",
+"symmetric": true,
+"name": "Split lock"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Split lock",
+"count": 2,
+"angle": "180 deg",
+"axis": [
+0,
+0,
+1
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Split locks"
+}
+],
+[
+"sketch.create",
+{
+"name": "Retainer profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Retainer profile",
+"start": [
+"stem_radius + 2.05 mm",
+"lock_low"
+],
+"segments": [
+{
+"line": [
+"retainer_inner",
+"lock_low"
+]
+},
+{
+"line": [
+"retainer_inner",
+"lock_low - skirt_depth"
+]
+},
+{
+"line": [
+"retainer_radius",
+"lock_low - skirt_depth"
+]
+},
+{
+"line": [
+"retainer_radius",
+"lock_high"
+]
+},
+{
+"line": [
+"stem_radius + 3.05 mm",
+"lock_high"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Retainer profile",
+"axis": "y",
+"name": "Valve retainer"
+}
+],
+[
+"material.preset",
+{
+"body": "Valve",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.92,
+"roughness": 0.3
+}
+],
+[
+"material.preset",
+{
+"body": "Split locks",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"material.preset",
+{
+"body": "Valve retainer",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.92,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Face",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Valve length",
+"measure": "extent",
+"of": "Valve",
+"axis": "z",
+"eq": "valve_length",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Split locks sit in the stem groove, at least",
+"measure": "clearance",
+"from": "Split locks",
+"to": "Valve",
+"min": "0.01 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "lock_fit",
+"measure": "clearance",
+"from": "Split locks",
+"to": "Valve",
+"label": "Split locks sit in the stem groove"
+}
+],
+[
+"assert.add",
+{
+"name": "Split locks sit in the stem groove, at most",
+"measure": "value",
+"expr": "lock_fit",
+"max": "0.03 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Retainer sits on the split locks, at least",
+"measure": "clearance",
+"from": "Valve retainer",
+"to": "Split locks",
+"min": "0.03 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "retainer_fit",
+"measure": "clearance",
+"from": "Valve retainer",
+"to": "Split locks",
+"label": "Retainer sits on the split locks"
+}
+],
+[
+"assert.add",
+{
+"name": "Retainer sits on the split locks, at most",
+"measure": "value",
+"expr": "retainer_fit",
+"max": "0.07 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Poppet valve",
+"description": "Poppet valve with a 45-degree seat face and a grooved stem, its two split locks and its spring retainer.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"turning",
+"grinding"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

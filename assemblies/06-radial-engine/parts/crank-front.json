@@ -189,8 +189,15 @@
 [
 "variable.set",
 {
+"name": "nose_stretch",
+"expr": "87 mm"
+}
+],
+[
+"variable.set",
+{
 "name": "taper_start",
-"expr": "journal_end + 3 mm"
+"expr": "journal_end + 3 mm + nose_stretch"
 }
 ],
 [
@@ -258,6 +265,12 @@
 "line": [
 "nose_root",
 "-taper_start"
+]
+},
+{
+"line": [
+"nose_root",
+"-journal_end - 3 mm"
 ]
 },
 {
@@ -536,6 +549,29 @@
 "0 mm",
 "0 mm",
 "(crank_radius) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Hub seat",
+"through": [
+[
+"0 mm",
+"-nose_stretch",
+"0 mm"
+],
+[
+"1 mm",
+"-nose_stretch",
+"0 mm"
+],
+[
+"0 mm",
+"-nose_stretch",
+"1 mm"
 ]
 ]
 }

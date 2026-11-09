@@ -9,7 +9,7 @@
 "variable.set",
 {
 "name": "t",
-"expr": "0.1"
+"expr": "0.05"
 }
 ],
 [
@@ -92,8 +92,8 @@
 [
 "variable.set",
 {
-"name": "dome_depth",
-"expr": "41.7 mm"
+"name": "chamber_height",
+"expr": "23.7 mm"
 }
 ],
 [
@@ -107,7 +107,7 @@
 "variable.set",
 {
 "name": "crank_angle",
-"expr": "start_angle + 360 deg * t"
+"expr": "start_angle + 720 deg * t"
 }
 ],
 [
@@ -177,6 +177,207 @@
 }
 ],
 [
+"table.set",
+{
+"name": "firing",
+"columns": [
+"row",
+"slot"
+],
+"rows": [
+[
+"1",
+0
+],
+[
+"2",
+4
+],
+[
+"3",
+1
+],
+[
+"4",
+5
+],
+[
+"5",
+2
+],
+[
+"6",
+6
+],
+[
+"7",
+3
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_offset",
+"expr": "32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_rest",
+"expr": "158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_height",
+"expr": "68 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_lift",
+"expr": "10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_track",
+"expr": "-158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_track",
+"expr": "-186 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pivot_y",
+"expr": "-46 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "arm_valve",
+"expr": "46 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "arm_push",
+"expr": "40 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pivot_above_deck",
+"expr": "142.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "valve_lash",
+"expr": "0.05 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_centre",
+"expr": "470 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_centre",
+"expr": "247.5 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_duration",
+"expr": "260 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_duration",
+"expr": "265 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "firing_interval",
+"expr": "720 deg / 7"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_rest_z",
+"expr": "tappet_rest + pin_height"
+}
+],
+[
+"variable.set",
+{
+"name": "pivot_z",
+"expr": "deck_height + pivot_above_deck"
+}
+],
+[
+"variable.set",
+{
+"name": "rest_angle",
+"expr": "asin(tappet_lift / arm_push / 2)"
+}
+],
+[
+"variable.set",
+{
+"name": "upper_rest_y",
+"expr": "pivot_y - arm_push * cos(rest_angle)"
+}
+],
+[
+"variable.set",
+{
+"name": "upper_rest_z",
+"expr": "pivot_z - arm_push * sin(rest_angle)"
+}
+],
+[
+"variable.set",
+{
+"name": "pushrod_i",
+"expr": "sqrt((upper_rest_y - intake_track)^2 + (upper_rest_z - pin_rest_z)^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "pushrod_e",
+"expr": "sqrt((upper_rest_y - exhaust_track)^2 + (upper_rest_z - pin_rest_z)^2)"
+}
+],
+[
 "instance.add",
 {
 "source": "parts/crankcase.3dcraft",
@@ -238,11 +439,23 @@
 {
 "source": "parts/propeller-hub.3dcraft",
 "name": "Propeller hub",
+"position": [
+0,
+-87,
+0
+],
 "rotation": [
 0,
 -36.0,
 0
 ]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/nose-case.3dcraft",
+"name": "Nose case"
 }
 ],
 [
@@ -496,7 +709,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "0"
 },
 "rotation": [
@@ -552,7 +765,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "1"
 },
 "rotation": [
@@ -608,7 +821,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "1"
 },
 "rotation": [
@@ -664,7 +877,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "0"
 },
 "rotation": [
@@ -720,7 +933,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "0"
 },
 "rotation": [
@@ -776,7 +989,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "0"
 },
 "rotation": [
@@ -832,7 +1045,7 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "0"
 },
 "rotation": [
@@ -903,6 +1116,16 @@
 [
 "mate.add",
 {
+"kind": "fixed",
+"name": "Nose_case_on_crankcase",
+"a": "Crankcase rear/Main axis",
+"b": "Nose case/Main axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
 "kind": "revolute",
 "name": "Crank_drive",
 "a": "Crankcase rear/Main axis",
@@ -925,7 +1148,7 @@
 {
 "kind": "fixed",
 "name": "Hub_on_nose",
-"a": "Crank front/Main axis",
+"a": "Crank front/Hub seat",
 "b": "Propeller hub/Crank seat",
 "flip": true
 }
@@ -1341,6 +1564,2209 @@
 }
 ],
 [
+"instance.add",
+{
+"source": "parts/cam-ring.3dcraft",
+"name": "Cam ring",
+"rotation": [
+0,
+6.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/crank-gear.3dcraft",
+"name": "Crank gear",
+"rotation": [
+0,
+-36.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/idler-stud.3dcraft",
+"name": "Idler stud",
+"position": [
+-77.942,
+-200,
+45
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/idler-gear.3dcraft",
+"name": "Idler gear",
+"position": [
+-77.942,
+-200,
+45
+],
+"rotation": [
+0,
+24.0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Cam_drive",
+"a": "Crankcase rear/Main axis",
+"b": "Cam ring/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Crank_gear_key",
+"a": "Crank front/Main axis",
+"b": "Crank gear/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Stud_in_front_wall",
+"a": "Nose case/Idler seat",
+"b": "Idler stud/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_turn",
+"a": "Idler stud/Axis",
+"b": "Idler gear/Axis",
+"flip": true
+}
+],
+[
+"coupling.add",
+{
+"kind": "gear",
+"name": "Crank_to_idler",
+"mates": [
+"Crank_drive",
+"Idler_turn"
+],
+"value": 1.5
+}
+],
+[
+"coupling.add",
+{
+"kind": "gear",
+"name": "Idler_to_cam_ring",
+"mates": [
+"Idler_turn",
+"Cam_drive"
+],
+"value": -4
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[1I]",
+"position": [
+32.0,
+-158.0,
+158.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[1I]",
+"position": [
+32.0,
+-46.0,
+503.05
+],
+"rotation": [
+7.1808,
+0.0,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[1I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+32.0,
+-158.0,
+226.0
+],
+"rotation": [
+-14.8856,
+0.0,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[1I]",
+"position": [
+32.0,
+0.0,
+384.45
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_1I",
+"a": "Cylinder[1]/Barrel/Tappet I",
+"b": "Tappet[1I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_1I",
+"a": "Tappet[1I]/Pin",
+"b": "Pushrod[1I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_1I",
+"a": "Cylinder[1]/Head/Rocker I",
+"b": "Rocker[1I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_1I",
+"a": "Rocker[1I]/Push end",
+"b": "Pushrod[1I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_1I",
+"a": "Cylinder[1]/Head/Valve I",
+"b": "Valve[1I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[1E]",
+"position": [
+-32.0,
+-186.0,
+158.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[1E]",
+"position": [
+-32.0,
+-46.0,
+503.05
+],
+"rotation": [
+7.1808,
+0.0,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[1E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+-32.0,
+-186.0,
+226.0
+],
+"rotation": [
+-20.2406,
+0.0,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[1E]",
+"position": [
+-32.0,
+0.0,
+384.45
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_1E",
+"a": "Cylinder[1]/Barrel/Tappet E",
+"b": "Tappet[1E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_1E",
+"a": "Tappet[1E]/Pin",
+"b": "Pushrod[1E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_1E",
+"a": "Cylinder[1]/Head/Rocker E",
+"b": "Rocker[1E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_1E",
+"a": "Rocker[1E]/Push end",
+"b": "Pushrod[1E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_1E",
+"a": "Cylinder[1]/Head/Valve E",
+"b": "Valve[1E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[2I]",
+"position": [
+-103.6015,
+-158.0,
+123.549
+],
+"rotation": [
+0.0,
+-51.4286,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[2I]",
+"position": [
+-373.3487,
+-46.0,
+338.6652
+],
+"rotation": [
+6.6494,
+-51.3603,
+3.2022
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[2I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+-156.7661,
+-158.0,
+165.9463
+],
+"rotation": [
+-13.8696,
+-51.131,
+-6.6792
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[2I]",
+"position": [
+-280.5951,
+0.0,
+264.6967
+],
+"rotation": [
+0.0,
+-51.4286,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_2I",
+"a": "Cylinder[2]/Barrel/Tappet I",
+"b": "Tappet[2I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_2I",
+"a": "Tappet[2I]/Pin",
+"b": "Pushrod[2I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_2I",
+"a": "Cylinder[2]/Head/Rocker I",
+"b": "Rocker[2I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_2I",
+"a": "Rocker[2I]/Push end",
+"b": "Pushrod[2I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_2I",
+"a": "Cylinder[2]/Head/Valve I",
+"b": "Valve[2I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[2E]",
+"position": [
+-144.781,
+-186.0,
+74.5295
+],
+"rotation": [
+0.0,
+-51.4286,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[2E]",
+"position": [
+-413.252,
+-46.0,
+288.6279
+],
+"rotation": [
+4.3713,
+-51.3991,
+2.1051
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[2E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+-197.9456,
+-186.0,
+116.9268
+],
+"rotation": [
+-18.8223,
+-50.88,
+-9.0644
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[2E]",
+"position": [
+-318.9723,
+0.0,
+213.4424
+],
+"rotation": [
+0.0,
+-51.4286,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_2E",
+"a": "Cylinder[2]/Barrel/Tappet E",
+"b": "Tappet[2E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_2E",
+"a": "Tappet[2E]/Pin",
+"b": "Pushrod[2E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_2E",
+"a": "Cylinder[2]/Head/Rocker E",
+"b": "Rocker[2E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_2E",
+"a": "Rocker[2E]/Push end",
+"b": "Pushrod[2E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_2E",
+"a": "Cylinder[2]/Head/Valve E",
+"b": "Valve[2E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[3I]",
+"position": [
+-161.1593,
+-158.0,
+-3.9606
+],
+"rotation": [
+0.0,
+-102.8571,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[3I]",
+"position": [
+-497.5582,
+-46.0,
+-80.7415
+],
+"rotation": [
+5.1392,
+-102.7062,
+6.4444
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[3I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+-227.4544,
+-158.0,
+-19.092
+],
+"rotation": [
+-10.648,
+-102.2081,
+-13.3522
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[3I]",
+"position": [
+-381.9317,
+0.0,
+-54.3505
+],
+"rotation": [
+0.0,
+-102.8571,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_3I",
+"a": "Cylinder[3]/Barrel/Tappet I",
+"b": "Tappet[3I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_3I",
+"a": "Tappet[3I]/Pin",
+"b": "Pushrod[3I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_3I",
+"a": "Cylinder[3]/Head/Rocker I",
+"b": "Rocker[3I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_3I",
+"a": "Rocker[3I]/Push end",
+"b": "Pushrod[3I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_3I",
+"a": "Cylinder[3]/Head/Valve I",
+"b": "Valve[3I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[3E]",
+"position": [
+-146.9179,
+-186.0,
+-66.356
+],
+"rotation": [
+0.0,
+-102.8571,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[3E]",
+"position": [
+-483.3168,
+-46.0,
+-143.1368
+],
+"rotation": [
+5.1392,
+-102.7062,
+6.4444
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[3E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+-213.213,
+-186.0,
+-81.4874
+],
+"rotation": [
+-14.4701,
+-101.6565,
+-18.1449
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[3E]",
+"position": [
+-367.6904,
+0.0,
+-116.7459
+],
+"rotation": [
+0.0,
+-102.8571,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_3E",
+"a": "Cylinder[3]/Barrel/Tappet E",
+"b": "Tappet[3E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_3E",
+"a": "Tappet[3E]/Pin",
+"b": "Pushrod[3E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_3E",
+"a": "Cylinder[3]/Head/Rocker E",
+"b": "Rocker[3E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_3E",
+"a": "Rocker[3E]/Push end",
+"b": "Pushrod[3E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_3E",
+"a": "Cylinder[3]/Head/Valve E",
+"b": "Valve[3E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[4I]",
+"position": [
+-97.3846,
+-158.0,
+-128.4688
+],
+"rotation": [
+0.0,
+-154.2857,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[4I]",
+"position": [
+-247.0962,
+-46.0,
+-439.3481
+],
+"rotation": [
+2.2058,
+-154.0184,
+9.664
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[4I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+-126.8887,
+-158.0,
+-189.7347
+],
+"rotation": [
+-4.5661,
+-153.1373,
+-20.0054
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[4I]",
+"position": [
+-195.6376,
+0.0,
+-332.4932
+],
+"rotation": [
+0.0,
+-154.2857,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_4I",
+"a": "Cylinder[4]/Barrel/Tappet I",
+"b": "Tappet[4I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_4I",
+"a": "Tappet[4I]/Pin",
+"b": "Pushrod[4I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_4I",
+"a": "Cylinder[4]/Head/Rocker I",
+"b": "Rocker[4I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_4I",
+"a": "Rocker[4I]/Push end",
+"b": "Pushrod[4I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_4I",
+"a": "Cylinder[4]/Head/Valve I",
+"b": "Valve[4I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[4E]",
+"position": [
+-44.0411,
+-186.0,
+-165.2047
+],
+"rotation": [
+0.0,
+-154.2857,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[4E]",
+"position": [
+-189.4342,
+-46.0,
+-467.1167
+],
+"rotation": [
+-2.1859,
+-154.0232,
+-9.5769
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[4E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+-73.5452,
+-186.0,
+-226.4706
+],
+"rotation": [
+-6.1987,
+-152.1636,
+-27.1584
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[4E]",
+"position": [
+-133.0083,
+0.0,
+-349.9471
+],
+"rotation": [
+0.0,
+-154.2857,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_4E",
+"a": "Cylinder[4]/Barrel/Tappet E",
+"b": "Tappet[4E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_4E",
+"a": "Tappet[4E]/Pin",
+"b": "Pushrod[4E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_4E",
+"a": "Cylinder[4]/Head/Rocker E",
+"b": "Rocker[4E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_4E",
+"a": "Rocker[4E]/Push end",
+"b": "Pushrod[4E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_4E",
+"a": "Cylinder[4]/Head/Valve E",
+"b": "Valve[4E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[5I]",
+"position": [
+41.1088,
+-158.0,
+-159.1157
+],
+"rotation": [
+0.0,
+154.2857,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[5I]",
+"position": [
+189.4342,
+-46.0,
+-467.1167
+],
+"rotation": [
+0.7626,
+154.2538,
+-3.3411
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[5I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+70.6129,
+-158.0,
+-220.3816
+],
+"rotation": [
+-4.5483,
+153.1463,
+19.9275
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[5I]",
+"position": [
+136.345,
+0.0,
+-356.8757
+],
+"rotation": [
+0.0,
+154.2857,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_5I",
+"a": "Cylinder[5]/Barrel/Tappet I",
+"b": "Tappet[5I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_5I",
+"a": "Tappet[5I]/Pin",
+"b": "Pushrod[5I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_5I",
+"a": "Cylinder[5]/Head/Rocker I",
+"b": "Rocker[5I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_5I",
+"a": "Rocker[5I]/Push end",
+"b": "Pushrod[5I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_5I",
+"a": "Cylinder[5]/Head/Valve I",
+"b": "Valve[5I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[5E]",
+"position": [
+97.3846,
+-186.0,
+-128.4688
+],
+"rotation": [
+0.0,
+154.2857,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[5E]",
+"position": [
+247.0962,
+-46.0,
+-439.3481
+],
+"rotation": [
+2.2058,
+154.0184,
+-9.664
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[5E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+126.8887,
+-186.0,
+-189.7347
+],
+"rotation": [
+-6.1991,
+152.1633,
+27.16
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[5E]",
+"position": [
+195.6376,
+0.0,
+-332.4932
+],
+"rotation": [
+0.0,
+154.2857,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_5E",
+"a": "Cylinder[5]/Barrel/Tappet E",
+"b": "Tappet[5E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_5E",
+"a": "Tappet[5E]/Pin",
+"b": "Pushrod[5E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_5E",
+"a": "Cylinder[5]/Head/Rocker E",
+"b": "Rocker[5E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_5E",
+"a": "Rocker[5E]/Push end",
+"b": "Pushrod[5E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_5E",
+"a": "Cylinder[5]/Head/Valve E",
+"b": "Valve[5E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[6I]",
+"position": [
+146.9179,
+-158.0,
+-66.356
+],
+"rotation": [
+0.0,
+102.8571,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[6I]",
+"position": [
+483.3168,
+-46.0,
+-143.1368
+],
+"rotation": [
+5.1392,
+102.7062,
+-6.4444
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[6I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+213.213,
+-158.0,
+-81.4874
+],
+"rotation": [
+-10.648,
+102.2081,
+13.3522
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[6I]",
+"position": [
+367.6904,
+0.0,
+-116.7459
+],
+"rotation": [
+0.0,
+102.8571,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_6I",
+"a": "Cylinder[6]/Barrel/Tappet I",
+"b": "Tappet[6I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_6I",
+"a": "Tappet[6I]/Pin",
+"b": "Pushrod[6I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_6I",
+"a": "Cylinder[6]/Head/Rocker I",
+"b": "Rocker[6I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_6I",
+"a": "Rocker[6I]/Push end",
+"b": "Pushrod[6I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_6I",
+"a": "Cylinder[6]/Head/Valve I",
+"b": "Valve[6I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[6E]",
+"position": [
+161.9186,
+-186.0,
+-4.1339
+],
+"rotation": [
+0.0,
+102.8571,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[6E]",
+"position": [
+497.5582,
+-46.0,
+-80.7415
+],
+"rotation": [
+4.2999,
+102.7515,
+-5.392
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[6E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+228.2137,
+-186.0,
+-19.2653
+],
+"rotation": [
+-14.456,
+101.6588,
+18.1272
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[6E]",
+"position": [
+381.0197,
+0.0,
+-54.1423
+],
+"rotation": [
+0.0,
+102.8571,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_6E",
+"a": "Cylinder[6]/Barrel/Tappet E",
+"b": "Tappet[6E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_6E",
+"a": "Tappet[6E]/Pin",
+"b": "Pushrod[6E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_6E",
+"a": "Cylinder[6]/Head/Rocker E",
+"b": "Rocker[6E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_6E",
+"a": "Rocker[6E]/Push end",
+"b": "Pushrod[6E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_6E",
+"a": "Cylinder[6]/Head/Valve E",
+"b": "Valve[6E]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[7I]",
+"position": [
+150.7321,
+-158.0,
+79.2753
+],
+"rotation": [
+0.0,
+51.4286,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[7I]",
+"position": [
+413.252,
+-46.0,
+288.6279
+],
+"rotation": [
+-5.7461,
+51.3776,
+2.7672
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[7I]",
+"params": {
+"rod_length": "pushrod_i"
+},
+"position": [
+203.8966,
+-158.0,
+121.6726
+],
+"rotation": [
+-13.8542,
+51.1317,
+6.6718
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[7I]",
+"position": [
+312.1684,
+0.0,
+208.0165
+],
+"rotation": [
+0.0,
+51.4286,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_7I",
+"a": "Cylinder[7]/Barrel/Tappet I",
+"b": "Tappet[7I]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_7I",
+"a": "Tappet[7I]/Pin",
+"b": "Pushrod[7I]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_7I",
+"a": "Cylinder[7]/Head/Rocker I",
+"b": "Rocker[7I]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_7I",
+"a": "Rocker[7I]/Push end",
+"b": "Pushrod[7I]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_7I",
+"a": "Cylinder[7]/Head/Valve I",
+"b": "Valve[7I]/Face",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/tappet.3dcraft",
+"name": "Tappet[7E]",
+"position": [
+103.5777,
+-186.0,
+123.53
+],
+"rotation": [
+0.0,
+51.4286,
+0.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker.3dcraft",
+"name": "Rocker[7E]",
+"position": [
+373.3487,
+-46.0,
+338.6652
+],
+"rotation": [
+6.6918,
+51.3594,
+-3.2226
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/pushrod.3dcraft",
+"name": "Pushrod[7E]",
+"params": {
+"rod_length": "pushrod_e"
+},
+"position": [
+156.7422,
+-186.0,
+165.9273
+],
+"rotation": [
+-18.8576,
+50.8779,
+9.0813
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve.3dcraft",
+"name": "Valve[7E]",
+"position": [
+280.6234,
+0.0,
+264.7193
+],
+"rotation": [
+0.0,
+51.4286,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Tappet_7E",
+"a": "Cylinder[7]/Barrel/Tappet E",
+"b": "Tappet[7E]/Slide",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_low_7E",
+"a": "Tappet[7E]/Pin",
+"b": "Pushrod[7E]/Low",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Rocker_7E",
+"a": "Cylinder[7]/Head/Rocker E",
+"b": "Rocker[7E]/Pivot",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Push_high_7E",
+"a": "Rocker[7E]/Push end",
+"b": "Pushrod[7E]/High",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Valve_7E",
+"a": "Cylinder[7]/Head/Valve E",
+"b": "Valve[7E]/Face",
+"flip": true
+}
+],
+[
+"variable.set",
+{
+"name": "lift_1i",
+"expr": "if(abs((mod(crank_angle - firing[\"1\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"1\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_1I_distance",
+"expr": "lift_1i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_1i",
+"expr": "atan2((pin_rest_z + lift_1i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_1i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_1i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_1I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_1i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_1e",
+"expr": "if(abs((mod(crank_angle - firing[\"1\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"1\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_1E_distance",
+"expr": "lift_1e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_1e",
+"expr": "atan2((pin_rest_z + lift_1e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_1e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_1e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_1E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_1e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_2i",
+"expr": "if(abs((mod(crank_angle - firing[\"2\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"2\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_2I_distance",
+"expr": "lift_2i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_2i",
+"expr": "atan2((pin_rest_z + lift_2i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_2i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_2i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_2I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_2i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_2e",
+"expr": "if(abs((mod(crank_angle - firing[\"2\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"2\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_2E_distance",
+"expr": "lift_2e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_2e",
+"expr": "atan2((pin_rest_z + lift_2e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_2e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_2e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_2E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_2e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_3i",
+"expr": "if(abs((mod(crank_angle - firing[\"3\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"3\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_3I_distance",
+"expr": "lift_3i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_3i",
+"expr": "atan2((pin_rest_z + lift_3i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_3i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_3i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_3I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_3i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_3e",
+"expr": "if(abs((mod(crank_angle - firing[\"3\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"3\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_3E_distance",
+"expr": "lift_3e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_3e",
+"expr": "atan2((pin_rest_z + lift_3e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_3e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_3e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_3E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_3e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_4i",
+"expr": "if(abs((mod(crank_angle - firing[\"4\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"4\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_4I_distance",
+"expr": "lift_4i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_4i",
+"expr": "atan2((pin_rest_z + lift_4i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_4i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_4i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_4I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_4i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_4e",
+"expr": "if(abs((mod(crank_angle - firing[\"4\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"4\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_4E_distance",
+"expr": "lift_4e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_4e",
+"expr": "atan2((pin_rest_z + lift_4e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_4e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_4e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_4E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_4e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_5i",
+"expr": "if(abs((mod(crank_angle - firing[\"5\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"5\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_5I_distance",
+"expr": "lift_5i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_5i",
+"expr": "atan2((pin_rest_z + lift_5i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_5i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_5i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_5I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_5i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_5e",
+"expr": "if(abs((mod(crank_angle - firing[\"5\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"5\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_5E_distance",
+"expr": "lift_5e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_5e",
+"expr": "atan2((pin_rest_z + lift_5e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_5e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_5e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_5E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_5e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_6i",
+"expr": "if(abs((mod(crank_angle - firing[\"6\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"6\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_6I_distance",
+"expr": "lift_6i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_6i",
+"expr": "atan2((pin_rest_z + lift_6i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_6i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_6i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_6I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_6i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_6e",
+"expr": "if(abs((mod(crank_angle - firing[\"6\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"6\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_6E_distance",
+"expr": "lift_6e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_6e",
+"expr": "atan2((pin_rest_z + lift_6e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_6e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_6e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_6E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_6e))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_7i",
+"expr": "if(abs((mod(crank_angle - firing[\"7\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg)) < intake_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"7\"].slot * firing_interval - intake_centre + 360 deg, 720 deg) - 360 deg) / intake_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_7I_distance",
+"expr": "lift_7i"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_7i",
+"expr": "atan2((pin_rest_z + lift_7i - pivot_z), (intake_track - pivot_y)) + acos(-(arm_push^2 + (intake_track - pivot_y)^2 + (pin_rest_z + lift_7i - pivot_z)^2 - pushrod_i^2) / (2 * arm_push * sqrt((intake_track - pivot_y)^2 + (pin_rest_z + lift_7i - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_7I_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_7i))"
+}
+],
+[
+"variable.set",
+{
+"name": "lift_7e",
+"expr": "if(abs((mod(crank_angle - firing[\"7\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg)) < exhaust_duration / 2, tappet_lift * cos(180 deg * (mod(crank_angle - firing[\"7\"].slot * firing_interval - exhaust_centre + 360 deg, 720 deg) - 360 deg) / exhaust_duration)^2, 0 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "Tappet_7E_distance",
+"expr": "lift_7e"
+}
+],
+[
+"variable.set",
+{
+"name": "gamma_7e",
+"expr": "atan2((pin_rest_z + lift_7e - pivot_z), (exhaust_track - pivot_y)) + acos(-(arm_push^2 + (exhaust_track - pivot_y)^2 + (pin_rest_z + lift_7e - pivot_z)^2 - pushrod_e^2) / (2 * arm_push * sqrt((exhaust_track - pivot_y)^2 + (pin_rest_z + lift_7e - pivot_z)^2)))"
+}
+],
+[
+"variable.set",
+{
+"name": "Valve_7E_distance",
+"expr": "-arm_valve * (sin(rest_angle) - sin(gamma_7e))"
+}
+],
+[
 "variable.set",
 {
 "name": "Crank_drive_angle",
@@ -1424,46 +3850,6 @@
 }
 ],
 [
-"table.set",
-{
-"name": "firing",
-"columns": [
-"row",
-"slot"
-],
-"rows": [
-[
-"1",
-0
-],
-[
-"2",
-4
-],
-[
-"3",
-1
-],
-[
-"4",
-5
-],
-[
-"5",
-2
-],
-[
-"6",
-6
-],
-[
-"7",
-3
-]
-]
-}
-],
-[
 "variable.set",
 {
 "name": "at_defaults",
@@ -1475,13 +3861,6 @@
 {
 "name": "sample_half",
 "expr": "360 deg / 144"
-}
-],
-[
-"variable.set",
-{
-"name": "firing_interval",
-"expr": "720 deg / 7"
 }
 ],
 [
@@ -1902,14 +4281,14 @@
 "variable.set",
 {
 "name": "design_dome",
-"expr": "pi * dome_depth * (3 * (bore / 2)^2 + dome_depth^2) / 6"
+"expr": "bore_area * chamber_height"
 }
 ],
 [
 "variable.set",
 {
 "name": "head_envelope",
-"expr": "2073788.2"
+"expr": "1725001.0"
 }
 ],
 [
@@ -2013,7 +4392,7 @@
 [
 "assert.add",
 {
-"name": "The dome of the drawn head has its stated volume",
+"name": "The chamber of the drawn head has its stated volume",
 "measure": "value",
 "expr": "chamber_drawn",
 "min": "design_dome * 0.995",
@@ -2289,8 +4668,8 @@
 "name": "Head 2, opened, keeps its share of head 1",
 "measure": "volume",
 "of": "Cylinder[2]/Head",
-"min": "head_volume * 0.49566 * 0.998",
-"max": "head_volume * 0.49566 * 1.002"
+"min": "head_volume * 0.49862 * 0.998",
+"max": "head_volume * 0.49862 * 1.002"
 }
 ],
 [
@@ -2309,8 +4688,8 @@
 "name": "Head 3, opened, keeps its share of head 1",
 "measure": "volume",
 "of": "Cylinder[3]/Head",
-"min": "head_volume * 0.49566 * 0.998",
-"max": "head_volume * 0.49566 * 1.002"
+"min": "head_volume * 0.49862 * 0.998",
+"max": "head_volume * 0.49862 * 1.002"
 }
 ],
 [
@@ -2524,10 +4903,793 @@
 }
 ],
 [
+"table.set",
+{
+"name": "timing",
+"columns": [
+"row",
+{
+"name": "opens",
+"unit": "deg"
+},
+{
+"name": "closes",
+"unit": "deg"
+}
+],
+"rows": [
+[
+"I",
+340,
+600
+],
+[
+"E",
+115,
+380
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Cam ring turns one sixth of the crank, against it",
+"measure": "jointAngle",
+"mate": "Cam_drive",
+"eq": "-crank_angle / 6",
+"tol": "0.02 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cam ring spigot runs in the nose case, at least",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Cam ring/Cam ring body",
+"surface": "cylinder",
+"radius": {
+"min": "149.5 mm",
+"max": "150.01 mm"
+}
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Nose case",
+"surface": "cylinder",
+"radius": {
+"min": "150.01 mm",
+"max": "155 mm"
+}
+}
+},
+"min": "0.04 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "spigot_gap",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Cam ring/Cam ring body",
+"surface": "cylinder",
+"radius": {
+"min": "149.5 mm",
+"max": "150.01 mm"
+}
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Nose case",
+"surface": "cylinder",
+"radius": {
+"min": "150.01 mm",
+"max": "155 mm"
+}
+}
+},
+"label": "Cam ring spigot runs in the nose case"
+}
+],
+[
+"assert.add",
+{
+"name": "Cam ring spigot runs in the nose case, at most",
+"measure": "value",
+"expr": "spigot_gap",
+"max": "0.12 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1I turns on its pin with its fit",
+"measure": "clearance",
+"from": "Rocker[1I]",
+"to": "Cylinder[1]/Bracket I/Rocker pin",
+"min": "0.01 mm",
+"max": "0.03 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Spring 1I is seated under its retainer while the valve is shut, at least",
+"measure": "clearance",
+"from": "Valve[1I]/Valve retainer",
+"to": "Cylinder[1]/Spring I",
+"min": "0.02 mm",
+"when": "lift_1i < 0.0001 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "spring_gap_1i",
+"measure": "clearance",
+"from": "Valve[1I]/Valve retainer",
+"to": "Cylinder[1]/Spring I",
+"label": "Spring 1I is seated under its retainer while the valve is shut"
+}
+],
+[
+"assert.add",
+{
+"name": "Spring 1I is seated under its retainer while the valve is shut, at most",
+"measure": "value",
+"expr": "spring_gap_1i",
+"max": "0.08 mm",
+"when": "lift_1i < 0.0001 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Spring 4E is seated under its retainer while the valve is shut, at least",
+"measure": "clearance",
+"from": "Valve[4E]/Valve retainer",
+"to": "Cylinder[4]/Spring E",
+"min": "0.02 mm",
+"when": "lift_4e < 0.0001 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "spring_gap_4e",
+"measure": "clearance",
+"from": "Valve[4E]/Valve retainer",
+"to": "Cylinder[4]/Spring E",
+"label": "Spring 4E is seated under its retainer while the valve is shut"
+}
+],
+[
+"assert.add",
+{
+"name": "Spring 4E is seated under its retainer while the valve is shut, at most",
+"measure": "value",
+"expr": "spring_gap_4e",
+"max": "0.08 mm",
+"when": "lift_4e < 0.0001 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1I roller stays on its cam track, at least",
+"measure": "clearance",
+"from": "Tappet[1I]/Roller",
+"to": "Cam ring/Intake lobes",
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "roller_gap_1i",
+"measure": "clearance",
+"from": "Tappet[1I]/Roller",
+"to": "Cam ring/Intake lobes",
+"label": "Tappet 1I roller stays on its cam track"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1I roller stays on its cam track, at most",
+"measure": "value",
+"expr": "roller_gap_1i",
+"max": "0.13 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1I pad stays on its valve tip, at least",
+"measure": "clearance",
+"from": "Rocker[1I]",
+"to": "Valve[1I]/Valve",
+"min": "0.01 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "pad_gap_1i",
+"measure": "clearance",
+"from": "Rocker[1I]",
+"to": "Valve[1I]/Valve",
+"label": "Rocker 1I pad stays on its valve tip"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1I pad stays on its valve tip, at most",
+"measure": "value",
+"expr": "pad_gap_1i",
+"max": "0.12 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1E roller stays on its cam track, at least",
+"measure": "clearance",
+"from": "Tappet[1E]/Roller",
+"to": "Cam ring/Exhaust lobes",
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "roller_gap_1e",
+"measure": "clearance",
+"from": "Tappet[1E]/Roller",
+"to": "Cam ring/Exhaust lobes",
+"label": "Tappet 1E roller stays on its cam track"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1E roller stays on its cam track, at most",
+"measure": "value",
+"expr": "roller_gap_1e",
+"max": "0.13 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1E pad stays on its valve tip, at least",
+"measure": "clearance",
+"from": "Rocker[1E]",
+"to": "Valve[1E]/Valve",
+"min": "0.01 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "pad_gap_1e",
+"measure": "clearance",
+"from": "Rocker[1E]",
+"to": "Valve[1E]/Valve",
+"label": "Rocker 1E pad stays on its valve tip"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1E pad stays on its valve tip, at most",
+"measure": "value",
+"expr": "pad_gap_1e",
+"max": "0.12 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4I roller stays on its cam track, at least",
+"measure": "clearance",
+"from": "Tappet[4I]/Roller",
+"to": "Cam ring/Intake lobes",
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "roller_gap_4i",
+"measure": "clearance",
+"from": "Tappet[4I]/Roller",
+"to": "Cam ring/Intake lobes",
+"label": "Tappet 4I roller stays on its cam track"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4I roller stays on its cam track, at most",
+"measure": "value",
+"expr": "roller_gap_4i",
+"max": "0.13 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4I pad stays on its valve tip, at least",
+"measure": "clearance",
+"from": "Rocker[4I]",
+"to": "Valve[4I]/Valve",
+"min": "0.01 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "pad_gap_4i",
+"measure": "clearance",
+"from": "Rocker[4I]",
+"to": "Valve[4I]/Valve",
+"label": "Rocker 4I pad stays on its valve tip"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4I pad stays on its valve tip, at most",
+"measure": "value",
+"expr": "pad_gap_4i",
+"max": "0.12 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4E roller stays on its cam track, at least",
+"measure": "clearance",
+"from": "Tappet[4E]/Roller",
+"to": "Cam ring/Exhaust lobes",
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "roller_gap_4e",
+"measure": "clearance",
+"from": "Tappet[4E]/Roller",
+"to": "Cam ring/Exhaust lobes",
+"label": "Tappet 4E roller stays on its cam track"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4E roller stays on its cam track, at most",
+"measure": "value",
+"expr": "roller_gap_4e",
+"max": "0.13 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4E pad stays on its valve tip, at least",
+"measure": "clearance",
+"from": "Rocker[4E]",
+"to": "Valve[4E]/Valve",
+"min": "0.01 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "pad_gap_4e",
+"measure": "clearance",
+"from": "Rocker[4E]",
+"to": "Valve[4E]/Valve",
+"label": "Rocker 4E pad stays on its valve tip"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4E pad stays on its valve tip, at most",
+"measure": "value",
+"expr": "pad_gap_4e",
+"max": "0.12 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 clears valve 1I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[1]/Piston",
+"to": "Valve[1I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_1I",
+"eq": "if(mod(crank_angle - firing[\"1\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"1\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 clears valve 1E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[1]/Piston",
+"to": "Valve[1E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 1E follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_1E",
+"eq": "if(mod(crank_angle - firing[\"1\"].slot * firing_interval - timing[\"E\"].opens, 720 deg) < (timing[\"E\"].closes - timing[\"E\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"1\"].slot * firing_interval - timing[\"E\"].opens, 720 deg) / (timing[\"E\"].closes - timing[\"E\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 clears valve 2I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[2]/Piston",
+"to": "Valve[2I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 2I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_2I",
+"eq": "if(mod(crank_angle - firing[\"2\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"2\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 clears valve 2E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[2]/Piston",
+"to": "Valve[2E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 clears valve 3I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[3]/Piston",
+"to": "Valve[3I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 3I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_3I",
+"eq": "if(mod(crank_angle - firing[\"3\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"3\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 clears valve 3E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[3]/Piston",
+"to": "Valve[3E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 clears valve 4I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[4]/Piston",
+"to": "Valve[4I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_4I",
+"eq": "if(mod(crank_angle - firing[\"4\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"4\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 clears valve 4E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[4]/Piston",
+"to": "Valve[4E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 4E follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_4E",
+"eq": "if(mod(crank_angle - firing[\"4\"].slot * firing_interval - timing[\"E\"].opens, 720 deg) < (timing[\"E\"].closes - timing[\"E\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"4\"].slot * firing_interval - timing[\"E\"].opens, 720 deg) / (timing[\"E\"].closes - timing[\"E\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 clears valve 5I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[5]/Piston",
+"to": "Valve[5I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 5I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_5I",
+"eq": "if(mod(crank_angle - firing[\"5\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"5\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 clears valve 5E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[5]/Piston",
+"to": "Valve[5E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 clears valve 6I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[6]/Piston",
+"to": "Valve[6I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 6I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_6I",
+"eq": "if(mod(crank_angle - firing[\"6\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"6\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 clears valve 6E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[6]/Piston",
+"to": "Valve[6E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 clears valve 7I with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[7]/Piston",
+"to": "Valve[7I]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Tappet 7I follows the valve timing table",
+"measure": "jointDistance",
+"mate": "Tappet_7I",
+"eq": "if(mod(crank_angle - firing[\"7\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) < (timing[\"I\"].closes - timing[\"I\"].opens), tappet_lift * sin(180 deg * mod(crank_angle - firing[\"7\"].slot * firing_interval - timing[\"I\"].opens, 720 deg) / (timing[\"I\"].closes - timing[\"I\"].opens))^2, 0 mm)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 clears valve 7E with the valves near shut at top dead centre",
+"measure": "clearance",
+"from": "Piston[7]/Piston",
+"to": "Valve[7E]/Valve",
+"min": "25 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_1I",
+"eq": "gamma_1i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 1E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_1E",
+"eq": "gamma_1e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 2I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_2I",
+"eq": "gamma_2i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 2E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_2E",
+"eq": "gamma_2e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 3I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_3I",
+"eq": "gamma_3i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 3E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_3E",
+"eq": "gamma_3e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_4I",
+"eq": "gamma_4i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 4E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_4E",
+"eq": "gamma_4e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 5I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_5I",
+"eq": "gamma_5i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 5E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_5E",
+"eq": "gamma_5e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 6I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_6I",
+"eq": "gamma_6i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 6E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_6E",
+"eq": "gamma_6e",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 7I solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_7I",
+"eq": "gamma_7i",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker 7E solved by its pushrod stands where the valve formula puts it",
+"measure": "jointAngle",
+"mate": "Rocker_7E",
+"eq": "gamma_7e",
+"tol": "0.01 deg"
+}
+],
+[
 "document.info",
 {
-"title": "Seven-cylinder radial engine",
-"description": "A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class: master rod and six articulated rods on knuckle pins, cut-away crankcase, finned cylinders.",
+"title": "Seven-cylinder radial engine with its valve train",
+"description": "A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class with its valve train: master rod and six articulated rods on knuckle pins, a cam ring at one sixth of the crank speed, roller tappets, pushrods, rockers and poppet valves, cut-away crankcase and opened cylinders.",
 "author": "3DCraft assemblies",
 "licence": "CC-BY-4.0",
 "tags": [

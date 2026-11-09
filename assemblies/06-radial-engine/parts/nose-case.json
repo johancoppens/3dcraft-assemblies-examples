@@ -1,0 +1,511 @@
+[
+[
+"variable.set",
+{
+"name": "drum_inner",
+"expr": "191 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "drum_outer",
+"expr": "201 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "drum_rear",
+"expr": "92.1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_inner",
+"expr": "200 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_outer",
+"expr": "220 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_inner",
+"expr": "128 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_bore",
+"expr": "150 mm + 0.08 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_depth",
+"expr": "12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_radius",
+"expr": "17 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_low",
+"expr": "186 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_high",
+"expr": "216 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_bore",
+"expr": "34 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_offset",
+"expr": "32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_track",
+"expr": "-158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_track",
+"expr": "-186 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_guide",
+"expr": "24 mm + 0.16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "section_angle",
+"expr": "200 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "section_centre_angle",
+"expr": "-60 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "section_face",
+"expr": "-35 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Nose case profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Nose case profile",
+"start": [
+"drum_inner",
+"-drum_rear"
+],
+"segments": [
+{
+"line": [
+"drum_outer",
+"-drum_rear"
+]
+},
+{
+"line": [
+"drum_outer",
+"-plate_inner + 3 mm"
+]
+},
+{
+"line": [
+"drum_outer - 8 mm",
+"-plate_outer"
+]
+},
+{
+"line": [
+"nose_bore + 6 mm",
+"-plate_outer"
+]
+},
+{
+"line": [
+"nose_bore",
+"-plate_outer + 6 mm"
+]
+},
+{
+"line": [
+"nose_bore",
+"-plate_inner"
+]
+},
+{
+"line": [
+"groove_inner",
+"-plate_inner"
+]
+},
+{
+"line": [
+"groove_inner",
+"-plate_inner - groove_depth"
+]
+},
+{
+"line": [
+"journal_bore",
+"-plate_inner - groove_depth"
+]
+},
+{
+"line": [
+"journal_bore",
+"-plate_inner"
+]
+},
+{
+"line": [
+"drum_inner",
+"-plate_inner"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Nose case profile",
+"axis": "y",
+"name": "Nose drum"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Intake boss",
+"radius": "boss_radius",
+"height": "boss_high - boss_low",
+"position": [
+"tappet_offset",
+"intake_track",
+"boss_low"
+]
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Exhaust boss",
+"radius": "boss_radius",
+"height": "boss_high - boss_low",
+"position": [
+"-tappet_offset",
+"exhaust_track",
+"boss_low"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Intake boss",
+"tool": "Exhaust boss",
+"name": "Bosses of one cylinder"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Bosses of one cylinder",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Guide bosses"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Nose drum",
+"tool": "Guide bosses",
+"name": "Nose shell"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Intake guide",
+"radius": "tappet_guide / 2",
+"height": "80 mm",
+"position": [
+"tappet_offset",
+"intake_track",
+"150 mm"
+]
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Exhaust guide",
+"radius": "tappet_guide / 2",
+"height": "80 mm",
+"position": [
+"-tappet_offset",
+"exhaust_track",
+"150 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Intake guide",
+"tool": "Exhaust guide",
+"name": "Guides of one cylinder"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Guides of one cylinder",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Guides of seven cylinders"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Nose shell",
+"tool": "Guides of seven cylinders",
+"name": "Nose guided"
+}
+],
+[
+"datum.plane",
+{
+"name": "Section plane",
+"from": "zx",
+"distance": "section_face"
+}
+],
+[
+"sketch.create",
+{
+"name": "Section wedge",
+"plane": "Section plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Section wedge",
+"start": [
+"0 mm",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"330 mm * cos(section_centre_angle - section_angle / 2)",
+"330 mm * sin(section_centre_angle - section_angle / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle - section_angle / 2 / 2)",
+"330 mm * sin(section_centre_angle - section_angle / 2 / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle)",
+"330 mm * sin(section_centre_angle)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle + section_angle / 2 / 2)",
+"330 mm * sin(section_centre_angle + section_angle / 2 / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle + section_angle / 2)",
+"330 mm * sin(section_centre_angle + section_angle / 2)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Section wedge",
+"distance": "400 mm",
+"reversed": true,
+"cut": "Nose guided",
+"name": "Nose case"
+}
+],
+[
+"material.preset",
+{
+"body": "Nose case",
+"preset": "steel",
+"color": "#7a7d82",
+"metallic": 0.15,
+"roughness": 0.68
+}
+],
+[
+"datum.plane",
+{
+"name": "Main axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Idler seat",
+"through": [
+[
+"-77.942 mm",
+"-plate_inner",
+"45 mm"
+],
+[
+"-76.942 mm",
+"-plate_inner",
+"45 mm"
+],
+[
+"-77.942 mm",
+"-plate_inner",
+"46 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Drum reaches past the cam track",
+"measure": "boxMin",
+"of": "Nose case",
+"axis": "y",
+"max": "-plate_outer + 0.5 mm",
+"min": "-plate_outer - 0.5 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Nose case",
+"description": "Cast nose case on the front of the crankcase (its bolts are not drawn): the drum around the cam ring, the groove for the spigot of the cam ring, the tappet guide bosses and the idler stud seat; cut away in front.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"casting",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

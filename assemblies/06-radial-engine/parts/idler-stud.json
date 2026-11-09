@@ -1,0 +1,110 @@
+[
+[
+"sketch.create",
+{
+"name": "Stud profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Stud profile",
+"start": [
+"0 mm",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"10 mm",
+"0 mm"
+]
+},
+{
+"line": [
+"10 mm",
+"72 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"72 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Stud profile",
+"axis": "y",
+"name": "Idler stud"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler stud",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.7,
+"roughness": 0.5
+}
+],
+[
+"datum.plane",
+{
+"name": "Axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Stud length",
+"measure": "extent",
+"of": "Idler stud",
+"axis": "y",
+"eq": "72 mm",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Idler stud",
+"description": "Fixed stud for the cam reduction idler, in the front wall of the cam chamber.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"turning"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

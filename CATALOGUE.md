@@ -97,8 +97,9 @@ its palette line only with the coordinator.
 - **Shows:** seven closed loops on one master rod, which no simple formula gives; `cylindrical` pistons; a cylinder placed
   seven times; a measured stroke per cylinder over the motion; a rigid subassembly for a cylinder.
 - **Stage 2, the valve train:** a cam ring turning at 1/6 of the crank speed against it, with tappets, pushrods, rockers and
-  poppet valves, driven by formulas of the same law that draws the cam (a cam is not a mate). Built after stage 1 passes;
-  kept only if it passes every check and stays within the budget, and reported either way.
+  poppet valves, driven by formulas of the same law that draws the cam (a cam is not a mate). Built after stage 1 passed
+  (reviewer's score 7), and kept: it passed every check within the budget and replaced stage 1 (reviewer's score 8;
+  `t` became one engine cycle, two crank turns).
 - **Look:** cast-grey crankcase, dark finned steel cylinders, bright rods and pistons, a copper accent.
 - **Parameters:** bore and stroke, rod ratio, start angle; at most four.
 - **Proves:** the master cylinder's stroke against 2 × the crank radius; each articulated cylinder's measured stroke, and the
@@ -124,13 +125,13 @@ What each assembly must carry, so that the six together show what assemblies can
 | | 1 Clamp | 2 Walker | 3 Jack | 4 Lamp | 5 Printer | 6 Engine |
 |---|---|---|---|---|---|---|
 | Closed loops | one | many | yes | yes | | seven |
-| Couplings | | | screw, gear | | linear, screw | stage 2: gear |
+| Couplings | | | screw, gear | | linear, screw | gear (cam drive) |
 | Limits | yes | | yes | yes | yes | |
 | Configurations by `params` | pins | bars | | arms | T-slot lengths | |
 | Parameters following `t` | | | | springs | belts, vase | |
 | Subassemblies | | flexible | | | rigid | rigid |
 | Other mates | | | | ball | planar | cylindrical |
-| Formula-driven contact | | | | | | stage 2: cam |
+| Formula-driven contact | | | | | | cam and tappets |
 | Trace | | foot | | | nozzle | |
 | Forces from the model | advantage | balance | screw force | spring balance | | |
 | Sheet metal with flat patterns | base, U-bar, stampings | | arms | | | |

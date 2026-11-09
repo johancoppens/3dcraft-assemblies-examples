@@ -126,7 +126,7 @@
 "variable.set",
 {
 "name": "bolt_circle",
-"expr": "206 mm"
+"expr": "213 mm"
 }
 ],
 [
@@ -140,7 +140,7 @@
 "variable.set",
 {
 "name": "head_radius",
-"expr": "11 mm"
+"expr": "9 mm"
 }
 ],
 [

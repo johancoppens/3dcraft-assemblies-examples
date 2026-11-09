@@ -1,0 +1,174 @@
+[
+[
+"variable.set",
+{
+"name": "coil_radius",
+"expr": "1.75 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "mean_radius",
+"expr": "14.4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "installed_height",
+"expr": "33 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "seat_gap",
+"expr": "0.05 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "coil_count",
+"expr": "5"
+}
+],
+[
+"variable.set",
+{
+"name": "coil_pitch",
+"expr": "(installed_height - 2 * (coil_radius + seat_gap)) / (coil_count - 1)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Coil sections",
+"plane": "yz"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Coil sections",
+"center": [
+"mean_radius",
+"coil_radius + seat_gap + 0 * coil_pitch"
+],
+"radius": "coil_radius"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Coil sections",
+"center": [
+"mean_radius",
+"coil_radius + seat_gap + 1 * coil_pitch"
+],
+"radius": "coil_radius"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Coil sections",
+"center": [
+"mean_radius",
+"coil_radius + seat_gap + 2 * coil_pitch"
+],
+"radius": "coil_radius"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Coil sections",
+"center": [
+"mean_radius",
+"coil_radius + seat_gap + 3 * coil_pitch"
+],
+"radius": "coil_radius"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Coil sections",
+"center": [
+"mean_radius",
+"coil_radius + seat_gap + 4 * coil_pitch"
+],
+"radius": "coil_radius"
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Coil sections",
+"axis": "y",
+"name": "Valve spring"
+}
+],
+[
+"material.preset",
+{
+"body": "Valve spring",
+"preset": "steel",
+"color": "#3b3f45",
+"metallic": 0.75,
+"roughness": 0.5
+}
+],
+[
+"datum.plane",
+{
+"name": "Base",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Spring stands at its installed height",
+"measure": "extent",
+"of": "Valve spring",
+"axis": "z",
+"eq": "installed_height - 2 * seat_gap",
+"tol": "0.001"
+}
+],
+[
+"document.info",
+{
+"title": "Valve spring",
+"description": "Valve spring drawn as rings at its installed height, from the head to the retainer: its compression is not drawn.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"spring winding"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

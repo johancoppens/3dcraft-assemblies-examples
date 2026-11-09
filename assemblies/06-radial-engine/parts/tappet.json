@@ -1,0 +1,468 @@
+[
+[
+"variable.set",
+{
+"name": "guide_diameter",
+"expr": "24 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stem_top",
+"expr": "68 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "roller_radius",
+"expr": "12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "roller_width",
+"expr": "18 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "axle_radius",
+"expr": "5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fork_width",
+"expr": "26 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Plunger profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Plunger profile",
+"start": [
+"0 mm",
+"10 mm"
+],
+"segments": [
+{
+"line": [
+"guide_diameter / 2",
+"10 mm"
+]
+},
+{
+"line": [
+"guide_diameter / 2",
+"stem_top - 3 mm"
+]
+},
+{
+"line": [
+"guide_diameter / 2 - 3 mm",
+"stem_top"
+]
+},
+{
+"line": [
+"0 mm",
+"stem_top"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Plunger profile",
+"axis": "y",
+"name": "Plunger"
+}
+],
+[
+"feature.block",
+{
+"name": "Fork",
+"size": [
+"guide_diameter",
+"fork_width",
+"23 mm"
+],
+"position": [
+"-guide_diameter / 2",
+"-fork_width / 2",
+"-7 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Plunger",
+"tool": "Fork",
+"name": "Tappet forked"
+}
+],
+[
+"feature.block",
+{
+"name": "Fork slot",
+"size": [
+"guide_diameter + 2 mm",
+"roller_width + 3 mm",
+"22 mm"
+],
+"position": [
+"-guide_diameter / 2 - 1 mm",
+"-roller_width / 2 - 1.5 mm",
+"-9 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Tappet forked",
+"tool": "Fork slot",
+"name": "Tappet slotted"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Axle bore",
+"radius": "axle_radius + 0.01 mm",
+"height": "fork_width + 4 mm",
+"position": [
+"0 mm",
+"-fork_width / 2 - 2 mm",
+"0 mm"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Tappet slotted",
+"tool": "Axle bore",
+"name": "Tappet drilled"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Ball socket",
+"radius": "9 mm",
+"height": "11 mm",
+"position": [
+"0 mm",
+"0 mm",
+"stem_top - 10 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Tappet drilled",
+"tool": "Ball socket",
+"name": "Tappet"
+}
+],
+[
+"sketch.create",
+{
+"name": "Roller profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Roller profile",
+"start": [
+"axle_radius + 0.03 mm",
+"-roller_width / 2"
+],
+"segments": [
+{
+"line": [
+"roller_radius - 0.6 mm",
+"-roller_width / 2"
+]
+},
+{
+"line": [
+"roller_radius",
+"-roller_width / 2 + 0.6 mm"
+]
+},
+{
+"line": [
+"roller_radius",
+"roller_width / 2 - 0.6 mm"
+]
+},
+{
+"line": [
+"roller_radius - 0.6 mm",
+"roller_width / 2"
+]
+},
+{
+"line": [
+"axle_radius + 0.03 mm",
+"roller_width / 2"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Roller profile",
+"axis": "y",
+"name": "Roller"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Roller axle",
+"radius": "axle_radius",
+"height": "fork_width",
+"position": [
+"0 mm",
+"-fork_width / 2",
+"0 mm"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Tappet",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"material.preset",
+{
+"body": "Roller",
+"preset": "steel",
+"color": "#3b3f45",
+"metallic": 0.85,
+"roughness": 0.42
+}
+],
+[
+"material.preset",
+{
+"body": "Roller axle",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Slide",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Pin",
+"through": [
+[
+"0 mm",
+"0 mm",
+"stem_top"
+],
+[
+"0 mm",
+"1 mm",
+"stem_top"
+],
+[
+"0 mm",
+"0 mm",
+"stem_top + 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Roller diameter",
+"measure": "extent",
+"of": "Roller",
+"axis": "z",
+"eq": "2 * roller_radius",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Roller runs on its axle, at least",
+"measure": "clearance",
+"from": "Roller",
+"to": "Roller axle",
+"min": "0.02 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "roller_gap",
+"measure": "clearance",
+"from": "Roller",
+"to": "Roller axle",
+"label": "Roller runs on its axle"
+}
+],
+[
+"assert.add",
+{
+"name": "Roller runs on its axle, at most",
+"measure": "value",
+"expr": "roller_gap",
+"max": "0.04 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Axle is pressed in the fork, at least",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Roller axle",
+"surface": "cylinder"
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Tappet",
+"surface": "cylinder",
+"radius": {
+"min": "axle_radius + 0.001 mm",
+"max": "axle_radius + 0.1 mm"
+}
+}
+},
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "axle_gap",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Roller axle",
+"surface": "cylinder"
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Tappet",
+"surface": "cylinder",
+"radius": {
+"min": "axle_radius + 0.001 mm",
+"max": "axle_radius + 0.1 mm"
+}
+}
+},
+"label": "Axle is pressed in the fork"
+}
+],
+[
+"assert.add",
+{
+"name": "Axle is pressed in the fork, at most",
+"measure": "value",
+"expr": "axle_gap",
+"max": "0.015 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Tappet",
+"description": "Roller tappet: a plunger in its guide, a fork, an axle pressed in the fork and a roller on the cam track.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

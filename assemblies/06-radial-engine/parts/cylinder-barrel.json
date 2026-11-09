@@ -144,6 +144,34 @@
 [
 "variable.set",
 {
+"name": "tappet_offset",
+"expr": "32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_rest",
+"expr": "158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_track",
+"expr": "-158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_track",
+"expr": "-186 mm"
+}
+],
+[
+"variable.set",
+{
 "name": "stud_circle",
 "expr": "82 mm"
 }
@@ -181,10 +209,64 @@
 {
 "sketch": "Barrel profile",
 "start": [
-"bore / 2",
-"deck_height"
+"barrel_outer + fin_depth",
+"fin_base + fin_thickness / 2 - 0.4 mm"
 ],
 "segments": [
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_base - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_base - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"pad_height + flange_thickness"
+]
+},
+{
+"line": [
+"flange_radius",
+"pad_height + flange_thickness"
+]
+},
+{
+"line": [
+"flange_radius",
+"pad_height"
+]
+},
+{
+"line": [
+"bore / 2 + wall - 3 mm",
+"pad_height"
+]
+},
+{
+"line": [
+"bore / 2 + wall - 3 mm",
+"pad_height - skirt_depth"
+]
+},
+{
+"line": [
+"bore / 2",
+"pad_height - skirt_depth"
+]
+},
+{
+"line": [
+"bore / 2",
+"deck_height"
+]
+},
 {
 "line": [
 "barrel_outer + 3 mm",
@@ -206,427 +288,59 @@
 {
 "line": [
 "barrel_outer",
-"fin_top - 0 * fin_pitch + fin_thickness / 2"
+"fin_top + fin_thickness / 2"
 ]
 },
 {
 "line": [
 "barrel_outer + fin_depth",
-"fin_top - 0 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+"fin_top + fin_thickness / 2 - 0.4 mm"
 ]
 },
 {
 "line": [
 "barrel_outer + fin_depth",
-"fin_top - 0 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+"fin_top - fin_thickness / 2 + 0.4 mm"
 ]
 },
 {
 "line": [
 "barrel_outer",
-"fin_top - 0 * fin_pitch - fin_thickness / 2"
+"fin_top - fin_thickness / 2"
 ]
 },
 {
 "line": [
 "barrel_outer",
-"fin_top - 1 * fin_pitch + fin_thickness / 2"
+"fin_top - fin_pitch + fin_thickness / 2"
 ]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 1 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 1 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 1 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 2 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 2 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 2 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 2 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 3 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 3 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 3 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 3 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 4 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 4 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 4 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 4 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 5 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 5 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 5 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 5 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 6 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 6 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 6 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 6 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 7 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 7 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 7 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 7 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 8 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 8 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 8 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 8 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 9 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 9 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 9 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 9 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 10 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 10 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 10 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 10 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 11 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 11 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 11 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 11 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 12 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 12 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 12 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 12 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 13 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 13 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 13 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 13 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 14 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 14 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 14 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 14 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 15 * fin_pitch + fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 15 * fin_pitch + fin_thickness / 2 - 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer + fin_depth",
-"fin_top - 15 * fin_pitch - fin_thickness / 2 + 0.4 mm"
-]
-},
-{
-"line": [
-"barrel_outer",
-"fin_top - 15 * fin_pitch - fin_thickness / 2"
-]
-},
-{
-"line": [
-"barrel_outer",
-"pad_height + flange_thickness"
-]
-},
-{
-"line": [
-"flange_radius",
-"pad_height + flange_thickness"
-]
-},
-{
-"line": [
-"flange_radius",
-"pad_height"
-]
-},
-{
-"line": [
-"bore / 2 + wall - 3 mm",
-"pad_height"
-]
-},
-{
-"line": [
-"bore / 2 + wall - 3 mm",
-"pad_height - skirt_depth"
-]
-},
-{
-"line": [
-"bore / 2",
-"pad_height - skirt_depth"
-]
-},
-{
-"line": "start"
 }
 ]
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Barrel profile",
+"entities": [
+"e29",
+"e31",
+"e33",
+"e35"
+],
+"chain": [
+"e26",
+"e34"
+],
+"count": "fin_count - 1"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "Barrel profile",
+"from": "e34[last]",
+"to": "e1"
 }
 ],
 [
@@ -955,6 +669,52 @@
 "0 mm",
 "1 mm",
 "deck_height"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Tappet I",
+"through": [
+[
+"tappet_offset",
+"intake_track",
+"tappet_rest"
+],
+[
+"tappet_offset + 1 mm",
+"intake_track",
+"tappet_rest"
+],
+[
+"tappet_offset",
+"intake_track + 1 mm",
+"tappet_rest"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Tappet E",
+"through": [
+[
+"-tappet_offset",
+"exhaust_track",
+"tappet_rest"
+],
+[
+"-tappet_offset + 1 mm",
+"exhaust_track",
+"tappet_rest"
+],
+[
+"-tappet_offset",
+"exhaust_track + 1 mm",
+"tappet_rest"
 ]
 ]
 }

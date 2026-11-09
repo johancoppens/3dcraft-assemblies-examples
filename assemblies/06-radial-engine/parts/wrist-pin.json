@@ -21,18 +21,6 @@
 }
 ],
 [
-"variable.publish",
-{
-"name": "pin_length",
-"label": "Pin length",
-"description": "Between the plug faces",
-"group": "Wrist pin",
-"order": 1,
-"min": "95 mm",
-"max": "125 mm"
-}
-],
-[
 "variable.set",
 {
 "name": "end_chamfer",

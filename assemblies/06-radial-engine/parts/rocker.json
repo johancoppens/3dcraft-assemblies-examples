@@ -1,0 +1,307 @@
+[
+[
+"variable.set",
+{
+"name": "arm_valve",
+"expr": "46 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "arm_push",
+"expr": "40 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "half_width",
+"expr": "7 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "end_radius",
+"expr": "11 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_bore",
+"expr": "14 mm + 0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "socket_radius",
+"expr": "9 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rocker outline",
+"plane": "yz"
+}
+],
+[
+"variable.set",
+{
+"name": "bar_below",
+"expr": "7 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pad_relief",
+"expr": "sqrt(end_radius^2 - bar_below^2)"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Rocker outline",
+"start": [
+"-arm_push",
+"end_radius"
+],
+"segments": [
+{
+"line": [
+"arm_valve",
+"end_radius"
+]
+},
+{
+"arc": [
+"arm_valve - pad_relief",
+"-bar_below"
+],
+"center": [
+"arm_valve",
+"0 mm"
+],
+"clockwise": true
+},
+{
+"line": [
+"-arm_push + pad_relief",
+"-bar_below"
+]
+},
+{
+"arc": "start",
+"center": [
+"-arm_push",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rocker outline",
+"distance": "2 * half_width",
+"symmetric": true,
+"name": "Rocker bar"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Pivot boss",
+"radius": "14 mm",
+"height": "2 * half_width",
+"position": [
+"-half_width",
+"0 mm",
+"0 mm"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Rocker bar",
+"tool": "Pivot boss",
+"name": "Rocker bossed"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Pivot bore",
+"radius": "pin_bore / 2",
+"height": "2 * half_width + 2 mm",
+"position": [
+"-half_width - 1 mm",
+"0 mm",
+"0 mm"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Rocker bossed",
+"tool": "Pivot bore",
+"name": "Rocker bored"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Socket",
+"radius": "socket_radius",
+"height": "2 * half_width + 2 mm",
+"position": [
+"-half_width - 1 mm",
+"-arm_push",
+"0 mm"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"feature.block",
+{
+"name": "Socket slot",
+"size": [
+"2 * half_width + 2 mm",
+"24 mm",
+"end_radius + 2 mm"
+],
+"position": [
+"-half_width - 1 mm",
+"-arm_push - 12 mm",
+"-end_radius - 2 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Socket",
+"tool": "Socket slot",
+"name": "Socket opening"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Rocker bored",
+"tool": "Socket opening",
+"name": "Rocker"
+}
+],
+[
+"material.preset",
+{
+"body": "Rocker",
+"preset": "steel",
+"color": "#d3d6da",
+"metallic": 0.97,
+"roughness": 0.24
+}
+],
+[
+"datum.plane",
+{
+"name": "Pivot",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Push end",
+"through": [
+[
+"0 mm",
+"-arm_push",
+"0 mm"
+],
+[
+"0 mm",
+"-arm_push + 1 mm",
+"0 mm"
+],
+[
+"0 mm",
+"-arm_push",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Rocker span",
+"measure": "extent",
+"of": "Rocker",
+"axis": "y",
+"eq": "arm_push + arm_valve + 2 * end_radius",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Rocker",
+"description": "Steel rocker: a bar with a pivot boss, a pad over the valve and an open socket for the pushrod ball.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

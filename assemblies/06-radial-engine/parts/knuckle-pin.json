@@ -14,18 +14,6 @@
 }
 ],
 [
-"variable.publish",
-{
-"name": "pin_length",
-"label": "Pin length",
-"description": "Across the two flange plates of the master rod, less the lock-plate recesses",
-"group": "Knuckle pin",
-"order": 1,
-"min": "50 mm",
-"max": "80 mm"
-}
-],
-[
 "variable.set",
 {
 "name": "end_chamfer",

@@ -46,20 +46,20 @@
 [
 "variable.set",
 {
-"name": "dome_depth",
-"expr": "41.7 mm"
+"name": "chamber_height",
+"expr": "23.7 mm"
 }
 ],
 [
 "variable.publish",
 {
-"name": "dome_depth",
-"label": "Dome depth",
-"description": "Depth of the combustion dome",
+"name": "chamber_height",
+"label": "Chamber height",
+"description": "Height of the flat combustion chamber above the deck",
 "group": "Cylinder",
 "order": 3,
-"min": "30 mm",
-"max": "55 mm"
+"min": "15 mm",
+"max": "35 mm"
 }
 ],
 [
@@ -102,9 +102,37 @@
 "params": {
 "bore": "bore",
 "deck_height": "deck_height",
-"dome_depth": "dome_depth",
+"chamber_height": "chamber_height",
 "open_section": "open_section"
 }
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker-bracket.3dcraft",
+"name": "Bracket I"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/rocker-bracket.3dcraft",
+"name": "Bracket E"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve-spring.3dcraft",
+"name": "Spring I"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/valve-spring.3dcraft",
+"name": "Spring E"
 }
 ],
 [
@@ -124,6 +152,46 @@
 "name": "Head_on_barrel",
 "a": "Barrel/Head seat",
 "b": "Head/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Bracket_I_on_head",
+"a": "Head/Bracket I",
+"b": "Bracket I/Base",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Bracket_E_on_head",
+"a": "Head/Bracket E",
+"b": "Bracket E/Base",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Spring_I_on_head",
+"a": "Head/Spring I",
+"b": "Spring I/Base",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Spring_E_on_head",
+"a": "Head/Spring E",
+"b": "Spring E/Base",
 "flip": true
 }
 ],

@@ -1,0 +1,497 @@
+[
+[
+"variable.set",
+{
+"name": "tappet_offset",
+"expr": "32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_rest",
+"expr": "158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "roller_radius",
+"expr": "12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "contact_gap",
+"expr": "0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tappet_lift",
+"expr": "10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_centre",
+"expr": "470 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_centre",
+"expr": "247.5 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_duration",
+"expr": "260 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_duration",
+"expr": "265 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "roller_stack",
+"expr": "roller_radius + contact_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "base_radius",
+"expr": "sqrt(tappet_offset^2 + tappet_rest^2) - roller_stack"
+}
+],
+[
+"variable.set",
+{
+"name": "ring_bore",
+"expr": "124 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "gear_bore",
+"expr": "120.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "track_width",
+"expr": "20 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_track",
+"expr": "-158 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_track",
+"expr": "-186 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "intake_rad",
+"expr": "intake_duration / (1 rad)"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_radius",
+"expr": "150 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_inner",
+"expr": "130 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_front",
+"expr": "211.9 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "exhaust_rad",
+"expr": "exhaust_duration / (1 rad)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Ring profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring profile",
+"start": [
+"gear_bore",
+"-198 mm"
+],
+"segments": [
+{
+"line": [
+"journal_inner",
+"-198 mm"
+]
+},
+{
+"line": [
+"journal_inner",
+"-journal_front"
+]
+},
+{
+"line": [
+"journal_radius",
+"-journal_front"
+]
+},
+{
+"line": [
+"journal_radius",
+"-198 mm"
+]
+},
+{
+"line": [
+"base_radius - 0.2 mm",
+"-198 mm"
+]
+},
+{
+"line": [
+"base_radius - 0.2 mm",
+"-148 mm"
+]
+},
+{
+"line": [
+"ring_bore",
+"-148 mm"
+]
+},
+{
+"line": [
+"ring_bore",
+"-176 mm"
+]
+},
+{
+"line": [
+"gear_bore",
+"-176 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Ring profile",
+"axis": "y",
+"name": "Cam ring body"
+}
+],
+[
+"datum.plane",
+{
+"name": "Intake track plane",
+"from": "zx",
+"distance": "intake_track - track_width / 2"
+}
+],
+[
+"datum.plane",
+{
+"name": "Exhaust track plane",
+"from": "zx",
+"distance": "exhaust_track - track_width / 2"
+}
+],
+[
+"sketch.create",
+{
+"name": "Intake track",
+"plane": "Intake track plane"
+}
+],
+[
+"sketch.create",
+{
+"name": "Exhaust track",
+"plane": "Exhaust track plane"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "Intake track",
+"x": "(-tappet_offset * sin((-intake_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * cos((-intake_centre / 6 - t * 1 rad / 6))) + roller_stack * (((tappet_offset * sin((-intake_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * cos((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * sin((-intake_centre / 6 - t * 1 rad / 6))) / sqrt((((tappet_offset * cos((-intake_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * sin((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * cos((-intake_centre / 6 - t * 1 rad / 6)))^2 + (((tappet_offset * sin((-intake_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * cos((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * sin((-intake_centre / 6 - t * 1 rad / 6)))^2)",
+"y": "(tappet_offset * cos((-intake_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * sin((-intake_centre / 6 - t * 1 rad / 6))) - roller_stack * (((tappet_offset * cos((-intake_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * sin((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * cos((-intake_centre / 6 - t * 1 rad / 6))) / sqrt((((tappet_offset * cos((-intake_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * sin((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * cos((-intake_centre / 6 - t * 1 rad / 6)))^2 + (((tappet_offset * sin((-intake_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / intake_rad)^2) * cos((-intake_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / intake_rad) * sin(2 * pi * t / intake_rad)) * sin((-intake_centre / 6 - t * 1 rad / 6)))^2)",
+"t": [
+"-intake_rad / 2",
+"intake_rad / 2"
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Intake track",
+"start": "e2",
+"segments": [
+{
+"arc": [
+"base_radius * cos((-intake_centre / 6 + intake_rad / 2 / 6 * 1 rad - 120 deg + atan(tappet_offset / tappet_rest)))",
+"base_radius * sin((-intake_centre / 6 + intake_rad / 2 / 6 * 1 rad - 120 deg + atan(tappet_offset / tappet_rest)))"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Intake track",
+"entities": [
+"e3",
+"e6"
+],
+"chain": [
+"e1",
+"e4"
+],
+"angle": "-120 deg",
+"center": [
+"0 mm",
+"0 mm"
+],
+"count": 3
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Intake track",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "base_radius - 0.18 mm"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Intake track",
+"distance": "track_width",
+"name": "Intake lobes"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "Exhaust track",
+"x": "(--tappet_offset * sin((-exhaust_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * cos((-exhaust_centre / 6 - t * 1 rad / 6))) + roller_stack * (((-tappet_offset * sin((-exhaust_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * cos((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * sin((-exhaust_centre / 6 - t * 1 rad / 6))) / sqrt((((-tappet_offset * cos((-exhaust_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * sin((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * cos((-exhaust_centre / 6 - t * 1 rad / 6)))^2 + (((-tappet_offset * sin((-exhaust_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * cos((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * sin((-exhaust_centre / 6 - t * 1 rad / 6)))^2)",
+"y": "(-tappet_offset * cos((-exhaust_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * sin((-exhaust_centre / 6 - t * 1 rad / 6))) - roller_stack * (((-tappet_offset * cos((-exhaust_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * sin((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * cos((-exhaust_centre / 6 - t * 1 rad / 6))) / sqrt((((-tappet_offset * cos((-exhaust_centre / 6 - t * 1 rad / 6)) + (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * sin((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * cos((-exhaust_centre / 6 - t * 1 rad / 6)))^2 + (((-tappet_offset * sin((-exhaust_centre / 6 - t * 1 rad / 6)) - (tappet_rest + tappet_lift * cos(pi * t / exhaust_rad)^2) * cos((-exhaust_centre / 6 - t * 1 rad / 6))) / 6) + (-tappet_lift * (pi / exhaust_rad) * sin(2 * pi * t / exhaust_rad)) * sin((-exhaust_centre / 6 - t * 1 rad / 6)))^2)",
+"t": [
+"-exhaust_rad / 2",
+"exhaust_rad / 2"
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Exhaust track",
+"start": "e2",
+"segments": [
+{
+"arc": [
+"base_radius * cos((-exhaust_centre / 6 + exhaust_rad / 2 / 6 * 1 rad - 120 deg + atan(-tappet_offset / tappet_rest)))",
+"base_radius * sin((-exhaust_centre / 6 + exhaust_rad / 2 / 6 * 1 rad - 120 deg + atan(-tappet_offset / tappet_rest)))"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Exhaust track",
+"entities": [
+"e3",
+"e6"
+],
+"chain": [
+"e1",
+"e4"
+],
+"angle": "-120 deg",
+"center": [
+"0 mm",
+"0 mm"
+],
+"count": 3
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Exhaust track",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "base_radius - 0.18 mm"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Exhaust track",
+"distance": "track_width",
+"name": "Exhaust lobes"
+}
+],
+[
+"material.preset",
+{
+"body": "Cam ring body",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.28
+}
+],
+[
+"material.preset",
+{
+"body": "Intake lobes",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.28
+}
+],
+[
+"material.preset",
+{
+"body": "Exhaust lobes",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.28
+}
+],
+[
+"datum.plane",
+{
+"name": "Axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Spigot diameter",
+"measure": "extent",
+"of": "Cam ring body",
+"axis": "x",
+"eq": "2 * journal_radius",
+"tol": "0.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Ring reaches the lobe height",
+"measure": "extent",
+"of": "Intake lobes",
+"axis": "z",
+"min": "2 * base_radius + tappet_lift * 0.6",
+"max": "2 * base_radius + 2 * tappet_lift + 12 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Cam ring",
+"description": "Double-track cam ring with three lobes per track, its flanks drawn from the lift law, an internal gear and a locating spigot that runs in the nose case.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"machining",
+"grinding"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

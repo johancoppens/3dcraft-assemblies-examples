@@ -1,0 +1,134 @@
+[
+[
+"sketch.create",
+{
+"name": "Idler profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Idler profile",
+"start": [
+"10.05 mm",
+"2 mm"
+],
+"segments": [
+{
+"line": [
+"29.9 mm",
+"2 mm"
+]
+},
+{
+"line": [
+"29.9 mm",
+"24 mm"
+]
+},
+{
+"line": [
+"22 mm",
+"24 mm"
+]
+},
+{
+"line": [
+"22 mm",
+"54 mm"
+]
+},
+{
+"line": [
+"53.9 mm",
+"54 mm"
+]
+},
+{
+"line": [
+"53.9 mm",
+"70 mm"
+]
+},
+{
+"line": [
+"10.05 mm",
+"70 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Idler profile",
+"axis": "y",
+"name": "Idler gear"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler gear",
+"preset": "steel",
+"color": "#b8bdc4",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Gear radii are the pitch radii less the drawn clearance",
+"measure": "extent",
+"of": "Idler gear",
+"axis": "x",
+"eq": "107.8 mm",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Idler gear",
+"description": "Compound idler of the cam reduction, 36 and 20 teeth at module 3, drawn as its pitch cylinders.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

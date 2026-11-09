@@ -1,0 +1,186 @@
+[
+[
+"variable.set",
+{
+"name": "rod_length",
+"expr": "275 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "rod_length",
+"label": "Length",
+"description": "Between the ball centres",
+"group": "Pushrod",
+"order": 1,
+"min": "230 mm",
+"max": "330 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tube_radius",
+"expr": "6.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ball_radius",
+"expr": "8 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pushrod profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pushrod profile",
+"start": [
+"0 mm",
+"-ball_radius"
+],
+"segments": [
+{
+"arc": [
+"ball_radius",
+"0 mm"
+],
+"center": [
+"0 mm",
+"0 mm"
+]
+},
+{
+"line": [
+"tube_radius",
+"sqrt(ball_radius^2 - tube_radius^2)"
+]
+},
+{
+"line": [
+"tube_radius",
+"rod_length - sqrt(ball_radius^2 - tube_radius^2)"
+]
+},
+{
+"line": [
+"ball_radius",
+"rod_length"
+]
+},
+{
+"arc": [
+"0 mm",
+"rod_length + ball_radius"
+],
+"center": [
+"0 mm",
+"rod_length"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Pushrod profile",
+"axis": "y",
+"name": "Pushrod"
+}
+],
+[
+"material.preset",
+{
+"body": "Pushrod",
+"preset": "steel",
+"color": "#b5692f",
+"metallic": 0.95,
+"roughness": 0.32
+}
+],
+[
+"datum.plane",
+{
+"name": "Low",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "High",
+"through": [
+[
+"0 mm",
+"0 mm",
+"rod_length"
+],
+[
+"0 mm",
+"1 mm",
+"rod_length"
+],
+[
+"0 mm",
+"0 mm",
+"rod_length + 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Length between balls",
+"measure": "extent",
+"of": "Pushrod",
+"axis": "z",
+"eq": "rod_length + 2 * ball_radius",
+"tol": "0.05"
+}
+],
+[
+"document.info",
+{
+"title": "Pushrod",
+"description": "Copper-plated tubular pushrod with ball ends.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"turning"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

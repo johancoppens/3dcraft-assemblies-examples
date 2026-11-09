@@ -1,0 +1,291 @@
+[
+[
+"variable.set",
+{
+"name": "height_to_pin",
+"expr": "50.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cheek_gap",
+"expr": "15 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "half_length",
+"expr": "14 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "half_width",
+"expr": "16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_radius",
+"expr": "7 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bracket post",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Bracket post",
+"start": [
+"-half_length",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"half_length",
+"0 mm"
+]
+},
+{
+"line": [
+"pin_radius + 5 mm",
+"height_to_pin - 3 mm"
+]
+},
+{
+"arc": [
+"-pin_radius - 5 mm",
+"height_to_pin - 3 mm"
+],
+"center": [
+"0 mm",
+"height_to_pin - 3 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bracket post",
+"distance": "2 * half_width",
+"symmetric": true,
+"name": "Bracket block"
+}
+],
+[
+"feature.block",
+{
+"name": "Rocker slot",
+"size": [
+"cheek_gap",
+"2 * half_length + 2 mm",
+"height_to_pin + 20 mm"
+],
+"position": [
+"-cheek_gap / 2",
+"-half_length - 1 mm",
+"6 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Bracket block",
+"tool": "Rocker slot",
+"name": "Bracket cheeks"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Pin hole",
+"radius": "pin_radius + 0.01 mm",
+"height": "2 * half_width + 2 mm",
+"position": [
+"-half_width - 1 mm",
+"0 mm",
+"height_to_pin"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Bracket cheeks",
+"tool": "Pin hole",
+"name": "Rocker bracket"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Rocker pin",
+"radius": "pin_radius",
+"height": "2 * half_width",
+"position": [
+"-half_width",
+"0 mm",
+"height_to_pin"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Rocker bracket",
+"preset": "steel",
+"color": "#3b3f45",
+"metallic": 0.8,
+"roughness": 0.45
+}
+],
+[
+"material.preset",
+{
+"body": "Rocker pin",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Base",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Bracket height",
+"measure": "extent",
+"of": "Rocker bracket",
+"axis": "z",
+"min": "height_to_pin",
+"max": "height_to_pin + 15 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Pin is pressed in the cheeks, at least",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Rocker pin",
+"surface": "cylinder"
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Rocker bracket",
+"surface": "cylinder",
+"radius": {
+"min": "pin_radius + 0.001 mm",
+"max": "pin_radius + 0.1 mm"
+}
+}
+},
+"min": "0.005 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "pin_gap",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"in": "Rocker pin",
+"surface": "cylinder"
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"in": "Rocker bracket",
+"surface": "cylinder",
+"radius": {
+"min": "pin_radius + 0.001 mm",
+"max": "pin_radius + 0.1 mm"
+}
+}
+},
+"label": "Pin is pressed in the cheeks"
+}
+],
+[
+"assert.add",
+{
+"name": "Pin is pressed in the cheeks, at most",
+"measure": "value",
+"expr": "pin_gap",
+"max": "0.015 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Rocker bracket",
+"description": "Two-cheek bracket and the rocker pin pressed through it; a static part of the cylinder head.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"casting"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]
