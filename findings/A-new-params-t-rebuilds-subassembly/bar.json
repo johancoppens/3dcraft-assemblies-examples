@@ -1,0 +1,176 @@
+[
+[
+"variable.set",
+{
+"name": "bar_length",
+"expr": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ply_thickness",
+"expr": "4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bar_width",
+"expr": "12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_bore",
+"expr": "4.2 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Outline",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Outline",
+"start": [
+"0 mm",
+"bar_width/2"
+],
+"segments": [
+{
+"line": [
+"bar_length",
+"bar_width/2"
+]
+},
+{
+"arc": [
+"bar_length",
+"-bar_width/2"
+],
+"center": [
+"bar_length",
+"0 mm"
+],
+"clockwise": true
+},
+{
+"line": [
+"0 mm",
+"-bar_width/2"
+]
+},
+{
+"arc": "start",
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Outline",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "pin_bore/2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Outline",
+"center": [
+"bar_length",
+"0 mm"
+],
+"radius": "pin_bore/2"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Outline",
+"distance": "ply_thickness",
+"name": "Bar"
+}
+],
+[
+"datum.axis",
+{
+"name": "Pivot A",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Pivot B",
+"through": [
+[
+"bar_length",
+"0 mm",
+"0 mm"
+],
+[
+"bar_length",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Pivot A plane",
+"from": "xy",
+"distance": "0 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bar_length",
+"label": "Length",
+"min": "10 mm",
+"max": "300 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Bar",
+"description": "probe",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

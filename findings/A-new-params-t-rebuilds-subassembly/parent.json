@@ -1,0 +1,250 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "t",
+"expr": "0"
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[1]",
+"mode": "flexible",
+"position": [
+0,
+0.0,
+0
+],
+"params": {
+"t": "t + 0/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[1]",
+"mode": "flexible",
+"position": [
+0,
+-50.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 0/6 - t"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[2]",
+"mode": "flexible",
+"position": [
+0,
+60.0,
+0
+],
+"params": {
+"t": "t + 3/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[2]",
+"mode": "flexible",
+"position": [
+0,
+10.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 3/6 - t"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[3]",
+"mode": "flexible",
+"position": [
+0,
+120.0,
+0
+],
+"params": {
+"t": "t + 1/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[3]",
+"mode": "flexible",
+"position": [
+0,
+70.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 1/6 - t"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[4]",
+"mode": "flexible",
+"position": [
+0,
+180.0,
+0
+],
+"params": {
+"t": "t + 4/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[4]",
+"mode": "flexible",
+"position": [
+0,
+130.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 4/6 - t"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[5]",
+"mode": "flexible",
+"position": [
+0,
+240.0,
+0
+],
+"params": {
+"t": "t + 2/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[5]",
+"mode": "flexible",
+"position": [
+0,
+190.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 2/6 - t"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Fore[6]",
+"mode": "flexible",
+"position": [
+0,
+300.0,
+0
+],
+"params": {
+"t": "t + 5/6"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "leg.3dcraftasm",
+"name": "Aft[6]",
+"mode": "flexible",
+"position": [
+0,
+250.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"t": "0.5 - 5/6 - t"
+}
+}
+],
+[
+"document.info",
+{
+"title": "Probe",
+"description": "p",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

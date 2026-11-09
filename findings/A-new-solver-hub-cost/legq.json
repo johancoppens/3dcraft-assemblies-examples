@@ -1,0 +1,291 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_a",
+"expr": "76.0 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_b",
+"expr": "83.0 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_c",
+"expr": "78.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_d",
+"expr": "80.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_e",
+"expr": "111.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_f",
+"expr": "78.8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_g",
+"expr": "73.4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_h",
+"expr": "131.4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_i",
+"expr": "98.0 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_j",
+"expr": "100.0 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_k",
+"expr": "123.8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_l",
+"expr": "15.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_m",
+"expr": "30.0 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "bar.3dcraft",
+"name": "Bar_J",
+"position": [
+25.98076211353316,
+10.0,
+14.999999999999998
+],
+"rotation": [
+30.079266094310217,
+-110.047210004485,
+110.047210004485
+],
+"params": {
+"bar_length": "len_j"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "bar.3dcraft",
+"name": "Bar_K",
+"position": [
+25.98076211353316,
+5.0,
+14.999999999999998
+],
+"rotation": [
+49.502434730069226,
+93.66857961106953,
+-93.66857961106953
+],
+"params": {
+"bar_length": "len_k"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "bar.3dcraft",
+"name": "Bar_C",
+"position": [
+-76.0,
+10.0,
+-15.6
+],
+"rotation": [
+79.06758579022151,
+51.13788468259028,
+-51.137884682590276
+],
+"params": {
+"bar_length": "len_c"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "bar.3dcraft",
+"name": "Bar_F",
+"position": [
+-153.55186891488177,
+10.0,
+4.8388754047036215
+],
+"rotation": [
+81.24467430224703,
+45.924199075179686,
+-45.924199075179686
+],
+"params": {
+"bar_length": "len_f"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "tri.3dcraft",
+"name": "Hip",
+"position": [
+-76.0,
+15.0,
+-15.6
+],
+"rotation": [
+74.14855955807354,
+-61.08757114496114,
+61.087571144961125
+],
+"params": {
+"side_a": "len_b",
+"side_b": "len_d",
+"side_c": "len_e"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "tri.3dcraft",
+"name": "Foot",
+"position": [
+-43.76313505957708,
+15.0,
+-87.28503706362248
+],
+"rotation": [
+20.137717226670524,
+-116.64193840293505,
+116.64193840293505
+],
+"params": {
+"side_a": "len_g",
+"side_b": "len_i",
+"side_c": "len_h"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Knee_K",
+"a": "Bar_K/Pivot B",
+"b": "Bar_C/Pivot B",
+"offset": "-5 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Hip_C",
+"a": "Bar_J/Pivot B",
+"b": "Hip/Corner B",
+"offset": "-5 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Hip_D",
+"a": "Hip/Corner C",
+"b": "Bar_F/Pivot A",
+"offset": "5 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Foot_knee",
+"a": "Bar_C/Pivot B",
+"b": "Foot/Corner A",
+"offset": "-5 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Foot_F",
+"a": "Bar_F/Pivot B",
+"b": "Foot/Corner B",
+"offset": "-5 mm",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Leg",
+"description": "probe",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -232,7 +232,7 @@ def check_report(lines, what):
     report = lines[-1]
     if not report.get("ok"):
         raise CheckError(f"{what}: document.check is not ok:\n" + json.dumps(
-            {k: report.get(k) for k in ("problems", "assertionSummary")}, indent=1)[:3000])
+            {k: report.get(k) for k in ("problems", "assertionSummary")}, indent=1)[:20000])
     return report
 
 

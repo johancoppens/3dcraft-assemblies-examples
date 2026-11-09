@@ -1,0 +1,89 @@
+[
+[
+"variable.set",
+{
+"name": "seg_len",
+"expr": "60 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "crank_radius",
+"expr": "30 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Sk",
+"plane": "zx"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Sk",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "4 mm"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Sk",
+"distance": "seg_len",
+"name": "Seg"
+}
+],
+[
+"datum.plane",
+{
+"name": "Start plane",
+"from": "zx",
+"distance": "0 mm"
+}
+],
+[
+"datum.plane",
+{
+"name": "End plane",
+"from": "zx",
+"distance": "seg_len"
+}
+],
+[
+"datum.axis",
+{
+"name": "Throw",
+"through": [
+[
+"crank_radius",
+"0 mm",
+"0 mm"
+],
+[
+"crank_radius",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"document.info",
+{
+"title": "Seg",
+"description": "p",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

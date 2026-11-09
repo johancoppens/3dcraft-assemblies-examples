@@ -1,0 +1,129 @@
+[
+[
+"variable.set",
+{
+"name": "ply_thickness",
+"expr": "4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_a",
+"expr": "76 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "len_l",
+"expr": "15.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_low",
+"expr": "21 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "margin",
+"expr": "12 mm"
+}
+],
+[
+"datum.plane",
+{
+"name": "Plate base",
+"from": "zx",
+"distance": "plate_low"
+}
+],
+[
+"sketch.create",
+{
+"name": "Outline",
+"plane": "Plate base"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Outline",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "margin"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Outline",
+"center": [
+"-len_l",
+"-len_a"
+],
+"radius": "margin"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Outline",
+"distance": "ply_thickness",
+"name": "Plate"
+}
+],
+[
+"datum.plane",
+{
+"name": "Axle plane",
+"from": "zx",
+"distance": "0 mm"
+}
+],
+[
+"datum.axis",
+{
+"name": "Hip axis",
+"through": [
+[
+"-len_a",
+"0 mm",
+"-len_l"
+],
+[
+"-len_a",
+"1 mm",
+"-len_l"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Origin",
+"from": "xy",
+"distance": "0 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Plate",
+"description": "probe",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

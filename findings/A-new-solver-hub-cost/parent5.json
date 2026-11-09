@@ -1,0 +1,1013 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "t",
+"expr": "0"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[0]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[1]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[2]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[3]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[4]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[5]"
+}
+],
+[
+"instance.add",
+{
+"source": "chassis.3dcraft",
+"name": "Plate[6]"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_0_ground",
+"a": "world/xy",
+"b": "Plate[0]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_1_ground",
+"a": "world/xy",
+"b": "Plate[1]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_2_ground",
+"a": "world/xy",
+"b": "Plate[2]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_3_ground",
+"a": "world/xy",
+"b": "Plate[3]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_4_ground",
+"a": "world/xy",
+"b": "Plate[4]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_5_ground",
+"a": "world/xy",
+"b": "Plate[5]/Zero",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Plate_6_ground",
+"a": "world/xy",
+"b": "Plate[6]/Zero",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[1]",
+"position": [
+0,
+-30.0,
+0
+],
+"rotation": [
+0,
+-30.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[2]",
+"position": [
+0,
+30.0,
+0
+],
+"rotation": [
+0,
+-210.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[3]",
+"position": [
+0,
+90.0,
+0
+],
+"rotation": [
+0,
+-90.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[4]",
+"position": [
+0,
+150.0,
+0
+],
+"rotation": [
+0,
+-270.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[5]",
+"position": [
+0,
+210.0,
+0
+],
+"rotation": [
+0,
+-150.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "seg.3dcraft",
+"name": "Seg[6]",
+"position": [
+0,
+270.0,
+0
+],
+"rotation": [
+0,
+-330.0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Drive",
+"a": "world/y",
+"b": "Seg[1]/Start plane",
+"offset": "-30.0 mm",
+"flip": true,
+"angle": "0 deg"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Coupler_1",
+"a": "Seg[1]/End plane",
+"b": "Seg[2]/Start plane",
+"flip": true,
+"angle": "-180 deg"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Coupler_2",
+"a": "Seg[2]/End plane",
+"b": "Seg[3]/Start plane",
+"flip": true,
+"angle": "120 deg"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Coupler_3",
+"a": "Seg[3]/End plane",
+"b": "Seg[4]/Start plane",
+"flip": true,
+"angle": "-180 deg"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Coupler_4",
+"a": "Seg[4]/End plane",
+"b": "Seg[5]/Start plane",
+"flip": true,
+"angle": "120 deg"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Coupler_5",
+"a": "Seg[5]/End plane",
+"b": "Seg[6]/Start plane",
+"flip": true,
+"angle": "-180 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "Drive_angle",
+"expr": "-30 deg - 360 deg * t"
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[1]",
+"mode": "flexible",
+"position": [
+0,
+0.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[1]",
+"mode": "flexible",
+"position": [
+0,
+-50.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_1",
+"a": "Seg[1]/Throw",
+"b": "Fore[1]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_1",
+"a": "Seg[1]/Throw",
+"b": "Fore[1]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_1",
+"a": "Plate[1]/Fore_hip",
+"b": "Fore[1]/Hip/Corner A",
+"offset": "15.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_1",
+"a": "Plate[1]/Fore_hip",
+"b": "Fore[1]/Bar_C/Pivot A",
+"offset": "10.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_1",
+"a": "Seg[1]/Throw",
+"b": "Aft[1]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_1",
+"a": "Seg[1]/Throw",
+"b": "Aft[1]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_1",
+"a": "Plate[0]/Aft_hip",
+"b": "Aft[1]/Hip/Corner A",
+"offset": "-65.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_1",
+"a": "Plate[0]/Aft_hip",
+"b": "Aft[1]/Bar_C/Pivot A",
+"offset": "-60.0 mm",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[2]",
+"mode": "flexible",
+"position": [
+0,
+60.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[2]",
+"mode": "flexible",
+"position": [
+0,
+10.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_2",
+"a": "Seg[2]/Throw",
+"b": "Fore[2]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_2",
+"a": "Seg[2]/Throw",
+"b": "Fore[2]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_2",
+"a": "Plate[2]/Fore_hip",
+"b": "Fore[2]/Hip/Corner A",
+"offset": "75.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_2",
+"a": "Plate[2]/Fore_hip",
+"b": "Fore[2]/Bar_C/Pivot A",
+"offset": "70.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_2",
+"a": "Seg[2]/Throw",
+"b": "Aft[2]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_2",
+"a": "Seg[2]/Throw",
+"b": "Aft[2]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_2",
+"a": "Plate[1]/Aft_hip",
+"b": "Aft[2]/Hip/Corner A",
+"offset": "-5.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_2",
+"a": "Plate[1]/Aft_hip",
+"b": "Aft[2]/Bar_C/Pivot A",
+"offset": "0.0 mm",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[3]",
+"mode": "flexible",
+"position": [
+0,
+120.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[3]",
+"mode": "flexible",
+"position": [
+0,
+70.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_3",
+"a": "Seg[3]/Throw",
+"b": "Fore[3]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_3",
+"a": "Seg[3]/Throw",
+"b": "Fore[3]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_3",
+"a": "Plate[3]/Fore_hip",
+"b": "Fore[3]/Hip/Corner A",
+"offset": "135.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_3",
+"a": "Plate[3]/Fore_hip",
+"b": "Fore[3]/Bar_C/Pivot A",
+"offset": "130.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_3",
+"a": "Seg[3]/Throw",
+"b": "Aft[3]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_3",
+"a": "Seg[3]/Throw",
+"b": "Aft[3]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_3",
+"a": "Plate[2]/Aft_hip",
+"b": "Aft[3]/Hip/Corner A",
+"offset": "55.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_3",
+"a": "Plate[2]/Aft_hip",
+"b": "Aft[3]/Bar_C/Pivot A",
+"offset": "60.0 mm",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[4]",
+"mode": "flexible",
+"position": [
+0,
+180.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[4]",
+"mode": "flexible",
+"position": [
+0,
+130.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_4",
+"a": "Seg[4]/Throw",
+"b": "Fore[4]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_4",
+"a": "Seg[4]/Throw",
+"b": "Fore[4]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_4",
+"a": "Plate[4]/Fore_hip",
+"b": "Fore[4]/Hip/Corner A",
+"offset": "195.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_4",
+"a": "Plate[4]/Fore_hip",
+"b": "Fore[4]/Bar_C/Pivot A",
+"offset": "190.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_4",
+"a": "Seg[4]/Throw",
+"b": "Aft[4]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_4",
+"a": "Seg[4]/Throw",
+"b": "Aft[4]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_4",
+"a": "Plate[3]/Aft_hip",
+"b": "Aft[4]/Hip/Corner A",
+"offset": "115.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_4",
+"a": "Plate[3]/Aft_hip",
+"b": "Aft[4]/Bar_C/Pivot A",
+"offset": "120.0 mm",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[5]",
+"mode": "flexible",
+"position": [
+0,
+240.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[5]",
+"mode": "flexible",
+"position": [
+0,
+190.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_5",
+"a": "Seg[5]/Throw",
+"b": "Fore[5]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_5",
+"a": "Seg[5]/Throw",
+"b": "Fore[5]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_5",
+"a": "Plate[5]/Fore_hip",
+"b": "Fore[5]/Hip/Corner A",
+"offset": "255.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_5",
+"a": "Plate[5]/Fore_hip",
+"b": "Fore[5]/Bar_C/Pivot A",
+"offset": "250.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_5",
+"a": "Seg[5]/Throw",
+"b": "Aft[5]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_5",
+"a": "Seg[5]/Throw",
+"b": "Aft[5]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_5",
+"a": "Plate[4]/Aft_hip",
+"b": "Aft[5]/Hip/Corner A",
+"offset": "175.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_5",
+"a": "Plate[4]/Aft_hip",
+"b": "Aft[5]/Bar_C/Pivot A",
+"offset": "180.0 mm",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Fore[6]",
+"mode": "flexible",
+"position": [
+0,
+300.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "legq.3dcraftasm",
+"name": "Aft[6]",
+"mode": "flexible",
+"position": [
+0,
+250.0,
+0
+],
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_j_6",
+"a": "Seg[6]/Throw",
+"b": "Fore[6]/Bar_J/Pivot A",
+"offset": "40.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_pin_k_6",
+"a": "Seg[6]/Throw",
+"b": "Fore[6]/Bar_K/Pivot A",
+"offset": "35.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_hip_6",
+"a": "Plate[6]/Fore_hip",
+"b": "Fore[6]/Hip/Corner A",
+"offset": "315.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Fore_c_6",
+"a": "Plate[6]/Fore_hip",
+"b": "Fore[6]/Bar_C/Pivot A",
+"offset": "310.0 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_j_6",
+"a": "Seg[6]/Throw",
+"b": "Aft[6]/Bar_J/Pivot A",
+"offset": "-30.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_pin_k_6",
+"a": "Seg[6]/Throw",
+"b": "Aft[6]/Bar_K/Pivot A",
+"offset": "-25.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_hip_6",
+"a": "Plate[5]/Aft_hip",
+"b": "Aft[6]/Hip/Corner A",
+"offset": "235.0 mm",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Aft_c_6",
+"a": "Plate[5]/Aft_hip",
+"b": "Aft[6]/Bar_C/Pivot A",
+"offset": "240.0 mm",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Probe",
+"description": "p",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

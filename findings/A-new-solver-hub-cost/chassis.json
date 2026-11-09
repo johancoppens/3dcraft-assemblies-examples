@@ -1,0 +1,95 @@
+[
+[
+"variable.set",
+{
+"name": "px",
+"expr": "0 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Sk",
+"plane": "xy"
+}
+],
+[
+"sketch.rect",
+{
+"sketch": "Sk",
+"from": [
+"-5 mm",
+"-5 mm"
+],
+"to": [
+"5 mm",
+"5 mm"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Sk",
+"distance": "5 mm",
+"name": "Ch"
+}
+],
+[
+"datum.axis",
+{
+"name": "Fore_hip",
+"through": [
+[
+"-76 mm",
+"0 mm",
+"-15.6 mm"
+],
+[
+"-76 mm",
+"1 mm",
+"-15.6 mm"
+]
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Aft_hip",
+"through": [
+[
+"76 mm",
+"0 mm",
+"-15.6 mm"
+],
+[
+"76 mm",
+"1 mm",
+"-15.6 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Zero",
+"from": "xy",
+"distance": "0 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Chassis",
+"description": "p",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]

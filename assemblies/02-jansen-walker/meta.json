@@ -1,0 +1,137 @@
+{
+  "id": "jansen-walker",
+  "title": "Jansen linkage walker",
+  "summary": "twelve legs, one keyed crankshaft, many closed loops",
+  "description": "A hand-cranked twelve-legged walking machine after Theo Jansen's linkage: laser-cut birch bars and frame ribs, walnut triangles, brass pins and a keyed brass crankshaft, walking on a floor of boards that rolls one board per turn.",
+  "domain": "Kinetic art, laser cutting",
+  "process": "Laser cutting, turning, hand assembly",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Many coupled closed loops, flexible subassemblies, geometry-keyed configurations and a solver branch limit to navigate."
+  },
+  "standards": [
+    "DIN 125-1 A washers (M4: 4.3 x 9 x 0.8 mm)"
+  ],
+  "materials": [
+    "Birch plywood, 4 mm: bars, crank webs and frame ribs",
+    "Walnut sheet, 4 mm triangles",
+    "Walnut dowels and hand crank",
+    "Brass rod, 4 mm and 8 mm",
+    "Rubber foot pads",
+    "Dark stained boards"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "one crank turn; the floor rolls exactly one board, so the loop is seamless",
+    "samples": 73,
+    "dof": 0
+  },
+  "contacts": [],
+  "preview": {
+    "camera": {
+      "eye": [
+        760,
+        880,
+        250
+      ],
+      "target": [
+        0,
+        -10,
+        -40
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 28
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/jansen-walker.step"
+    },
+    {
+      "part": "bar",
+      "path": "exports/bar-j.dxf",
+      "sketch": "Bar outline",
+      "values": {
+        "bar_length": "100 mm"
+      }
+    },
+    {
+      "part": "bar",
+      "path": "exports/bar-k.dxf",
+      "sketch": "Bar outline",
+      "values": {
+        "bar_length": "123.8 mm"
+      }
+    },
+    {
+      "part": "bar",
+      "path": "exports/bar-c.dxf",
+      "sketch": "Bar outline",
+      "values": {
+        "bar_length": "78.6 mm"
+      }
+    },
+    {
+      "part": "bar",
+      "path": "exports/bar-f.dxf",
+      "sketch": "Bar outline",
+      "values": {
+        "bar_length": "78.8 mm"
+      }
+    },
+    {
+      "part": "hip-triangle",
+      "path": "exports/hip-triangle.dxf",
+      "sketch": "Hip outline"
+    },
+    {
+      "part": "foot-triangle",
+      "path": "exports/foot-triangle.dxf",
+      "sketch": "Foot outline"
+    },
+    {
+      "part": "frame-rib",
+      "path": "exports/frame-rib.dxf",
+      "sketch": "Rib outline"
+    },
+    {
+      "part": "crank-segment",
+      "path": "exports/crank-web.dxf",
+      "sketch": "Web outline"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-09",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Built and passed: 0 dof, the reference foot within 1.25e-5 mm of the circle intersections, 4 to 6 feet on the floor, centre of mass inside the feet, slip at most 2.34 mm, no collisions at 121 moments. About 950 commands in about 130 CLI calls. It took the leg's joints from a published Jig and invented a band, a slip bound and the layer stack; these were added to the prompt afterwards, and that wording was not retested."
+  },
+  "stats": {
+    "steps": 775,
+    "parts": 11,
+    "instances": 45,
+    "configurations": 23,
+    "mates": 81,
+    "couplings": 0,
+    "dof": 0,
+    "parameters": 2,
+    "assertions": 38,
+    "part_assertions": 18,
+    "warnings": 0,
+    "build_s": 10.47,
+    "load_s": 2.33,
+    "load_cpu_s": 4.19,
+    "bake_s": 9.2,
+    "bake_mb": 1.2,
+    "file_bytes": 512455,
+    "range_worst_s": 2.049
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  }
+}

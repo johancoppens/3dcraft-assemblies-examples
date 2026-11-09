@@ -1,0 +1,199 @@
+[
+[
+"variable.set",
+{
+"name": "side_a",
+"expr": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "side_b",
+"expr": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "side_c",
+"expr": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ply_thickness",
+"expr": "4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_radius",
+"expr": "7 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_bore",
+"expr": "4.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "apex_x",
+"expr": "(side_b^2 - side_c^2 + side_a^2)/(2*side_a)"
+}
+],
+[
+"variable.set",
+{
+"name": "apex_y",
+"expr": "sqrt(side_b^2 - apex_x^2)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Outline",
+"plane": "xy"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Outline",
+"points": [
+[
+"0 mm",
+"0 mm"
+],
+[
+"side_a",
+"0 mm"
+],
+[
+"apex_x",
+"apex_y"
+]
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Outline",
+"distance": "ply_thickness",
+"name": "Triangle"
+}
+],
+[
+"datum.axis",
+{
+"name": "Corner A",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Corner B",
+"through": [
+[
+"side_a",
+"0 mm",
+"0 mm"
+],
+[
+"side_a",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Corner C",
+"through": [
+[
+"apex_x",
+"apex_y",
+"0 mm"
+],
+[
+"apex_x",
+"apex_y",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Tip",
+"at": [
+"apex_x",
+"apex_y",
+"ply_thickness/2"
+]
+}
+],
+[
+"variable.publish",
+{
+"name": "side_a",
+"label": "A",
+"min": "10 mm",
+"max": "300 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "side_b",
+"label": "B",
+"min": "10 mm",
+"max": "300 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "side_c",
+"label": "C",
+"min": "10 mm",
+"max": "300 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Triangle",
+"description": "probe",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0"
+}
+],
+[
+"document.check",
+{}
+]
+]
