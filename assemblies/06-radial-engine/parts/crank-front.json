@@ -1,0 +1,582 @@
+[
+[
+"variable.set",
+{
+"name": "crank_radius",
+"expr": "58.75 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "crank_radius",
+"label": "Crank radius",
+"description": "Half the stroke",
+"group": "Crankshaft",
+"order": 1,
+"min": "50 mm",
+"max": "68 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_radius",
+"expr": "35 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "spigot_radius",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_length",
+"expr": "63.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_radius",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_thickness",
+"expr": "28 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_inner",
+"expr": "pin_length / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "web_outer",
+"expr": "web_inner + web_thickness"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_length",
+"expr": "42 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_end",
+"expr": "web_outer + journal_length"
+}
+],
+[
+"variable.set",
+{
+"name": "web_pin_radius",
+"expr": "45 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_fillet",
+"expr": "2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_fillet",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cw_radius",
+"expr": "125 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cw_half",
+"expr": "72 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "edge",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "end_z",
+"expr": "cw_radius * cos(180 deg - cw_half)"
+}
+],
+[
+"variable.set",
+{
+"name": "end_x",
+"expr": "cw_radius * sin(180 deg - cw_half)"
+}
+],
+[
+"variable.set",
+{
+"name": "to_end",
+"expr": "hypot(end_z - crank_radius, end_x)"
+}
+],
+[
+"variable.set",
+{
+"name": "end_ang",
+"expr": "atan2(end_x, end_z - crank_radius)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_ang",
+"expr": "end_ang - acos(web_pin_radius / to_end)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_z",
+"expr": "crank_radius + web_pin_radius * cos(tan_ang)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_x",
+"expr": "web_pin_radius * sin(tan_ang)"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_root",
+"expr": "27 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_tip",
+"expr": "21.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "taper_start",
+"expr": "journal_end + 3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "taper_end",
+"expr": "taper_start + 110 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "thread_radius",
+"expr": "20.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_end",
+"expr": "taper_end + 24 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Front stub profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Front stub profile",
+"start": [
+"0 mm",
+"-nose_end"
+],
+"segments": [
+{
+"line": [
+"thread_radius - edge",
+"-nose_end"
+]
+},
+{
+"line": [
+"thread_radius",
+"-nose_end + edge"
+]
+},
+{
+"line": [
+"thread_radius",
+"-taper_end"
+]
+},
+{
+"line": [
+"nose_tip",
+"-taper_end"
+]
+},
+{
+"line": [
+"nose_root",
+"-taper_start"
+]
+},
+{
+"line": [
+"journal_radius",
+"-journal_end"
+]
+},
+{
+"line": [
+"journal_radius",
+"-web_outer - web_fillet"
+]
+},
+{
+"arc": [
+"journal_radius + web_fillet",
+"-web_outer"
+],
+"center": [
+"journal_radius + web_fillet",
+"-web_outer - web_fillet"
+],
+"clockwise": true
+},
+{
+"line": [
+"journal_radius + web_fillet",
+"-web_outer + 10 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"-web_outer + 10 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Front stub profile",
+"axis": "y",
+"name": "Front stub"
+}
+],
+[
+"datum.plane",
+{
+"name": "Front web plane",
+"from": "zx",
+"distance": "-web_outer"
+}
+],
+[
+"sketch.create",
+{
+"name": "Front web outline",
+"plane": "Front web plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Front web outline",
+"start": [
+"tan_z",
+"tan_x"
+],
+"segments": [
+{
+"line": [
+"end_z",
+"end_x"
+]
+},
+{
+"arc": [
+"end_z",
+"-end_x"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": false
+},
+{
+"line": [
+"tan_z",
+"-tan_x"
+]
+},
+{
+"arc": "start",
+"center": [
+"crank_radius",
+"0 mm"
+],
+"clockwise": false
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Front web outline",
+"distance": "web_thickness",
+"name": "Front web"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Front stub",
+"tool": "Front web",
+"name": "Front stub and web"
+}
+],
+[
+"datum.plane",
+{
+"name": "Pin section plane",
+"from": "xy",
+"distance": "crank_radius"
+}
+],
+[
+"sketch.create",
+{
+"name": "Crank pin profile",
+"plane": "Pin section plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Crank pin profile",
+"start": [
+"0 mm",
+"-web_outer + 6 mm"
+],
+"segments": [
+{
+"line": [
+"pin_radius + pin_fillet",
+"-web_outer + 6 mm"
+]
+},
+{
+"line": [
+"pin_radius + pin_fillet",
+"-web_inner"
+]
+},
+{
+"arc": [
+"pin_radius",
+"-web_inner + pin_fillet"
+],
+"center": [
+"pin_radius + pin_fillet",
+"-web_inner + pin_fillet"
+],
+"clockwise": true
+},
+{
+"line": [
+"pin_radius",
+"web_inner - 0.02 mm"
+]
+},
+{
+"line": [
+"spigot_radius",
+"web_inner - 0.02 mm"
+]
+},
+{
+"line": [
+"spigot_radius",
+"web_outer - 0.5 mm - edge"
+]
+},
+{
+"line": [
+"spigot_radius - edge",
+"web_outer - 0.5 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"web_outer - 0.5 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Crank pin profile",
+"axis": "y",
+"name": "Crank pin and spigot"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Front stub and web",
+"tool": "Crank pin and spigot",
+"name": "Crank front"
+}
+],
+[
+"material.preset",
+{
+"body": "Crank front",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.28
+}
+],
+[
+"datum.plane",
+{
+"name": "Main axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Crank pin",
+"through": [
+[
+"0 mm",
+"0 mm",
+"crank_radius"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"crank_radius"
+],
+[
+"0 mm",
+"0 mm",
+"(crank_radius) - 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Throw equals the stated crank radius",
+"measure": "boxMax",
+"of": "Crank front",
+"axis": "z",
+"eq": "crank_radius + web_pin_radius",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "The counterweight sector stands opposite the pin",
+"measure": "boxMin",
+"of": "Crank front",
+"axis": "z",
+"eq": "-cw_radius",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Crank, front half",
+"description": "Front half of the built-up crankshaft: nose, journal, front web with counterweight, crank pin with a spigot.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

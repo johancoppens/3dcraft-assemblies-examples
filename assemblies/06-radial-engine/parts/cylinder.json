@@ -1,0 +1,144 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore",
+"group": "Cylinder",
+"order": 1,
+"min": "124 mm",
+"max": "136 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "deck_height",
+"expr": "360 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "deck_height",
+"label": "Deck height",
+"description": "Crank axis to the barrel top",
+"group": "Cylinder",
+"order": 2,
+"min": "300 mm",
+"max": "420 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "dome_depth",
+"expr": "41.7 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "dome_depth",
+"label": "Dome depth",
+"description": "Depth of the combustion dome",
+"group": "Cylinder",
+"order": 3,
+"min": "30 mm",
+"max": "55 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "open_section",
+"expr": "0"
+}
+],
+[
+"variable.publish",
+{
+"name": "open_section",
+"label": "Open the front half",
+"description": "Cut this cylinder open to show the piston",
+"group": "Cylinder",
+"order": 4,
+"min": "0",
+"max": "1",
+"step": "1"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder-barrel.3dcraft",
+"name": "Barrel",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"open_section": "open_section"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder-head.3dcraft",
+"name": "Head",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "open_section"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Barrel_mount",
+"a": "world/xy",
+"b": "Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Head_on_barrel",
+"a": "Barrel/Head seat",
+"b": "Head/Seat",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Cylinder",
+"description": "One cylinder unit: the barrel with the head screwed and shrunk on; placed seven times.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

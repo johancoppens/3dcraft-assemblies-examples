@@ -1,0 +1,486 @@
+[
+[
+"variable.set",
+{
+"name": "link_length",
+"expr": "163 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "link_length",
+"label": "Rod length",
+"description": "Knuckle pin to wrist pin",
+"group": "Rod",
+"order": 1,
+"min": "110 mm",
+"max": "215 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "big_eye_radius",
+"expr": "21 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "small_eye_radius",
+"expr": "22 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_half",
+"expr": "13.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_fillet",
+"expr": "16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "eye_width",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_thickness",
+"expr": "9 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "flange",
+"expr": "5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "knuckle_bore",
+"expr": "26 mm + 0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "wrist_bore",
+"expr": "34 mm + 0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fillet_big_z",
+"expr": "0 mm + sqrt((big_eye_radius + shank_fillet)^2 - (shank_half + shank_fillet)^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_big_z",
+"expr": "0 mm + (fillet_big_z - 0 mm) * big_eye_radius / (big_eye_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_big_x",
+"expr": "(shank_half + shank_fillet) * big_eye_radius / (big_eye_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "fillet_small_z",
+"expr": "link_length - sqrt((small_eye_radius + shank_fillet)^2 - (shank_half + shank_fillet)^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_small_z",
+"expr": "link_length - (link_length - fillet_small_z) * small_eye_radius / (small_eye_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_small_x",
+"expr": "(shank_half + shank_fillet) * small_eye_radius / (small_eye_radius + shank_fillet)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rod outline",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Rod outline",
+"start": [
+"tangent_big_z",
+"tangent_big_x"
+],
+"segments": [
+{
+"arc": [
+"fillet_big_z",
+"shank_half"
+],
+"center": [
+"fillet_big_z",
+"shank_half + shank_fillet"
+],
+"clockwise": false
+},
+{
+"line": [
+"fillet_small_z",
+"shank_half"
+]
+},
+{
+"arc": [
+"tangent_small_z",
+"tangent_small_x"
+],
+"center": [
+"fillet_small_z",
+"shank_half + shank_fillet"
+],
+"clockwise": false
+},
+{
+"arc": [
+"tangent_small_z",
+"-tangent_small_x"
+],
+"center": [
+"link_length",
+"0 mm"
+],
+"clockwise": true
+},
+{
+"arc": [
+"fillet_small_z",
+"-shank_half"
+],
+"center": [
+"fillet_small_z",
+"-shank_half - shank_fillet"
+],
+"clockwise": false
+},
+{
+"line": [
+"fillet_big_z",
+"-shank_half"
+]
+},
+{
+"arc": [
+"tangent_big_z",
+"-tangent_big_x"
+],
+"center": [
+"fillet_big_z",
+"-shank_half - shank_fillet"
+],
+"clockwise": false
+},
+{
+"arc": "start",
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rod outline",
+"distance": "eye_width",
+"symmetric": true,
+"name": "Rod blank"
+}
+],
+[
+"feature.chamfer",
+{
+"name": "Rod rounded",
+"distance": "1.2 mm",
+"edges": [
+[
+"F2:side(e4)",
+"F2:startCap(e4,e6,e9,e12,e15,e17,e20,e22)"
+],
+[
+"F2:side(e4)",
+"F2:endCap(e4,e6,e9,e12,e15,e17,e20,e22)"
+]
+],
+"chain": true
+}
+],
+[
+"sketch.create",
+{
+"name": "Pin bores",
+"plane": "zx"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Pin bores",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "knuckle_bore / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Pin bores",
+"center": [
+"link_length",
+"0 mm"
+],
+"radius": "wrist_bore / 2"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Pin bores",
+"throughAll": true,
+"symmetric": true,
+"cut": "Rod rounded",
+"name": "Rod bored"
+}
+],
+[
+"datum.plane",
+{
+"name": "Pocket plus face",
+"from": "zx",
+"distance": "(eye_width / 2)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pocket plus",
+"plane": "Pocket plus face"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pocket plus",
+"start": [
+"fillet_big_z + 6 mm",
+"shank_half - flange"
+],
+"segments": [
+{
+"line": [
+"fillet_small_z - 6 mm",
+"shank_half - flange"
+]
+},
+{
+"line": [
+"fillet_small_z - 6 mm",
+"-(shank_half - flange)"
+]
+},
+{
+"line": [
+"fillet_big_z + 6 mm",
+"-(shank_half - flange)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Pocket plus",
+"distance": "(eye_width - web_thickness) / 2",
+"reversed": true,
+"cut": "Rod bored",
+"name": "Rod pocketed plus"
+}
+],
+[
+"datum.plane",
+{
+"name": "Pocket minus face",
+"from": "zx",
+"distance": "-(eye_width / 2)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pocket minus",
+"plane": "Pocket minus face"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pocket minus",
+"start": [
+"fillet_big_z + 6 mm",
+"shank_half - flange"
+],
+"segments": [
+{
+"line": [
+"fillet_small_z - 6 mm",
+"shank_half - flange"
+]
+},
+{
+"line": [
+"fillet_small_z - 6 mm",
+"-(shank_half - flange)"
+]
+},
+{
+"line": [
+"fillet_big_z + 6 mm",
+"-(shank_half - flange)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Pocket minus",
+"distance": "(eye_width - web_thickness) / 2",
+"reversed": false,
+"cut": "Rod pocketed plus",
+"name": "Link rod"
+}
+],
+[
+"material.preset",
+{
+"body": "Link rod",
+"preset": "steel",
+"color": "#d3d6da",
+"metallic": 0.97,
+"roughness": 0.22
+}
+],
+[
+"datum.plane",
+{
+"name": "Big end",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"(0 mm) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Small end",
+"through": [
+[
+"0 mm",
+"0 mm",
+"link_length"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"link_length"
+],
+[
+"0 mm",
+"0 mm",
+"(link_length) - 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Rod length between the eyes",
+"measure": "extent",
+"of": "Link rod",
+"axis": "z",
+"eq": "link_length + big_eye_radius + small_eye_radius",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Articulated rod",
+"description": "One of six identical H-section steel rods; each swings on a knuckle pin in the master rod flange.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

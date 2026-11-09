@@ -1,0 +1,6 @@
+[
+["variable.set",{"name":"length","expr":"40 mm"}],
+["variable.publish",{"name":"length","label":"Length","group":"Bar","order":1,"min":"20 mm","max":"80 mm"}],
+["feature.block",{"name":"Bar","size":["length","10 mm","10 mm"]}],
+["document.check",{}]
+]

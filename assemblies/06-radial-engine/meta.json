@@ -1,0 +1,86 @@
+{
+  "id": "radial-engine",
+  "title": "Seven-cylinder radial engine",
+  "summary": "seven closed loops, articulated rods, finned cylinders",
+  "description": "A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class, with a master rod and six articulated rods on knuckle pins in a cut-away crankcase.",
+  "domain": "Aviation, engines",
+  "process": "Casting, forging, machining",
+  "tier": "complex",
+  "difficulty": {
+    "score": null,
+    "rationale": ""
+  },
+  "standards": [],
+  "materials": [
+    "Cast grey crankcase",
+    "Finned steel barrels, dark",
+    "Cast aluminium heads",
+    "Polished steel rods and crank",
+    "Aluminium pistons",
+    "Copper-plated propeller hub"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "one full crank turn: the mechanism closes on itself",
+    "samples": 73,
+    "dof": 0
+  },
+  "contacts": [],
+  "preview": {
+    "camera": {
+      "eye": [
+        -980,
+        -1560,
+        560
+      ],
+      "target": [
+        -20,
+        0,
+        60
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 31
+    },
+    "look": {
+      "rotation": 270
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/radial-engine.step"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-09",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Built and checked: 39 instances, 0 dof, firing interval 102.86° measured, every piston within 0.1 mm of the closed form at 73 samples, strokes 117.500, 117.563, 118.611 and 118.262 mm (equal to this model's), no collisions at 121 moments and at the range corners (8 moments each). It invented the link-rod length, the piston skirt, the head chamber and the case sizes; these were added to the prompt afterwards, and that wording was not retested. About 60 CLI calls."
+  },
+  "stats": {
+    "steps": 732,
+    "parts": 12,
+    "instances": 39,
+    "configurations": 12,
+    "mates": 46,
+    "couplings": 0,
+    "dof": 0,
+    "parameters": 4,
+    "assertions": 79,
+    "part_assertions": 17,
+    "warnings": 0,
+    "build_s": 16.89,
+    "load_s": 2.16,
+    "load_cpu_s": 6.75,
+    "bake_s": 3.84,
+    "bake_mb": 5.4,
+    "file_bytes": 814407,
+    "range_worst_s": 5.653
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  }
+}

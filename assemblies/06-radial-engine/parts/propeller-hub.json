@@ -1,0 +1,280 @@
+[
+[
+"variable.set",
+{
+"name": "taper_start",
+"expr": "104.75 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "taper_length",
+"expr": "110 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_root",
+"expr": "27 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nose_tip",
+"expr": "21.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "seat_gap",
+"expr": "0.03 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "seat_rear",
+"expr": "145 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "seat_front",
+"expr": "214 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hub_radius",
+"expr": "82 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "taper_rate",
+"expr": "(nose_tip - nose_root) / taper_length"
+}
+],
+[
+"sketch.create",
+{
+"name": "Hub profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Hub profile",
+"start": [
+"nose_root + taper_rate * (seat_rear - taper_start) + seat_gap",
+"-seat_rear"
+],
+"segments": [
+{
+"line": [
+"46 mm",
+"-seat_rear"
+]
+},
+{
+"line": [
+"46 mm",
+"-184 mm"
+]
+},
+{
+"line": [
+"hub_radius - 4 mm",
+"-184 mm"
+]
+},
+{
+"line": [
+"hub_radius",
+"-188 mm"
+]
+},
+{
+"line": [
+"hub_radius",
+"-216 mm"
+]
+},
+{
+"line": [
+"hub_radius - 4 mm",
+"-220 mm"
+]
+},
+{
+"line": [
+"62 mm",
+"-224 mm"
+]
+},
+{
+"line": [
+"62 mm",
+"-244 mm"
+]
+},
+{
+"line": [
+"34 mm",
+"-244 mm"
+]
+},
+{
+"line": [
+"34 mm",
+"-seat_front"
+]
+},
+{
+"line": [
+"nose_root + taper_rate * (seat_front - taper_start) + seat_gap",
+"-seat_front"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Hub profile",
+"axis": "y",
+"name": "Propeller hub"
+}
+],
+[
+"sketch.create",
+{
+"name": "Nut profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Nut profile",
+"start": [
+"21.6 mm",
+"-seat_front - 0.05 mm"
+],
+"segments": [
+{
+"line": [
+"30 mm",
+"-seat_front - 0.05 mm"
+]
+},
+{
+"line": [
+"30 mm",
+"-236 mm"
+]
+},
+{
+"line": [
+"21.6 mm",
+"-236 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Nut profile",
+"axis": "y",
+"name": "Retaining nut"
+}
+],
+[
+"material.preset",
+{
+"body": "Propeller hub",
+"preset": "steel",
+"color": "#b87333",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"material.preset",
+{
+"body": "Retaining nut",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"datum.plane",
+{
+"name": "Crank seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Hub length along the nose",
+"measure": "extent",
+"of": "Propeller hub",
+"axis": "y",
+"eq": "244 mm - seat_rear",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Propeller hub",
+"description": "Copper-plated propeller hub on the taper of the crank nose, held by a retaining nut.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

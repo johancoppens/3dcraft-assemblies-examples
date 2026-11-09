@@ -1,0 +1,283 @@
+[
+[
+"variable.set",
+{
+"name": "pin_diameter",
+"expr": "34 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bore_diameter",
+"expr": "18 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_length",
+"expr": "112 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "pin_length",
+"label": "Pin length",
+"description": "Between the plug faces",
+"group": "Wrist pin",
+"order": 1,
+"min": "95 mm",
+"max": "125 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "end_chamfer",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plug_reach",
+"expr": "5.2 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pin profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pin profile",
+"start": [
+"bore_diameter / 2",
+"-pin_length / 2"
+],
+"segments": [
+{
+"line": [
+"pin_diameter / 2 - end_chamfer",
+"-pin_length / 2"
+]
+},
+{
+"line": [
+"pin_diameter / 2",
+"-pin_length / 2 + end_chamfer"
+]
+},
+{
+"line": [
+"pin_diameter / 2",
+"pin_length / 2 - end_chamfer"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - end_chamfer",
+"pin_length / 2"
+]
+},
+{
+"line": [
+"bore_diameter / 2",
+"pin_length / 2"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Pin profile",
+"axis": "y",
+"name": "Wrist pin"
+}
+],
+[
+"sketch.create",
+{
+"name": "Plug profiles",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Plug profiles",
+"start": [
+"0 mm",
+"-pin_length / 2"
+],
+"segments": [
+{
+"line": [
+"pin_diameter / 2 - 2 mm",
+"-pin_length / 2"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - 2 mm",
+"-(pin_length / 2 + plug_reach - 2 mm)"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - 6 mm",
+"-(pin_length / 2 + plug_reach)"
+]
+},
+{
+"line": [
+"0 mm",
+"-(pin_length / 2 + plug_reach)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Plug profiles",
+"start": [
+"0 mm",
+"pin_length / 2"
+],
+"segments": [
+{
+"line": [
+"pin_diameter / 2 - 2 mm",
+"pin_length / 2"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - 2 mm",
+"(pin_length / 2 + plug_reach - 2 mm)"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - 6 mm",
+"(pin_length / 2 + plug_reach)"
+]
+},
+{
+"line": [
+"0 mm",
+"(pin_length / 2 + plug_reach)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Plug profiles",
+"axis": "y",
+"name": "Pin plugs"
+}
+],
+[
+"datum.plane",
+{
+"name": "Axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"(0 mm) - 1 mm"
+]
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Wrist pin",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.26
+}
+],
+[
+"material.preset",
+{
+"body": "Pin plugs",
+"preset": "aluminium-brushed",
+"color": "#dfe1e3",
+"metallic": 0.92,
+"roughness": 0.3
+}
+],
+[
+"assert.add",
+{
+"name": "Pin length is the stated size",
+"measure": "extent",
+"of": "Wrist pin",
+"axis": "y",
+"eq": "pin_length",
+"tol": "0.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Plugs reach past the pin ends",
+"measure": "extent",
+"of": "Pin plugs",
+"axis": "y",
+"eq": "pin_length + 2 * plug_reach",
+"tol": "0.001"
+}
+],
+[
+"document.info",
+{
+"title": "Wrist pin",
+"description": "Tubular full-floating wrist pin of hardened steel with aluminium end plugs that bear on the bore.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"turning"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

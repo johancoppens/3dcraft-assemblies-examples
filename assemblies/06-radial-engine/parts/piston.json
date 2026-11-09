@@ -1,0 +1,676 @@
+[
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore",
+"group": "Piston",
+"order": 1,
+"min": "124 mm",
+"max": "136 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "running_clearance",
+"expr": "0.32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "crown_height",
+"expr": "64 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "crown_height",
+"label": "Crown height",
+"description": "Wrist pin axis to the piston crown",
+"group": "Piston",
+"order": 2,
+"min": "50 mm",
+"max": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "skirt_length",
+"expr": "32 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "crown_thickness",
+"expr": "13 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "wall",
+"expr": "6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_width",
+"expr": "3.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "groove_depth",
+"expr": "4.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "land",
+"expr": "5.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "top_land",
+"expr": "9 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "edge_chamfer",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_bore",
+"expr": "34 mm + 0.03 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_radius",
+"expr": "28 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "rod_slot",
+"expr": "36 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "outer_radius",
+"expr": "bore / 2 - running_clearance / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_half",
+"expr": "sqrt((outer_radius - 1.4 mm)^2 - boss_radius^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "inner_radius",
+"expr": "outer_radius - wall"
+}
+],
+[
+"variable.set",
+{
+"name": "ring_width",
+"expr": "3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ring_clearance",
+"expr": "0.05 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Piston profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Piston profile",
+"start": [
+"0 mm",
+"crown_height"
+],
+"segments": [
+{
+"line": [
+"outer_radius - edge_chamfer",
+"crown_height"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - edge_chamfer"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 0 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 0 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 0 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 0 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 1 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 1 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 1 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 1 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 2 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 2 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 2 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 2 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 3 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 3 * (groove_width + land)"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth",
+"crown_height - top_land - 3 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"crown_height - top_land - 3 * (groove_width + land) - groove_width"
+]
+},
+{
+"line": [
+"outer_radius",
+"-skirt_length + edge_chamfer"
+]
+},
+{
+"line": [
+"outer_radius - edge_chamfer",
+"-skirt_length"
+]
+},
+{
+"line": [
+"inner_radius",
+"-skirt_length"
+]
+},
+{
+"line": [
+"inner_radius",
+"crown_height - crown_thickness - 6 mm"
+]
+},
+{
+"arc": [
+"inner_radius - 6 mm",
+"crown_height - crown_thickness"
+],
+"center": [
+"inner_radius - 6 mm",
+"crown_height - crown_thickness - 6 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"crown_height - crown_thickness"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Piston profile",
+"axis": "y",
+"name": "Piston shell"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Pin bosses",
+"radius": "boss_radius",
+"height": "2 * boss_half",
+"position": [
+"0 mm",
+"-boss_half",
+"0 mm"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Piston shell",
+"tool": "Pin bosses",
+"name": "Piston with bosses"
+}
+],
+[
+"feature.block",
+{
+"name": "Rod slot",
+"size": [
+"2 * inner_radius + 2 mm",
+"rod_slot",
+"skirt_length + 40 mm"
+],
+"position": [
+"-inner_radius - 1 mm",
+"-rod_slot / 2",
+"-skirt_length - 10 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Piston with bosses",
+"tool": "Rod slot",
+"name": "Piston slotted"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Pin bore",
+"radius": "pin_bore / 2",
+"height": "2 * outer_radius + 10 mm",
+"position": [
+"0 mm",
+"-outer_radius - 5 mm",
+"0 mm"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Piston slotted",
+"tool": "Pin bore",
+"name": "Piston"
+}
+],
+[
+"sketch.create",
+{
+"name": "Ring profiles",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring profiles",
+"start": [
+"outer_radius - groove_depth + ring_clearance",
+"crown_height - top_land - 0 * (groove_width + land) - (groove_width - ring_width) / 2"
+],
+"segments": [
+{
+"line": [
+"bore / 2 - ring_clearance",
+"crown_height - top_land - 0 * (groove_width + land) - (groove_width - ring_width) / 2"
+]
+},
+{
+"line": [
+"bore / 2 - ring_clearance",
+"(crown_height - top_land - 0 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth + ring_clearance",
+"(crown_height - top_land - 0 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring profiles",
+"start": [
+"outer_radius - groove_depth + ring_clearance",
+"crown_height - top_land - 1 * (groove_width + land) - (groove_width - ring_width) / 2"
+],
+"segments": [
+{
+"line": [
+"bore / 2 - ring_clearance",
+"crown_height - top_land - 1 * (groove_width + land) - (groove_width - ring_width) / 2"
+]
+},
+{
+"line": [
+"bore / 2 - ring_clearance",
+"(crown_height - top_land - 1 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth + ring_clearance",
+"(crown_height - top_land - 1 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring profiles",
+"start": [
+"outer_radius - groove_depth + ring_clearance",
+"crown_height - top_land - 2 * (groove_width + land) - (groove_width - ring_width) / 2"
+],
+"segments": [
+{
+"line": [
+"bore / 2 - ring_clearance",
+"crown_height - top_land - 2 * (groove_width + land) - (groove_width - ring_width) / 2"
+]
+},
+{
+"line": [
+"bore / 2 - ring_clearance",
+"(crown_height - top_land - 2 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth + ring_clearance",
+"(crown_height - top_land - 2 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring profiles",
+"start": [
+"outer_radius - groove_depth + ring_clearance",
+"crown_height - top_land - 3 * (groove_width + land) - (groove_width - ring_width) / 2"
+],
+"segments": [
+{
+"line": [
+"bore / 2 - ring_clearance",
+"crown_height - top_land - 3 * (groove_width + land) - (groove_width - ring_width) / 2"
+]
+},
+{
+"line": [
+"bore / 2 - ring_clearance",
+"(crown_height - top_land - 3 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": [
+"outer_radius - groove_depth + ring_clearance",
+"(crown_height - top_land - 3 * (groove_width + land) - (groove_width - ring_width) / 2) - ring_width"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Ring profiles",
+"axis": "y",
+"name": "Piston rings"
+}
+],
+[
+"material.preset",
+{
+"body": "Piston",
+"preset": "aluminium-brushed",
+"color": "#dfe1e3",
+"metallic": 0.92,
+"roughness": 0.3
+}
+],
+[
+"material.preset",
+{
+"body": "Piston rings",
+"preset": "steel",
+"color": "#3b3f45",
+"metallic": 0.85,
+"roughness": 0.42
+}
+],
+[
+"datum.plane",
+{
+"name": "Wrist",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"(0 mm) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Bore",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Piston outside diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston",
+"axis": "x",
+"eq": "bore - running_clearance",
+"tol": "0.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston shell is hollow",
+"measure": "volume",
+"of": "Piston",
+"max": "3.1416 * outer_radius^2 * (crown_height + skirt_length) * 0.66"
+}
+],
+[
+"assert.add",
+{
+"name": "Four rings are four lumps of ring section",
+"measure": "volume",
+"of": "Piston rings",
+"min": "3.1416 * (bore^2 - (bore - 12 mm)^2) / 4 * ring_width * 2",
+"max": "3.1416 * (bore^2 - (bore - 24 mm)^2) / 4 * ring_width * 4"
+}
+],
+[
+"document.info",
+{
+"title": "Piston",
+"description": "Aluminium piston with four grooves, full-floating pin bosses and its set of rings.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"casting",
+"turning"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -1,0 +1,1287 @@
+[
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore (for the skirt holes)",
+"group": "Crankcase",
+"order": 1,
+"min": "124 mm",
+"max": "136 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "section_cut",
+"expr": "0"
+}
+],
+[
+"variable.publish",
+{
+"name": "section_cut",
+"label": "Cut the front open",
+"description": "Cut this half away at the front to show the rods",
+"group": "Crankcase",
+"order": 2,
+"min": "0",
+"max": "1",
+"step": "1"
+}
+],
+[
+"variable.set",
+{
+"name": "cavity_radius",
+"expr": "176 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pad_height",
+"expr": "224 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "skirt_hole",
+"expr": "bore + 8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_circle",
+"expr": "82 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_hole",
+"expr": "10.4 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_depth",
+"expr": "18 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_bore",
+"expr": "60 mm + 0.1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bearing_face",
+"expr": "62 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_radius",
+"expr": "48 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "boss_end",
+"expr": "128 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hole_radius",
+"expr": "6.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_radius",
+"expr": "6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_circle",
+"expr": "206 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_angle",
+"expr": "360 deg / 14"
+}
+],
+[
+"variable.set",
+{
+"name": "head_radius",
+"expr": "11 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "head_y",
+"expr": "92.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "section_face",
+"expr": "35 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "section_angle",
+"expr": "200 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "section_centre_angle",
+"expr": "60 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_radius",
+"expr": "16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "prism_flat",
+"expr": "pad_height + 2.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_centre",
+"expr": "(prism_flat - corner_radius) / cos(180 deg / 7)"
+}
+],
+[
+"datum.plane",
+{
+"name": "Prism plane",
+"from": "zx",
+"distance": "-12 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Heptagon",
+"plane": "Prism plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Heptagon",
+"start": [
+"(corner_centre * cos((0 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((0 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((0 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((0 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+],
+"segments": [
+{
+"arc": [
+"(corner_centre * cos((0 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((0 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((0 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((0 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((0 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((0 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((1 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((1 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((1 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((1 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((1 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((1 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((1 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((1 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((1 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((1 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((2 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((2 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((2 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((2 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((2 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((2 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((2 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((2 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((2 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((2 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((3 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((3 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((3 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((3 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((3 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((3 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((3 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((3 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((3 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((3 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((4 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((4 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((4 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((4 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((4 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((4 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((4 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((4 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((4 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((4 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((5 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((5 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((5 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((5 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((5 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((5 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((5 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((5 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((5 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((5 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": [
+"(corner_centre * cos((6 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((6 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)",
+"(corner_centre * sin((6 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((6 * 360 deg / 7 + 180 deg / 7) - 180 deg / 7)"
+]
+},
+{
+"arc": [
+"(corner_centre * cos((6 * 360 deg / 7 + 180 deg / 7))) + corner_radius * cos((6 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)",
+"(corner_centre * sin((6 * 360 deg / 7 + 180 deg / 7))) + corner_radius * sin((6 * 360 deg / 7 + 180 deg / 7) + 180 deg / 7)"
+],
+"center": [
+"(corner_centre * cos((6 * 360 deg / 7 + 180 deg / 7)))",
+"(corner_centre * sin((6 * 360 deg / 7 + 180 deg / 7)))"
+],
+"clockwise": false
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Heptagon",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "cavity_radius + 4 mm"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Heptagon",
+"distance": "104 mm",
+"name": "Case prism body"
+}
+],
+[
+"feature.draft",
+{
+"name": "Case prism",
+"faces": [
+"F3:side(e4)",
+"F3:side(e6)",
+"F3:side(e9)",
+"F3:side(e11)",
+"F3:side(e14)",
+"F3:side(e16)",
+"F3:side(e19)",
+"F3:side(e21)",
+"F3:side(e24)",
+"F3:side(e26)",
+"F3:side(e29)",
+"F3:side(e31)",
+"F3:side(e34)",
+"F3:side(e35)"
+],
+"neutral": "zx",
+"angle": "1.2 deg"
+}
+],
+[
+"sketch.create",
+{
+"name": "Half case profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Half case profile",
+"start": [
+"cavity_radius",
+"-12 mm"
+],
+"segments": [
+{
+"line": [
+"cavity_radius + 8 mm",
+"-12 mm"
+]
+},
+{
+"line": [
+"cavity_radius + 6 mm",
+"92 mm"
+]
+},
+{
+"arc": [
+"cavity_radius - 8 mm",
+"106 mm"
+],
+"center": [
+"cavity_radius - 8 mm",
+"92 mm"
+],
+"clockwise": false
+},
+{
+"line": [
+"62 mm",
+"116 mm"
+]
+},
+{
+"arc": [
+"boss_radius + 4 mm",
+"126 mm"
+],
+"center": [
+"62 mm",
+"126 mm"
+],
+"clockwise": true
+},
+{
+"line": [
+"boss_radius + 2 mm",
+"boss_end"
+]
+},
+{
+"line": [
+"journal_bore / 2",
+"boss_end"
+]
+},
+{
+"line": [
+"journal_bore / 2",
+"bearing_face"
+]
+},
+{
+"line": [
+"boss_radius",
+"bearing_face"
+]
+},
+{
+"line": [
+"boss_radius",
+"92 mm"
+]
+},
+{
+"arc": [
+"60 mm",
+"104 mm"
+],
+"center": [
+"60 mm",
+"92 mm"
+],
+"clockwise": true
+},
+{
+"line": [
+"cavity_radius - 13.8 mm",
+"96 mm"
+]
+},
+{
+"arc": [
+"cavity_radius - 1.8 mm",
+"84 mm"
+],
+"center": [
+"cavity_radius - 13.8 mm",
+"84 mm"
+],
+"clockwise": true
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Half case profile",
+"axis": "y",
+"name": "Case shell"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Case shell",
+"tool": "Case prism",
+"name": "Case blended"
+}
+],
+[
+"datum.plane",
+{
+"name": "Rib base",
+"from": "zx",
+"distance": "104 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rib outline",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Rib outline",
+"start": [
+"112 mm",
+"66 mm"
+],
+"segments": [
+{
+"line": [
+"126 mm",
+"66 mm"
+]
+},
+{
+"line": [
+"115 mm",
+"186 mm"
+]
+},
+{
+"line": [
+"104 mm",
+"186 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rib outline",
+"distance": "10 mm",
+"symmetric": true,
+"name": "Rib body"
+}
+],
+[
+"feature.draft",
+{
+"name": "Rib",
+"faces": [
+"F10:startCap(e3,e5,e7,e8)",
+"F10:endCap(e3,e5,e7,e8)"
+],
+"neutral": "Rib base",
+"angle": "1.5 deg"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Rib",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Seven ribs"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Case blended",
+"tool": "Seven ribs",
+"name": "Case ribbed"
+}
+],
+[
+"feature.block",
+{
+"name": "Parting block",
+"size": [
+"700 mm",
+"160 mm",
+"700 mm"
+],
+"position": [
+"-350 mm",
+"-160 mm",
+"-350 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Case ribbed",
+"tool": "Parting block",
+"name": "Case parted"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Skirt bore",
+"radius": "skirt_hole / 2",
+"height": "260 mm",
+"position": [
+"0 mm",
+"0 mm",
+"150 mm"
+]
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Stud hole",
+"radius": "stud_hole / 2",
+"height": "stud_depth + 20 mm",
+"position": [
+"stud_circle * cos(22.5 deg)",
+"stud_circle * sin(22.5 deg)",
+"pad_height - stud_depth"
+]
+}
+],
+[
+"feature.pattern",
+{
+"source": "Stud hole",
+"count": 8,
+"angle": "45 deg",
+"axis": [
+0,
+0,
+1
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Stud holes"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Bolt hole",
+"radius": "hole_radius",
+"height": "boss_end + 40 mm",
+"position": [
+"-bolt_circle * sin(bolt_angle)",
+"-5 mm",
+"bolt_circle * cos(bolt_angle)"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Skirt bore",
+"tool": "Stud holes",
+"name": "Bores with studs"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Bores with studs",
+"tool": "Bolt hole",
+"name": "Bores with bolt hole"
+}
+],
+[
+"feature.block",
+{
+"name": "Seat cut",
+"size": [
+"186 mm",
+"106 mm",
+"40 mm"
+],
+"position": [
+"-93 mm",
+"-6 mm",
+"pad_height"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Bores with bolt hole",
+"tool": "Seat cut",
+"name": "Bores of one cylinder"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Bores of one cylinder",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Bores of seven cylinders"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Case parted",
+"tool": "Bores of seven cylinders",
+"name": "Case bored"
+}
+],
+[
+"datum.plane",
+{
+"name": "Bolt section plane",
+"from": "xy",
+"distance": "bolt_circle * cos(bolt_angle)"
+}
+],
+[
+"datum.axis",
+{
+"name": "Bolt axis",
+"through": [
+[
+"-bolt_circle * sin(bolt_angle)",
+"0 mm",
+"bolt_circle * cos(bolt_angle)"
+],
+[
+"-bolt_circle * sin(bolt_angle)",
+"1 mm",
+"bolt_circle * cos(bolt_angle)"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Through bolt profile",
+"plane": "Bolt section plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Through bolt profile",
+"start": [
+"-bolt_circle * sin(bolt_angle)",
+"-head_y - 9.5 mm"
+],
+"segments": [
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + bolt_radius",
+"-head_y - 9.5 mm"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + bolt_radius",
+"head_y"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + head_radius",
+"head_y"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + head_radius",
+"head_y + 8 mm"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle)",
+"head_y + 8 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Through bolt profile",
+"start": [
+"-bolt_circle * sin(bolt_angle) + bolt_radius + 0.05 mm",
+"-head_y - 8 mm"
+],
+"segments": [
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + head_radius",
+"-head_y - 8 mm"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + head_radius",
+"-head_y"
+]
+},
+{
+"line": [
+"-bolt_circle * sin(bolt_angle) + bolt_radius + 0.05 mm",
+"-head_y"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Through bolt profile",
+"axis": "Bolt axis",
+"name": "Through bolt",
+"when": "section_cut > 0.5"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Through bolt",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Through bolts",
+"when": "section_cut > 0.5"
+}
+],
+[
+"datum.plane",
+{
+"name": "Section plane",
+"from": "zx",
+"distance": "section_face"
+}
+],
+[
+"sketch.create",
+{
+"name": "Section wedge",
+"plane": "Section plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Section wedge",
+"start": [
+"0 mm",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"330 mm * cos(section_centre_angle - section_angle / 2)",
+"330 mm * sin(section_centre_angle - section_angle / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle - section_angle / 2 / 2)",
+"330 mm * sin(section_centre_angle - section_angle / 2 / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle)",
+"330 mm * sin(section_centre_angle)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle + section_angle / 2 / 2)",
+"330 mm * sin(section_centre_angle + section_angle / 2 / 2)"
+]
+},
+{
+"line": [
+"330 mm * cos(section_centre_angle + section_angle / 2)",
+"330 mm * sin(section_centre_angle + section_angle / 2)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Section wedge",
+"distance": "400 mm",
+"name": "Cut wedge",
+"when": "section_cut > 0.5"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Case bored",
+"tool": "Cut wedge",
+"keepTool": true,
+"name": "Crankcase half",
+"when": "section_cut > 0.5"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Through bolts",
+"tool": "Cut wedge",
+"name": "Through bolts cut",
+"when": "section_cut > 0.5"
+}
+],
+[
+"material.preset",
+{
+"body": "Case bored",
+"preset": "steel",
+"color": "#7a7d82",
+"metallic": 0.15,
+"roughness": 0.68
+}
+],
+[
+"material.preset",
+{
+"body": "Crankcase half",
+"preset": "steel",
+"color": "#7a7d82",
+"metallic": 0.15,
+"roughness": 0.68
+}
+],
+[
+"datum.plane",
+{
+"name": "Main axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Engine datum",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Parting",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 1",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(0 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(0 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 2",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(1 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(1 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 3",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(2 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(2 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 4",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(3 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(3 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 5",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(4 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(4 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 6",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(5 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(5 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat 7",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"cos(6 * 360 deg / 7) * 1 mm",
+"0 mm",
+"sin(6 * 360 deg / 7) * 1 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Cast corners of the heptagon release along the pull",
+"measure": "draft",
+"faces": {
+"kind": "face",
+"where": {
+"name": "*F3:side(e19)"
+}
+},
+"direction": "y",
+"min": "1 deg",
+"max": "1.4 deg"
+}
+],
+[
+"document.info",
+{
+"title": "Crankcase half",
+"description": "One half of the cast crankcase, placed twice: a drafted heptagon whose flats are machined as the seven seats, a revolved rear wall, drafted ribs, skirt bores, stud holes and through-bolts; the front half is cut away.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"casting",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

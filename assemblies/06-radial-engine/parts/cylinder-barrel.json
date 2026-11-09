@@ -1,0 +1,1005 @@
+[
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore",
+"group": "Cylinder",
+"order": 1,
+"min": "124 mm",
+"max": "136 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "deck_height",
+"expr": "360 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "deck_height",
+"label": "Deck height",
+"description": "Crank axis to the barrel top",
+"group": "Cylinder",
+"order": 2,
+"min": "300 mm",
+"max": "420 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "open_section",
+"expr": "0"
+}
+],
+[
+"variable.publish",
+{
+"name": "open_section",
+"label": "Open the front half",
+"description": "Cut the barrel open to show the piston",
+"group": "Cylinder",
+"order": 3,
+"min": "0",
+"max": "1",
+"step": "1"
+}
+],
+[
+"variable.set",
+{
+"name": "pad_height",
+"expr": "224 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "wall",
+"expr": "6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "skirt_depth",
+"expr": "36 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "flange_thickness",
+"expr": "11 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "flange_radius",
+"expr": "90 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_depth",
+"expr": "17 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_base",
+"expr": "pad_height + flange_thickness + 8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_top",
+"expr": "deck_height - 10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_count",
+"expr": "16"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_pitch",
+"expr": "(fin_top - fin_base) / (fin_count - 1)"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_thickness",
+"expr": "2.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "barrel_outer",
+"expr": "bore / 2 + wall"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_circle",
+"expr": "82 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_radius",
+"expr": "5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nut_radius",
+"expr": "8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nut_height",
+"expr": "6 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Barrel profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Barrel profile",
+"start": [
+"bore / 2",
+"deck_height"
+],
+"segments": [
+{
+"line": [
+"barrel_outer + 3 mm",
+"deck_height"
+]
+},
+{
+"line": [
+"barrel_outer + 3 mm",
+"deck_height - 3 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"deck_height - 5 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 0 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 0 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 0 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 0 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 1 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 1 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 1 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 1 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 2 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 2 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 2 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 2 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 3 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 3 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 3 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 3 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 4 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 4 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 4 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 4 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 5 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 5 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 5 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 5 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 6 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 6 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 6 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 6 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 7 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 7 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 7 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 7 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 8 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 8 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 8 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 8 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 9 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 9 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 9 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 9 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 10 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 10 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 10 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 10 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 11 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 11 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 11 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 11 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 12 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 12 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 12 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 12 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 13 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 13 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 13 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 13 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 14 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 14 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 14 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 14 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 15 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 15 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer + fin_depth",
+"fin_top - 15 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"barrel_outer",
+"fin_top - 15 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"barrel_outer",
+"pad_height + flange_thickness"
+]
+},
+{
+"line": [
+"flange_radius",
+"pad_height + flange_thickness"
+]
+},
+{
+"line": [
+"flange_radius",
+"pad_height"
+]
+},
+{
+"line": [
+"bore / 2 + wall - 3 mm",
+"pad_height"
+]
+},
+{
+"line": [
+"bore / 2 + wall - 3 mm",
+"pad_height - skirt_depth"
+]
+},
+{
+"line": [
+"bore / 2",
+"pad_height - skirt_depth"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Barrel profile",
+"axis": "y",
+"name": "Barrel"
+}
+],
+[
+"material.preset",
+{
+"body": "Barrel",
+"preset": "steel",
+"color": "#2f3236",
+"metallic": 0.9,
+"roughness": 0.42
+}
+],
+[
+"variable.set",
+{
+"name": "stud_x",
+"expr": "stud_circle * cos(22.5 deg)"
+}
+],
+[
+"variable.set",
+{
+"name": "stud_y",
+"expr": "stud_circle * sin(22.5 deg)"
+}
+],
+[
+"datum.plane",
+{
+"name": "Stud plane",
+"through": [
+[
+"stud_x",
+"stud_y",
+"pad_height"
+],
+[
+"stud_x + cos(22.5 deg) * 1 mm",
+"stud_y + sin(22.5 deg) * 1 mm",
+"pad_height"
+],
+[
+"stud_x",
+"stud_y",
+"pad_height + 1 mm"
+]
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Stud axis",
+"through": [
+[
+"stud_x",
+"stud_y",
+"pad_height"
+],
+[
+"stud_x",
+"stud_y",
+"pad_height + 1 mm"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Stud profile",
+"plane": "Stud plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Stud profile",
+"start": [
+"0 mm",
+"-16 mm"
+],
+"segments": [
+{
+"line": [
+"stud_radius",
+"-16 mm"
+]
+},
+{
+"line": [
+"stud_radius",
+"flange_thickness + 0.02 mm"
+]
+},
+{
+"line": [
+"nut_radius",
+"flange_thickness + 0.02 mm"
+]
+},
+{
+"line": [
+"nut_radius",
+"flange_thickness + nut_height"
+]
+},
+{
+"line": [
+"0 mm",
+"flange_thickness + nut_height"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Stud profile",
+"axis": "Stud axis",
+"name": "Hold-down stud"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Hold-down stud",
+"count": 8,
+"angle": "45 deg",
+"axis": [
+0,
+0,
+1
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Hold-down studs"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Flange hole",
+"radius": "stud_radius + 0.5 mm",
+"height": "flange_thickness + 4 mm",
+"position": [
+"stud_x",
+"stud_y",
+"pad_height - 2 mm"
+]
+}
+],
+[
+"feature.pattern",
+{
+"source": "Flange hole",
+"count": 8,
+"angle": "45 deg",
+"axis": [
+0,
+0,
+1
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Flange holes"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Barrel",
+"tool": "Flange holes",
+"name": "Barrel drilled"
+}
+],
+[
+"material.preset",
+{
+"body": "Hold-down studs",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"feature.block",
+{
+"name": "Section cut block",
+"when": "open_section > 0.5",
+"size": [
+"2 * flange_radius + 20 mm",
+"flange_radius + 10 mm",
+"deck_height + 20 mm"
+],
+"position": [
+"-flange_radius - 10 mm",
+"-flange_radius - 10 mm",
+"100 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Barrel drilled",
+"tool": "Section cut block",
+"keepTool": true,
+"name": "Barrel section",
+"when": "open_section > 0.5"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Hold-down studs",
+"tool": "Section cut block",
+"name": "Hold-down studs opened",
+"when": "open_section > 0.5"
+}
+],
+[
+"material.preset",
+{
+"body": "Barrel section",
+"preset": "steel",
+"color": "#2f3236",
+"metallic": 0.9,
+"roughness": 0.42
+}
+],
+[
+"material.preset",
+{
+"body": "Hold-down studs opened",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"datum.plane",
+{
+"name": "Mount",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Bore",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"1 mm",
+"0 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Head seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"deck_height"
+],
+[
+"1 mm",
+"0 mm",
+"deck_height"
+],
+[
+"0 mm",
+"1 mm",
+"deck_height"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Eight studs and nuts on the flange",
+"measure": "volume",
+"of": {
+"body": "Hold-down studs",
+"follow": true
+},
+"min": "8 * pi * stud_radius^2 * (flange_thickness + 2 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel length",
+"measure": "extent",
+"of": {
+"body": "Barrel",
+"follow": true
+},
+"axis": "z",
+"eq": "deck_height - pad_height + skirt_depth",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Cylinder barrel",
+"description": "Finned forged-steel barrel with a skirt that enters the crankcase; fins machined from the solid.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

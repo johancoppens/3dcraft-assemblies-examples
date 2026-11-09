@@ -1,0 +1,1035 @@
+[
+[
+"variable.set",
+{
+"name": "rod_length",
+"expr": "235 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "rod_length",
+"label": "Rod length",
+"description": "Big end to wrist pin",
+"group": "Master rod",
+"order": 1,
+"min": "190 mm",
+"max": "280 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "knuckle_radius",
+"expr": "72 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "knuckle_radius",
+"label": "Knuckle radius",
+"description": "Centre of the flange to the knuckle pins",
+"group": "Master rod",
+"order": 2,
+"min": "60 mm",
+"max": "90 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "big_bore",
+"expr": "70 mm + 0.1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "wrist_bore",
+"expr": "34 mm + 0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "knuckle_hole",
+"expr": "26 mm + 0.02 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hub_radius",
+"expr": "48 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "flange_radius",
+"expr": "knuckle_radius + 28 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "rod_gap",
+"expr": "34 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate",
+"expr": "13 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "small_eye_radius",
+"expr": "26 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_half",
+"expr": "17 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_end_radius",
+"expr": "22 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_end_z",
+"expr": "hub_radius - 10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_fillet",
+"expr": "20 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shank_width",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_thickness",
+"expr": "9 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "flange_edge",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "half_gap",
+"expr": "rod_gap / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "half_width",
+"expr": "rod_gap / 2 + plate"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_recess",
+"expr": "2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_inner",
+"expr": "knuckle_radius - 16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_outer",
+"expr": "knuckle_radius + 16 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_gap",
+"expr": "0.05 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Big end profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Big end profile",
+"start": [
+"big_bore / 2",
+"-half_width"
+],
+"segments": [
+{
+"line": [
+"plate_inner",
+"-half_width"
+]
+},
+{
+"line": [
+"plate_inner",
+"-half_width + plate_recess"
+]
+},
+{
+"line": [
+"plate_outer",
+"-half_width + plate_recess"
+]
+},
+{
+"line": [
+"plate_outer",
+"-half_width"
+]
+},
+{
+"line": [
+"flange_radius - flange_edge",
+"-half_width"
+]
+},
+{
+"line": [
+"flange_radius",
+"-half_width + flange_edge"
+]
+},
+{
+"line": [
+"flange_radius",
+"-half_gap - flange_edge"
+]
+},
+{
+"line": [
+"flange_radius - flange_edge",
+"-half_gap"
+]
+},
+{
+"line": [
+"hub_radius",
+"-half_gap"
+]
+},
+{
+"line": [
+"hub_radius",
+"half_gap"
+]
+},
+{
+"line": [
+"flange_radius - flange_edge",
+"half_gap"
+]
+},
+{
+"line": [
+"flange_radius",
+"half_gap + flange_edge"
+]
+},
+{
+"line": [
+"flange_radius",
+"half_width - flange_edge"
+]
+},
+{
+"line": [
+"flange_radius - flange_edge",
+"half_width"
+]
+},
+{
+"line": [
+"plate_outer",
+"half_width"
+]
+},
+{
+"line": [
+"plate_outer",
+"half_width - plate_recess"
+]
+},
+{
+"line": [
+"plate_inner",
+"half_width - plate_recess"
+]
+},
+{
+"line": [
+"plate_inner",
+"half_width"
+]
+},
+{
+"line": [
+"big_bore / 2",
+"half_width"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Big end profile",
+"axis": "y",
+"name": "Flanged big end"
+}
+],
+[
+"variable.set",
+{
+"name": "fillet_big_z",
+"expr": "shank_end_z + sqrt((shank_end_radius + shank_fillet)^2 - (shank_half + shank_fillet)^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_big_z",
+"expr": "shank_end_z + (fillet_big_z - shank_end_z) * shank_end_radius / (shank_end_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_big_x",
+"expr": "(shank_half + shank_fillet) * shank_end_radius / (shank_end_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "fillet_small_z",
+"expr": "rod_length - sqrt((small_eye_radius + shank_fillet)^2 - (shank_half + shank_fillet)^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_small_z",
+"expr": "rod_length - (rod_length - fillet_small_z) * small_eye_radius / (small_eye_radius + shank_fillet)"
+}
+],
+[
+"variable.set",
+{
+"name": "tangent_small_x",
+"expr": "(shank_half + shank_fillet) * small_eye_radius / (small_eye_radius + shank_fillet)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Shank outline",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Shank outline",
+"start": [
+"tangent_big_z",
+"tangent_big_x"
+],
+"segments": [
+{
+"arc": [
+"fillet_big_z",
+"shank_half"
+],
+"center": [
+"fillet_big_z",
+"shank_half + shank_fillet"
+],
+"clockwise": false
+},
+{
+"line": [
+"fillet_small_z",
+"shank_half"
+]
+},
+{
+"arc": [
+"tangent_small_z",
+"tangent_small_x"
+],
+"center": [
+"fillet_small_z",
+"shank_half + shank_fillet"
+],
+"clockwise": false
+},
+{
+"arc": [
+"tangent_small_z",
+"-tangent_small_x"
+],
+"center": [
+"rod_length",
+"0 mm"
+],
+"clockwise": true
+},
+{
+"arc": [
+"fillet_small_z",
+"-shank_half"
+],
+"center": [
+"fillet_small_z",
+"-shank_half - shank_fillet"
+],
+"clockwise": false
+},
+{
+"line": [
+"fillet_big_z",
+"-shank_half"
+]
+},
+{
+"arc": [
+"tangent_big_z",
+"-tangent_big_x"
+],
+"center": [
+"fillet_big_z",
+"-shank_half - shank_fillet"
+],
+"clockwise": false
+},
+{
+"arc": "start",
+"center": [
+"shank_end_z",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Shank outline",
+"distance": "shank_width",
+"symmetric": true,
+"name": "Shank blank"
+}
+],
+[
+"feature.chamfer",
+{
+"name": "Shank rounded",
+"distance": "1.5 mm",
+"edges": [
+[
+"F4:side(e4)",
+"F4:startCap(e4,e6,e9,e12,e15,e17,e20,e22)"
+],
+[
+"F4:side(e4)",
+"F4:endCap(e4,e6,e9,e12,e15,e17,e20,e22)"
+]
+],
+"chain": true
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Flanged big end",
+"tool": "Shank rounded",
+"name": "Rod joined"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bores",
+"plane": "zx"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"rod_length",
+"0 mm"
+],
+"radius": "wrist_bore / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "big_bore / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(1 * 360 deg / 7)",
+"-knuckle_radius * sin(1 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(2 * 360 deg / 7)",
+"-knuckle_radius * sin(2 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(3 * 360 deg / 7)",
+"-knuckle_radius * sin(3 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(4 * 360 deg / 7)",
+"-knuckle_radius * sin(4 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(5 * 360 deg / 7)",
+"-knuckle_radius * sin(5 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"knuckle_radius * cos(6 * 360 deg / 7)",
+"-knuckle_radius * sin(6 * 360 deg / 7)"
+],
+"radius": "knuckle_hole / 2"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bores",
+"throughAll": true,
+"symmetric": true,
+"cut": "Rod joined",
+"name": "Rod bored"
+}
+],
+[
+"datum.plane",
+{
+"name": "Pocket plus face",
+"from": "zx",
+"distance": "(shank_width / 2)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pocket plus",
+"plane": "Pocket plus face"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pocket plus",
+"start": [
+"flange_radius + 8 mm",
+"shank_half - 5 mm"
+],
+"segments": [
+{
+"line": [
+"fillet_small_z - 6 mm",
+"shank_half - 5 mm"
+]
+},
+{
+"line": [
+"fillet_small_z - 6 mm",
+"-(shank_half - 5 mm)"
+]
+},
+{
+"line": [
+"flange_radius + 8 mm",
+"-(shank_half - 5 mm)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Pocket plus",
+"distance": "(shank_width - web_thickness) / 2",
+"reversed": true,
+"cut": "Rod bored",
+"name": "Rod pocketed"
+}
+],
+[
+"datum.plane",
+{
+"name": "Pocket minus face",
+"from": "zx",
+"distance": "-(shank_width / 2)"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pocket minus",
+"plane": "Pocket minus face"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pocket minus",
+"start": [
+"flange_radius + 8 mm",
+"shank_half - 5 mm"
+],
+"segments": [
+{
+"line": [
+"fillet_small_z - 6 mm",
+"shank_half - 5 mm"
+]
+},
+{
+"line": [
+"fillet_small_z - 6 mm",
+"-(shank_half - 5 mm)"
+]
+},
+{
+"line": [
+"flange_radius + 8 mm",
+"-(shank_half - 5 mm)"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Pocket minus",
+"distance": "(shank_width - web_thickness) / 2",
+"reversed": false,
+"cut": "Rod pocketed",
+"name": "Master rod"
+}
+],
+[
+"sketch.create",
+{
+"name": "Lock plate profiles",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Lock plate profiles",
+"start": [
+"plate_inner + plate_gap",
+"-half_width + plate_recess - plate_gap"
+],
+"segments": [
+{
+"line": [
+"plate_outer - plate_gap",
+"-half_width + plate_recess - plate_gap"
+]
+},
+{
+"line": [
+"plate_outer - plate_gap",
+"-half_width + plate_gap"
+]
+},
+{
+"line": [
+"plate_inner + plate_gap",
+"-half_width + plate_gap"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Lock plate profiles",
+"start": [
+"plate_inner + plate_gap",
+"half_width - plate_recess + plate_gap"
+],
+"segments": [
+{
+"line": [
+"plate_outer - plate_gap",
+"half_width - plate_recess + plate_gap"
+]
+},
+{
+"line": [
+"plate_outer - plate_gap",
+"half_width - plate_gap"
+]
+},
+{
+"line": [
+"plate_inner + plate_gap",
+"half_width - plate_gap"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Lock plate profiles",
+"axis": "y",
+"name": "Lock plates"
+}
+],
+[
+"material.preset",
+{
+"body": "Lock plates",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"material.preset",
+{
+"body": "Master rod",
+"preset": "steel",
+"color": "#dcdfe2",
+"metallic": 0.97,
+"roughness": 0.2
+}
+],
+[
+"datum.plane",
+{
+"name": "Big end",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"(0 mm) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Wrist",
+"through": [
+[
+"0 mm",
+"0 mm",
+"rod_length"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"rod_length"
+],
+[
+"0 mm",
+"0 mm",
+"(rod_length) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 2",
+"through": [
+[
+"-knuckle_radius * sin(1 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(1 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(1 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(1 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(1 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(1 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 3",
+"through": [
+[
+"-knuckle_radius * sin(2 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(2 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(2 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(2 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(2 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(2 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 4",
+"through": [
+[
+"-knuckle_radius * sin(3 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(3 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(3 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(3 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(3 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(3 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 5",
+"through": [
+[
+"-knuckle_radius * sin(4 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(4 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(4 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(4 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(4 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(4 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 6",
+"through": [
+[
+"-knuckle_radius * sin(5 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(5 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(5 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(5 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(5 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(5 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Knuckle 7",
+"through": [
+[
+"-knuckle_radius * sin(6 * 360 deg / 7)",
+"0 mm",
+"knuckle_radius * cos(6 * 360 deg / 7)"
+],
+[
+"(-knuckle_radius * sin(6 * 360 deg / 7)) + 1 mm",
+"0 mm",
+"knuckle_radius * cos(6 * 360 deg / 7)"
+],
+[
+"-knuckle_radius * sin(6 * 360 deg / 7)",
+"0 mm",
+"(knuckle_radius * cos(6 * 360 deg / 7)) - 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Plates are drilled and pocketed",
+"measure": "volume",
+"of": "Master rod",
+"max": "pi * flange_radius^2 * 2 * plate + pi * hub_radius^2 * rod_gap + 2 * shank_half * shank_width * rod_length"
+}
+],
+[
+"document.info",
+{
+"title": "Master rod",
+"description": "The master rod: a flanged big end carrying six knuckle pins and an H-section shank to the wrist pin.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -1,0 +1,166 @@
+[
+[
+"variable.set",
+{
+"name": "pin_diameter",
+"expr": "26 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_length",
+"expr": "55.8 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "pin_length",
+"label": "Pin length",
+"description": "Across the two flange plates of the master rod, less the lock-plate recesses",
+"group": "Knuckle pin",
+"order": 1,
+"min": "50 mm",
+"max": "80 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "end_chamfer",
+"expr": "1.5 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pin profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pin profile",
+"start": [
+"0 mm",
+"-pin_length / 2"
+],
+"segments": [
+{
+"line": [
+"pin_diameter / 2 - end_chamfer",
+"-pin_length / 2"
+]
+},
+{
+"line": [
+"pin_diameter / 2",
+"-pin_length / 2 + end_chamfer"
+]
+},
+{
+"line": [
+"pin_diameter / 2",
+"pin_length / 2 - end_chamfer"
+]
+},
+{
+"line": [
+"pin_diameter / 2 - end_chamfer",
+"pin_length / 2"
+]
+},
+{
+"line": [
+"0 mm",
+"pin_length / 2"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Pin profile",
+"axis": "y",
+"name": "Knuckle pin"
+}
+],
+[
+"datum.plane",
+{
+"name": "Axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"(0 mm) + 1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"(0 mm) - 1 mm"
+]
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Knuckle pin",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.26
+}
+],
+[
+"assert.add",
+{
+"name": "Pin diameter is the stated size",
+"measure": "extent",
+"of": "Knuckle pin",
+"axis": "x",
+"eq": "pin_diameter",
+"tol": "0.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Pin length is the stated size",
+"measure": "extent",
+"of": "Knuckle pin",
+"axis": "y",
+"eq": "pin_length",
+"tol": "0.001"
+}
+],
+[
+"document.info",
+{
+"title": "Knuckle pin",
+"description": "Hardened steel knuckle pin: holds one articulated rod to the master rod flange.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"turning"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

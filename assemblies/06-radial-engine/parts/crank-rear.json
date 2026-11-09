@@ -1,0 +1,720 @@
+[
+[
+"variable.set",
+{
+"name": "crank_radius",
+"expr": "58.75 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "crank_radius",
+"label": "Crank radius",
+"description": "Half the stroke",
+"group": "Crankshaft",
+"order": 1,
+"min": "50 mm",
+"max": "68 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_radius",
+"expr": "35 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "spigot_radius",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_length",
+"expr": "63.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_radius",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_thickness",
+"expr": "28 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_inner",
+"expr": "pin_length / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "web_outer",
+"expr": "web_inner + web_thickness"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_length",
+"expr": "42 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "journal_end",
+"expr": "web_outer + journal_length"
+}
+],
+[
+"variable.set",
+{
+"name": "web_pin_radius",
+"expr": "45 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "web_fillet",
+"expr": "2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_fillet",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cw_radius",
+"expr": "125 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cw_half",
+"expr": "72 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "edge",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "end_z",
+"expr": "cw_radius * cos(180 deg - cw_half)"
+}
+],
+[
+"variable.set",
+{
+"name": "end_x",
+"expr": "cw_radius * sin(180 deg - cw_half)"
+}
+],
+[
+"variable.set",
+{
+"name": "to_end",
+"expr": "hypot(end_z - crank_radius, end_x)"
+}
+],
+[
+"variable.set",
+{
+"name": "end_ang",
+"expr": "atan2(end_x, end_z - crank_radius)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_ang",
+"expr": "end_ang - acos(web_pin_radius / to_end)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_z",
+"expr": "crank_radius + web_pin_radius * cos(tan_ang)"
+}
+],
+[
+"variable.set",
+{
+"name": "tan_x",
+"expr": "web_pin_radius * sin(tan_ang)"
+}
+],
+[
+"variable.set",
+{
+"name": "tail_radius",
+"expr": "24 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tail_length",
+"expr": "50 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tail_end",
+"expr": "journal_end + tail_length"
+}
+],
+[
+"variable.set",
+{
+"name": "spigot_bore",
+"expr": "2 * spigot_radius + 0.04 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "slit_half",
+"expr": "1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "slit_start",
+"expr": "crank_radius + sqrt((spigot_bore / 2)^2 - slit_half^2)"
+}
+],
+[
+"variable.set",
+{
+"name": "ear_half",
+"expr": "36 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ear_low",
+"expr": "crank_radius + 24 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "ear_high",
+"expr": "crank_radius + 46 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_y",
+"expr": "web_inner + web_thickness / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_z",
+"expr": "crank_radius + 37 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_radius",
+"expr": "5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bolt_head",
+"expr": "9 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rear stub profile",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Rear stub profile",
+"start": [
+"0 mm",
+"tail_end"
+],
+"segments": [
+{
+"line": [
+"tail_radius - edge",
+"tail_end"
+]
+},
+{
+"line": [
+"tail_radius",
+"tail_end - edge"
+]
+},
+{
+"line": [
+"tail_radius",
+"journal_end"
+]
+},
+{
+"line": [
+"journal_radius",
+"journal_end - 3 mm"
+]
+},
+{
+"line": [
+"journal_radius",
+"web_outer + web_fillet"
+]
+},
+{
+"arc": [
+"journal_radius + web_fillet",
+"web_outer"
+],
+"center": [
+"journal_radius + web_fillet",
+"web_outer + web_fillet"
+],
+"clockwise": false
+},
+{
+"line": [
+"journal_radius + web_fillet",
+"web_outer - 10 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"web_outer - 10 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Rear stub profile",
+"axis": "y",
+"name": "Rear stub"
+}
+],
+[
+"datum.plane",
+{
+"name": "Rear web plane",
+"from": "zx",
+"distance": "web_inner"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rear web outline",
+"plane": "Rear web plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Rear web outline",
+"start": [
+"tan_z",
+"tan_x"
+],
+"segments": [
+{
+"line": [
+"end_z",
+"end_x"
+]
+},
+{
+"arc": [
+"end_z",
+"-end_x"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": false
+},
+{
+"line": [
+"tan_z",
+"-tan_x"
+]
+},
+{
+"arc": "start",
+"center": [
+"crank_radius",
+"0 mm"
+],
+"clockwise": false
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rear web outline",
+"distance": "web_thickness",
+"name": "Rear web"
+}
+],
+[
+"feature.block",
+{
+"name": "Clamp ears",
+"size": [
+"2 * ear_half",
+"web_thickness",
+"ear_high - ear_low"
+],
+"position": [
+"-ear_half",
+"web_inner",
+"ear_low"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Rear web",
+"tool": "Clamp ears",
+"name": "Web with ears"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Rear stub",
+"tool": "Web with ears",
+"name": "Rear stub and web"
+}
+],
+[
+"sketch.create",
+{
+"name": "Spigot bore and slit",
+"plane": "Rear web plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Spigot bore and slit",
+"start": [
+"slit_start",
+"slit_half"
+],
+"segments": [
+{
+"line": [
+"ear_high + 1 mm",
+"slit_half"
+]
+},
+{
+"line": [
+"ear_high + 1 mm",
+"-slit_half"
+]
+},
+{
+"line": [
+"slit_start",
+"-slit_half"
+]
+},
+{
+"arc": "start",
+"center": [
+"crank_radius",
+"0 mm"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Spigot bore and slit",
+"distance": "web_thickness",
+"cut": "Rear stub and web",
+"name": "Web clamped"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Bolt hole",
+"radius": "bolt_radius + 0.2 mm",
+"height": "2 * ear_half + 2 mm",
+"position": [
+"-ear_half - 1 mm",
+"bolt_y",
+"bolt_z"
+],
+"axis": [
+1,
+0,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Web clamped",
+"tool": "Bolt hole",
+"name": "Crank rear"
+}
+],
+[
+"datum.plane",
+{
+"name": "Bolt plane",
+"from": "xy",
+"distance": "bolt_z"
+}
+],
+[
+"datum.axis",
+{
+"name": "Bolt axis",
+"through": [
+[
+"0 mm",
+"bolt_y",
+"bolt_z"
+],
+[
+"1 mm",
+"bolt_y",
+"bolt_z"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp bolt profile",
+"plane": "Bolt plane"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Clamp bolt profile",
+"start": [
+"-ear_half - 9 mm",
+"bolt_y"
+],
+"segments": [
+{
+"line": [
+"-ear_half - 9 mm",
+"bolt_y + bolt_head"
+]
+},
+{
+"line": [
+"-ear_half",
+"bolt_y + bolt_head"
+]
+},
+{
+"line": [
+"-ear_half",
+"bolt_y + bolt_radius"
+]
+},
+{
+"line": [
+"ear_half + 8.5 mm",
+"bolt_y + bolt_radius"
+]
+},
+{
+"line": [
+"ear_half + 8.5 mm",
+"bolt_y"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Clamp bolt profile",
+"start": [
+"ear_half",
+"bolt_y + bolt_radius + 0.05 mm"
+],
+"segments": [
+{
+"line": [
+"ear_half",
+"bolt_y + bolt_head"
+]
+},
+{
+"line": [
+"ear_half + 9 mm",
+"bolt_y + bolt_head"
+]
+},
+{
+"line": [
+"ear_half + 9 mm",
+"bolt_y + bolt_radius + 0.05 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Clamp bolt profile",
+"axis": "Bolt axis",
+"name": "Clamp bolt"
+}
+],
+[
+"material.preset",
+{
+"body": "Crank rear",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.95,
+"roughness": 0.28
+}
+],
+[
+"material.preset",
+{
+"body": "Clamp bolt",
+"preset": "steel",
+"color": "#44484e",
+"metallic": 0.75,
+"roughness": 0.45
+}
+],
+[
+"datum.plane",
+{
+"name": "Main axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"1 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Web reaches past the crank pin by the ears",
+"measure": "boxMax",
+"of": "Crank rear",
+"axis": "z",
+"eq": "ear_high",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Crank, rear half",
+"description": "Rear half of the built-up crankshaft: tail, journal and a web that clamps the crank pin spigot with one bolt.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"forging",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

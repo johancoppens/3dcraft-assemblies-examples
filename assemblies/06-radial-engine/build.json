@@ -1,0 +1,2543 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "t",
+"expr": "0.1"
+}
+],
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stroke",
+"expr": "117.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "rod_ratio",
+"expr": "4"
+}
+],
+[
+"variable.set",
+{
+"name": "start_angle",
+"expr": "0 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "angle_step",
+"expr": "360 deg / 7"
+}
+],
+[
+"variable.set",
+{
+"name": "crank_radius",
+"expr": "stroke / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "rod_length",
+"expr": "rod_ratio * crank_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "knuckle_radius",
+"expr": "72 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "link_length",
+"expr": "rod_length - knuckle_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "crown_height",
+"expr": "64 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "head_gap",
+"expr": "3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "dome_depth",
+"expr": "41.7 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "deck_height",
+"expr": "crank_radius + rod_length + crown_height + head_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "crank_angle",
+"expr": "start_angle + 360 deg * t"
+}
+],
+[
+"variable.set",
+{
+"name": "master_cos",
+"expr": "sqrt(rod_length^2 - (crank_radius * sin(crank_angle))^2) / rod_length"
+}
+],
+[
+"variable.set",
+{
+"name": "master_sin",
+"expr": "-crank_radius * sin(crank_angle) / rod_length"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore (the pistons, barrels and heads follow it)",
+"group": "Engine",
+"order": 1,
+"min": "126 mm",
+"max": "134 mm",
+"step": "1 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "stroke",
+"label": "Stroke",
+"description": "Crank throw twice over",
+"group": "Engine",
+"order": 2,
+"min": "116 mm",
+"max": "122 mm",
+"step": "0.5 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "rod_ratio",
+"label": "Rod ratio",
+"description": "Master rod length over the crank radius",
+"group": "Engine",
+"order": 3,
+"min": "3.95",
+"max": "4.2",
+"step": "0.01"
+}
+],
+[
+"variable.publish",
+{
+"name": "start_angle",
+"label": "Start angle",
+"description": "Where the crank stands when t is 0",
+"group": "Engine",
+"order": 4,
+"min": "0 deg",
+"max": "355 deg",
+"step": "5 deg"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/crankcase.3dcraft",
+"name": "Crankcase rear",
+"params": {
+"bore": "bore",
+"section_cut": "0"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/crankcase.3dcraft",
+"name": "Crankcase front",
+"params": {
+"bore": "bore",
+"section_cut": "1"
+},
+"rotation": [
+0,
+0,
+180
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/crank-front.3dcraft",
+"name": "Crank front",
+"params": {
+"crank_radius": "crank_radius"
+},
+"rotation": [
+0,
+-36.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/crank-rear.3dcraft",
+"name": "Crank rear",
+"params": {
+"crank_radius": "crank_radius"
+},
+"rotation": [
+0,
+-36.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/propeller-hub.3dcraft",
+"name": "Propeller hub",
+"rotation": [
+0,
+-36.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/master-rod.3dcraft",
+"name": "Master rod",
+"params": {
+"rod_length": "rod_length",
+"knuckle_radius": "knuckle_radius"
+},
+"position": [
+-34.5324,
+0.0,
+47.5297
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[2]",
+"position": [
+-83.6166,
+0.0,
+100.2056
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[2]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+-83.6166,
+0.0,
+100.2056
+],
+"rotation": [
+0,
+-60.6817,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[3]",
+"position": [
+-106.3195,
+0.0,
+41.997
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[3]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+-106.3195,
+0.0,
+41.997
+],
+"rotation": [
+0,
+-126.2063,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[4]",
+"position": [
+-74.9653,
+0.0,
+-12.0453
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[4]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+-74.9653,
+0.0,
+-12.0453
+],
+"rotation": [
+0,
+-176.762,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[5]",
+"position": [
+-13.1642,
+0.0,
+-21.2264
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[5]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+-13.1642,
+0.0,
+-21.2264
+],
+"rotation": [
+0,
+146.8585,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[6]",
+"position": [
+32.5461,
+0.0,
+21.3673
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[6]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+32.5461,
+0.0,
+21.3673
+],
+"rotation": [
+0,
+112.7747,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/knuckle-pin.3dcraft",
+"name": "Knuckle pin[7]",
+"position": [
+27.745,
+0.0,
+83.6618
+],
+"rotation": [
+0,
+8.45,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/link-rod.3dcraft",
+"name": "Link rod[7]",
+"params": {
+"link_length": "link_length"
+},
+"position": [
+27.745,
+0.0,
+83.6618
+],
+"rotation": [
+0,
+68.5956,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[1]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "0"
+},
+"rotation": [
+0,
+-0.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[1]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+-0.0,
+0,
+279.9787
+],
+"rotation": [
+0,
+-0.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[1]",
+"position": [
+-0.0,
+0,
+279.9787
+],
+"rotation": [
+0,
+-0.0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[2]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "1"
+},
+"rotation": [
+0,
+-51.4286,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[2]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+-225.7384,
+0,
+180.0203
+],
+"rotation": [
+0,
+-51.4286,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[2]",
+"position": [
+-225.7384,
+0,
+180.0203
+],
+"rotation": [
+0,
+-51.4286,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[3]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "1"
+},
+"rotation": [
+0,
+-102.8571,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[3]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+-237.8434,
+0,
+-54.2862
+],
+"rotation": [
+0,
+-102.8571,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[3]",
+"position": [
+-237.8434,
+0,
+-54.2862
+],
+"rotation": [
+0,
+-102.8571,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[4]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "0"
+},
+"rotation": [
+0,
+-154.2857,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[4]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+-84.172,
+0,
+-174.785
+],
+"rotation": [
+0,
+-154.2857,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[4]",
+"position": [
+-84.172,
+0,
+-174.785
+],
+"rotation": [
+0,
+-154.2857,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[5]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "0"
+},
+"rotation": [
+0,
+-205.7143,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[5]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+75.9492,
+0,
+-157.7101
+],
+"rotation": [
+0,
+-205.7143,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[5]",
+"position": [
+75.9492,
+0,
+-157.7101
+],
+"rotation": [
+0,
+-205.7143,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[6]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "0"
+},
+"rotation": [
+0,
+-257.1429,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[6]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+182.8376,
+0,
+-41.7315
+],
+"rotation": [
+0,
+-257.1429,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[6]",
+"position": [
+182.8376,
+0,
+-41.7315
+],
+"rotation": [
+0,
+-257.1429,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/cylinder.3dcraftasm",
+"name": "Cylinder[7]",
+"params": {
+"bore": "bore",
+"deck_height": "deck_height",
+"dome_depth": "dome_depth",
+"open_section": "0"
+},
+"rotation": [
+0,
+-308.5714,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/piston.3dcraft",
+"name": "Piston[7]",
+"params": {
+"bore": "bore",
+"crown_height": "crown_height"
+},
+"position": [
+179.5025,
+0,
+143.1485
+],
+"rotation": [
+0,
+-308.5714,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/wrist-pin.3dcraft",
+"name": "Wrist pin[7]",
+"position": [
+179.5025,
+0,
+143.1485
+],
+"rotation": [
+0,
+-308.5714,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Engine_datum",
+"a": "world/xy",
+"b": "Crankcase rear/Engine datum",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Case_parting",
+"a": "Crankcase rear/Parting",
+"b": "Crankcase front/Parting",
+"offset": "-0.05 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Crank_drive",
+"a": "Crankcase rear/Main axis",
+"b": "Crank front/Main axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Crank_clamp",
+"a": "Crank front/Main axis",
+"b": "Crank rear/Main axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Hub_on_nose",
+"a": "Crank front/Main axis",
+"b": "Propeller hub/Crank seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Big_end",
+"a": "Crank front/Crank pin",
+"b": "Master rod/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_2",
+"a": "Master rod/Knuckle 2",
+"b": "Knuckle pin[2]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_2",
+"a": "Knuckle pin[2]/Axis",
+"b": "Link rod[2]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_3",
+"a": "Master rod/Knuckle 3",
+"b": "Knuckle pin[3]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_3",
+"a": "Knuckle pin[3]/Axis",
+"b": "Link rod[3]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_4",
+"a": "Master rod/Knuckle 4",
+"b": "Knuckle pin[4]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_4",
+"a": "Knuckle pin[4]/Axis",
+"b": "Link rod[4]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_5",
+"a": "Master rod/Knuckle 5",
+"b": "Knuckle pin[5]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_5",
+"a": "Knuckle pin[5]/Axis",
+"b": "Link rod[5]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_6",
+"a": "Master rod/Knuckle 6",
+"b": "Knuckle pin[6]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_6",
+"a": "Knuckle pin[6]/Axis",
+"b": "Link rod[6]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Knuckle_7",
+"a": "Master rod/Knuckle 7",
+"b": "Knuckle pin[7]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Link_7",
+"a": "Knuckle pin[7]/Axis",
+"b": "Link rod[7]/Big end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_1",
+"a": "Crankcase rear/Seat 1",
+"b": "Cylinder[1]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_1",
+"a": "Cylinder[1]/Barrel/Bore",
+"b": "Piston[1]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_1",
+"a": "Piston[1]/Wrist",
+"b": "Wrist pin[1]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_1",
+"a": "Piston[1]/Wrist",
+"b": "Master rod/Wrist",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_2",
+"a": "Crankcase rear/Seat 2",
+"b": "Cylinder[2]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_2",
+"a": "Cylinder[2]/Barrel/Bore",
+"b": "Piston[2]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_2",
+"a": "Piston[2]/Wrist",
+"b": "Wrist pin[2]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_2",
+"a": "Piston[2]/Wrist",
+"b": "Link rod[2]/Small end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_3",
+"a": "Crankcase rear/Seat 3",
+"b": "Cylinder[3]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_3",
+"a": "Cylinder[3]/Barrel/Bore",
+"b": "Piston[3]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_3",
+"a": "Piston[3]/Wrist",
+"b": "Wrist pin[3]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_3",
+"a": "Piston[3]/Wrist",
+"b": "Link rod[3]/Small end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_4",
+"a": "Crankcase rear/Seat 4",
+"b": "Cylinder[4]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_4",
+"a": "Cylinder[4]/Barrel/Bore",
+"b": "Piston[4]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_4",
+"a": "Piston[4]/Wrist",
+"b": "Wrist pin[4]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_4",
+"a": "Piston[4]/Wrist",
+"b": "Link rod[4]/Small end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_5",
+"a": "Crankcase rear/Seat 5",
+"b": "Cylinder[5]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_5",
+"a": "Cylinder[5]/Barrel/Bore",
+"b": "Piston[5]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_5",
+"a": "Piston[5]/Wrist",
+"b": "Wrist pin[5]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_5",
+"a": "Piston[5]/Wrist",
+"b": "Link rod[5]/Small end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_6",
+"a": "Crankcase rear/Seat 6",
+"b": "Cylinder[6]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_6",
+"a": "Cylinder[6]/Barrel/Bore",
+"b": "Piston[6]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_6",
+"a": "Piston[6]/Wrist",
+"b": "Wrist pin[6]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_6",
+"a": "Piston[6]/Wrist",
+"b": "Link rod[6]/Small end",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cylinder_7",
+"a": "Crankcase rear/Seat 7",
+"b": "Cylinder[7]/Barrel/Mount",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Bore_7",
+"a": "Cylinder[7]/Barrel/Bore",
+"b": "Piston[7]/Bore",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Pin_7",
+"a": "Piston[7]/Wrist",
+"b": "Wrist pin[7]/Axis",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Wrist_7",
+"a": "Piston[7]/Wrist",
+"b": "Link rod[7]/Small end",
+"flip": true
+}
+],
+[
+"variable.set",
+{
+"name": "Crank_drive_angle",
+"expr": "crank_angle"
+}
+],
+[
+"table.set",
+{
+"name": "independent",
+"columns": [
+"row",
+{
+"name": "tdc",
+"unit": "mm"
+},
+{
+"name": "bdc",
+"unit": "mm"
+},
+{
+"name": "theta_tdc",
+"unit": "deg"
+},
+{
+"name": "theta_bdc",
+"unit": "deg"
+}
+],
+"rows": [
+[
+"1",
+293.75,
+176.25,
+0.0,
+180.0
+],
+[
+"2",
+291.7777,
+174.2149,
+52.95,
+229.13
+],
+[
+"3",
+291.0209,
+172.4064,
+108.56,
+272.43
+],
+[
+"4",
+293.2877,
+175.0219,
+157.48,
+321.63
+],
+[
+"5",
+293.2877,
+175.0219,
+202.52,
+38.37
+],
+[
+"6",
+291.0209,
+172.4064,
+251.44,
+87.58
+],
+[
+"7",
+291.7777,
+174.2149,
+307.05,
+130.87
+]
+]
+}
+],
+[
+"table.set",
+{
+"name": "firing",
+"columns": [
+"row",
+"slot"
+],
+"rows": [
+[
+"1",
+0
+],
+[
+"2",
+4
+],
+[
+"3",
+1
+],
+[
+"4",
+5
+],
+[
+"5",
+2
+],
+[
+"6",
+6
+],
+[
+"7",
+3
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "at_defaults",
+"expr": "if(abs(stroke - 117.5 mm) < 0.001 mm && abs(rod_ratio - 4) < 0.0001, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "sample_half",
+"expr": "360 deg / 144"
+}
+],
+[
+"variable.set",
+{
+"name": "firing_interval",
+"expr": "720 deg / 7"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_1",
+"eq": "crank_radius * cos(crank_angle) + rod_length * master_cos",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_2",
+"eq": "(crank_radius * cos(crank_angle - 1 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 1 * angle_step) + master_sin * sin(crank_angle - 1 * angle_step)) + (crank_radius * cos(crank_angle - 1 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_3",
+"eq": "(crank_radius * cos(crank_angle - 2 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 2 * angle_step) + master_sin * sin(crank_angle - 2 * angle_step)) + (crank_radius * cos(crank_angle - 2 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_4",
+"eq": "(crank_radius * cos(crank_angle - 3 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 3 * angle_step) + master_sin * sin(crank_angle - 3 * angle_step)) + (crank_radius * cos(crank_angle - 3 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_5",
+"eq": "(crank_radius * cos(crank_angle - 4 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 4 * angle_step) + master_sin * sin(crank_angle - 4 * angle_step)) + (crank_radius * cos(crank_angle - 4 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_6",
+"eq": "(crank_radius * cos(crank_angle - 5 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 5 * angle_step) + master_sin * sin(crank_angle - 5 * angle_step)) + (crank_radius * cos(crank_angle - 5 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 follows the closed form",
+"measure": "jointDistance",
+"mate": "Bore_7",
+"eq": "(crank_radius * cos(crank_angle - 6 * angle_step) + knuckle_radius * master_cos) + sqrt(link_length^2 - crank_radius^2 - knuckle_radius^2 - 2 * crank_radius * knuckle_radius * (master_cos * cos(crank_angle - 6 * angle_step) + master_sin * sin(crank_angle - 6 * angle_step)) + (crank_radius * cos(crank_angle - 6 * angle_step) + knuckle_radius * master_cos)^2)",
+"tol": "0.02 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_1",
+"expr": "if(abs(mod(crank_angle - independent[\"1\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_1",
+"expr": "if(abs(mod(crank_angle - independent[\"1\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_1",
+"min": "if(at_defaults == 1, independent[\"1\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"1\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_1",
+"min": "if(at_defaults == 1 && near_tdc_1 == 1, independent[\"1\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_1 == 1, independent[\"1\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_2",
+"expr": "if(abs(mod(crank_angle - independent[\"2\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_2",
+"expr": "if(abs(mod(crank_angle - independent[\"2\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_2",
+"min": "if(at_defaults == 1, independent[\"2\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"2\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_2",
+"min": "if(at_defaults == 1 && near_tdc_2 == 1, independent[\"2\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_2 == 1, independent[\"2\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_3",
+"expr": "if(abs(mod(crank_angle - independent[\"3\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_3",
+"expr": "if(abs(mod(crank_angle - independent[\"3\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_3",
+"min": "if(at_defaults == 1, independent[\"3\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"3\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_3",
+"min": "if(at_defaults == 1 && near_tdc_3 == 1, independent[\"3\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_3 == 1, independent[\"3\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_4",
+"expr": "if(abs(mod(crank_angle - independent[\"4\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_4",
+"expr": "if(abs(mod(crank_angle - independent[\"4\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_4",
+"min": "if(at_defaults == 1, independent[\"4\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"4\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_4",
+"min": "if(at_defaults == 1 && near_tdc_4 == 1, independent[\"4\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_4 == 1, independent[\"4\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_5",
+"expr": "if(abs(mod(crank_angle - independent[\"5\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_5",
+"expr": "if(abs(mod(crank_angle - independent[\"5\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_5",
+"min": "if(at_defaults == 1, independent[\"5\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"5\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_5",
+"min": "if(at_defaults == 1 && near_tdc_5 == 1, independent[\"5\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_5 == 1, independent[\"5\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_6",
+"expr": "if(abs(mod(crank_angle - independent[\"6\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_6",
+"expr": "if(abs(mod(crank_angle - independent[\"6\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_6",
+"min": "if(at_defaults == 1, independent[\"6\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"6\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_6",
+"min": "if(at_defaults == 1 && near_tdc_6 == 1, independent[\"6\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_6 == 1, independent[\"6\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_tdc_7",
+"expr": "if(abs(mod(crank_angle - independent[\"7\"].theta_tdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"variable.set",
+{
+"name": "near_bdc_7",
+"expr": "if(abs(mod(crank_angle - independent[\"7\"].theta_bdc + 180 deg, 360 deg) - 180 deg) < sample_half, 1, 0)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 stays within its independent travel",
+"measure": "jointDistance",
+"mate": "Bore_7",
+"min": "if(at_defaults == 1, independent[\"7\"].bdc - 0.03 mm, 0 mm)",
+"max": "if(at_defaults == 1, independent[\"7\"].tdc + 0.03 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 reaches its independent TDC and BDC",
+"measure": "jointDistance",
+"mate": "Bore_7",
+"min": "if(at_defaults == 1 && near_tdc_7 == 1, independent[\"7\"].tdc - 0.15 mm, 0 mm)",
+"max": "if(at_defaults == 1 && near_bdc_7 == 1, independent[\"7\"].bdc + 0.15 mm, 500 mm)"
+}
+],
+[
+"assert.add",
+{
+"name": "Master cylinder TDC equals rod plus crank radius",
+"measure": "jointDistance",
+"mate": "Bore_1",
+"eq": "rod_length + crank_radius",
+"tol": "0.01 mm",
+"when": "abs(mod(crank_angle + 180 deg, 360 deg) - 180 deg) < 0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Master cylinder BDC equals rod minus crank radius",
+"measure": "jointDistance",
+"mate": "Bore_1",
+"eq": "rod_length - crank_radius",
+"tol": "0.01 mm",
+"when": "abs(mod(crank_angle, 360 deg) - 180 deg) < 0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 1 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[1]",
+"axis": "y",
+"eq": "-(mod(firing[\"1\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 2 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[2]",
+"axis": "y",
+"eq": "-(mod(firing[\"2\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 3 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[3]",
+"axis": "y",
+"eq": "-(mod(firing[\"3\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 4 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[4]",
+"axis": "y",
+"eq": "-(mod(firing[\"4\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 5 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[5]",
+"axis": "y",
+"eq": "-(mod(firing[\"5\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 6 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[6]",
+"axis": "y",
+"eq": "-(mod(firing[\"6\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"assert.add",
+{
+"name": "Cylinder 7 stands where the firing order puts it",
+"measure": "rotation",
+"instance": "Cylinder[7]",
+"axis": "y",
+"eq": "-(mod(firing[\"7\"].slot * firing_interval + 180 deg, 360 deg) - 180 deg)",
+"tol": "0.01 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "bore_area",
+"expr": "pi * bore^2 / 4"
+}
+],
+[
+"variable.set",
+{
+"name": "design_dome",
+"expr": "pi * dome_depth * (3 * (bore / 2)^2 + dome_depth^2) / 6"
+}
+],
+[
+"variable.set",
+{
+"name": "head_envelope",
+"expr": "2073788.2"
+}
+],
+[
+"variable.set",
+{
+"name": "at_nominal_bore",
+"expr": "if(at_defaults == 1 && abs(bore - 130 mm) < 0.001 mm, 1, 0)"
+}
+],
+[
+"variable.measure",
+{
+"name": "head_volume",
+"measure": "volume",
+"of": "Cylinder[1]/Head/Head section",
+"label": "Volume of the drawn head"
+}
+],
+[
+"variable.output",
+{
+"name": "chamber_drawn",
+"expr": "if(at_nominal_bore == 1, head_envelope * (1 mm)^3 - head_volume, design_dome)",
+"label": "Combustion chamber as drawn"
+}
+],
+[
+"variable.output",
+{
+"name": "clearance_volume",
+"expr": "chamber_drawn + bore_area * head_gap",
+"label": "Clearance volume, master cylinder"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio",
+"expr": "(bore_area * stroke + clearance_volume) / clearance_volume",
+"label": "Compression ratio, master cylinder"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_2",
+"expr": "(bore_area * (independent[\"2\"].tdc - independent[\"2\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"2\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"2\"].tdc))",
+"label": "Compression ratio, cylinder 2 (independent strokes, chamber as drawn)"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_3",
+"expr": "(bore_area * (independent[\"3\"].tdc - independent[\"3\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"3\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"3\"].tdc))",
+"label": "Compression ratio, cylinder 3 (independent strokes, chamber as drawn)"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_4",
+"expr": "(bore_area * (independent[\"4\"].tdc - independent[\"4\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"4\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"4\"].tdc))",
+"label": "Compression ratio, cylinder 4 (independent strokes, chamber as drawn)"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_5",
+"expr": "(bore_area * (independent[\"5\"].tdc - independent[\"5\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"5\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"5\"].tdc))",
+"label": "Compression ratio, cylinder 5 (independent strokes, chamber as drawn)"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_6",
+"expr": "(bore_area * (independent[\"6\"].tdc - independent[\"6\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"6\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"6\"].tdc))",
+"label": "Compression ratio, cylinder 6 (independent strokes, chamber as drawn)"
+}
+],
+[
+"variable.output",
+{
+"name": "compression_ratio_7",
+"expr": "(bore_area * (independent[\"7\"].tdc - independent[\"7\"].bdc) + (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"7\"].tdc))) / (clearance_volume + bore_area * (independent[\"1\"].tdc - independent[\"7\"].tdc))",
+"label": "Compression ratio, cylinder 7 (independent strokes, chamber as drawn)"
+}
+],
+[
+"assert.add",
+{
+"name": "Compression ratio of the master cylinder from the drawn head",
+"measure": "value",
+"expr": "compression_ratio",
+"min": "if(at_nominal_bore == 1, 5.3, 2)",
+"max": "if(at_nominal_bore == 1, 5.5, 12)"
+}
+],
+[
+"assert.add",
+{
+"name": "The dome of the drawn head has its stated volume",
+"measure": "value",
+"expr": "chamber_drawn",
+"min": "design_dome * 0.995",
+"max": "design_dome * 1.005"
+}
+],
+[
+"assert.add",
+{
+"name": "Head of cylinder 4 is drawn like head 1",
+"measure": "volume",
+"of": "Cylinder[4]/Head/Head section",
+"min": "head_volume * 0.999",
+"max": "head_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Head of cylinder 5 is drawn like head 1",
+"measure": "volume",
+"of": "Cylinder[5]/Head/Head section",
+"min": "head_volume * 0.999",
+"max": "head_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Head of cylinder 6 is drawn like head 1",
+"measure": "volume",
+"of": "Cylinder[6]/Head/Head section",
+"min": "head_volume * 0.999",
+"max": "head_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Head of cylinder 7 is drawn like head 1",
+"measure": "volume",
+"of": "Cylinder[7]/Head/Head section",
+"min": "head_volume * 0.999",
+"max": "head_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[1]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 rings run in the bore",
+"measure": "extent",
+"of": "Piston[1]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[2]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 2 rings run in the bore",
+"measure": "extent",
+"of": "Piston[2]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[3]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 rings run in the bore",
+"measure": "extent",
+"of": "Piston[3]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[4]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 4 rings run in the bore",
+"measure": "extent",
+"of": "Piston[4]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[5]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 5 rings run in the bore",
+"measure": "extent",
+"of": "Piston[5]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[6]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 6 rings run in the bore",
+"measure": "extent",
+"of": "Piston[6]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 diameter leaves the running clearance",
+"measure": "extent",
+"of": "Piston[7]/Piston",
+"axis": "y",
+"min": "bore - 0.34 mm",
+"max": "bore - 0.30 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 7 rings run in the bore",
+"measure": "extent",
+"of": "Piston[7]/Piston rings",
+"axis": "y",
+"min": "bore - 0.12 mm",
+"max": "bore - 0.08 mm"
+}
+],
+[
+"variable.measure",
+{
+"name": "barrel_volume",
+"measure": "volume",
+"of": "Cylinder[1]/Barrel/Barrel section",
+"label": "Volume of the drawn barrel"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 4 is drawn like barrel 1",
+"measure": "volume",
+"of": "Cylinder[4]/Barrel/Barrel section",
+"min": "barrel_volume * 0.999",
+"max": "barrel_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 5 is drawn like barrel 1",
+"measure": "volume",
+"of": "Cylinder[5]/Barrel/Barrel section",
+"min": "barrel_volume * 0.999",
+"max": "barrel_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 6 is drawn like barrel 1",
+"measure": "volume",
+"of": "Cylinder[6]/Barrel/Barrel section",
+"min": "barrel_volume * 0.999",
+"max": "barrel_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 7 is drawn like barrel 1",
+"measure": "volume",
+"of": "Cylinder[7]/Barrel/Barrel section",
+"min": "barrel_volume * 0.999",
+"max": "barrel_volume * 1.001"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 1 has the volume computed independently",
+"measure": "volume",
+"of": "Cylinder[1]/Barrel/Barrel section",
+"min": "if(at_nominal_bore == 1, 753952, 1)",
+"max": "if(at_nominal_bore == 1, 755462, 1e12)"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 2, opened, is half of barrel 1",
+"measure": "volume",
+"of": "Cylinder[2]/Barrel/Barrel section",
+"min": "barrel_volume * 0.4995",
+"max": "barrel_volume * 0.5005"
+}
+],
+[
+"assert.add",
+{
+"name": "Head 2, opened, keeps its share of head 1",
+"measure": "volume",
+"of": "Cylinder[2]/Head",
+"min": "head_volume * 0.49566 * 0.998",
+"max": "head_volume * 0.49566 * 1.002"
+}
+],
+[
+"assert.add",
+{
+"name": "Barrel 3, opened, is half of barrel 1",
+"measure": "volume",
+"of": "Cylinder[3]/Barrel/Barrel section",
+"min": "barrel_volume * 0.4995",
+"max": "barrel_volume * 0.5005"
+}
+],
+[
+"assert.add",
+{
+"name": "Head 3, opened, keeps its share of head 1",
+"measure": "volume",
+"of": "Cylinder[3]/Head",
+"min": "head_volume * 0.49566 * 0.998",
+"max": "head_volume * 0.49566 * 1.002"
+}
+],
+[
+"assert.add",
+{
+"name": "Knuckle pin 2 in the master flange has the stated fit",
+"measure": "clearance",
+"from": "Knuckle pin[2]",
+"to": "Master rod/Master rod",
+"min": "0.004 mm",
+"max": "0.03 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Knuckle pin 2 in its rod has the stated fit",
+"measure": "clearance",
+"from": "Knuckle pin[2]",
+"to": "Link rod[2]",
+"min": "0.01 mm",
+"max": "0.04 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Wrist pin 1 in the master rod has the stated fit",
+"measure": "clearance",
+"from": "Wrist pin[1]/Wrist pin",
+"to": "Master rod/Master rod",
+"min": "0.01 mm",
+"max": "0.05 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Wrist pin 2 in its rod has the stated fit",
+"measure": "clearance",
+"from": "Wrist pin[2]/Wrist pin",
+"to": "Link rod[2]",
+"min": "0.01 mm",
+"max": "0.05 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Wrist pin 1 in the piston bosses has the stated fit",
+"measure": "clearance",
+"from": "Wrist pin[1]/Wrist pin",
+"to": "Piston[1]/Piston",
+"min": "0.005 mm",
+"max": "0.04 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Master big end on the crank pin has the stated fit",
+"measure": "clearance",
+"from": "Master rod/Master rod",
+"to": "Crank front",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Rear main bearing has the stated fit",
+"measure": "clearance",
+"from": "Crank rear/Crank rear",
+"to": "Crankcase rear",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Front main bearing has the stated fit",
+"measure": "clearance",
+"from": "Crank front",
+"to": "Crankcase front/Crankcase half",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Crank pin spigot in the rear web has the stated fit",
+"measure": "clearance",
+"from": "Crank front",
+"to": "Crank rear/Crank rear",
+"min": "0.005 mm",
+"max": "0.05 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Propeller hub on its taper has the stated fit",
+"measure": "clearance",
+"from": "Propeller hub/Propeller hub",
+"to": "Crank front",
+"min": "0.01 mm",
+"max": "0.06 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Link rod 2 side clearance to the master rod plates",
+"measure": "clearance",
+"from": "Link rod[2]",
+"to": "Master rod/Master rod",
+"min": "1.5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Link rod 7 side clearance to the master rod plates",
+"measure": "clearance",
+"from": "Link rod[7]",
+"to": "Master rod/Master rod",
+"min": "1.5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Link rod 4 clears the crankcase",
+"measure": "clearance",
+"from": "Link rod[4]",
+"to": "Crankcase rear",
+"min": "3 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Link rod 3 clears the crankcase",
+"measure": "clearance",
+"from": "Link rod[3]",
+"to": "Crankcase rear",
+"min": "4 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Master rod clears the crankcase",
+"measure": "clearance",
+"from": "Master rod/Master rod",
+"to": "Crankcase rear",
+"min": "5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Adjacent rods clear each other",
+"measure": "clearance",
+"from": "Link rod[3]",
+"to": "Link rod[4]",
+"min": "15 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Adjacent pistons clear each other",
+"measure": "clearance",
+"from": "Piston[2]/Piston",
+"to": "Piston[3]/Piston",
+"min": "1.5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 3 and 4 clear each other",
+"measure": "clearance",
+"from": "Piston[3]/Piston",
+"to": "Piston[4]/Piston",
+"min": "1.5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Piston 1 clears the crankcase",
+"measure": "clearance",
+"from": "Piston[1]/Piston",
+"to": "Crankcase rear",
+"min": "2.5 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Master rod clears the piston bosses at its small end",
+"measure": "clearance",
+"from": "Master rod/Master rod",
+"to": "Piston[1]/Piston",
+"min": "2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Seven-cylinder radial engine",
+"description": "A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class: master rod and six articulated rods on knuckle pins, cut-away crankcase, finned cylinders.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"assembly",
+"aero engine"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -1,0 +1,652 @@
+[
+[
+"variable.set",
+{
+"name": "bore",
+"expr": "130 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bore",
+"label": "Bore",
+"description": "Cylinder bore",
+"group": "Head",
+"order": 1,
+"min": "124 mm",
+"max": "136 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "deck_height",
+"expr": "360 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "deck_height",
+"label": "Deck height",
+"description": "Crank axis to the barrel top",
+"group": "Head",
+"order": 2,
+"min": "300 mm",
+"max": "420 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "dome_depth",
+"expr": "41.7 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "dome_depth",
+"label": "Dome depth",
+"description": "Depth of the combustion dome",
+"group": "Head",
+"order": 3,
+"min": "30 mm",
+"max": "55 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "open_section",
+"expr": "0"
+}
+],
+[
+"variable.publish",
+{
+"name": "open_section",
+"label": "Open the front half",
+"description": "Cut the head open to show the dome",
+"group": "Head",
+"order": 4,
+"min": "0",
+"max": "1",
+"step": "1"
+}
+],
+[
+"variable.set",
+{
+"name": "dome_radius",
+"expr": "(bore^2 / 4 + dome_depth^2) / (2 * dome_depth)"
+}
+],
+[
+"variable.set",
+{
+"name": "head_height",
+"expr": "112 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "head_radius",
+"expr": "bore / 2 + 15 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_count",
+"expr": "9"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_pitch",
+"expr": "(head_height - 22 mm) / fin_count"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_depth",
+"expr": "20 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fin_thickness",
+"expr": "2.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "top_radius",
+"expr": "bore / 2 - 10 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Head profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Head profile",
+"start": [
+"bore / 2",
+"deck_height"
+],
+"segments": [
+{
+"line": [
+"head_radius",
+"deck_height"
+]
+},
+{
+"line": [
+"head_radius - 0 * 0.9 mm",
+"deck_height + 12 mm + 0 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 0 * 1.9 mm",
+"deck_height + 12 mm + 0 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 0 * 1.9 mm",
+"deck_height + 12 mm + 0 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 0 * 0.9 mm",
+"deck_height + 12 mm + 0 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 1 * 0.9 mm",
+"deck_height + 12 mm + 1 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 1 * 1.9 mm",
+"deck_height + 12 mm + 1 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 1 * 1.9 mm",
+"deck_height + 12 mm + 1 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 1 * 0.9 mm",
+"deck_height + 12 mm + 1 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 2 * 0.9 mm",
+"deck_height + 12 mm + 2 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 2 * 1.9 mm",
+"deck_height + 12 mm + 2 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 2 * 1.9 mm",
+"deck_height + 12 mm + 2 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 2 * 0.9 mm",
+"deck_height + 12 mm + 2 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 3 * 0.9 mm",
+"deck_height + 12 mm + 3 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 3 * 1.9 mm",
+"deck_height + 12 mm + 3 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 3 * 1.9 mm",
+"deck_height + 12 mm + 3 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 3 * 0.9 mm",
+"deck_height + 12 mm + 3 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 4 * 0.9 mm",
+"deck_height + 12 mm + 4 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 4 * 1.9 mm",
+"deck_height + 12 mm + 4 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 4 * 1.9 mm",
+"deck_height + 12 mm + 4 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 4 * 0.9 mm",
+"deck_height + 12 mm + 4 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 5 * 0.9 mm",
+"deck_height + 12 mm + 5 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 5 * 1.9 mm",
+"deck_height + 12 mm + 5 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 5 * 1.9 mm",
+"deck_height + 12 mm + 5 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 5 * 0.9 mm",
+"deck_height + 12 mm + 5 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 6 * 0.9 mm",
+"deck_height + 12 mm + 6 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 6 * 1.9 mm",
+"deck_height + 12 mm + 6 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 6 * 1.9 mm",
+"deck_height + 12 mm + 6 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 6 * 0.9 mm",
+"deck_height + 12 mm + 6 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 7 * 0.9 mm",
+"deck_height + 12 mm + 7 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 7 * 1.9 mm",
+"deck_height + 12 mm + 7 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 7 * 1.9 mm",
+"deck_height + 12 mm + 7 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 7 * 0.9 mm",
+"deck_height + 12 mm + 7 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius - 8 * 0.9 mm",
+"deck_height + 12 mm + 8 * fin_pitch - fin_thickness / 2"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 8 * 1.9 mm",
+"deck_height + 12 mm + 8 * fin_pitch - fin_thickness / 2 + 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius + fin_depth - 8 * 1.9 mm",
+"deck_height + 12 mm + 8 * fin_pitch + fin_thickness / 2 - 0.4 mm"
+]
+},
+{
+"line": [
+"head_radius - 8 * 0.9 mm",
+"deck_height + 12 mm + 8 * fin_pitch + fin_thickness / 2"
+]
+},
+{
+"line": [
+"top_radius",
+"deck_height + head_height - 6 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"deck_height + head_height"
+]
+},
+{
+"line": [
+"0 mm",
+"deck_height + dome_depth"
+]
+},
+{
+"arc": "start",
+"center": [
+"0 mm",
+"deck_height + dome_depth - dome_radius"
+],
+"clockwise": true
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Head profile",
+"axis": "y",
+"name": "Head shell"
+}
+],
+[
+"variable.set",
+{
+"name": "plug_seat",
+"expr": "head_radius + fin_depth + 2 mm"
+}
+],
+[
+"feature.cylinder",
+{
+"name": "Plug boss",
+"radius": "15 mm",
+"height": "30 mm",
+"position": [
+"0 mm",
+"-plug_seat",
+"deck_height + 38 mm"
+],
+"axis": [
+0,
+1,
+0
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Head shell",
+"tool": "Plug boss",
+"name": "Head"
+}
+],
+[
+"sketch.create",
+{
+"name": "Plug profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Plug profile",
+"start": [
+"-plug_seat",
+"deck_height + 38 mm"
+],
+"segments": [
+{
+"line": [
+"-plug_seat - 23 mm",
+"deck_height + 38 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 23 mm",
+"deck_height + 40 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 17 mm",
+"deck_height + 43 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 15 mm",
+"deck_height + 43 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 15 mm",
+"deck_height + 47 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 6 mm",
+"deck_height + 47 mm"
+]
+},
+{
+"line": [
+"-plug_seat - 6 mm",
+"deck_height + 44 mm"
+]
+},
+{
+"line": [
+"-plug_seat",
+"deck_height + 44 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"datum.axis",
+{
+"name": "Plug axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"deck_height + 38 mm"
+],
+[
+"0 mm",
+"-1 mm",
+"deck_height + 38 mm"
+]
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Plug profile",
+"axis": "Plug axis",
+"name": "Spark plug",
+"when": "open_section < 0.5"
+}
+],
+[
+"material.preset",
+{
+"body": "Head",
+"preset": "steel",
+"color": "#55585c",
+"metallic": 0.45,
+"roughness": 0.5
+}
+],
+[
+"material.preset",
+{
+"body": "Spark plug",
+"preset": "steel",
+"color": "#b5692f",
+"metallic": 0.95,
+"roughness": 0.3
+}
+],
+[
+"feature.block",
+{
+"name": "Head section block",
+"when": "open_section > 0.5",
+"size": [
+"2 * head_radius + 40 mm",
+"head_radius + 30 mm",
+"head_height + 40 mm"
+],
+"position": [
+"-head_radius - 20 mm",
+"-head_radius - 30 mm",
+"deck_height - 20 mm"
+]
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Head",
+"tool": "Head section block",
+"name": "Head section",
+"when": "open_section > 0.5"
+}
+],
+[
+"material.preset",
+{
+"body": "Head section",
+"preset": "steel",
+"color": "#55585c",
+"metallic": 0.45,
+"roughness": 0.5
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"deck_height"
+],
+[
+"1 mm",
+"0 mm",
+"deck_height"
+],
+[
+"0 mm",
+"1 mm",
+"deck_height"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Head height",
+"measure": "extent",
+"of": {
+"body": "Head",
+"follow": true
+},
+"axis": "z",
+"eq": "head_height",
+"tol": "0.1"
+}
+],
+[
+"document.info",
+{
+"title": "Cylinder head",
+"description": "Cast aluminium head with deep fins and a spherical-cap combustion chamber.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"casting",
+"machining"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]
