@@ -1,0 +1,2411 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "vase_foot",
+"unit": "mm"
+},
+{
+"name": "vase_lip",
+"unit": "mm"
+},
+{
+"name": "vase_wall",
+"unit": "mm"
+},
+{
+"name": "vase_floor",
+"unit": "mm"
+},
+{
+"name": "layer_height",
+"unit": "mm"
+},
+{
+"name": "lead",
+"unit": "mm"
+},
+{
+"name": "pulley_inset",
+"unit": "mm"
+},
+{
+"name": "nozzle_below_frame_top",
+"unit": "mm"
+},
+{
+"name": "carriage_half_length",
+"unit": "mm"
+},
+{
+"name": "x_rail_cut",
+"unit": "mm"
+},
+{
+"name": "y_rail_cut",
+"unit": "mm"
+},
+{
+"name": "z_rail_cut",
+"unit": "mm"
+},
+{
+"name": "float_y_share"
+},
+{
+"name": "gantry_floor_clear",
+"unit": "mm"
+},
+{
+"name": "gantry_front_clear",
+"unit": "mm"
+},
+{
+"name": "head_travel_clear",
+"unit": "mm"
+},
+{
+"name": "tower_x",
+"unit": "mm"
+},
+{
+"name": "nozzle_offset_y",
+"unit": "mm"
+},
+{
+"name": "bed_shift",
+"unit": "mm"
+},
+{
+"name": "z_misalignment",
+"unit": "mm"
+},
+{
+"name": "float_face_below_bed",
+"unit": "mm"
+},
+{
+"name": "screw_seat_height",
+"unit": "mm"
+},
+{
+"name": "carriage_rail_gap_min",
+"unit": "mm"
+},
+{
+"name": "carriage_rail_gap_max",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+36,
+18,
+0.8,
+2,
+0.2,
+8,
+53,
+52,
+22.7,
+126,
+110,
+100,
+0.6,
+112,
+122,
+57,
+32,
+61,
+57,
+0.3,
+87,
+60,
+0.25,
+0.35
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "t",
+"expr": "0.62"
+}
+],
+[
+"variable.set",
+{
+"name": "build_size",
+"expr": "250 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "vase_height",
+"expr": "180 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "vase_belly",
+"expr": "34 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "spiral_turns",
+"expr": "6"
+}
+],
+[
+"variable.set",
+{
+"name": "vase_start",
+"expr": "sizes[\"all\"].vase_floor + 1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "build_size + 250 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "half_frame",
+"expr": "frame_size / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "track_half",
+"expr": "half_frame - sizes[\"all\"].pulley_inset"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_pitch_radius",
+"expr": "20 * 2 mm / (2 * pi)"
+}
+],
+[
+"variable.set",
+{
+"name": "back_pitch_radius",
+"expr": "6.5 mm + 0.5 mm + 0.055 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "span_gap",
+"expr": "0.05 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "nozzle_tip_height",
+"expr": "frame_size - sizes[\"all\"].nozzle_below_frame_top"
+}
+],
+[
+"variable.set",
+{
+"name": "first_layer_bed",
+"expr": "nozzle_tip_height - sizes[\"all\"].layer_height - vase_start"
+}
+],
+[
+"variable.set",
+{
+"name": "nut_start_offset",
+"expr": "first_layer_bed - sizes[\"all\"].float_face_below_bed - sizes[\"all\"].screw_seat_height"
+}
+],
+[
+"variable.set",
+{
+"name": "print_height",
+"expr": "vase_start + (vase_height - vase_start) * t"
+}
+],
+[
+"variable.set",
+{
+"name": "rim_outer",
+"expr": "sizes[\"all\"].vase_foot + vase_belly * sin(180 deg * print_height / vase_height)^2 + sizes[\"all\"].vase_lip * (print_height / vase_height)^8"
+}
+],
+[
+"variable.set",
+{
+"name": "nozzle_radius",
+"expr": "rim_outer - sizes[\"all\"].vase_wall / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "spiral_angle",
+"expr": "360 deg * spiral_turns * t"
+}
+],
+[
+"variable.set",
+{
+"name": "cmd_x",
+"expr": "nozzle_radius * cos(spiral_angle)"
+}
+],
+[
+"variable.set",
+{
+"name": "cmd_y",
+"expr": "nozzle_radius * sin(spiral_angle) + sizes[\"all\"].nozzle_offset_y - sizes[\"all\"].bed_shift"
+}
+],
+[
+"variable.set",
+{
+"name": "cmd_motor_a",
+"expr": "(cmd_x - cmd_y) / belt_pitch_radius * 1 rad"
+}
+],
+[
+"variable.set",
+{
+"name": "cmd_motor_b",
+"expr": "(cmd_x + cmd_y) / belt_pitch_radius * 1 rad"
+}
+],
+[
+"variable.set",
+{
+"name": "cmd_screw",
+"expr": "(print_height - vase_start) / sizes[\"all\"].lead * 360 deg"
+}
+],
+[
+"variable.set",
+{
+"name": "span_y_rear",
+"expr": "track_half - cmd_y - 2 * span_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "span_y_front",
+"expr": "track_half + cmd_y - 2 * span_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "span_x_left",
+"expr": "cmd_x - sizes[\"all\"].tower_x + track_half - 2 * span_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "span_x_right",
+"expr": "track_half - cmd_x - sizes[\"all\"].tower_x - 2 * span_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_wraps",
+"expr": "2.5 * pi * belt_pitch_radius + pi / 2 * back_pitch_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_static",
+"expr": "4 * track_half + belt_pitch_radius + back_pitch_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_moving_expected",
+"expr": "4 * track_half - 2 * sizes[\"all\"].tower_x"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_length_expected",
+"expr": "belt_static + belt_moving_expected + belt_wraps"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/frame.3dcraftasm",
+"name": "Frame",
+"position": [
+0,
+0,
+0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size",
+"z_misalignment": "sizes[\"all\"].z_misalignment"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Frame_fixed",
+"a": "world/xy",
+"b": "Frame/Cube west south bottom/Frame centre",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gantry.3dcraftasm",
+"name": "Gantry",
+"position": [
+0,
+-59.796,
+498.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/toolhead.3dcraftasm",
+"name": "Toolhead",
+"position": [
+-12.17,
+-87.796,
+498.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/bed.3dcraftasm",
+"name": "Bed",
+"position": [
+0,
+-57,
+335.06
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size",
+"build_size": "build_size",
+"bed_shift": "sizes[\"all\"].bed_shift"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/vase.3dcraft",
+"name": "Vase",
+"position": [
+0,
+-57,
+335.06
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"height": "print_height",
+"full_height": "vase_height",
+"belly": "vase_belly",
+"foot_radius": "sizes[\"all\"].vase_foot",
+"lip_flare": "sizes[\"all\"].vase_lip"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Motor A pulley",
+"position": [
+-197.0,
+197.0,
+534.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hub_height": "7 mm",
+"hub_side": "1"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Motor B pulley",
+"position": [
+197.0,
+197.0,
+524.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hub_height": "7 mm",
+"hub_side": "-1"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler A rear",
+"position": [
+210.421,
+197.0,
+534.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler A front",
+"position": [
+210.421,
+-197.0,
+534.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler B rear",
+"position": [
+-210.421,
+197.0,
+524.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler B front",
+"position": [
+-210.421,
+-197.0,
+524.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler A left",
+"position": [
+-197.0,
+-59.796,
+534.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/back-idler.3dcraft",
+"name": "Idler A right",
+"position": [
+197.0,
+-59.796,
+534.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/back-idler.3dcraft",
+"name": "Idler B left",
+"position": [
+-197.0,
+-59.796,
+524.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gt2-pulley.3dcraft",
+"name": "Idler B right",
+"position": [
+197.0,
+-59.796,
+524.0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/lead-screw.3dcraft",
+"name": "Screw left",
+"position": [
+-197.0,
+40,
+60
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"screw_length": "frame_size - 110 mm"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/lead-screw.3dcraft",
+"name": "Screw right",
+"position": [
+197.0,
+-40,
+60
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"screw_length": "frame_size - 110 mm"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/float-nut.3dcraft",
+"name": "Nut left",
+"position": [
+-197.0,
+40,
+248.06
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/float-nut.3dcraft",
+"name": "Nut right",
+"position": [
+197.0,
+-40,
+248.06
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt A left span",
+"position": [
+-197.0,
+-66.162,
+534.0
+],
+"rotation": [
+180.0,
+0.0,
+0.0
+],
+"params": {
+"span_length": "span_x_left"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt A rear span",
+"position": [
+-203.366,
+197.0,
+534.0
+],
+"rotation": [
+0.0,
+0.0,
+0.0
+],
+"params": {
+"span_length": "span_y_rear"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt A front span",
+"position": [
+204.055,
+-197.0,
+534.0
+],
+"rotation": [
+127.279,
+-127.279,
+0.0
+],
+"params": {
+"span_length": "span_y_front"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt A right span",
+"position": [
+197.0,
+-52.741,
+534.0
+],
+"rotation": [
+0.0,
+0.0,
+180.0
+],
+"params": {
+"span_length": "span_x_right"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt B right span",
+"position": [
+197.0,
+-66.162,
+524.0
+],
+"rotation": [
+0.0,
+0.0,
+180.0
+],
+"params": {
+"span_length": "span_x_right"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt B rear span",
+"position": [
+203.366,
+197.0,
+524.0
+],
+"rotation": [
+127.279,
+127.279,
+0.0
+],
+"params": {
+"span_length": "span_y_rear"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt B front span",
+"position": [
+-204.055,
+-197.0,
+524.0
+],
+"rotation": [
+0.0,
+0.0,
+0.0
+],
+"params": {
+"span_length": "span_y_front"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-span.3dcraft",
+"name": "Belt B left span",
+"position": [
+-197.0,
+-52.741,
+524.0
+],
+"rotation": [
+180.0,
+0.0,
+0.0
+],
+"params": {
+"span_length": "span_x_left"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Gantry_Y",
+"a": "Frame/Y rail west/Rail line",
+"b": "Gantry/Y carriage left/Rail line",
+"flip": true,
+"limits": [
+"-(half_frame - sizes[\"all\"].gantry_front_clear)",
+"half_frame - sizes[\"all\"].gantry_floor_clear"
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Gantry_Y_right",
+"a": "Frame/Y rail east/Rail line",
+"b": "Gantry/Y carriage right/Rail line",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Carriage_X",
+"a": "Gantry/X rail/Rail line",
+"b": "Toolhead/X carriage/Rail line",
+"flip": true,
+"limits": [
+"-(track_half - sizes[\"all\"].head_travel_clear)",
+"track_half - sizes[\"all\"].head_travel_clear"
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Motor_A",
+"a": "Frame/Corner rear left/Motor axis",
+"b": "Motor A pulley/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Motor_B",
+"a": "Frame/Corner rear right/Motor axis",
+"b": "Motor B pulley/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_A_rear",
+"a": "Frame/Corner rear right/Idler axis",
+"b": "Idler A rear/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_A_front",
+"a": "Frame/Corner front right/Idler axis",
+"b": "Idler A front/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_B_rear",
+"a": "Frame/Corner rear left/Idler axis",
+"b": "Idler B rear/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_B_front",
+"a": "Frame/Corner front left/Idler axis",
+"b": "Idler B front/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_A_left",
+"a": "Gantry/End left/Toothed axis",
+"b": "Idler A left/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_A_right",
+"a": "Gantry/End right/Back axis",
+"b": "Idler A right/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_B_left",
+"a": "Gantry/End left/Back axis",
+"b": "Idler B left/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Idler_B_right",
+"a": "Gantry/End right/Toothed axis",
+"b": "Idler B right/Belt plane",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Z_screw_left",
+"a": "Frame/Z mount left/Motor flange",
+"b": "Screw left/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Z_screw_right",
+"a": "Frame/Z mount right/Motor flange",
+"b": "Screw right/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Bed_lift",
+"a": "Frame/Z rail west/Rail line",
+"b": "Bed/Z carriage left/Rail line",
+"flip": true,
+"limits": [
+"-((frame_size - sizes[\"all\"].z_rail_cut) / 2 - sizes[\"all\"].carriage_half_length)",
+"(frame_size - sizes[\"all\"].z_rail_cut) / 2 - sizes[\"all\"].carriage_half_length"
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Bed_lift_right",
+"a": "Frame/Z rail east/Rail line",
+"b": "Bed/Z carriage right/Rail line",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Nut_left_on_screw",
+"a": "Screw left/Seat",
+"b": "Nut left/Thread axis",
+"flip": true,
+"offset": "nut_start_offset"
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Nut_right_on_screw",
+"a": "Screw right/Seat",
+"b": "Nut right/Thread axis",
+"flip": true,
+"offset": "nut_start_offset"
+}
+],
+[
+"mate.add",
+{
+"kind": "planar",
+"name": "Nut_left_float",
+"a": "Bed/Bracket left/Float seat",
+"b": "Nut left/Float face",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "planar",
+"name": "Nut_right_float",
+"a": "Bed/Bracket right/Float seat",
+"b": "Nut right/Float face",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Vase_on_bed",
+"a": "Bed/Build plate/Bed origin",
+"b": "Vase/Bed seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_A_left_span",
+"a": "Gantry/End left/Toothed span start",
+"b": "Belt A left span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_A_rear_span",
+"a": "Frame/Corner rear left/Y span start",
+"b": "Belt A rear span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_A_front_span",
+"a": "Frame/Corner front right/Y span start",
+"b": "Belt A front span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_A_right_span",
+"a": "Gantry/End right/Back span start",
+"b": "Belt A right span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_B_right_span",
+"a": "Gantry/End right/Toothed span start",
+"b": "Belt B right span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_B_rear_span",
+"a": "Frame/Corner rear right/Y span start",
+"b": "Belt B rear span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_B_front_span",
+"a": "Frame/Corner front left/Y span start",
+"b": "Belt B front span/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "On_Belt_B_left_span",
+"a": "Gantry/End left/Back span start",
+"b": "Belt B left span/Start",
+"flip": true
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Belt_A",
+"terms": [
+{
+"mate": "Motor_A",
+"coefficient": "belt_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "-1"
+},
+{
+"mate": "Gantry_Y",
+"coefficient": "1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Belt_B",
+"terms": [
+{
+"mate": "Motor_B",
+"coefficient": "belt_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "-1"
+},
+{
+"mate": "Gantry_Y",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_Idler_A_rear",
+"terms": [
+{
+"mate": "Idler_A_rear",
+"coefficient": "1"
+},
+{
+"mate": "Motor_A",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_Idler_A_front",
+"terms": [
+{
+"mate": "Idler_A_front",
+"coefficient": "1"
+},
+{
+"mate": "Motor_A",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_Idler_B_rear",
+"terms": [
+{
+"mate": "Idler_B_rear",
+"coefficient": "1"
+},
+{
+"mate": "Motor_B",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_Idler_B_front",
+"terms": [
+{
+"mate": "Idler_B_front",
+"coefficient": "1"
+},
+{
+"mate": "Motor_B",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_idler_A_left",
+"terms": [
+{
+"mate": "Idler_A_left",
+"coefficient": "belt_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_idler_A_right",
+"terms": [
+{
+"mate": "Idler_A_right",
+"coefficient": "back_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_idler_B_left",
+"terms": [
+{
+"mate": "Idler_B_left",
+"coefficient": "back_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "linear",
+"name": "Run_idler_B_right",
+"terms": [
+{
+"mate": "Idler_B_right",
+"coefficient": "belt_pitch_radius"
+},
+{
+"mate": "Carriage_X",
+"coefficient": "-1"
+}
+]
+}
+],
+[
+"coupling.add",
+{
+"kind": "screw",
+"name": "Thread_left",
+"mates": [
+"Nut_left_on_screw",
+"Z_screw_left"
+],
+"value": "-sizes[\"all\"].lead"
+}
+],
+[
+"coupling.add",
+{
+"kind": "screw",
+"name": "Thread_right",
+"mates": [
+"Nut_right_on_screw",
+"Z_screw_right"
+],
+"value": "-sizes[\"all\"].lead"
+}
+],
+[
+"joint.set",
+{
+"mate": "Motor_A",
+"value": "cmd_motor_a"
+}
+],
+[
+"joint.set",
+{
+"mate": "Motor_B",
+"value": "cmd_motor_b"
+}
+],
+[
+"joint.set",
+{
+"mate": "Z_screw_left",
+"value": "cmd_screw"
+}
+],
+[
+"joint.set",
+{
+"mate": "Z_screw_right",
+"value": "cmd_screw"
+}
+],
+[
+"joint.set",
+{
+"mate": "Nut_left_float",
+"which": "angle",
+"value": "0 deg"
+}
+],
+[
+"joint.set",
+{
+"mate": "Nut_right_float",
+"which": "angle",
+"value": "0 deg"
+}
+],
+[
+"variable.measure",
+{
+"name": "motor_a_measured",
+"measure": "jointAngle",
+"mate": "Motor_A"
+}
+],
+[
+"variable.measure",
+{
+"name": "motor_b_measured",
+"measure": "jointAngle",
+"mate": "Motor_B"
+}
+],
+[
+"variable.measure",
+{
+"name": "screw_left_measured",
+"measure": "jointAngle",
+"mate": "Z_screw_left"
+}
+],
+[
+"variable.measure",
+{
+"name": "screw_right_measured",
+"measure": "jointAngle",
+"mate": "Z_screw_right"
+}
+],
+[
+"variable.measure",
+{
+"name": "head_x",
+"measure": "position",
+"point": "Toolhead/Head plate/Origin",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "gantry_y",
+"measure": "position",
+"point": "Gantry/Y carriage left/Top",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "nozzle_x",
+"measure": "position",
+"point": "Toolhead/Hot end/Nozzle tip",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "nozzle_y",
+"measure": "position",
+"point": "Toolhead/Hot end/Nozzle tip",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "nozzle_z",
+"measure": "position",
+"point": "Toolhead/Hot end/Nozzle tip",
+"axis": "z"
+}
+],
+[
+"variable.measure",
+{
+"name": "rim_x",
+"measure": "position",
+"point": "Vase/Rim point",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "rim_y",
+"measure": "position",
+"point": "Vase/Rim point",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "rim_z",
+"measure": "position",
+"point": "Vase/Rim point",
+"axis": "z"
+}
+],
+[
+"variable.measure",
+{
+"name": "vase_axis_x",
+"measure": "position",
+"point": "Vase/Bed seat",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "vase_axis_y",
+"measure": "position",
+"point": "Vase/Bed seat",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "bed_z",
+"measure": "position",
+"point": "Bed/Build plate/Bed origin",
+"axis": "z"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_a_axis_x",
+"measure": "position",
+"point": "Motor A pulley/Belt plane",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_a_axis_y",
+"measure": "position",
+"point": "Motor A pulley/Belt plane",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_a_pitch_x",
+"measure": "position",
+"point": "Motor A pulley/Pitch point",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_a_pitch_y",
+"measure": "position",
+"point": "Motor A pulley/Pitch point",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_b_axis_x",
+"measure": "position",
+"point": "Motor B pulley/Belt plane",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_b_axis_y",
+"measure": "position",
+"point": "Motor B pulley/Belt plane",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_b_pitch_x",
+"measure": "position",
+"point": "Motor B pulley/Pitch point",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "pulley_b_pitch_y",
+"measure": "position",
+"point": "Motor B pulley/Pitch point",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_a_rear_measured",
+"measure": "jointAngle",
+"mate": "Idler_A_rear"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_a_front_measured",
+"measure": "jointAngle",
+"mate": "Idler_A_front"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_b_rear_measured",
+"measure": "jointAngle",
+"mate": "Idler_B_rear"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_b_front_measured",
+"measure": "jointAngle",
+"mate": "Idler_B_front"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_a_left_measured",
+"measure": "jointAngle",
+"mate": "Idler_A_left"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_a_right_measured",
+"measure": "jointAngle",
+"mate": "Idler_A_right"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_b_left_measured",
+"measure": "jointAngle",
+"mate": "Idler_B_left"
+}
+],
+[
+"variable.measure",
+{
+"name": "idler_b_right_measured",
+"measure": "jointAngle",
+"mate": "Idler_B_right"
+}
+],
+[
+"variable.measure",
+{
+"name": "float_left_x",
+"measure": "jointDistance",
+"mate": "Nut_left_float",
+"motion": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "float_left_y",
+"measure": "jointDistance",
+"mate": "Nut_left_float",
+"motion": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "float_right_x",
+"measure": "jointDistance",
+"mate": "Nut_right_float",
+"motion": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "float_right_y",
+"measure": "jointDistance",
+"mate": "Nut_right_float",
+"motion": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "anchor_a_left_x",
+"measure": "position",
+"point": "Toolhead/Clamp A left/Seat",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "anchor_a_right_x",
+"measure": "position",
+"point": "Toolhead/Clamp A right/Seat",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "anchor_b_left_x",
+"measure": "position",
+"point": "Toolhead/Clamp B left/Seat",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "anchor_b_right_x",
+"measure": "position",
+"point": "Toolhead/Clamp B right/Seat",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "left_toothed_span_x",
+"measure": "position",
+"point": "Gantry/End left/Toothed span tangent",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "left_back_span_x",
+"measure": "position",
+"point": "Gantry/End left/Back span tangent",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "right_toothed_span_x",
+"measure": "position",
+"point": "Gantry/End right/Toothed span tangent",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "right_back_span_x",
+"measure": "position",
+"point": "Gantry/End right/Back span tangent",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "left_toothed_tangent_y",
+"measure": "position",
+"point": "Gantry/End left/Toothed tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "left_back_tangent_y",
+"measure": "position",
+"point": "Gantry/End left/Back tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "right_toothed_tangent_y",
+"measure": "position",
+"point": "Gantry/End right/Toothed tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "right_back_tangent_y",
+"measure": "position",
+"point": "Gantry/End right/Back tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "rear_left_tangent_y",
+"measure": "position",
+"point": "Frame/Corner rear left/Y tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "rear_right_tangent_y",
+"measure": "position",
+"point": "Frame/Corner rear right/Y tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "front_left_tangent_y",
+"measure": "position",
+"point": "Frame/Corner front left/Y tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "front_right_tangent_y",
+"measure": "position",
+"point": "Frame/Corner front right/Y tangent",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "a_left_end_x",
+"measure": "position",
+"point": "Belt A left span/End",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "a_right_end_x",
+"measure": "position",
+"point": "Belt A right span/End",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "b_left_end_x",
+"measure": "position",
+"point": "Belt B left span/End",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "b_right_end_x",
+"measure": "position",
+"point": "Belt B right span/End",
+"axis": "x"
+}
+],
+[
+"variable.measure",
+{
+"name": "a_rear_end_y",
+"measure": "position",
+"point": "Belt A rear span/End",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "a_front_end_y",
+"measure": "position",
+"point": "Belt A front span/End",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "b_rear_end_y",
+"measure": "position",
+"point": "Belt B rear span/End",
+"axis": "y"
+}
+],
+[
+"variable.measure",
+{
+"name": "b_front_end_y",
+"measure": "position",
+"point": "Belt B front span/End",
+"axis": "y"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_a_moving",
+"expr": "(anchor_a_left_x - left_toothed_span_x) + (rear_left_tangent_y - left_toothed_tangent_y) + (right_back_tangent_y - front_right_tangent_y) + (right_back_span_x - anchor_a_right_x)",
+"label": "Belt A: the four moving straight pieces, measured",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_b_moving",
+"expr": "(anchor_b_left_x - left_back_span_x) + (rear_right_tangent_y - right_toothed_tangent_y) + (left_back_tangent_y - front_left_tangent_y) + (right_toothed_span_x - anchor_b_right_x)",
+"label": "Belt B: the four moving straight pieces, measured",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_a_length",
+"expr": "belt_a_moving + belt_static + belt_wraps",
+"label": "Belt A: pitch length, measured pieces plus the static runs and wraps",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_b_length",
+"expr": "belt_b_moving + belt_static + belt_wraps",
+"label": "Belt B: pitch length, measured pieces plus the static runs and wraps",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "pulley_a_radius",
+"expr": "hypot(pulley_a_pitch_x - pulley_a_axis_x, pulley_a_pitch_y - pulley_a_axis_y)",
+"label": "Motor A pulley: pitch radius measured on the instance",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "pulley_b_radius",
+"expr": "hypot(pulley_b_pitch_x - pulley_b_axis_x, pulley_b_pitch_y - pulley_b_axis_y)",
+"label": "Motor B pulley: pitch radius measured on the instance",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_a_motor_side",
+"expr": "(anchor_a_left_x - left_toothed_span_x) + (rear_left_tangent_y - left_toothed_tangent_y)",
+"label": "Belt A: carriage to motor, measured",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "belt_b_motor_side",
+"expr": "(right_toothed_span_x - anchor_b_right_x) + (rear_right_tangent_y - right_toothed_tangent_y)",
+"label": "Belt B: carriage to motor, measured",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "nozzle_radial",
+"expr": "hypot(nozzle_x - vase_axis_x, nozzle_y - vase_axis_y)",
+"label": "Nozzle's distance from the vase's axis",
+"unit": "mm"
+}
+],
+[
+"variable.output",
+{
+"name": "rim_radial",
+"expr": "hypot(rim_x - vase_axis_x, rim_y - vase_axis_y)",
+"label": "The vase's rim: its wall centre, read off the vase",
+"unit": "mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Motor A turns by the CoreXY equation for the measured carriage and the drawn pulley",
+"measure": "value",
+"expr": "motor_a_measured / (1 rad) * pulley_a_radius - (head_x - gantry_y)",
+"eq": "0 mm",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Motor B turns by the CoreXY equation for the measured carriage and the drawn pulley",
+"measure": "value",
+"expr": "motor_b_measured / (1 rad) * pulley_b_radius - (head_x + gantry_y)",
+"eq": "0 mm",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt A is one constant length over the motion",
+"measure": "value",
+"expr": "belt_a_moving",
+"eq": "belt_moving_expected",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt B is one constant length over the motion",
+"measure": "value",
+"expr": "belt_b_moving",
+"eq": "belt_moving_expected",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt A's motor pays out what the carriage side takes up",
+"measure": "value",
+"expr": "belt_a_motor_side - motor_a_measured / (1 rad) * pulley_a_radius",
+"eq": "2 * track_half - sizes[\"all\"].tower_x",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt B's motor pays out what the carriage side takes up",
+"measure": "value",
+"expr": "belt_b_motor_side + motor_b_measured / (1 rad) * pulley_b_radius",
+"eq": "2 * track_half - sizes[\"all\"].tower_x",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Frame idlers roll with their belts",
+"measure": "value",
+"expr": "max(abs(idler_a_rear_measured / (1 rad) * pulley_a_radius - (belt_a_motor_side - (2 * track_half - sizes[\"all\"].tower_x))), max(abs(idler_a_front_measured / (1 rad) * pulley_a_radius - (belt_a_motor_side - (2 * track_half - sizes[\"all\"].tower_x))), max(abs(idler_b_rear_measured / (1 rad) * pulley_b_radius - (2 * track_half - sizes[\"all\"].tower_x - belt_b_motor_side)), abs(idler_b_front_measured / (1 rad) * pulley_b_radius - (2 * track_half - sizes[\"all\"].tower_x - belt_b_motor_side)))))",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Gantry idlers roll with their belts",
+"measure": "value",
+"expr": "max(abs(idler_a_left_measured / (1 rad) * pulley_a_radius - ((anchor_a_left_x - left_toothed_span_x) - (track_half - sizes[\"all\"].tower_x))), max(abs(idler_a_right_measured / (1 rad) * back_pitch_radius + ((track_half - sizes[\"all\"].tower_x) - (right_back_span_x - anchor_a_right_x))), max(abs(idler_b_left_measured / (1 rad) * back_pitch_radius + ((anchor_b_left_x - left_back_span_x) - (track_half - sizes[\"all\"].tower_x))), abs(idler_b_right_measured / (1 rad) * pulley_b_radius - ((track_half - sizes[\"all\"].tower_x) - (right_toothed_span_x - anchor_b_right_x))))))",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Toothed idler turns on its pin with its running fit",
+"measure": "clearance",
+"from": "Idler A left",
+"to": "Gantry/End left/Idler bolt",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Back idler turns on its pin with its running fit",
+"measure": "clearance",
+"from": "Idler A right",
+"to": "Gantry/End right/Idler bolt",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Motor pulley sits on its shaft with its fit",
+"measure": "clearance",
+"from": "Motor A pulley",
+"to": "Frame/Motor A stator/Shaft",
+"min": "0.02 mm",
+"max": "0.1 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt A's drawn spans reach the toolhead clamps",
+"measure": "value",
+"expr": "max(abs(anchor_a_left_x - a_left_end_x - span_gap), abs(a_right_end_x - anchor_a_right_x - span_gap))",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Belt B's drawn spans reach the toolhead clamps",
+"measure": "value",
+"expr": "max(abs(b_right_end_x - anchor_b_right_x - span_gap), abs(anchor_b_left_x - b_left_end_x - span_gap))",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "The drawn Y spans reach the gantry idlers",
+"measure": "value",
+"expr": "max(abs(a_rear_end_y - left_toothed_tangent_y - span_gap), max(abs(right_back_tangent_y - a_front_end_y - span_gap), max(abs(b_rear_end_y - right_toothed_tangent_y - span_gap), abs(left_back_tangent_y - b_front_end_y - span_gap))))",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Nozzle runs over the rim radially",
+"measure": "value",
+"expr": "nozzle_radial - rim_radial",
+"eq": "0 mm",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Nozzle is one layer above the rim",
+"measure": "value",
+"expr": "nozzle_z - rim_z",
+"eq": "sizes[\"all\"].layer_height",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Nozzle clears the wall by about one layer",
+"measure": "clearance",
+"from": "Toolhead/Hot end/Nozzle",
+"to": "Vase",
+"min": "0.1 mm",
+"max": "0.35 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Bed follows the left screw",
+"measure": "value",
+"expr": "bed_z - first_layer_bed + screw_left_measured / (360 deg) * sizes[\"all\"].lead",
+"eq": "0 mm",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Bed follows the right screw",
+"measure": "value",
+"expr": "bed_z - first_layer_bed + screw_right_measured / (360 deg) * sizes[\"all\"].lead",
+"eq": "0 mm",
+"tol": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Bed is at the first layer at the start",
+"measure": "value",
+"expr": "bed_z",
+"eq": "first_layer_bed",
+"tol": "0.02 mm",
+"when": "abs(t) < 0.0001"
+}
+],
+[
+"assert.add",
+{
+"name": "Bed has dropped the full print height at the end",
+"measure": "value",
+"expr": "bed_z",
+"eq": "nozzle_tip_height - sizes[\"all\"].layer_height - vase_height",
+"tol": "0.02 mm",
+"when": "abs(t - 1) < 0.0001"
+}
+],
+[
+"assert.add",
+{
+"name": "Left nut floats by the screw's misalignment",
+"measure": "value",
+"expr": "hypot(float_left_x - sizes[\"all\"].z_misalignment, float_left_y - sizes[\"all\"].float_y_share * sizes[\"all\"].z_misalignment)",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Right nut floats by the screw's misalignment",
+"measure": "value",
+"expr": "hypot(float_right_x + sizes[\"all\"].z_misalignment, float_right_y - sizes[\"all\"].float_y_share * sizes[\"all\"].z_misalignment)",
+"max": "0.02 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Toolhead stays on its rail",
+"measure": "value",
+"expr": "abs(head_x)",
+"max": "(frame_size - sizes[\"all\"].x_rail_cut) / 2 - sizes[\"all\"].carriage_half_length"
+}
+],
+[
+"assert.add",
+{
+"name": "Gantry stays on its rails",
+"measure": "value",
+"expr": "abs(gantry_y)",
+"max": "(frame_size - sizes[\"all\"].y_rail_cut) / 2 - sizes[\"all\"].carriage_half_length"
+}
+],
+[
+"assert.add",
+{
+"name": "Left Y carriage rides its rail with its clearance",
+"measure": "clearance",
+"from": "Gantry/Y carriage left/Carriage",
+"to": "Frame/Y rail west",
+"min": "sizes[\"all\"].carriage_rail_gap_min",
+"max": "sizes[\"all\"].carriage_rail_gap_max"
+}
+],
+[
+"assert.add",
+{
+"name": "X carriage rides its rail with its clearance",
+"measure": "clearance",
+"from": "Toolhead/X carriage/Carriage",
+"to": "Gantry/X rail",
+"min": "sizes[\"all\"].carriage_rail_gap_min",
+"max": "sizes[\"all\"].carriage_rail_gap_max"
+}
+],
+[
+"assert.add",
+{
+"name": "Left Z carriage rides its rail with its clearance",
+"measure": "clearance",
+"from": "Bed/Z carriage left/Carriage",
+"to": "Frame/Z rail west",
+"min": "sizes[\"all\"].carriage_rail_gap_min",
+"max": "sizes[\"all\"].carriage_rail_gap_max"
+}
+],
+[
+"variable.publish",
+{
+"name": "build_size",
+"label": "Build size",
+"group": "Machine",
+"order": 1,
+"min": "200 mm",
+"max": "300 mm",
+"step": "10 mm",
+"description": "Side of the square build area; the frame follows it"
+}
+],
+[
+"variable.publish",
+{
+"name": "vase_height",
+"label": "Vase height",
+"group": "Print",
+"order": 1,
+"min": "120 mm",
+"max": "220 mm",
+"step": "10 mm",
+"description": "Height of the finished spiral vase"
+}
+],
+[
+"variable.publish",
+{
+"name": "vase_belly",
+"label": "Vase belly",
+"group": "Print",
+"order": 2,
+"min": "20 mm",
+"max": "34 mm",
+"step": "2 mm",
+"description": "How far the belly swells beyond the vase's foot radius"
+}
+],
+[
+"variable.publish",
+{
+"name": "spiral_turns",
+"label": "Spiral turns (time-lapse)",
+"group": "Print",
+"order": 3,
+"min": "2",
+"max": "10",
+"step": "1",
+"description": "Turns of the spiral the time-lapse plays over the height; a real print makes hundreds"
+}
+],
+[
+"document.info",
+{
+"title": "CoreXY 3D printer",
+"description": "A desktop CoreXY 3D printer that plays a spiral-vase print as a time-lapse: a 3030 T-slot frame, MGN12 rails, NEMA 17 motors driving two GT2 belts, a Z bed on two T8 lead screws with floating nuts, and a blue vase that grows on the bed as the nozzle runs its rim.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"3D printing",
+"CoreXY",
+"belts",
+"machine building"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

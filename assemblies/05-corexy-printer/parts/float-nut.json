@@ -1,0 +1,471 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "plate_side",
+"unit": "mm"
+},
+{
+"name": "plate_thickness",
+"unit": "mm"
+},
+{
+"name": "bore_radius",
+"unit": "mm"
+},
+{
+"name": "flange_radius",
+"unit": "mm"
+},
+{
+"name": "flange_thickness",
+"unit": "mm"
+},
+{
+"name": "nut_radius",
+"unit": "mm"
+},
+{
+"name": "nut_length",
+"unit": "mm"
+},
+{
+"name": "thread_radius",
+"unit": "mm"
+},
+{
+"name": "float_hole_pitch",
+"unit": "mm"
+},
+{
+"name": "float_hole_grid",
+"unit": "mm"
+},
+{
+"name": "float_slot_radius",
+"unit": "mm"
+},
+{
+"name": "nut_bolt_tap",
+"unit": "mm"
+},
+{
+"name": "nut_flange_hole",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+40,
+4,
+5.5,
+11,
+3.5,
+5.1,
+15,
+4,
+16,
+28,
+3.5,
+1.3,
+1.75
+]
+]
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].plate_side / 2) - (-sizes[\"all\"].plate_side / 2))",
+"((sizes[\"all\"].plate_side / 2) - (-sizes[\"all\"].plate_side / 2))",
+"((0 mm) - (-sizes[\"all\"].plate_thickness))"
+],
+"position": [
+"1 * ((-sizes[\"all\"].plate_side / 2) + (sizes[\"all\"].plate_side / 2)) / 2 - ((sizes[\"all\"].plate_side / 2) - (-sizes[\"all\"].plate_side / 2)) / 2",
+"(-sizes[\"all\"].plate_side / 2)",
+"(-sizes[\"all\"].plate_thickness)"
+],
+"name": "Plate blank block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Plate blank"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].bore_radius",
+"height": "sizes[\"all\"].plate_thickness + 2 mm",
+"position": [
+"0 mm",
+"0 mm",
+"-sizes[\"all\"].plate_thickness - 1 mm"
+],
+"name": "Plate bore tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Plate blank",
+"tool": "Plate bore tool",
+"name": "Float plate bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Plate holes",
+"plane": "xy",
+"offset": "0 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Plate holes",
+"center": [
+"-sizes[\"all\"].float_hole_grid / 2",
+"-sizes[\"all\"].float_hole_grid / 2"
+],
+"radius": "sizes[\"all\"].float_slot_radius"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Plate holes",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].float_hole_grid",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].float_hole_grid"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Plate holes",
+"distance": "sizes[\"all\"].plate_thickness + 1 mm",
+"reversed": true,
+"cut": "Float plate bored",
+"name": "Float plate slotted"
+}
+],
+[
+"sketch.create",
+{
+"name": "Nut bolt holes",
+"plane": "xy",
+"offset": "0 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Nut bolt holes",
+"center": [
+"sizes[\"all\"].float_hole_pitch / 2",
+"0 mm"
+],
+"radius": "sizes[\"all\"].nut_bolt_tap"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Nut bolt holes",
+"entities": [
+"e2"
+],
+"count": 4,
+"angle": "90 deg",
+"center": [
+"0 mm",
+"0 mm"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Nut bolt holes",
+"distance": "sizes[\"all\"].plate_thickness + 1 mm",
+"reversed": true,
+"cut": "Float plate slotted",
+"name": "Float plate"
+}
+],
+[
+"material.preset",
+{
+"body": "Float plate",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"sketch.create",
+{
+"name": "Nut flange section",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Nut flange section",
+"start": [
+"-sizes[\"all\"].plate_thickness",
+"sizes[\"all\"].thread_radius"
+],
+"segments": [
+{
+"line": [
+"-sizes[\"all\"].plate_thickness",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].plate_thickness - sizes[\"all\"].flange_thickness",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].plate_thickness - sizes[\"all\"].flange_thickness",
+"sizes[\"all\"].nut_radius"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].plate_thickness - sizes[\"all\"].nut_length",
+"sizes[\"all\"].nut_radius"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].plate_thickness - sizes[\"all\"].nut_length",
+"sizes[\"all\"].thread_radius"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Nut flange section",
+"axis": "x",
+"name": "T8 nut blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "Nut flange holes",
+"plane": "xy",
+"offset": "-sizes[\"all\"].plate_thickness"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Nut flange holes",
+"center": [
+"sizes[\"all\"].float_hole_pitch / 2",
+"0 mm"
+],
+"radius": "sizes[\"all\"].nut_flange_hole"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Nut flange holes",
+"entities": [
+"e2"
+],
+"count": 4,
+"angle": "90 deg",
+"center": [
+"0 mm",
+"0 mm"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Nut flange holes",
+"distance": "sizes[\"all\"].flange_thickness",
+"reversed": true,
+"cut": "T8 nut blank",
+"name": "T8 nut"
+}
+],
+[
+"material.preset",
+{
+"body": "T8 nut",
+"preset": "steel",
+"color": "#b08d4a",
+"metallic": 0.9,
+"roughness": 0.32
+}
+],
+[
+"datum.plane",
+{
+"name": "Float face",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Thread axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Float plate covers the seat",
+"measure": "extent",
+"of": "Float plate",
+"axis": "x",
+"eq": "sizes[\"all\"].plate_side",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Printable wall",
+"measure": "thickness",
+"of": "Float plate",
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Floating nut plate",
+"description": "An Oldham-style floating nut plate: a printed plate that slides on the bed bracket, carrying a flanged brass T8 nut, so a screw that is off its nominal axis pushes the bed only up.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"lead screw"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -1,0 +1,535 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "overall_length",
+"unit": "mm"
+},
+{
+"name": "block_top",
+"unit": "mm"
+},
+{
+"name": "block_height",
+"unit": "mm"
+},
+{
+"name": "block_length",
+"unit": "mm"
+},
+{
+"name": "block_width",
+"unit": "mm"
+},
+{
+"name": "hole_from_end",
+"unit": "mm"
+},
+{
+"name": "nozzle_flat",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+62,
+-37,
+11.5,
+23,
+16,
+14.5,
+0.5
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Heat sink section",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Heat sink section",
+"start": [
+"0 mm",
+"1 mm"
+],
+"segments": [
+{
+"line": [
+"0 mm",
+"8 mm"
+]
+},
+{
+"line": [
+"-3.7 mm",
+"8 mm"
+]
+},
+{
+"line": [
+"-3.7 mm",
+"6 mm"
+]
+},
+{
+"line": [
+"-8.34 mm",
+"6 mm"
+]
+},
+{
+"line": [
+"-8.34 mm",
+"8 mm"
+]
+},
+{
+"line": [
+"-11.34 mm",
+"8 mm"
+]
+},
+{
+"line": [
+"-11.34 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-13 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-13 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-15.2 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-15.2 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-17 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-17 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-19.2 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-19.2 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-21 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-21 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-23.2 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-23.2 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-25 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-25 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-27.2 mm",
+"11.15 mm"
+]
+},
+{
+"line": [
+"-27.2 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-30 mm",
+"6.5 mm"
+]
+},
+{
+"line": [
+"-30 mm",
+"1 mm"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Heat sink section",
+"axis": "x",
+"name": "Heat sink"
+}
+],
+[
+"material.preset",
+{
+"body": "Heat sink",
+"preset": "aluminium-brushed",
+"color": "#c9ccd2",
+"metallic": 0.65,
+"roughness": 0.45
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "3.5 mm",
+"height": "sizes[\"all\"].block_top * -1 - 30 mm",
+"position": [
+"0 mm",
+"0 mm",
+"sizes[\"all\"].block_top"
+],
+"name": "Heat break"
+}
+],
+[
+"material.preset",
+{
+"body": "Heat break",
+"preset": "steel",
+"color": "#8b9198",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"feature.block",
+{
+"name": "Heater block raw",
+"size": [
+"sizes[\"all\"].block_length",
+"sizes[\"all\"].block_width",
+"sizes[\"all\"].block_height"
+],
+"position": [
+"-(sizes[\"all\"].block_length - sizes[\"all\"].hole_from_end)",
+"-sizes[\"all\"].block_width / 2",
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height"
+]
+}
+],
+[
+"feature.chamfer",
+{
+"name": "Heater block",
+"distance": "0.6 mm",
+"edges": [
+[
+"F4:face(0)",
+"F4:face(2)"
+],
+[
+"F4:face(0)",
+"F4:face(3)"
+],
+[
+"F4:face(0)",
+"F4:face(4)"
+],
+[
+"F4:face(0)",
+"F4:face(5)"
+],
+[
+"F4:face(1)",
+"F4:face(2)"
+],
+[
+"F4:face(1)",
+"F4:face(3)"
+],
+[
+"F4:face(1)",
+"F4:face(4)"
+],
+[
+"F4:face(1)",
+"F4:face(5)"
+],
+[
+"F4:face(2)",
+"F4:face(4)"
+],
+[
+"F4:face(2)",
+"F4:face(5)"
+],
+[
+"F4:face(3)",
+"F4:face(4)"
+],
+[
+"F4:face(3)",
+"F4:face(5)"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Nozzle section",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Nozzle section",
+"start": [
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height",
+"0.3 mm"
+],
+"segments": [
+{
+"line": [
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height",
+"4.5 mm"
+]
+},
+{
+"line": [
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height - 4 mm",
+"4.5 mm"
+]
+},
+{
+"line": [
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height - 5.5 mm",
+"4 mm"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].overall_length + 1.2 mm",
+"2 mm"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].overall_length",
+"sizes[\"all\"].nozzle_flat"
+]
+},
+{
+"line": [
+"-sizes[\"all\"].overall_length",
+"0.3 mm"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Nozzle section",
+"axis": "x",
+"name": "Nozzle"
+}
+],
+[
+"material.preset",
+{
+"body": "Nozzle",
+"preset": "steel",
+"color": "#b8903f",
+"metallic": 0.9,
+"roughness": 0.3
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "3.05 mm",
+"height": "22 mm",
+"axis": [
+0,
+1,
+0
+],
+"position": [
+"6.4 mm",
+"-11 mm",
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height / 2"
+],
+"name": "Cartridge bore tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Heater block",
+"tool": "Cartridge bore tool",
+"name": "Heater block bored"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "3 mm",
+"height": "20 mm",
+"axis": [
+0,
+1,
+0
+],
+"position": [
+"6.4 mm",
+"-10 mm",
+"sizes[\"all\"].block_top - sizes[\"all\"].block_height / 2"
+],
+"name": "Heater cartridge"
+}
+],
+[
+"material.preset",
+{
+"body": "Heater block bored",
+"preset": "aluminium-brushed",
+"color": "#d7dade",
+"metallic": 0.6,
+"roughness": 0.5
+}
+],
+[
+"material.preset",
+{
+"body": "Heater cartridge",
+"preset": "steel",
+"color": "#7b8086",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"datum.plane",
+{
+"name": "Mount",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Nozzle tip",
+"at": [
+"0 mm",
+"0 mm",
+"-sizes[\"all\"].overall_length"
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Nozzle tip is the overall length below the top",
+"measure": "boxMin",
+"of": "Nozzle",
+"axis": "z",
+"eq": "-sizes[\"all\"].overall_length",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Hot end",
+"description": "A V6-class all-metal hot end: finned aluminium heat sink 22.3 mm in diameter, stainless heat break, aluminium heater block 23 x 16 x 11.5 mm, brass nozzle; 62 mm overall.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"3D printing"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

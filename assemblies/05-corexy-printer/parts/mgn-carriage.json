@@ -1,0 +1,347 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "carriage_width",
+"unit": "mm"
+},
+{
+"name": "carriage_height",
+"unit": "mm"
+},
+{
+"name": "base_gap",
+"unit": "mm"
+},
+{
+"name": "metal_length",
+"unit": "mm"
+},
+{
+"name": "overall_length",
+"unit": "mm"
+},
+{
+"name": "channel_half",
+"unit": "mm"
+},
+{
+"name": "channel_top",
+"unit": "mm"
+},
+{
+"name": "bolt_pitch",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+27,
+13,
+3,
+32.4,
+45.4,
+6.3,
+8.5,
+20
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Block section",
+"plane": "yz",
+"offset": "-sizes[\"all\"].metal_length / 2"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Block section",
+"points": [
+[
+"-sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].base_gap"
+],
+[
+"-sizes[\"all\"].channel_half",
+"sizes[\"all\"].base_gap"
+],
+[
+"-sizes[\"all\"].channel_half",
+"sizes[\"all\"].channel_top"
+],
+[
+"sizes[\"all\"].channel_half",
+"sizes[\"all\"].channel_top"
+],
+[
+"sizes[\"all\"].channel_half",
+"sizes[\"all\"].base_gap"
+],
+[
+"sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].base_gap"
+],
+[
+"sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].carriage_height"
+],
+[
+"-sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].carriage_height"
+]
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Block section",
+"distance": "sizes[\"all\"].metal_length",
+"name": "Carriage block"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bolt holes",
+"plane": "xy",
+"offset": "sizes[\"all\"].carriage_height"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bolt holes",
+"center": [
+"-sizes[\"all\"].bolt_pitch / 2",
+"-sizes[\"all\"].bolt_pitch / 2"
+],
+"radius": "1.25 mm"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Bolt holes",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].bolt_pitch",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].bolt_pitch"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bolt holes",
+"distance": "3.5 mm",
+"reversed": true,
+"cut": "Carriage block",
+"name": "Carriage"
+}
+],
+[
+"material.preset",
+{
+"body": "Carriage",
+"preset": "steel",
+"color": "#c3c8cd",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"sketch.create",
+{
+"name": "Seal section",
+"plane": "yz",
+"offset": "sizes[\"all\"].metal_length / 2"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Seal section",
+"points": [
+[
+"-sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].base_gap"
+],
+[
+"-sizes[\"all\"].channel_half",
+"sizes[\"all\"].base_gap"
+],
+[
+"-sizes[\"all\"].channel_half",
+"sizes[\"all\"].channel_top"
+],
+[
+"sizes[\"all\"].channel_half",
+"sizes[\"all\"].channel_top"
+],
+[
+"sizes[\"all\"].channel_half",
+"sizes[\"all\"].base_gap"
+],
+[
+"sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].base_gap"
+],
+[
+"sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].carriage_height"
+],
+[
+"-sizes[\"all\"].carriage_width / 2",
+"sizes[\"all\"].carriage_height"
+]
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Seal section",
+"distance": "(sizes[\"all\"].overall_length - sizes[\"all\"].metal_length) / 2",
+"name": "End seal"
+}
+],
+[
+"feature.mirror",
+{
+"source": "End seal",
+"normal": [
+1,
+0,
+0
+],
+"keep": true,
+"name": "End seal rear"
+}
+],
+[
+"material.preset",
+{
+"body": "End seal",
+"preset": "abs",
+"color": "#17181b",
+"roughness": 0.5
+}
+],
+[
+"material.preset",
+{
+"body": "End seal rear",
+"preset": "abs",
+"color": "#17181b",
+"roughness": 0.5
+}
+],
+[
+"datum.plane",
+{
+"name": "Rail line",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Top",
+"through": [
+[
+"0 mm",
+"0 mm",
+"sizes[\"all\"].carriage_height"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].carriage_height + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"sizes[\"all\"].carriage_height + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Carriage width is MGN12H",
+"measure": "extent",
+"of": "Carriage",
+"axis": "y",
+"eq": "sizes[\"all\"].carriage_width",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Carriage length with its seals is the MGN12H length",
+"measure": "extent",
+"of": [
+"Carriage",
+"End seal",
+"End seal rear"
+],
+"axis": "x",
+"eq": "sizes[\"all\"].overall_length",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "MGN12H carriage",
+"description": "HIWIN MGN12H block, 45.4 x 27 x 13 mm with four M3 holes and black end seals, drawn with its channel clear of the rail.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"linear motion"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

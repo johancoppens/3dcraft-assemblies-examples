@@ -1,0 +1,334 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "frame_width",
+"unit": "mm"
+},
+{
+"name": "front_cap",
+"unit": "mm"
+},
+{
+"name": "corner_chamfer",
+"unit": "mm"
+},
+{
+"name": "boss_diameter",
+"unit": "mm"
+},
+{
+"name": "boss_height",
+"unit": "mm"
+},
+{
+"name": "shaft_diameter",
+"unit": "mm"
+},
+{
+"name": "bolt_spacing",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+42.3,
+6,
+4.5,
+22,
+2,
+5,
+31
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "body_length",
+"expr": "38 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "body_length",
+"label": "Body length",
+"group": "Motor",
+"order": 1,
+"description": "Length of the motor body behind the flange",
+"min": "34 mm",
+"max": "60 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "shaft_length",
+"expr": "24 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "shaft_length",
+"label": "Shaft length",
+"group": "Motor",
+"order": 2,
+"description": "Shaft length from the flange face",
+"min": "16 mm",
+"max": "40 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"sizes[\"all\"].frame_width",
+"sizes[\"all\"].frame_width",
+"body_length - sizes[\"all\"].front_cap"
+],
+"position": [
+"-sizes[\"all\"].frame_width / 2",
+"-sizes[\"all\"].frame_width / 2",
+"-body_length"
+],
+"name": "Stator blank"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "sizes[\"all\"].corner_chamfer",
+"name": "Stator"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"sizes[\"all\"].frame_width",
+"sizes[\"all\"].frame_width",
+"sizes[\"all\"].front_cap"
+],
+"position": [
+"-sizes[\"all\"].frame_width / 2",
+"-sizes[\"all\"].frame_width / 2",
+"-sizes[\"all\"].front_cap"
+],
+"name": "Front cap blank"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "sizes[\"all\"].corner_chamfer",
+"name": "Front cap"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].boss_diameter / 2",
+"height": "sizes[\"all\"].boss_height",
+"position": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Boss"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].shaft_diameter / 2",
+"height": "shaft_length - sizes[\"all\"].boss_height",
+"position": [
+"0 mm",
+"0 mm",
+"sizes[\"all\"].boss_height"
+],
+"name": "Shaft"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bolt circle",
+"plane": "xy",
+"offset": "0 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bolt circle",
+"center": [
+"-sizes[\"all\"].bolt_spacing / 2",
+"-sizes[\"all\"].bolt_spacing / 2"
+],
+"radius": "1.25 mm"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Bolt circle",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].bolt_spacing",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].bolt_spacing"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bolt circle",
+"distance": "4.5 mm",
+"reversed": true,
+"cut": "Front cap",
+"name": "Front cap drilled"
+}
+],
+[
+"material.preset",
+{
+"body": "Stator",
+"preset": "abs",
+"color": "#1a1b1e",
+"roughness": 0.4
+}
+],
+[
+"material.preset",
+{
+"body": "Front cap drilled",
+"preset": "aluminium-brushed",
+"color": "#b9bdc4",
+"metallic": 0.65,
+"roughness": 0.5
+}
+],
+[
+"material.preset",
+{
+"body": "Boss",
+"preset": "aluminium-brushed",
+"color": "#b9bdc4",
+"metallic": 0.65,
+"roughness": 0.5
+}
+],
+[
+"material.preset",
+{
+"body": "Shaft",
+"preset": "steel",
+"color": "#aeb4bb",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"datum.plane",
+{
+"name": "Flange",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Body is the NEMA 17 width",
+"measure": "extent",
+"of": "Stator",
+"axis": "x",
+"eq": "sizes[\"all\"].frame_width",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "NEMA 17 stepper",
+"description": "NEMA 17 stepper body, 42.3 mm square, 31 mm bolt spacing, boss 22 x 2 mm, shaft 5 x 24 mm (Songyang SY42STH38 drawing); a fixed part, the pulley is a separate instance.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"motor"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

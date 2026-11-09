@@ -1,0 +1,336 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "500 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "frame_size",
+"label": "Frame size",
+"group": "Bed",
+"order": 1,
+"min": "400 mm",
+"max": "600 mm",
+"description": "Outer size of the frame, which sets the cross beam length"
+}
+],
+[
+"variable.set",
+{
+"name": "build_size",
+"expr": "250 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "build_size",
+"label": "Build size",
+"group": "Bed",
+"order": 2,
+"min": "200 mm",
+"max": "300 mm",
+"description": "Build area's side, which sets the plate and the arms"
+}
+],
+[
+"variable.set",
+{
+"name": "bed_shift",
+"expr": "57 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bed_shift",
+"label": "Bed shift",
+"group": "Bed",
+"order": 3,
+"min": "0 mm",
+"max": "100 mm",
+"description": "How far the plate's centre stands in front of the cross beam"
+}
+],
+[
+"variable.set",
+{
+"name": "plate_size",
+"expr": "build_size + 50 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "arm_length",
+"expr": "build_size + 30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "cross_length",
+"expr": "frame_size - 126 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/build-plate.3dcraft",
+"name": "Build plate",
+"position": [
+0,
+0,
+0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"plate_size": "plate_size",
+"bed_shift": "bed_shift"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Bed_origin",
+"a": "world/xy",
+"b": "Build plate/Bed origin",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/box-beam.3dcraft",
+"name": "Arm left",
+"position": [
+-120,
+-140,
+-23
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"beam_length": "arm_length"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/box-beam.3dcraft",
+"name": "Arm right",
+"position": [
+120,
+-140,
+-23
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"beam_length": "arm_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Arm_left_on_plate",
+"a": "Build plate/Arm seat left",
+"b": "Arm left/Face z plus",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Arm_right_on_plate",
+"a": "Build plate/Arm seat right",
+"b": "Arm right/Face z plus",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/box-beam.3dcraft",
+"name": "Cross beam",
+"position": [
+-187.0,
+57,
+-53
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"beam_length": "cross_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Cross_on_plate",
+"a": "Build plate/Cross seat",
+"b": "Cross beam/Face z plus",
+"flip": true,
+"offset": "-30 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/bed-bracket.3dcraft",
+"name": "Bracket left",
+"position": [
+-187.0,
+57,
+-53
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "-1"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/bed-bracket.3dcraft",
+"name": "Bracket right",
+"position": [
+187.0,
+57,
+-53
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "1"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Bracket_left",
+"a": "Cross beam/Start",
+"b": "Bracket left/Beam seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Bracket_right",
+"a": "Cross beam/End",
+"b": "Bracket right/Beam seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-carriage.3dcraft",
+"name": "Z carriage left",
+"position": [
+-207.0,
+57,
+-53
+],
+"rotation": [
+127.279,
+0.0,
+127.279
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-carriage.3dcraft",
+"name": "Z carriage right",
+"position": [
+207.0,
+57,
+-53
+],
+"rotation": [
+0.0,
+-90.0,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Z_carriage_left",
+"a": "Bracket left/Z carriage seat",
+"b": "Z carriage left/Top",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Z_carriage_right",
+"a": "Bracket right/Z carriage seat",
+"b": "Z carriage right/Top",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Bed",
+"description": "The moving bed: an aluminium plate on two 3030 arms and a 3030 cross beam, held by two printed brackets on two MGN12H Z carriages, one rigid block on the Z rails.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

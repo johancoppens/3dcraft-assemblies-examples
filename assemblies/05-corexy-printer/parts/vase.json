@@ -1,0 +1,437 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "wall",
+"unit": "mm"
+},
+{
+"name": "floor_thickness",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+0.8,
+2
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "height",
+"expr": "60 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "height",
+"label": "Printed height",
+"group": "Vase",
+"order": 1,
+"description": "Height printed so far, the height of the rim; it follows the motion",
+"min": "3 mm",
+"max": "400 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "full_height",
+"expr": "180 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "full_height",
+"label": "Full height",
+"group": "Vase",
+"order": 2,
+"description": "Height of the finished vase, which its shape is drawn from",
+"min": "50 mm",
+"max": "400 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "foot_radius",
+"expr": "36 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "foot_radius",
+"label": "Foot radius",
+"group": "Vase",
+"order": 3,
+"description": "Radius of the outer wall at the bed",
+"min": "20 mm",
+"max": "120 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "belly",
+"expr": "34 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "belly",
+"label": "Belly",
+"group": "Vase",
+"order": 4,
+"description": "How far the belly swells out from the foot, in the vase's middle",
+"min": "0 mm",
+"max": "60 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "lip_flare",
+"expr": "18 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "lip_flare",
+"label": "Lip flare",
+"group": "Vase",
+"order": 5,
+"description": "Extra flare at the top of the finished vase",
+"min": "0 mm",
+"max": "40 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "drawn_height",
+"expr": "min(height, full_height)"
+}
+],
+[
+"variable.set",
+{
+"name": "rim_radius",
+"expr": "foot_radius + belly * sin(180 deg * min(drawn_height / full_height, 1))^2 + lip_flare * min(drawn_height / full_height, 1)^8 - sizes[\"all\"].wall / 2"
+}
+],
+[
+"sketch.create",
+{
+"name": "Vase section",
+"plane": "zx"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Vase section",
+"points": [
+[
+"sizes[\"all\"].floor_thickness",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"foot_radius"
+],
+[
+"drawn_height * 1 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 1 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 1 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 2 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 2 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 2 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 3 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 3 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 3 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 4 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 4 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 4 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 5 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 5 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 5 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 6 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 6 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 6 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 7 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 7 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 7 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 8 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 8 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 8 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 9 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 9 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 9 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 10 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 10 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 10 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 11 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 11 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 11 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 12 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 12 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 12 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 13 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 13 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 13 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 14 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 14 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 14 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 15 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 15 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 15 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 16 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 16 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 16 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 17 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 17 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 17 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 18 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 18 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 18 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 19 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 19 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 19 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 20 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 20 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 20 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 21 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 21 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 21 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 22 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 22 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 22 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 23 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 23 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 23 / 24) / full_height, 1)^8"
+],
+[
+"drawn_height * 24 / 24",
+"foot_radius + belly * sin(180 deg * min((drawn_height * 24 / 24) / full_height, 1))^2 + lip_flare * min((drawn_height * 24 / 24) / full_height, 1)^8"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 24 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 24 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 24 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 23 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 23 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 23 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 22 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 22 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 22 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 21 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 21 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 21 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 20 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 20 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 20 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 19 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 19 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 19 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 18 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 18 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 18 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 17 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 17 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 17 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 16 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 16 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 16 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 15 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 15 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 15 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 14 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 14 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 14 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 13 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 13 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 13 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 12 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 12 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 12 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 11 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 11 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 11 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 10 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 10 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 10 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 9 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 9 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 9 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 8 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 8 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 8 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 7 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 7 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 7 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 6 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 6 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 6 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 5 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 5 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 5 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 4 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 4 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 4 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 3 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 3 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 3 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 2 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 2 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 2 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 1 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 1 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 1 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+],
+[
+"(sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 0 / 24)",
+"foot_radius + belly * sin(180 deg * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 0 / 24)) / full_height, 1))^2 + lip_flare * min(((sizes[\"all\"].floor_thickness + (drawn_height - sizes[\"all\"].floor_thickness) * 0 / 24)) / full_height, 1)^8 - sizes[\"all\"].wall"
+]
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Vase section",
+"axis": "x",
+"name": "Vase"
+}
+],
+[
+"material.preset",
+{
+"body": "Vase",
+"preset": "abs",
+"color": "#1f5fbf",
+"roughness": 0.4
+}
+],
+[
+"datum.plane",
+{
+"name": "Bed seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Rim point",
+"at": [
+"rim_radius",
+"0 mm",
+"drawn_height"
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Vase height follows the printed height",
+"measure": "extent",
+"of": "Vase",
+"axis": "z",
+"eq": "drawn_height",
+"tol": "0.005"
+}
+],
+[
+"document.info",
+{
+"title": "Vase",
+"description": "The spiral-vase print itself: a body of revolution with a closed formula for its wall, cut at the height printed so far.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"3D printing"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

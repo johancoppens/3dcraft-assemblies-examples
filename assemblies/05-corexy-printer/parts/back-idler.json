@@ -1,0 +1,169 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "outer_radius",
+"unit": "mm"
+},
+{
+"name": "flange_radius",
+"unit": "mm"
+},
+{
+"name": "flange_thickness",
+"unit": "mm"
+},
+{
+"name": "stack_width",
+"unit": "mm"
+},
+{
+"name": "bore_radius",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+6.5,
+7.5,
+1,
+8,
+2.55
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Idler section",
+"plane": "zx"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Idler section",
+"start": [
+"-sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].bore_radius"
+],
+"segments": [
+{
+"line": [
+"-sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].flange_thickness - sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].flange_thickness - sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].outer_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].stack_width / 2 - sizes[\"all\"].flange_thickness",
+"sizes[\"all\"].outer_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].stack_width / 2 - sizes[\"all\"].flange_thickness",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].flange_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].stack_width / 2",
+"sizes[\"all\"].bore_radius"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Idler section",
+"axis": "x",
+"name": "Back idler"
+}
+],
+[
+"material.preset",
+{
+"body": "Back idler",
+"preset": "steel",
+"color": "#c9ced3",
+"metallic": 0.85,
+"roughness": 0.3
+}
+],
+[
+"datum.plane",
+{
+"name": "Belt plane",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Rolling diameter is above the Gates minimum backside idler",
+"measure": "value",
+"expr": "2 * sizes[\"all\"].outer_radius",
+"min": "12.7 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Back idler",
+"description": "Two F695-type flanged bearings back to back, rolling on the belt's smooth back at the back bends: 13 mm outside, flanges 15 mm.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"belt drive"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

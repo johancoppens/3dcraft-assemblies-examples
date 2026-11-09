@@ -1,0 +1,146 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "belt_width",
+"unit": "mm"
+},
+{
+"name": "pitch_to_tooth_side",
+"unit": "mm"
+},
+{
+"name": "pitch_to_back",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+6,
+0.2,
+0.5
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "span_length",
+"expr": "200 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "span_length",
+"label": "Span length",
+"group": "Belt",
+"order": 1,
+"description": "Length of this straight piece of the belt, along its pitch line",
+"min": "1 mm",
+"max": "2000 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"span_length",
+"sizes[\"all\"].pitch_to_tooth_side + sizes[\"all\"].pitch_to_back",
+"sizes[\"all\"].belt_width"
+],
+"position": [
+"0 mm",
+"-sizes[\"all\"].pitch_to_tooth_side",
+"-sizes[\"all\"].belt_width / 2"
+],
+"name": "Belt span"
+}
+],
+[
+"material.preset",
+{
+"body": "Belt span",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"datum.plane",
+{
+"name": "Start",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "End",
+"through": [
+[
+"span_length",
+"0 mm",
+"0 mm"
+],
+[
+"span_length + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"span_length + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Span length",
+"measure": "extent",
+"of": "Belt span",
+"axis": "x",
+"eq": "span_length",
+"tol": "0.001"
+}
+],
+[
+"document.info",
+{
+"title": "Belt span",
+"description": "One straight piece of a GT2 6 mm belt, the belt's backing drawn along its pitch line; the length follows the motion.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

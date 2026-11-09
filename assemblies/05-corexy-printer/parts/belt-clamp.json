@@ -1,0 +1,318 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "clamp_length",
+"unit": "mm"
+},
+{
+"name": "mouth",
+"unit": "mm"
+},
+{
+"name": "clamp_width",
+"unit": "mm"
+},
+{
+"name": "clamp_height",
+"unit": "mm"
+},
+{
+"name": "belt_slot_half",
+"unit": "mm"
+},
+{
+"name": "back_clear",
+"unit": "mm"
+},
+{
+"name": "tooth_clear",
+"unit": "mm"
+},
+{
+"name": "tooth_bottom",
+"unit": "mm"
+},
+{
+"name": "screw_offset",
+"unit": "mm"
+},
+{
+"name": "screw_clear",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+14,
+12,
+7,
+5,
+3.2,
+0.7,
+0.4,
+1.1,
+3.7,
+1.7
+]
+]
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].mouth) - (-2 mm))",
+"((sizes[\"all\"].clamp_width) - (-sizes[\"all\"].clamp_width))",
+"((sizes[\"all\"].clamp_height) - (-sizes[\"all\"].clamp_height))"
+],
+"position": [
+"1 * ((-2 mm) + (sizes[\"all\"].mouth)) / 2 - ((sizes[\"all\"].mouth) - (-2 mm)) / 2",
+"(-sizes[\"all\"].clamp_width)",
+"(-sizes[\"all\"].clamp_height)"
+],
+"name": "Clamp blank block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "0.3 mm",
+"name": "Clamp blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "Slot profile",
+"plane": "xy",
+"offset": "-sizes[\"all\"].belt_slot_half"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Slot profile",
+"points": [
+[
+"sizes[\"all\"].mouth + 1 mm",
+"sizes[\"all\"].back_clear"
+],
+[
+"sizes[\"all\"].mouth + 1 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"12 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"11 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"10 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"9 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"8 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"7 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"6 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"5 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"4 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"3 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"2 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"1 mm",
+"-sizes[\"all\"].tooth_bottom"
+],
+[
+"0 mm",
+"-sizes[\"all\"].tooth_clear"
+],
+[
+"0 mm",
+"sizes[\"all\"].back_clear"
+]
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Slot profile",
+"distance": "2 * sizes[\"all\"].belt_slot_half",
+"cut": "Clamp blank",
+"name": "Clamp slotted"
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp screw",
+"plane": "yz",
+"offset": "sizes[\"all\"].mouth + 1 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screw",
+"center": [
+"sizes[\"all\"].screw_offset",
+"0 mm"
+],
+"radius": "sizes[\"all\"].screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp screw",
+"distance": "sizes[\"all\"].clamp_length + 2 mm",
+"reversed": true,
+"cut": "Clamp slotted",
+"name": "Belt clamp"
+}
+],
+[
+"material.preset",
+{
+"body": "Belt clamp",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Wall around the screw bore",
+"measure": "thickness",
+"of": {
+"kind": "face",
+"where": {
+"hole": true
+}
+},
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Belt clamp",
+"description": "A printed clamp for a belt end: a blind slot with a 2 mm serration that meshes the belt's teeth, one M3 screw into the toolhead's bridge.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

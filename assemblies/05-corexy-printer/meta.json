@@ -1,0 +1,266 @@
+{
+  "id": "corexy-printer",
+  "title": "CoreXY 3D printer",
+  "summary": "CoreXY belts, Z screws, a vase that grows",
+  "description": "A desktop CoreXY FDM printer with a 250 mm build area: a black T-slot frame, MGN12 rails, NEMA 17 motors on two GT2 belts, a bed on two T8 lead screws with floating nuts, and a blue spiral vase printed as a time-lapse while the nozzle runs its rim.",
+  "domain": "3D printing, machine building",
+  "process": "Aluminium extrusion cut to length, FDM printing, machined and bought components",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "A large coupled machine with subassemblies and configurations following t, and full fastener geometry; the couplings stay serial and linear."
+  },
+  "standards": [
+    "HIWIN MGN catalogue (MGN12 rail, MGN12H block)",
+    "Gates PowerGrip GT design manual (2MGT, 20-tooth sprocket dimensions, idler minimums)",
+    "NEMA 17 mounting pattern (Songyang SY42STH38 drawing)"
+  ],
+  "materials": [
+    "Black anodised aluminium extrusion 3030",
+    "Orange PETG printed brackets",
+    "Blue PETG vase",
+    "Hardened steel rails and carriages",
+    "Aluminium heater block and heat sink, brass nozzle"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "one spiral-vase print as a time-lapse: it runs once from the first ring to the finished vase and does not repeat",
+    "samples": 73,
+    "dof": 0
+  },
+  "contacts": [
+    {
+      "pair": [
+        "Frame/Z motor left/*",
+        "Screw left"
+      ],
+      "why": "the lead screw is the motor's shaft (an integrated T8 motor)"
+    },
+    {
+      "pair": [
+        "Frame/Z motor right/*",
+        "Screw right"
+      ],
+      "why": "the lead screw is the motor's shaft (an integrated T8 motor)"
+    },
+    {
+      "pair": [
+        "Screw *",
+        "Nut */*"
+      ],
+      "why": "the thread is the joint: the nut's bore and the screw's crest are drawn line-on-line (F-014)"
+    }
+  ],
+  "preview": {
+    "camera": {
+      "eye": [
+        900,
+        -1240,
+        880
+      ],
+      "target": [
+        0,
+        -20,
+        245
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 28
+    },
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/corexy-printer.step"
+    },
+    {
+      "path": "exports/corner-rear-left.3mf",
+      "part": "corner",
+      "bodies": [
+        "Corner bracket"
+      ],
+      "values": {
+        "hand": -1,
+        "front": 0,
+        "motor_level": "34 mm",
+        "idler_level": "24 mm"
+      }
+    },
+    {
+      "path": "exports/corner-rear-right.3mf",
+      "part": "corner",
+      "bodies": [
+        "Corner bracket"
+      ],
+      "values": {
+        "hand": 1,
+        "front": 0,
+        "motor_level": "24 mm",
+        "idler_level": "34 mm"
+      }
+    },
+    {
+      "path": "exports/corner-front-left.3mf",
+      "part": "corner",
+      "bodies": [
+        "Corner bracket"
+      ],
+      "values": {
+        "hand": 1,
+        "front": 1,
+        "motor_level": "24 mm",
+        "idler_level": "24 mm"
+      }
+    },
+    {
+      "path": "exports/corner-front-right.3mf",
+      "part": "corner",
+      "bodies": [
+        "Corner bracket"
+      ],
+      "values": {
+        "hand": -1,
+        "front": 1,
+        "motor_level": "34 mm",
+        "idler_level": "34 mm"
+      }
+    },
+    {
+      "path": "exports/gantry-end-left.3mf",
+      "part": "gantry-end",
+      "bodies": [
+        "Gantry end"
+      ],
+      "values": {
+        "hand": -1
+      }
+    },
+    {
+      "path": "exports/gantry-end-right.3mf",
+      "part": "gantry-end",
+      "bodies": [
+        "Gantry end"
+      ],
+      "values": {
+        "hand": 1
+      }
+    },
+    {
+      "path": "exports/bed-bracket-left.3mf",
+      "part": "bed-bracket",
+      "bodies": [
+        "Bed bracket"
+      ],
+      "values": {
+        "hand": -1
+      }
+    },
+    {
+      "path": "exports/bed-bracket-right.3mf",
+      "part": "bed-bracket",
+      "bodies": [
+        "Bed bracket"
+      ],
+      "values": {
+        "hand": 1
+      }
+    },
+    {
+      "path": "exports/z-mount-left.3mf",
+      "part": "z-mount",
+      "bodies": [
+        "Z mount"
+      ],
+      "values": {
+        "hand": -1
+      }
+    },
+    {
+      "path": "exports/z-mount-right.3mf",
+      "part": "z-mount",
+      "bodies": [
+        "Z mount"
+      ],
+      "values": {
+        "hand": 1
+      }
+    },
+    {
+      "path": "exports/head-plate.3mf",
+      "part": "head-plate",
+      "bodies": [
+        "Head plate"
+      ]
+    },
+    {
+      "path": "exports/hot-end-clamp.3mf",
+      "part": "head-plate",
+      "bodies": [
+        "Hot end clamp"
+      ]
+    },
+    {
+      "path": "exports/hot-end-cap.3mf",
+      "part": "head-plate",
+      "bodies": [
+        "Hot end cap"
+      ]
+    },
+    {
+      "path": "exports/belt-clamp.3mf",
+      "part": "belt-clamp",
+      "bodies": [
+        "Belt clamp"
+      ]
+    },
+    {
+      "path": "exports/float-plate.3mf",
+      "part": "float-nut",
+      "bodies": [
+        "Float plate"
+      ]
+    },
+    {
+      "path": "exports/corner-cube.3mf",
+      "part": "corner-cube",
+      "bodies": [
+        "Corner cube"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-09",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Built and checked: 0 dof, CoreXY couplings, nozzle on the rim within 0.02 mm and one layer above it at 73 samples, each belt's length constant to 2e-12 mm, bed drop and floats within 0.02 mm, no collisions at 73 samples and at 16 slider corners (13 samples each); the 121-moment collision run was not done. About 65 CLI calls. It guessed the origin, the belt levels, the coupling signs, the Z motors' corners and the slider ranges; these were added to the prompt afterwards, and that wording was not retested."
+  },
+  "stats": {
+    "steps": 1010,
+    "parts": 24,
+    "instances": 27,
+    "configurations": 15,
+    "mates": 31,
+    "couplings": 12,
+    "dof": 0,
+    "parameters": 4,
+    "assertions": 28,
+    "part_assertions": 28,
+    "warnings": 0,
+    "build_s": 4.46,
+    "load_s": 1.25,
+    "load_cpu_s": 3.97,
+    "bake_s": 1.49,
+    "bake_mb": 31.3,
+    "file_bytes": 1182135,
+    "range_worst_s": 4.796
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  },
+  "budget_exception": "File size 1.18 MB: the T-slot profile and the MGN parts shared by the frame, gantry, toolhead and bed subassemblies are packed once per subassembly (findings/A-028-part-packed-per-subassembly). Granted by the coordinator up to 1.2 MB."
+}

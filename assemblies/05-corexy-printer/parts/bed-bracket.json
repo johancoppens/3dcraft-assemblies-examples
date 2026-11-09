@@ -1,0 +1,636 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "screw_side",
+"unit": "mm"
+},
+{
+"name": "carriage_face",
+"unit": "mm"
+},
+{
+"name": "float_u",
+"unit": "mm"
+},
+{
+"name": "float_z",
+"unit": "mm"
+},
+{
+"name": "bracket_half",
+"unit": "mm"
+},
+{
+"name": "bracket_top",
+"unit": "mm"
+},
+{
+"name": "lobe_inboard",
+"unit": "mm"
+},
+{
+"name": "lobe_outboard",
+"unit": "mm"
+},
+{
+"name": "lobe_half",
+"unit": "mm"
+},
+{
+"name": "lobe_thickness",
+"unit": "mm"
+},
+{
+"name": "screw_clearance",
+"unit": "mm"
+},
+{
+"name": "carriage_bolts",
+"unit": "mm"
+},
+{
+"name": "carriage_screw_clear",
+"unit": "mm"
+},
+{
+"name": "float_hole_grid",
+"unit": "mm"
+},
+{
+"name": "lobe_tap",
+"unit": "mm"
+},
+{
+"name": "beam_half",
+"unit": "mm"
+},
+{
+"name": "shelf_reach",
+"unit": "mm"
+},
+{
+"name": "shelf_thick",
+"unit": "mm"
+},
+{
+"name": "beam_bolt_first",
+"unit": "mm"
+},
+{
+"name": "beam_bolt_pitch",
+"unit": "mm"
+},
+{
+"name": "beam_bolt_clear",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+40,
+20,
+10,
+-34,
+20,
+25,
+20,
+30,
+23.5,
+12,
+12,
+20,
+1.7,
+28,
+1.3,
+15,
+24,
+6,
+8,
+10,
+2.75
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "hand",
+"expr": "-1"
+}
+],
+[
+"variable.publish",
+{
+"name": "hand",
+"label": "Hand",
+"group": "Bed bracket",
+"order": 1,
+"description": "-1: left bracket, +1: right bracket",
+"min": "-1",
+"max": "1",
+"step": "2"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].carriage_face) - (0 mm))",
+"((sizes[\"all\"].bracket_half) - (-sizes[\"all\"].bracket_half))",
+"((sizes[\"all\"].bracket_top) - (sizes[\"all\"].float_z))"
+],
+"position": [
+"hand * ((0 mm) + (sizes[\"all\"].carriage_face)) / 2 - ((sizes[\"all\"].carriage_face) - (0 mm)) / 2",
+"(-sizes[\"all\"].bracket_half)",
+"(sizes[\"all\"].float_z)"
+],
+"name": "Bracket block block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "1 mm",
+"name": "Bracket block"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].lobe_outboard) - (-sizes[\"all\"].lobe_inboard))",
+"((-hand * sizes[\"all\"].screw_side + sizes[\"all\"].lobe_half) - (-hand * sizes[\"all\"].screw_side - sizes[\"all\"].lobe_half))",
+"((sizes[\"all\"].float_z + sizes[\"all\"].lobe_thickness) - (sizes[\"all\"].float_z))"
+],
+"position": [
+"hand * ((-sizes[\"all\"].lobe_inboard) + (sizes[\"all\"].lobe_outboard)) / 2 - ((sizes[\"all\"].lobe_outboard) - (-sizes[\"all\"].lobe_inboard)) / 2",
+"(-hand * sizes[\"all\"].screw_side - sizes[\"all\"].lobe_half)",
+"(sizes[\"all\"].float_z)"
+],
+"name": "Nut lobe block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(0)",
+"F3:face(2)"
+],
+[
+"F3:face(0)",
+"F3:face(3)"
+],
+[
+"F3:face(0)",
+"F3:face(4)"
+],
+[
+"F3:face(0)",
+"F3:face(5)"
+],
+[
+"F3:face(1)",
+"F3:face(2)"
+],
+[
+"F3:face(1)",
+"F3:face(3)"
+],
+[
+"F3:face(1)",
+"F3:face(4)"
+],
+[
+"F3:face(1)",
+"F3:face(5)"
+],
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "1 mm",
+"name": "Nut lobe"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((1 mm) - (-sizes[\"all\"].shelf_reach))",
+"((sizes[\"all\"].beam_half) - (-sizes[\"all\"].beam_half))",
+"((-sizes[\"all\"].beam_half) - (-sizes[\"all\"].beam_half - sizes[\"all\"].shelf_thick))"
+],
+"position": [
+"hand * ((-sizes[\"all\"].shelf_reach) + (1 mm)) / 2 - ((1 mm) - (-sizes[\"all\"].shelf_reach)) / 2",
+"(-sizes[\"all\"].beam_half)",
+"(-sizes[\"all\"].beam_half - sizes[\"all\"].shelf_thick)"
+],
+"name": "Beam shelf block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F5:face(0)",
+"F5:face(2)"
+],
+[
+"F5:face(0)",
+"F5:face(3)"
+],
+[
+"F5:face(0)",
+"F5:face(4)"
+],
+[
+"F5:face(0)",
+"F5:face(5)"
+],
+[
+"F5:face(1)",
+"F5:face(2)"
+],
+[
+"F5:face(1)",
+"F5:face(3)"
+],
+[
+"F5:face(1)",
+"F5:face(4)"
+],
+[
+"F5:face(1)",
+"F5:face(5)"
+],
+[
+"F5:face(2)",
+"F5:face(4)"
+],
+[
+"F5:face(2)",
+"F5:face(5)"
+],
+[
+"F5:face(3)",
+"F5:face(4)"
+],
+[
+"F5:face(3)",
+"F5:face(5)"
+]
+],
+"distance": "1 mm",
+"name": "Beam shelf"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Bracket block",
+"tool": "Nut lobe",
+"name": "Bracket and lobe"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Bracket and lobe",
+"tool": "Beam shelf",
+"name": "Bracket printed"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].screw_clearance",
+"height": "sizes[\"all\"].lobe_thickness + 2 mm",
+"position": [
+"hand * sizes[\"all\"].float_u",
+"-hand * sizes[\"all\"].screw_side",
+"sizes[\"all\"].float_z - 1 mm"
+],
+"name": "Screw clearance tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Bracket printed",
+"tool": "Screw clearance tool",
+"name": "Bracket bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Carriage screws",
+"plane": "yz",
+"offset": "hand * sizes[\"all\"].carriage_face / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Carriage screws",
+"center": [
+"-sizes[\"all\"].carriage_bolts / 2",
+"-sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].carriage_screw_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Carriage screws",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].carriage_bolts",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].carriage_bolts"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Carriage screws",
+"distance": "sizes[\"all\"].carriage_face + 2 mm",
+"symmetric": true,
+"cut": "Bracket bored",
+"name": "Bracket drilled"
+}
+],
+[
+"sketch.create",
+{
+"name": "Lobe screws",
+"plane": "xy",
+"offset": "sizes[\"all\"].float_z"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Lobe screws",
+"center": [
+"hand * sizes[\"all\"].float_u - sizes[\"all\"].float_hole_grid / 2",
+"-hand * sizes[\"all\"].screw_side - sizes[\"all\"].float_hole_grid / 2"
+],
+"radius": "sizes[\"all\"].lobe_tap"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Lobe screws",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].float_hole_grid",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].float_hole_grid"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Lobe screws",
+"distance": "sizes[\"all\"].lobe_thickness - 2 mm",
+"cut": "Bracket drilled",
+"name": "Bracket lobe tapped"
+}
+],
+[
+"sketch.create",
+{
+"name": "Beam bolts",
+"plane": "xy",
+"offset": "-sizes[\"all\"].beam_half"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Beam bolts",
+"center": [
+"-hand * sizes[\"all\"].beam_bolt_first",
+"0 mm"
+],
+"radius": "sizes[\"all\"].beam_bolt_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Beam bolts",
+"center": [
+"-hand * (sizes[\"all\"].beam_bolt_first + sizes[\"all\"].beam_bolt_pitch)",
+"0 mm"
+],
+"radius": "sizes[\"all\"].beam_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Beam bolts",
+"distance": "sizes[\"all\"].shelf_thick + 1 mm",
+"reversed": true,
+"cut": "Bracket lobe tapped",
+"name": "Bed bracket"
+}
+],
+[
+"material.preset",
+{
+"body": "Bed bracket",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"datum.plane",
+{
+"name": "Beam seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Z carriage seat",
+"through": [
+[
+"hand * sizes[\"all\"].carriage_face",
+"0 mm",
+"0 mm"
+],
+[
+"hand * sizes[\"all\"].carriage_face + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+],
+[
+"hand * sizes[\"all\"].carriage_face + (0) * 1 mm",
+"0 mm + (hand) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Float seat",
+"through": [
+[
+"hand * sizes[\"all\"].float_u",
+"-hand * sizes[\"all\"].screw_side",
+"sizes[\"all\"].float_z"
+],
+[
+"hand * sizes[\"all\"].float_u + (1) * 1 mm",
+"-hand * sizes[\"all\"].screw_side + (0) * 1 mm",
+"sizes[\"all\"].float_z + (0) * 1 mm"
+],
+[
+"hand * sizes[\"all\"].float_u + (0) * 1 mm",
+"-hand * sizes[\"all\"].screw_side + (1) * 1 mm",
+"sizes[\"all\"].float_z + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Printable wall",
+"measure": "thickness",
+"of": "Bed bracket",
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Bed bracket",
+"description": "Printed bracket joining the bed's cross beam to its Z carriage, with a lobe that carries the floating nut plate at the lead screw.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

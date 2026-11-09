@@ -1,0 +1,1598 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "back_idler_radius",
+"unit": "mm"
+},
+{
+"name": "pitch_to_tooth",
+"unit": "mm"
+},
+{
+"name": "pitch_to_back",
+"unit": "mm"
+},
+{
+"name": "belt_gap",
+"unit": "mm"
+},
+{
+"name": "belt_width",
+"unit": "mm"
+},
+{
+"name": "inset",
+"unit": "mm"
+},
+{
+"name": "span_gap",
+"unit": "mm"
+},
+{
+"name": "roof_bottom",
+"unit": "mm"
+},
+{
+"name": "roof_top",
+"unit": "mm"
+},
+{
+"name": "corner_half",
+"unit": "mm"
+},
+{
+"name": "tower_reach",
+"unit": "mm"
+},
+{
+"name": "tower_reach_u",
+"unit": "mm"
+},
+{
+"name": "tower_chamfer",
+"unit": "mm"
+},
+{
+"name": "cube_step",
+"unit": "mm"
+},
+{
+"name": "cube_half",
+"unit": "mm"
+},
+{
+"name": "foot_gap",
+"unit": "mm"
+},
+{
+"name": "bolt_tap",
+"unit": "mm"
+},
+{
+"name": "spacer_inner",
+"unit": "mm"
+},
+{
+"name": "spacer_outer",
+"unit": "mm"
+},
+{
+"name": "idler_half",
+"unit": "mm"
+},
+{
+"name": "spacer_gap",
+"unit": "mm"
+},
+{
+"name": "floor_start",
+"unit": "mm"
+},
+{
+"name": "floor_reach",
+"unit": "mm"
+},
+{
+"name": "roof_reach_x",
+"unit": "mm"
+},
+{
+"name": "roof_reach_y",
+"unit": "mm"
+},
+{
+"name": "pin_radius",
+"unit": "mm"
+},
+{
+"name": "motor_bore",
+"unit": "mm"
+},
+{
+"name": "boss_recess",
+"unit": "mm"
+},
+{
+"name": "shaft_clear",
+"unit": "mm"
+},
+{
+"name": "rear_tap_depth",
+"unit": "mm"
+},
+{
+"name": "motor_bolt_spacing",
+"unit": "mm"
+},
+{
+"name": "motor_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "idler_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "key_clear",
+"unit": "mm"
+},
+{
+"name": "bolt_head_radius",
+"unit": "mm"
+},
+{
+"name": "bolt_head_height",
+"unit": "mm"
+},
+{
+"name": "tower_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "tower_head_clear",
+"unit": "mm"
+},
+{
+"name": "tower_head_depth",
+"unit": "mm"
+},
+{
+"name": "foot_reach",
+"unit": "mm"
+},
+{
+"name": "foot_height",
+"unit": "mm"
+},
+{
+"name": "foot_screw",
+"unit": "mm"
+},
+{
+"name": "foot_screw_clear",
+"unit": "mm"
+},
+{
+"name": "foot_key_clear",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+6.5,
+0.2,
+0.5,
+0.055,
+6,
+38,
+0.05,
+40,
+45,
+15,
+16,
+17,
+1.2,
+1,
+16,
+0.05,
+2.1,
+2.6,
+4,
+4.5,
+0.05,
+8,
+70,
+29.5,
+59,
+2.5,
+11.2,
+2.2,
+3.5,
+2.8,
+31,
+1.7,
+2.65,
+3.25,
+4.25,
+5,
+4.25,
+7,
+8.5,
+46,
+6,
+36,
+2.75,
+5
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "hand",
+"expr": "-1"
+}
+],
+[
+"variable.publish",
+{
+"name": "hand",
+"label": "Hand",
+"group": "Corner",
+"order": 1,
+"description": "-1: the corner where the part is left of its centre, +1: the mirror image",
+"min": "-1",
+"max": "1",
+"step": "2"
+}
+],
+[
+"variable.set",
+{
+"name": "front",
+"expr": "0"
+}
+],
+[
+"variable.publish",
+{
+"name": "front",
+"label": "Front corner",
+"group": "Corner",
+"order": 2,
+"description": "0 for a rear corner with a motor, 1 for a front corner",
+"min": "0",
+"max": "1",
+"step": "1"
+}
+],
+[
+"variable.set",
+{
+"name": "motor_level",
+"expr": "34 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "motor_level",
+"label": "Motor belt level",
+"group": "Corner",
+"order": 3,
+"description": "Height of the motor belt level above the frame's top face",
+"min": "24 mm",
+"max": "34 mm",
+"step": "10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "idler_level",
+"expr": "24 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "idler_level",
+"label": "Idler belt level",
+"group": "Corner",
+"order": 4,
+"description": "Height of the idler belt level above the frame's top face",
+"min": "24 mm",
+"max": "34 mm",
+"step": "10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "500 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "frame_size",
+"label": "Frame size",
+"group": "Corner",
+"order": 5,
+"description": "Outer size of the frame: it sets the length of the long static belt pieces",
+"min": "300 mm",
+"max": "800 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_pitch_radius",
+"expr": "20 * 2 mm / (2 * pi)"
+}
+],
+[
+"variable.set",
+{
+"name": "back_pitch_radius",
+"expr": "sizes[\"all\"].back_idler_radius + sizes[\"all\"].pitch_to_back + sizes[\"all\"].belt_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "inboard",
+"expr": "-hand"
+}
+],
+[
+"variable.set",
+{
+"name": "idler_inset",
+"expr": "sizes[\"all\"].inset - belt_pitch_radius - back_pitch_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "back_sign",
+"expr": "if(front > 0.5, inboard, hand)"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_start",
+"expr": "if(front > 0.5, 0 deg, if(hand > 0, 0 deg, 90 deg))"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_end",
+"expr": "if(front > 0.5, 180 deg, if(hand > 0, 90 deg, 180 deg))"
+}
+],
+[
+"variable.set",
+{
+"name": "idler_x",
+"expr": "inboard * idler_inset"
+}
+],
+[
+"variable.set",
+{
+"name": "idler_y",
+"expr": "-sizes[\"all\"].inset"
+}
+],
+[
+"variable.set",
+{
+"name": "motor_x",
+"expr": "inboard * sizes[\"all\"].inset"
+}
+],
+[
+"variable.set",
+{
+"name": "span_start_x",
+"expr": "if(front > 0.5, inboard * (idler_inset + belt_pitch_radius), inboard * (sizes[\"all\"].inset - belt_pitch_radius))"
+}
+],
+[
+"variable.set",
+{
+"name": "span_start_y",
+"expr": "-sizes[\"all\"].inset - sizes[\"all\"].span_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "half_frame",
+"expr": "frame_size / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "track_half",
+"expr": "half_frame - 53 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "rear_span_length",
+"expr": "2 * track_half + belt_pitch_radius + back_pitch_radius"
+}
+],
+[
+"variable.set",
+{
+"name": "side_span_length",
+"expr": "2 * track_half"
+}
+],
+[
+"variable.set",
+{
+"name": "floor_bottom",
+"expr": "motor_level - 20 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "floor_top",
+"expr": "floor_bottom + 5 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].tower_reach_u) - (-sizes[\"all\"].corner_half))",
+"((sizes[\"all\"].corner_half) - (-sizes[\"all\"].tower_reach))",
+"((sizes[\"all\"].roof_top) - (sizes[\"all\"].cube_step))"
+],
+"position": [
+"inboard * ((-sizes[\"all\"].corner_half) + (sizes[\"all\"].tower_reach_u)) / 2 - ((sizes[\"all\"].tower_reach_u) - (-sizes[\"all\"].corner_half)) / 2",
+"(-sizes[\"all\"].tower_reach)",
+"(sizes[\"all\"].cube_step)"
+],
+"name": "Corner tower block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "sizes[\"all\"].tower_chamfer",
+"name": "Corner tower"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].floor_reach) - (sizes[\"all\"].floor_start))",
+"((sizes[\"all\"].corner_half) - (-sizes[\"all\"].floor_reach))",
+"((floor_top) - (floor_bottom))"
+],
+"position": [
+"inboard * ((sizes[\"all\"].floor_start) + (sizes[\"all\"].floor_reach)) / 2 - ((sizes[\"all\"].floor_reach) - (sizes[\"all\"].floor_start)) / 2",
+"(-sizes[\"all\"].floor_reach)",
+"(floor_bottom)"
+],
+"name": "Corner floor block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(0)",
+"F3:face(2)"
+],
+[
+"F3:face(0)",
+"F3:face(3)"
+],
+[
+"F3:face(0)",
+"F3:face(4)"
+],
+[
+"F3:face(0)",
+"F3:face(5)"
+],
+[
+"F3:face(1)",
+"F3:face(2)"
+],
+[
+"F3:face(1)",
+"F3:face(3)"
+],
+[
+"F3:face(1)",
+"F3:face(4)"
+],
+[
+"F3:face(1)",
+"F3:face(5)"
+],
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Corner floor"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].roof_reach_x) - (-sizes[\"all\"].corner_half))",
+"((sizes[\"all\"].corner_half) - (-sizes[\"all\"].roof_reach_y))",
+"((sizes[\"all\"].roof_top) - (sizes[\"all\"].roof_bottom))"
+],
+"position": [
+"inboard * ((-sizes[\"all\"].corner_half) + (sizes[\"all\"].roof_reach_x)) / 2 - ((sizes[\"all\"].roof_reach_x) - (-sizes[\"all\"].corner_half)) / 2",
+"(-sizes[\"all\"].roof_reach_y)",
+"(sizes[\"all\"].roof_bottom)"
+],
+"name": "Corner roof block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F5:face(0)",
+"F5:face(2)"
+],
+[
+"F5:face(0)",
+"F5:face(3)"
+],
+[
+"F5:face(0)",
+"F5:face(4)"
+],
+[
+"F5:face(0)",
+"F5:face(5)"
+],
+[
+"F5:face(1)",
+"F5:face(2)"
+],
+[
+"F5:face(1)",
+"F5:face(3)"
+],
+[
+"F5:face(1)",
+"F5:face(4)"
+],
+[
+"F5:face(1)",
+"F5:face(5)"
+],
+[
+"F5:face(2)",
+"F5:face(4)"
+],
+[
+"F5:face(2)",
+"F5:face(5)"
+],
+[
+"F5:face(3)",
+"F5:face(4)"
+],
+[
+"F5:face(3)",
+"F5:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Corner roof"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].foot_reach) - (sizes[\"all\"].cube_half + sizes[\"all\"].foot_gap))",
+"((sizes[\"all\"].corner_half) - (-sizes[\"all\"].corner_half))",
+"((sizes[\"all\"].foot_height) - (0 mm))"
+],
+"position": [
+"inboard * ((sizes[\"all\"].cube_half + sizes[\"all\"].foot_gap) + (sizes[\"all\"].foot_reach)) / 2 - ((sizes[\"all\"].foot_reach) - (sizes[\"all\"].cube_half + sizes[\"all\"].foot_gap)) / 2",
+"(-sizes[\"all\"].corner_half)",
+"(0 mm)"
+],
+"name": "Rail foot block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F7:face(0)",
+"F7:face(2)"
+],
+[
+"F7:face(0)",
+"F7:face(3)"
+],
+[
+"F7:face(0)",
+"F7:face(4)"
+],
+[
+"F7:face(0)",
+"F7:face(5)"
+],
+[
+"F7:face(1)",
+"F7:face(2)"
+],
+[
+"F7:face(1)",
+"F7:face(3)"
+],
+[
+"F7:face(1)",
+"F7:face(4)"
+],
+[
+"F7:face(1)",
+"F7:face(5)"
+],
+[
+"F7:face(2)",
+"F7:face(4)"
+],
+[
+"F7:face(2)",
+"F7:face(5)"
+],
+[
+"F7:face(3)",
+"F7:face(4)"
+],
+[
+"F7:face(3)",
+"F7:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Rail foot"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Corner tower",
+"tool": "Corner floor",
+"name": "Tower and floor"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Tower and floor",
+"tool": "Corner roof",
+"name": "Tower, floor and roof"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Tower, floor and roof",
+"tool": "Rail foot",
+"name": "Corner printed"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].shaft_clear",
+"height": "floor_top - floor_bottom + 2 mm",
+"position": [
+"motor_x",
+"-sizes[\"all\"].inset",
+"floor_bottom - 1 mm"
+],
+"name": "Shaft hole tool",
+"when": "front < 0.5"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Corner printed",
+"tool": "Shaft hole tool",
+"name": "Corner shaft hole",
+"when": "front < 0.5"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].motor_bore",
+"height": "sizes[\"all\"].boss_recess + 1 mm",
+"position": [
+"motor_x",
+"-sizes[\"all\"].inset",
+"floor_bottom - 1 mm"
+],
+"name": "Boss recess tool",
+"when": "front < 0.5"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Corner shaft hole",
+"tool": "Boss recess tool",
+"name": "Corner with motor bore",
+"when": "front < 0.5"
+}
+],
+[
+"sketch.create",
+{
+"name": "Motor bolts",
+"plane": "xy",
+"offset": "floor_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Motor bolts",
+"center": [
+"motor_x - sizes[\"all\"].motor_bolt_spacing / 2",
+"-sizes[\"all\"].inset - sizes[\"all\"].motor_bolt_spacing / 2"
+],
+"radius": "sizes[\"all\"].motor_bolt_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Motor bolts",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].motor_bolt_spacing",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].motor_bolt_spacing"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Motor bolts",
+"distance": "floor_top - floor_bottom + 2 mm",
+"reversed": true,
+"cut": "Corner with motor bore",
+"name": "Corner with motor bolts",
+"when": "front < 0.5"
+}
+],
+[
+"sketch.create",
+{
+"name": "Roof holes",
+"plane": "xy",
+"offset": "sizes[\"all\"].roof_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof holes",
+"center": [
+"idler_x",
+"idler_y"
+],
+"radius": "sizes[\"all\"].idler_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Roof holes",
+"distance": "sizes[\"all\"].roof_top - sizes[\"all\"].roof_bottom + 1 mm",
+"reversed": true,
+"cut": "Corner with motor bolts",
+"name": "Corner roof holed"
+}
+],
+[
+"sketch.create",
+{
+"name": "Roof key holes",
+"plane": "xy",
+"offset": "sizes[\"all\"].roof_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof key holes",
+"center": [
+"motor_x - inboard * sizes[\"all\"].motor_bolt_spacing / 2",
+"-sizes[\"all\"].inset - sizes[\"all\"].motor_bolt_spacing / 2"
+],
+"radius": "sizes[\"all\"].key_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof key holes",
+"center": [
+"motor_x - inboard * sizes[\"all\"].motor_bolt_spacing / 2",
+"-sizes[\"all\"].inset + sizes[\"all\"].motor_bolt_spacing / 2"
+],
+"radius": "sizes[\"all\"].key_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Roof key holes",
+"distance": "sizes[\"all\"].roof_top - sizes[\"all\"].roof_bottom + 1 mm",
+"reversed": true,
+"cut": "Corner roof holed",
+"name": "Corner roof keyed",
+"when": "front < 0.5"
+}
+],
+[
+"sketch.create",
+{
+"name": "Floor thread",
+"plane": "xy",
+"offset": "floor_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Floor thread",
+"center": [
+"idler_x",
+"idler_y"
+],
+"radius": "sizes[\"all\"].bolt_tap"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Floor thread",
+"distance": "if(front > 0.5, floor_top - floor_bottom + 1 mm, sizes[\"all\"].rear_tap_depth)",
+"reversed": true,
+"cut": "Corner roof keyed",
+"name": "Corner floor tapped"
+}
+],
+[
+"sketch.create",
+{
+"name": "Tower bolt",
+"plane": "xy",
+"offset": "sizes[\"all\"].roof_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Tower bolt",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].tower_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Tower bolt",
+"distance": "sizes[\"all\"].roof_top + 1 mm",
+"reversed": true,
+"cut": "Corner floor tapped",
+"name": "Corner tower bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Tower bolt head",
+"plane": "xy",
+"offset": "sizes[\"all\"].roof_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Tower bolt head",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].tower_head_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Tower bolt head",
+"distance": "sizes[\"all\"].tower_head_depth",
+"reversed": true,
+"cut": "Corner tower bored",
+"name": "Corner counterbored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Foot screw",
+"plane": "xy",
+"offset": "sizes[\"all\"].foot_height"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Foot screw",
+"center": [
+"inboard * sizes[\"all\"].foot_screw",
+"0 mm"
+],
+"radius": "sizes[\"all\"].foot_screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Foot screw",
+"distance": "sizes[\"all\"].foot_height + 1 mm",
+"reversed": true,
+"cut": "Corner counterbored",
+"name": "Corner foot drilled"
+}
+],
+[
+"sketch.create",
+{
+"name": "Foot screw access",
+"plane": "xy",
+"offset": "sizes[\"all\"].foot_height"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Foot screw access",
+"center": [
+"inboard * sizes[\"all\"].foot_screw",
+"0 mm"
+],
+"radius": "sizes[\"all\"].foot_key_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Foot screw access",
+"distance": "sizes[\"all\"].roof_bottom - sizes[\"all\"].foot_height",
+"cut": "Corner foot drilled",
+"name": "Corner bracket"
+}
+],
+[
+"material.preset",
+{
+"body": "Corner bracket",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"datum.axis",
+{
+"name": "Idler bolt axis",
+"through": [
+[
+"idler_x",
+"idler_y",
+"0 mm"
+],
+[
+"idler_x",
+"idler_y",
+"1 mm"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Idler bolt section",
+"plane": "zx",
+"offset": "idler_y"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Idler bolt section",
+"start": [
+"floor_top - 2.5 mm",
+"idler_x"
+],
+"segments": [
+{
+"line": [
+"floor_top - 2.5 mm",
+"idler_x + sizes[\"all\"].bolt_tap"
+]
+},
+{
+"line": [
+"floor_top",
+"idler_x + sizes[\"all\"].bolt_tap"
+]
+},
+{
+"line": [
+"floor_top",
+"idler_x + sizes[\"all\"].pin_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top",
+"idler_x + sizes[\"all\"].pin_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top",
+"idler_x + sizes[\"all\"].bolt_head_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top + sizes[\"all\"].bolt_head_height",
+"idler_x + sizes[\"all\"].bolt_head_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top + sizes[\"all\"].bolt_head_height",
+"idler_x"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Idler bolt section",
+"axis": "Idler bolt axis",
+"name": "Idler bolt"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler bolt",
+"preset": "steel",
+"color": "#aeb4bb",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"sketch.create",
+{
+"name": "Spacer sections",
+"plane": "zx",
+"offset": "idler_y"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Spacer sections",
+"closed": true,
+"points": [
+[
+"floor_top",
+"idler_x + sizes[\"all\"].spacer_inner"
+],
+[
+"floor_top",
+"idler_x + sizes[\"all\"].spacer_outer"
+],
+[
+"idler_level - sizes[\"all\"].idler_half - sizes[\"all\"].spacer_gap",
+"idler_x + sizes[\"all\"].spacer_outer"
+],
+[
+"idler_level - sizes[\"all\"].idler_half - sizes[\"all\"].spacer_gap",
+"idler_x + sizes[\"all\"].spacer_inner"
+]
+]
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Spacer sections",
+"closed": true,
+"points": [
+[
+"idler_level + sizes[\"all\"].idler_half + sizes[\"all\"].spacer_gap",
+"idler_x + sizes[\"all\"].spacer_inner"
+],
+[
+"idler_level + sizes[\"all\"].idler_half + sizes[\"all\"].spacer_gap",
+"idler_x + sizes[\"all\"].spacer_outer"
+],
+[
+"sizes[\"all\"].roof_bottom",
+"idler_x + sizes[\"all\"].spacer_outer"
+],
+[
+"sizes[\"all\"].roof_bottom",
+"idler_x + sizes[\"all\"].spacer_inner"
+]
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Spacer sections",
+"axis": "Idler bolt axis",
+"name": "Idler spacers"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler spacers",
+"preset": "steel",
+"color": "#d3d7dc",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"sketch.create",
+{
+"name": "Motor wrap outline",
+"plane": "xy",
+"offset": "(motor_level) - sizes[\"all\"].belt_width / 2"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Motor wrap outline",
+"start": [
+"(motor_x) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_start)",
+"(-sizes[\"all\"].inset) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_start)"
+],
+"segments": [
+{
+"arc": [
+"(motor_x) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_end)",
+"(-sizes[\"all\"].inset) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_end)"
+],
+"center": [
+"motor_x",
+"-sizes[\"all\"].inset"
+]
+},
+{
+"line": [
+"(motor_x) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_end)",
+"(-sizes[\"all\"].inset) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_end)"
+]
+},
+{
+"arc": [
+"(motor_x) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_start)",
+"(-sizes[\"all\"].inset) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_start)"
+],
+"center": [
+"motor_x",
+"-sizes[\"all\"].inset"
+],
+"clockwise": true
+}
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Motor wrap outline",
+"distance": "2 * sizes[\"all\"].belt_width / 2",
+"name": "Motor wrap",
+"when": "front < 0.5"
+}
+],
+[
+"sketch.create",
+{
+"name": "Idler wrap outline",
+"plane": "xy",
+"offset": "(idler_level) - sizes[\"all\"].belt_width / 2"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Idler wrap outline",
+"start": [
+"(idler_x) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_start)",
+"(idler_y) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_start)"
+],
+"segments": [
+{
+"arc": [
+"(idler_x) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_end)",
+"(idler_y) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_end)"
+],
+"center": [
+"idler_x",
+"idler_y"
+]
+},
+{
+"line": [
+"(idler_x) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_end)",
+"(idler_y) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_end)"
+]
+},
+{
+"arc": [
+"(idler_x) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_start)",
+"(idler_y) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_start)"
+],
+"center": [
+"idler_x",
+"idler_y"
+],
+"clockwise": true
+}
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Idler wrap outline",
+"distance": "2 * sizes[\"all\"].belt_width / 2",
+"name": "Idler wrap"
+}
+],
+[
+"feature.block",
+{
+"name": "Rear span",
+"when": "front < 0.5",
+"size": [
+"rear_span_length",
+"sizes[\"all\"].pitch_to_tooth + sizes[\"all\"].pitch_to_back",
+"sizes[\"all\"].belt_width"
+],
+"position": [
+"motor_x + (inboard - 1) / 2 * rear_span_length",
+"-sizes[\"all\"].inset + belt_pitch_radius - sizes[\"all\"].pitch_to_tooth",
+"motor_level - sizes[\"all\"].belt_width / 2"
+]
+}
+],
+[
+"feature.block",
+{
+"name": "Side span",
+"when": "front < 0.5",
+"size": [
+"sizes[\"all\"].pitch_to_tooth + sizes[\"all\"].pitch_to_back",
+"side_span_length",
+"sizes[\"all\"].belt_width"
+],
+"position": [
+"idler_x - inboard * belt_pitch_radius - inboard * (sizes[\"all\"].pitch_to_back - sizes[\"all\"].pitch_to_tooth) / 2 - (sizes[\"all\"].pitch_to_tooth + sizes[\"all\"].pitch_to_back) / 2",
+"-sizes[\"all\"].inset - side_span_length",
+"idler_level - sizes[\"all\"].belt_width / 2"
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Motor wrap",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"material.preset",
+{
+"body": "Idler wrap",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"material.preset",
+{
+"body": "Rear span",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"material.preset",
+{
+"body": "Side span",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"datum.plane",
+{
+"name": "Cube seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"sizes[\"all\"].cube_step"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].cube_step + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"sizes[\"all\"].cube_step + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Motor flange",
+"through": [
+[
+"motor_x",
+"-sizes[\"all\"].inset",
+"floor_bottom"
+],
+[
+"motor_x + (1) * 1 mm",
+"-sizes[\"all\"].inset + (0) * 1 mm",
+"floor_bottom + (0) * 1 mm"
+],
+[
+"motor_x + (0) * 1 mm",
+"-sizes[\"all\"].inset + (1) * 1 mm",
+"floor_bottom + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Motor axis",
+"through": [
+[
+"motor_x",
+"-sizes[\"all\"].inset",
+"motor_level"
+],
+[
+"motor_x + (1) * 1 mm",
+"-sizes[\"all\"].inset + (0) * 1 mm",
+"motor_level + (0) * 1 mm"
+],
+[
+"motor_x + (0) * 1 mm",
+"-sizes[\"all\"].inset + (1) * 1 mm",
+"motor_level + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Idler axis",
+"through": [
+[
+"idler_x",
+"idler_y",
+"idler_level"
+],
+[
+"idler_x + (1) * 1 mm",
+"idler_y + (0) * 1 mm",
+"idler_level + (0) * 1 mm"
+],
+[
+"idler_x + (0) * 1 mm",
+"idler_y + (1) * 1 mm",
+"idler_level + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Y span start",
+"through": [
+[
+"span_start_x",
+"span_start_y",
+"if(front > 0.5, idler_level, motor_level)"
+],
+[
+"span_start_x + (back_sign) * 1 mm",
+"span_start_y + (0) * 1 mm",
+"if(front > 0.5, idler_level, motor_level) + (0) * 1 mm"
+],
+[
+"span_start_x + (0) * 1 mm",
+"span_start_y + (0) * 1 mm",
+"if(front > 0.5, idler_level, motor_level) + (back_sign) * 1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Y tangent",
+"at": [
+"span_start_x",
+"-sizes[\"all\"].inset",
+"if(front > 0.5, idler_level, motor_level)"
+]
+}
+],
+[
+"document.info",
+{
+"title": "Corner bracket",
+"description": "A printed PETG bracket for a top corner of the frame: floor and roof around one or two belt levels, the motor seat at the rear corners, the idler pin and the belt's static wraps and spans.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

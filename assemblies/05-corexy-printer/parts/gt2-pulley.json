@@ -1,0 +1,353 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "teeth"
+},
+{
+"name": "belt_pitch",
+"unit": "mm"
+},
+{
+"name": "bore_diameter",
+"unit": "mm"
+},
+{
+"name": "tooth_zone",
+"unit": "mm"
+},
+{
+"name": "flange_thickness",
+"unit": "mm"
+},
+{
+"name": "hub_radius",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+20,
+2,
+5.1,
+7,
+1,
+8
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "hub_height",
+"expr": "0 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "hub_height",
+"label": "Hub height",
+"group": "Pulley",
+"order": 1,
+"description": "Height of the hub beyond a flange, 0 for an idler",
+"min": "0 mm",
+"max": "12 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hub_side",
+"expr": "-1"
+}
+],
+[
+"variable.publish",
+{
+"name": "hub_side",
+"label": "Hub side",
+"group": "Pulley",
+"order": 2,
+"description": "-1: hub below the lower flange, +1: above the upper flange",
+"min": "-1",
+"max": "1"
+}
+],
+[
+"variable.set",
+{
+"name": "flange_radius",
+"expr": "17.4 mm / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "pitch_radius",
+"expr": "sizes[\"all\"].teeth * sizes[\"all\"].belt_pitch / (2 * pi)"
+}
+],
+[
+"variable.set",
+{
+"name": "land_radius",
+"expr": "pitch_radius - 0.255 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "root_radius",
+"expr": "land_radius - 0.75 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tooth_angle",
+"expr": "360 deg / sizes[\"all\"].teeth"
+}
+],
+[
+"variable.set",
+{
+"name": "land_half",
+"expr": "tooth_angle * 0.22"
+}
+],
+[
+"sketch.create",
+{
+"name": "Tooth ring",
+"plane": "xy",
+"offset": "-sizes[\"all\"].tooth_zone / 2"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Tooth ring",
+"start": [
+"land_radius * cos(land_half)",
+"land_radius * sin(land_half)"
+],
+"segments": [
+{
+"arc": [
+"land_radius * cos(tooth_angle - land_half)",
+"land_radius * sin(tooth_angle - land_half)"
+],
+"center": [
+"0 mm",
+"0 mm"
+]
+},
+{
+"arc": [
+"land_radius * cos(tooth_angle + land_half)",
+"land_radius * sin(tooth_angle + land_half)"
+],
+"through": [
+"root_radius * cos(tooth_angle)",
+"root_radius * sin(tooth_angle)"
+]
+}
+]
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Tooth ring",
+"entities": [
+"e4",
+"e7"
+],
+"chain": [
+"e1",
+"e5"
+],
+"angle": "tooth_angle",
+"center": [
+"0 mm",
+"0 mm"
+],
+"count": "sizes[\"all\"].teeth"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Tooth ring",
+"distance": "sizes[\"all\"].tooth_zone",
+"name": "Tooth core"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "flange_radius",
+"height": "sizes[\"all\"].flange_thickness",
+"position": [
+"0 mm",
+"0 mm",
+"-sizes[\"all\"].tooth_zone / 2 - sizes[\"all\"].flange_thickness"
+],
+"name": "Lower flange"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Tooth core",
+"tool": "Lower flange",
+"name": "Pulley with lower flange"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "flange_radius",
+"height": "sizes[\"all\"].flange_thickness",
+"position": [
+"0 mm",
+"0 mm",
+"sizes[\"all\"].tooth_zone / 2"
+],
+"name": "Upper flange"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Pulley with lower flange",
+"tool": "Upper flange",
+"name": "Pulley with flanges"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].hub_radius",
+"height": "max(hub_height, 0.001 mm)",
+"position": [
+"0 mm",
+"0 mm",
+"if(hub_side < 0, -sizes[\"all\"].tooth_zone / 2 - sizes[\"all\"].flange_thickness - hub_height, sizes[\"all\"].tooth_zone / 2 + sizes[\"all\"].flange_thickness)"
+],
+"name": "Hub",
+"when": "hub_height > 0 mm"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Pulley with flanges",
+"tool": "Hub",
+"name": "Pulley with hub",
+"when": "hub_height > 0 mm"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].bore_diameter / 2",
+"height": "sizes[\"all\"].tooth_zone + 2 * sizes[\"all\"].flange_thickness + 2 * hub_height + 2 mm",
+"position": [
+"0 mm",
+"0 mm",
+"-sizes[\"all\"].tooth_zone / 2 - sizes[\"all\"].flange_thickness - hub_height - 1 mm"
+],
+"name": "Bore tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Pulley with hub",
+"tool": "Bore tool",
+"name": "GT2 pulley"
+}
+],
+[
+"material.preset",
+{
+"body": "GT2 pulley",
+"preset": "aluminium-brushed",
+"color": "#c4c8ce",
+"metallic": 0.7,
+"roughness": 0.45
+}
+],
+[
+"datum.plane",
+{
+"name": "Belt plane",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Pitch point",
+"at": [
+"pitch_radius",
+"0 mm",
+"0 mm"
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Pitch diameter is 20 x 2 mm over pi",
+"measure": "value",
+"expr": "2 * pitch_radius",
+"eq": "12.73 mm",
+"tol": "0.01 mm"
+}
+],
+[
+"document.info",
+{
+"title": "GT2 pulley",
+"description": "A 20-tooth GT2 pulley, 2 mm pitch: pitch diameter 12.73 mm and outside diameter 12.22 mm from the Gates tables, a simplified round groove because the true profile is Gates' own; with a hub on a motor shaft, without one as a toothed idler on its pin.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"belt drive"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

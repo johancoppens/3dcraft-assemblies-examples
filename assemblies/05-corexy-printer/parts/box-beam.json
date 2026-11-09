@@ -1,0 +1,297 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "beam_side",
+"unit": "mm"
+},
+{
+"name": "beam_wall",
+"unit": "mm"
+},
+{
+"name": "corner_round",
+"unit": "mm"
+},
+{
+"name": "end_bolt_first",
+"unit": "mm"
+},
+{
+"name": "end_bolt_pitch",
+"unit": "mm"
+},
+{
+"name": "end_bolt_clear",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+30,
+3,
+2.5,
+8,
+10,
+2.75
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "beam_length",
+"expr": "280 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "beam_length",
+"label": "Length",
+"group": "Beam",
+"order": 1,
+"description": "Cut length of the box section",
+"min": "100 mm",
+"max": "800 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"beam_length",
+"sizes[\"all\"].beam_side",
+"sizes[\"all\"].beam_side"
+],
+"position": [
+"0 mm",
+"-sizes[\"all\"].beam_side / 2",
+"-sizes[\"all\"].beam_side / 2"
+],
+"name": "Box blank"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+]
+],
+"radius": "sizes[\"all\"].corner_round",
+"name": "Rounded blank"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"beam_length + 2 mm",
+"sizes[\"all\"].beam_side - 2 * sizes[\"all\"].beam_wall",
+"sizes[\"all\"].beam_side - 2 * sizes[\"all\"].beam_wall"
+],
+"position": [
+"-1 mm",
+"-sizes[\"all\"].beam_side / 2 + sizes[\"all\"].beam_wall",
+"-sizes[\"all\"].beam_side / 2 + sizes[\"all\"].beam_wall"
+],
+"name": "Bore tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Rounded blank",
+"tool": "Bore tool",
+"name": "Box bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "End bolts",
+"plane": "xy",
+"offset": "sizes[\"all\"].beam_side / 2 + 1 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "End bolts",
+"center": [
+"sizes[\"all\"].end_bolt_first",
+"0 mm"
+],
+"radius": "sizes[\"all\"].end_bolt_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "End bolts",
+"center": [
+"sizes[\"all\"].end_bolt_first + sizes[\"all\"].end_bolt_pitch",
+"0 mm"
+],
+"radius": "sizes[\"all\"].end_bolt_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "End bolts",
+"center": [
+"beam_length - sizes[\"all\"].end_bolt_first",
+"0 mm"
+],
+"radius": "sizes[\"all\"].end_bolt_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "End bolts",
+"center": [
+"beam_length - sizes[\"all\"].end_bolt_first - sizes[\"all\"].end_bolt_pitch",
+"0 mm"
+],
+"radius": "sizes[\"all\"].end_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "End bolts",
+"distance": "sizes[\"all\"].beam_side + 2 mm",
+"reversed": true,
+"cut": "Box bored",
+"name": "Box beam"
+}
+],
+[
+"material.preset",
+{
+"body": "Box beam",
+"preset": "steel",
+"color": "#14161a",
+"metallic": 0.0,
+"roughness": 0.46
+}
+],
+[
+"datum.plane",
+{
+"name": "Start",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "End",
+"through": [
+[
+"beam_length",
+"0 mm",
+"0 mm"
+],
+[
+"beam_length + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"beam_length + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Face z plus",
+"through": [
+[
+"beam_length / 2",
+"0 mm",
+"sizes[\"all\"].beam_side / 2"
+],
+[
+"beam_length / 2 + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].beam_side / 2 + (0) * 1 mm"
+],
+[
+"beam_length / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"sizes[\"all\"].beam_side / 2 + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Beam is 30 mm square",
+"measure": "extent",
+"of": "Box beam",
+"axis": "z",
+"eq": "sizes[\"all\"].beam_side",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Box beam",
+"description": "A 30 x 30 x 3 mm box section of black anodised aluminium, cut to length, with the same datums as the T-slot profile: the bed's arms and cross beam.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

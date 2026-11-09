@@ -1,0 +1,211 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/head-plate.3dcraft",
+"name": "Head plate",
+"position": [
+0,
+0,
+0
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Head_origin",
+"a": "world/xy",
+"b": "Head plate/Origin",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-carriage.3dcraft",
+"name": "X carriage",
+"position": [
+0,
+13,
+0
+],
+"rotation": [
+90.0,
+0.0,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Carriage_on_plate",
+"a": "Head plate/Carriage seat",
+"b": "X carriage/Top",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/hot-end.3dcraft",
+"name": "Hot end",
+"position": [
+0,
+-33,
+12
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Hot_end_in_clamp",
+"a": "Head plate/Hot end seat",
+"b": "Hot end/Mount",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-clamp.3dcraft",
+"name": "Clamp A left",
+"position": [
+-32,
+21.6,
+36
+],
+"rotation": [
+0.0,
+0.0,
+180.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Clamp_A_left",
+"a": "Head plate/Clamp A left",
+"b": "Clamp A left/Seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-clamp.3dcraft",
+"name": "Clamp A right",
+"position": [
+32,
+35.1,
+36
+],
+"rotation": [
+180.0,
+0.0,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Clamp_A_right",
+"a": "Head plate/Clamp A right",
+"b": "Clamp A right/Seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-clamp.3dcraft",
+"name": "Clamp B right",
+"position": [
+32,
+21.6,
+26
+],
+"rotation": [
+180.0,
+0.0,
+0.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Clamp_B_right",
+"a": "Head plate/Clamp B right",
+"b": "Clamp B right/Seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/belt-clamp.3dcraft",
+"name": "Clamp B left",
+"position": [
+-32,
+35.1,
+26
+],
+"rotation": [
+0.0,
+0.0,
+180.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Clamp_B_left",
+"a": "Head plate/Clamp B left",
+"b": "Clamp B left/Seat",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Toolhead",
+"description": "The moving head: the printed plate on its MGN12H carriage, with the hot end and fan, one rigid block on the X rail.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

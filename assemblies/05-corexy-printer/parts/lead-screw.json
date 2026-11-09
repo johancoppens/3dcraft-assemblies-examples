@@ -1,0 +1,126 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "screw_diameter",
+"unit": "mm"
+},
+{
+"name": "screw_tip",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+8,
+1.2
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "screw_length",
+"expr": "380 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "screw_length",
+"label": "Screw length",
+"group": "Screw",
+"order": 1,
+"description": "Length of the T8 lead screw above the motor flange",
+"min": "100 mm",
+"max": "700 mm"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].screw_diameter / 2",
+"height": "screw_length",
+"name": "Screw blank"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+]
+],
+"distance": "sizes[\"all\"].screw_tip",
+"name": "Lead screw"
+}
+],
+[
+"material.preset",
+{
+"body": "Lead screw",
+"preset": "steel",
+"color": "#c2c6cc",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"datum.plane",
+{
+"name": "Seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "T8 diameter",
+"measure": "extent",
+"of": "Lead screw",
+"axis": "x",
+"eq": "sizes[\"all\"].screw_diameter",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "T8 lead screw",
+"description": "T8 x 8 mm lead screw, 4-start: the thread is drawn at its 8 mm crest diameter, the nut is drawn line-on-line, as a thread is in 3DCraft (F-014).",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"lead screw"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

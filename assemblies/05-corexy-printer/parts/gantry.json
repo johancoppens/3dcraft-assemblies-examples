@@ -1,0 +1,230 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "500 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "frame_size",
+"label": "Frame size",
+"group": "Gantry",
+"order": 1,
+"min": "400 mm",
+"max": "600 mm",
+"description": "Outer size of the frame, which sets the beam and rail lengths"
+}
+],
+[
+"variable.set",
+{
+"name": "beam_length",
+"expr": "frame_size - 96 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "x_rail_length",
+"expr": "frame_size - 126 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Beam",
+"position": [
+-202.0,
+0,
+0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"length": "beam_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Beam_datum",
+"a": "world/yz",
+"b": "Beam/Start",
+"flip": true,
+"offset": "-beam_length / 2"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gantry-end.3dcraft",
+"name": "End left",
+"position": [
+-197.0,
+0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "-1"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/gantry-end.3dcraft",
+"name": "End right",
+"position": [
+197.0,
+0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "1"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "End_left_on_beam",
+"a": "Beam/Start",
+"b": "End left/Beam seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "End_right_on_beam",
+"a": "Beam/End",
+"b": "End right/Beam seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-rail.3dcraft",
+"name": "X rail",
+"position": [
+-187.0,
+-15,
+0
+],
+"rotation": [
+90.0,
+0.0,
+0.0
+],
+"params": {
+"rail_length": "x_rail_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "X_rail_on_beam",
+"a": "Beam/Face y minus",
+"b": "X rail/Base",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-carriage.3dcraft",
+"name": "Y carriage left",
+"position": [
+-235.0,
+0,
+2
+],
+"rotation": [
+0.0,
+0.0,
+90.0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-carriage.3dcraft",
+"name": "Y carriage right",
+"position": [
+235.0,
+0,
+2
+],
+"rotation": [
+0.0,
+0.0,
+90.0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Y_carriage_left",
+"a": "End left/Carriage seat",
+"b": "Y carriage left/Top",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Y_carriage_right",
+"a": "End right/Carriage seat",
+"b": "Y carriage right/Top",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Gantry",
+"description": "The X beam of the CoreXY gantry: a 3030 profile with its MGN12 rail, the two printed ends with their idler pins and quarter belt wraps, and the two Y carriages, one rigid block on the Y rails.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

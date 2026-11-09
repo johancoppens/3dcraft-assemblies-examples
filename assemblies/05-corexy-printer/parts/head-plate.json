@@ -1,0 +1,1303 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "back_idler_radius",
+"unit": "mm"
+},
+{
+"name": "pitch_to_tooth",
+"unit": "mm"
+},
+{
+"name": "pitch_to_back",
+"unit": "mm"
+},
+{
+"name": "belt_gap",
+"unit": "mm"
+},
+{
+"name": "belt_width",
+"unit": "mm"
+},
+{
+"name": "anchor_x",
+"unit": "mm"
+},
+{
+"name": "level_high_local",
+"unit": "mm"
+},
+{
+"name": "level_low_local",
+"unit": "mm"
+},
+{
+"name": "beam_offset",
+"unit": "mm"
+},
+{
+"name": "plate_half",
+"unit": "mm"
+},
+{
+"name": "plate_depth",
+"unit": "mm"
+},
+{
+"name": "plate_below",
+"unit": "mm"
+},
+{
+"name": "bridge_half",
+"unit": "mm"
+},
+{
+"name": "bridge_bottom",
+"unit": "mm"
+},
+{
+"name": "bridge_top",
+"unit": "mm"
+},
+{
+"name": "bridge_reach",
+"unit": "mm"
+},
+{
+"name": "clamp_half",
+"unit": "mm"
+},
+{
+"name": "clamp_front",
+"unit": "mm"
+},
+{
+"name": "hot_end_y",
+"unit": "mm"
+},
+{
+"name": "hot_end_top",
+"unit": "mm"
+},
+{
+"name": "clamp_bottom",
+"unit": "mm"
+},
+{
+"name": "clamp_top",
+"unit": "mm"
+},
+{
+"name": "collar_radius",
+"unit": "mm"
+},
+{
+"name": "groove_radius",
+"unit": "mm"
+},
+{
+"name": "top_collar",
+"unit": "mm"
+},
+{
+"name": "groove_width",
+"unit": "mm"
+},
+{
+"name": "lower_collar",
+"unit": "mm"
+},
+{
+"name": "carriage_bolts",
+"unit": "mm"
+},
+{
+"name": "carriage_screw_clear",
+"unit": "mm"
+},
+{
+"name": "head_clear",
+"unit": "mm"
+},
+{
+"name": "head_depth",
+"unit": "mm"
+},
+{
+"name": "clamp_screw_x",
+"unit": "mm"
+},
+{
+"name": "clamp_screw_clear",
+"unit": "mm"
+},
+{
+"name": "clamp_screw_tap",
+"unit": "mm"
+},
+{
+"name": "clamp_screw_depth",
+"unit": "mm"
+},
+{
+"name": "clamp_screw_z",
+"unit": "mm"
+},
+{
+"name": "fan_half",
+"unit": "mm"
+},
+{
+"name": "fan_hole_rise",
+"unit": "mm"
+},
+{
+"name": "fan_depth",
+"unit": "mm"
+},
+{
+"name": "fan_screw_x",
+"unit": "mm"
+},
+{
+"name": "fan_screw_z",
+"unit": "mm"
+},
+{
+"name": "fan_screw_tap",
+"unit": "mm"
+},
+{
+"name": "fan_tap_depth",
+"unit": "mm"
+},
+{
+"name": "neck_axial_clear",
+"unit": "mm"
+},
+{
+"name": "clamp_head_radius",
+"unit": "mm"
+},
+{
+"name": "clamp_head_depth",
+"unit": "mm"
+},
+{
+"name": "anchor_screw_offset",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+6.5,
+0.2,
+0.5,
+0.055,
+6,
+32,
+36,
+26,
+28,
+38,
+8,
+20,
+30,
+20,
+44,
+42,
+16.5,
+47,
+-33,
+12,
+-0.6,
+13,
+8.1,
+6.1,
+3.7,
+4.64,
+3,
+20,
+1.7,
+3,
+3.5,
+11.5,
+1.7,
+1.3,
+6,
+4,
+15,
+27,
+10,
+12,
+9.6,
+1.3,
+5,
+0.1,
+3,
+3.2,
+3.7
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "belt_pitch_radius",
+"expr": "20 * 2 mm / (2 * pi)"
+}
+],
+[
+"variable.set",
+{
+"name": "back_pitch_radius",
+"expr": "sizes[\"all\"].back_idler_radius + sizes[\"all\"].pitch_to_back + sizes[\"all\"].belt_gap"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].plate_half) - (-sizes[\"all\"].plate_half))",
+"((0 mm) - (-sizes[\"all\"].plate_depth))",
+"((sizes[\"all\"].bridge_top) - (-sizes[\"all\"].plate_below))"
+],
+"position": [
+"1 * ((-sizes[\"all\"].plate_half) + (sizes[\"all\"].plate_half)) / 2 - ((sizes[\"all\"].plate_half) - (-sizes[\"all\"].plate_half)) / 2",
+"(-sizes[\"all\"].plate_depth)",
+"(-sizes[\"all\"].plate_below)"
+],
+"name": "Mounting plate block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Mounting plate"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].bridge_half) - (-sizes[\"all\"].bridge_half))",
+"((sizes[\"all\"].bridge_reach) - (0 mm))",
+"((sizes[\"all\"].bridge_top) - (sizes[\"all\"].bridge_bottom))"
+],
+"position": [
+"1 * ((-sizes[\"all\"].bridge_half) + (sizes[\"all\"].bridge_half)) / 2 - ((sizes[\"all\"].bridge_half) - (-sizes[\"all\"].bridge_half)) / 2",
+"(0 mm)",
+"(sizes[\"all\"].bridge_bottom)"
+],
+"name": "Belt bridge block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(0)",
+"F3:face(2)"
+],
+[
+"F3:face(0)",
+"F3:face(3)"
+],
+[
+"F3:face(0)",
+"F3:face(4)"
+],
+[
+"F3:face(0)",
+"F3:face(5)"
+],
+[
+"F3:face(1)",
+"F3:face(2)"
+],
+[
+"F3:face(1)",
+"F3:face(3)"
+],
+[
+"F3:face(1)",
+"F3:face(4)"
+],
+[
+"F3:face(1)",
+"F3:face(5)"
+],
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Belt bridge"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Mounting plate",
+"tool": "Belt bridge",
+"name": "Head printed"
+}
+],
+[
+"sketch.create",
+{
+"name": "Carriage screws",
+"plane": "zx",
+"offset": "-sizes[\"all\"].plate_depth"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Carriage screws",
+"center": [
+"-sizes[\"all\"].carriage_bolts / 2",
+"-sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].carriage_screw_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Carriage screws",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].carriage_bolts",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].carriage_bolts"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Carriage screws",
+"distance": "sizes[\"all\"].plate_depth + 1 mm",
+"cut": "Head printed",
+"name": "Plate drilled"
+}
+],
+[
+"sketch.create",
+{
+"name": "Carriage screw heads",
+"plane": "zx",
+"offset": "-sizes[\"all\"].plate_depth"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Carriage screw heads",
+"center": [
+"-sizes[\"all\"].carriage_bolts / 2",
+"-sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].head_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Carriage screw heads",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].carriage_bolts",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].carriage_bolts"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Carriage screw heads",
+"distance": "sizes[\"all\"].head_depth",
+"cut": "Plate drilled",
+"name": "Plate counterbored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp screw holes",
+"plane": "zx",
+"offset": "-sizes[\"all\"].plate_depth"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screw holes",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"-sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screw holes",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp screw holes",
+"distance": "sizes[\"all\"].clamp_screw_depth",
+"cut": "Plate counterbored",
+"name": "Plate tapped"
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp bridge bores",
+"plane": "yz"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp bridge bores",
+"center": [
+"sizes[\"all\"].beam_offset - belt_pitch_radius - sizes[\"all\"].anchor_screw_offset",
+"sizes[\"all\"].level_high_local"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp bridge bores",
+"center": [
+"sizes[\"all\"].beam_offset + back_pitch_radius - sizes[\"all\"].anchor_screw_offset",
+"sizes[\"all\"].level_high_local"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp bridge bores",
+"center": [
+"sizes[\"all\"].beam_offset - belt_pitch_radius - sizes[\"all\"].anchor_screw_offset",
+"sizes[\"all\"].level_low_local"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp bridge bores",
+"center": [
+"sizes[\"all\"].beam_offset + back_pitch_radius - sizes[\"all\"].anchor_screw_offset",
+"sizes[\"all\"].level_low_local"
+],
+"radius": "sizes[\"all\"].clamp_screw_tap"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp bridge bores",
+"distance": "2 * sizes[\"all\"].bridge_half + 2 mm",
+"symmetric": true,
+"cut": "Plate tapped",
+"name": "Head plate"
+}
+],
+[
+"material.preset",
+{
+"body": "Head plate",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].clamp_half) - (-sizes[\"all\"].clamp_half))",
+"((-sizes[\"all\"].plate_depth) - (sizes[\"all\"].hot_end_y))",
+"((sizes[\"all\"].clamp_top) - (sizes[\"all\"].clamp_bottom))"
+],
+"position": [
+"1 * ((-sizes[\"all\"].clamp_half) + (sizes[\"all\"].clamp_half)) / 2 - ((sizes[\"all\"].clamp_half) - (-sizes[\"all\"].clamp_half)) / 2",
+"(sizes[\"all\"].hot_end_y)",
+"(sizes[\"all\"].clamp_bottom)"
+],
+"name": "Hot end clamp blank block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F18:face(0)",
+"F18:face(2)"
+],
+[
+"F18:face(0)",
+"F18:face(3)"
+],
+[
+"F18:face(0)",
+"F18:face(4)"
+],
+[
+"F18:face(0)",
+"F18:face(5)"
+],
+[
+"F18:face(1)",
+"F18:face(2)"
+],
+[
+"F18:face(1)",
+"F18:face(3)"
+],
+[
+"F18:face(1)",
+"F18:face(4)"
+],
+[
+"F18:face(1)",
+"F18:face(5)"
+],
+[
+"F18:face(2)",
+"F18:face(4)"
+],
+[
+"F18:face(2)",
+"F18:face(5)"
+],
+[
+"F18:face(3)",
+"F18:face(4)"
+],
+[
+"F18:face(3)",
+"F18:face(5)"
+]
+],
+"distance": "0.3 mm",
+"name": "Hot end clamp blank"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].clamp_half) - (-sizes[\"all\"].clamp_half))",
+"((sizes[\"all\"].hot_end_y) - (-sizes[\"all\"].clamp_front))",
+"((sizes[\"all\"].clamp_top) - (sizes[\"all\"].clamp_bottom))"
+],
+"position": [
+"1 * ((-sizes[\"all\"].clamp_half) + (sizes[\"all\"].clamp_half)) / 2 - ((sizes[\"all\"].clamp_half) - (-sizes[\"all\"].clamp_half)) / 2",
+"(-sizes[\"all\"].clamp_front)",
+"(sizes[\"all\"].clamp_bottom)"
+],
+"name": "Hot end cap blank block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F20:face(0)",
+"F20:face(2)"
+],
+[
+"F20:face(0)",
+"F20:face(3)"
+],
+[
+"F20:face(0)",
+"F20:face(4)"
+],
+[
+"F20:face(0)",
+"F20:face(5)"
+],
+[
+"F20:face(1)",
+"F20:face(2)"
+],
+[
+"F20:face(1)",
+"F20:face(3)"
+],
+[
+"F20:face(1)",
+"F20:face(4)"
+],
+[
+"F20:face(1)",
+"F20:face(5)"
+],
+[
+"F20:face(2)",
+"F20:face(4)"
+],
+[
+"F20:face(2)",
+"F20:face(5)"
+],
+[
+"F20:face(3)",
+"F20:face(4)"
+],
+[
+"F20:face(3)",
+"F20:face(5)"
+]
+],
+"distance": "0.3 mm",
+"name": "Hot end cap blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "Neck profile",
+"plane": "zx",
+"offset": "sizes[\"all\"].hot_end_y"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Neck profile",
+"points": [
+[
+"sizes[\"all\"].clamp_bottom - 1 mm",
+"0 mm"
+],
+[
+"sizes[\"all\"].clamp_bottom - 1 mm",
+"sizes[\"all\"].collar_radius"
+],
+[
+"sizes[\"all\"].hot_end_top - sizes[\"all\"].top_collar - sizes[\"all\"].groove_width + sizes[\"all\"].neck_axial_clear",
+"sizes[\"all\"].collar_radius"
+],
+[
+"sizes[\"all\"].hot_end_top - sizes[\"all\"].top_collar - sizes[\"all\"].groove_width + sizes[\"all\"].neck_axial_clear",
+"sizes[\"all\"].groove_radius"
+],
+[
+"sizes[\"all\"].hot_end_top - sizes[\"all\"].top_collar - sizes[\"all\"].neck_axial_clear",
+"sizes[\"all\"].groove_radius"
+],
+[
+"sizes[\"all\"].hot_end_top - sizes[\"all\"].top_collar - sizes[\"all\"].neck_axial_clear",
+"sizes[\"all\"].collar_radius"
+],
+[
+"sizes[\"all\"].clamp_top + 1 mm",
+"sizes[\"all\"].collar_radius"
+],
+[
+"sizes[\"all\"].clamp_top + 1 mm",
+"0 mm"
+]
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Neck profile",
+"axis": "x",
+"cut": "Hot end clamp blank",
+"name": "Hot end clamp bored"
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Neck profile",
+"axis": "x",
+"cut": "Hot end cap blank",
+"name": "Hot end cap bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp screws",
+"plane": "zx",
+"offset": "-sizes[\"all\"].clamp_front - 1 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screws",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"-sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screws",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp screws",
+"distance": "sizes[\"all\"].clamp_front - sizes[\"all\"].plate_depth + 2 mm",
+"cut": "Hot end cap bored",
+"name": "Hot end cap drilled"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp screws",
+"distance": "sizes[\"all\"].clamp_front - sizes[\"all\"].plate_depth + 2 mm",
+"cut": "Hot end clamp bored",
+"name": "Hot end clamp"
+}
+],
+[
+"sketch.create",
+{
+"name": "Clamp screw heads",
+"plane": "zx",
+"offset": "-sizes[\"all\"].clamp_front"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screw heads",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"-sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_head_radius"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Clamp screw heads",
+"center": [
+"sizes[\"all\"].clamp_screw_z",
+"sizes[\"all\"].clamp_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_head_radius"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Clamp screw heads",
+"distance": "sizes[\"all\"].clamp_head_depth",
+"cut": "Hot end cap drilled",
+"name": "Hot end cap recessed"
+}
+],
+[
+"sketch.create",
+{
+"name": "Fan taps",
+"plane": "zx",
+"offset": "-sizes[\"all\"].clamp_front"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Fan taps",
+"center": [
+"sizes[\"all\"].fan_screw_z",
+"-sizes[\"all\"].fan_screw_x"
+],
+"radius": "sizes[\"all\"].fan_screw_tap"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Fan taps",
+"center": [
+"sizes[\"all\"].fan_screw_z",
+"sizes[\"all\"].fan_screw_x"
+],
+"radius": "sizes[\"all\"].fan_screw_tap"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Fan taps",
+"distance": "sizes[\"all\"].fan_tap_depth",
+"cut": "Hot end cap recessed",
+"name": "Hot end cap"
+}
+],
+[
+"material.preset",
+{
+"body": "Hot end cap",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"material.preset",
+{
+"body": "Hot end clamp",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"feature.block",
+{
+"size": [
+"2 * sizes[\"all\"].fan_half",
+"sizes[\"all\"].fan_depth",
+"2 * sizes[\"all\"].fan_half"
+],
+"position": [
+"-sizes[\"all\"].fan_half",
+"-sizes[\"all\"].clamp_front - sizes[\"all\"].fan_depth",
+"sizes[\"all\"].fan_screw_z - sizes[\"all\"].fan_hole_rise"
+],
+"name": "Fan blank block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F38:face(0)",
+"F38:face(2)"
+],
+[
+"F38:face(0)",
+"F38:face(3)"
+],
+[
+"F38:face(0)",
+"F38:face(4)"
+],
+[
+"F38:face(0)",
+"F38:face(5)"
+],
+[
+"F38:face(1)",
+"F38:face(2)"
+],
+[
+"F38:face(1)",
+"F38:face(3)"
+],
+[
+"F38:face(1)",
+"F38:face(4)"
+],
+[
+"F38:face(1)",
+"F38:face(5)"
+],
+[
+"F38:face(2)",
+"F38:face(4)"
+],
+[
+"F38:face(2)",
+"F38:face(5)"
+],
+[
+"F38:face(3)",
+"F38:face(4)"
+],
+[
+"F38:face(3)",
+"F38:face(5)"
+]
+],
+"distance": "1.5 mm",
+"name": "Fan blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "Fan screws",
+"plane": "zx",
+"offset": "-sizes[\"all\"].clamp_front - sizes[\"all\"].fan_depth - 1 mm"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Fan screws",
+"center": [
+"sizes[\"all\"].fan_screw_z",
+"-sizes[\"all\"].fan_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Fan screws",
+"center": [
+"sizes[\"all\"].fan_screw_z",
+"sizes[\"all\"].fan_screw_x"
+],
+"radius": "sizes[\"all\"].clamp_screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Fan screws",
+"distance": "sizes[\"all\"].fan_depth + 2 mm",
+"cut": "Fan blank",
+"name": "Cooling fan"
+}
+],
+[
+"material.preset",
+{
+"body": "Cooling fan",
+"preset": "abs",
+"color": "#141518",
+"roughness": 0.5
+}
+],
+[
+"datum.plane",
+{
+"name": "Origin",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Carriage seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Hot end seat",
+"through": [
+[
+"0 mm",
+"sizes[\"all\"].hot_end_y",
+"sizes[\"all\"].hot_end_top"
+],
+[
+"0 mm + (1) * 1 mm",
+"sizes[\"all\"].hot_end_y + (0) * 1 mm",
+"sizes[\"all\"].hot_end_top + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].hot_end_y + (1) * 1 mm",
+"sizes[\"all\"].hot_end_top + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Clamp A left",
+"through": [
+[
+"-sizes[\"all\"].anchor_x",
+"sizes[\"all\"].beam_offset - belt_pitch_radius",
+"sizes[\"all\"].level_high_local"
+],
+[
+"-sizes[\"all\"].anchor_x + (-1) * 1 mm",
+"sizes[\"all\"].beam_offset - belt_pitch_radius + (0) * 1 mm",
+"sizes[\"all\"].level_high_local + (0) * 1 mm"
+],
+[
+"-sizes[\"all\"].anchor_x + (0) * 1 mm",
+"sizes[\"all\"].beam_offset - belt_pitch_radius + (-1) * 1 mm",
+"sizes[\"all\"].level_high_local + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Clamp A right",
+"through": [
+[
+"sizes[\"all\"].anchor_x",
+"sizes[\"all\"].beam_offset + back_pitch_radius",
+"sizes[\"all\"].level_high_local"
+],
+[
+"sizes[\"all\"].anchor_x + (1) * 1 mm",
+"sizes[\"all\"].beam_offset + back_pitch_radius + (0) * 1 mm",
+"sizes[\"all\"].level_high_local + (0) * 1 mm"
+],
+[
+"sizes[\"all\"].anchor_x + (0) * 1 mm",
+"sizes[\"all\"].beam_offset + back_pitch_radius + (-1) * 1 mm",
+"sizes[\"all\"].level_high_local + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Clamp B right",
+"through": [
+[
+"sizes[\"all\"].anchor_x",
+"sizes[\"all\"].beam_offset - belt_pitch_radius",
+"sizes[\"all\"].level_low_local"
+],
+[
+"sizes[\"all\"].anchor_x + (1) * 1 mm",
+"sizes[\"all\"].beam_offset - belt_pitch_radius + (0) * 1 mm",
+"sizes[\"all\"].level_low_local + (0) * 1 mm"
+],
+[
+"sizes[\"all\"].anchor_x + (0) * 1 mm",
+"sizes[\"all\"].beam_offset - belt_pitch_radius + (-1) * 1 mm",
+"sizes[\"all\"].level_low_local + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Clamp B left",
+"through": [
+[
+"-sizes[\"all\"].anchor_x",
+"sizes[\"all\"].beam_offset + back_pitch_radius",
+"sizes[\"all\"].level_low_local"
+],
+[
+"-sizes[\"all\"].anchor_x + (-1) * 1 mm",
+"sizes[\"all\"].beam_offset + back_pitch_radius + (0) * 1 mm",
+"sizes[\"all\"].level_low_local + (0) * 1 mm"
+],
+[
+"-sizes[\"all\"].anchor_x + (0) * 1 mm",
+"sizes[\"all\"].beam_offset + back_pitch_radius + (-1) * 1 mm",
+"sizes[\"all\"].level_low_local + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Printable wall",
+"measure": "thickness",
+"of": "Head plate",
+"min": "1.2 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Clamp wall",
+"measure": "thickness",
+"of": "Hot end clamp",
+"min": "1.2 mm"
+}
+],
+[
+"assert.add",
+{
+"name": "Cap wall",
+"measure": "thickness",
+"of": "Hot end cap",
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Head plate",
+"description": "The printed X carriage: a plate on the MGN12H block with its four screws, a bridge over the beam carrying the belt clamps, and a two-piece clamp on the hot end's groove neck with a 30 mm cooling fan on its cap.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

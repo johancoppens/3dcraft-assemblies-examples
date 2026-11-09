@@ -1,0 +1,1258 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "motor_shaft",
+"unit": "mm"
+},
+{
+"name": "motor_a_shaft",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+24,
+30
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "500 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "frame_size",
+"label": "Frame size",
+"group": "Frame",
+"order": 1,
+"min": "400 mm",
+"max": "600 mm",
+"description": "Outer size of the cubic frame"
+}
+],
+[
+"variable.set",
+{
+"name": "z_misalignment",
+"expr": "0.3 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "z_misalignment",
+"label": "Lead screw misalignment",
+"group": "Frame",
+"order": 2,
+"min": "0 mm",
+"max": "0.8 mm",
+"description": "How far the Z screw axes stand off the bed's nominal nut seats"
+}
+],
+[
+"variable.set",
+{
+"name": "profile_length",
+"expr": "frame_size - 62 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "mid_upright_length",
+"expr": "frame_size - 60 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "y_rail_length",
+"expr": "frame_size - 110 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "z_rail_length",
+"expr": "frame_size - 100 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube west south bottom",
+"position": [
+-235.0,
+-235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube west south top",
+"position": [
+-235.0,
+-235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube west north bottom",
+"position": [
+-235.0,
+235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube west north top",
+"position": [
+-235.0,
+235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube east south bottom",
+"position": [
+235.0,
+-235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube east south top",
+"position": [
+235.0,
+-235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube east north bottom",
+"position": [
+235.0,
+235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner-cube.3dcraft",
+"name": "Cube east north top",
+"position": [
+235.0,
+235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"frame_size": "frame_size"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Frame_on_floor",
+"a": "world/xy",
+"b": "Cube west south bottom/Frame centre",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail X south bottom",
+"position": [
+-220.0,
+-235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_south_bottom_a",
+"a": "Cube west south bottom/East",
+"b": "Rail X south bottom/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_south_bottom_b",
+"a": "Rail X south bottom/End",
+"b": "Cube east south bottom/West",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail X south top",
+"position": [
+-220.0,
+-235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_south_top_a",
+"a": "Cube west south top/East",
+"b": "Rail X south top/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_south_top_b",
+"a": "Rail X south top/End",
+"b": "Cube east south top/West",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail X north bottom",
+"position": [
+-220.0,
+235.0,
+15
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_north_bottom_a",
+"a": "Cube west north bottom/East",
+"b": "Rail X north bottom/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_north_bottom_b",
+"a": "Rail X north bottom/End",
+"b": "Cube east north bottom/West",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail X north top",
+"position": [
+-220.0,
+235.0,
+485.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_north_top_a",
+"a": "Cube west north top/East",
+"b": "Rail X north top/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RX_north_top_b",
+"a": "Rail X north top/End",
+"b": "Cube east north top/West",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail Y west bottom",
+"position": [
+-235.0,
+-220.0,
+15
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_west_bottom_a",
+"a": "Cube west south bottom/North",
+"b": "Rail Y west bottom/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_west_bottom_b",
+"a": "Rail Y west bottom/End",
+"b": "Cube west north bottom/South",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail Y west top",
+"position": [
+-235.0,
+-220.0,
+485.0
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_west_top_a",
+"a": "Cube west south top/North",
+"b": "Rail Y west top/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_west_top_b",
+"a": "Rail Y west top/End",
+"b": "Cube west north top/South",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail Y east bottom",
+"position": [
+235.0,
+-220.0,
+15
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_east_bottom_a",
+"a": "Cube east south bottom/North",
+"b": "Rail Y east bottom/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_east_bottom_b",
+"a": "Rail Y east bottom/End",
+"b": "Cube east north bottom/South",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Rail Y east top",
+"position": [
+235.0,
+-220.0,
+485.0
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_east_top_a",
+"a": "Cube east south top/North",
+"b": "Rail Y east top/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "RY_east_top_b",
+"a": "Rail Y east top/End",
+"b": "Cube east north top/South",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Upright west south",
+"position": [
+-235.0,
+-235.0,
+30
+],
+"rotation": [
+-69.282,
+-69.282,
+-69.282
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_west_south_a",
+"a": "Cube west south bottom/Top",
+"b": "Upright west south/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_west_south_b",
+"a": "Upright west south/End",
+"b": "Cube west south top/Bottom",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Upright west north",
+"position": [
+-235.0,
+235.0,
+30
+],
+"rotation": [
+-69.282,
+-69.282,
+-69.282
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_west_north_a",
+"a": "Cube west north bottom/Top",
+"b": "Upright west north/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_west_north_b",
+"a": "Upright west north/End",
+"b": "Cube west north top/Bottom",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Upright east south",
+"position": [
+235.0,
+-235.0,
+30
+],
+"rotation": [
+-69.282,
+-69.282,
+-69.282
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_east_south_a",
+"a": "Cube east south bottom/Top",
+"b": "Upright east south/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_east_south_b",
+"a": "Upright east south/End",
+"b": "Cube east south top/Bottom",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Upright east north",
+"position": [
+235.0,
+235.0,
+30
+],
+"rotation": [
+-69.282,
+-69.282,
+-69.282
+],
+"params": {
+"length": "profile_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_east_north_a",
+"a": "Cube east north bottom/Top",
+"b": "Upright east north/Start",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "UP_east_north_b",
+"a": "Upright east north/End",
+"b": "Cube east north top/Bottom",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Mid upright west",
+"position": [
+-235.0,
+0,
+30
+],
+"rotation": [
+0.0,
+-90.0,
+0.0
+],
+"params": {
+"length": "mid_upright_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Mid_west",
+"a": "Rail Y west bottom/Face z plus",
+"b": "Mid upright west/Start",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-rail.3dcraft",
+"name": "Z rail west",
+"position": [
+-220.0,
+0,
+250.0
+],
+"rotation": [
+127.279,
+0.0,
+127.279
+],
+"params": {
+"rail_length": "z_rail_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zrail_west",
+"a": "Mid upright west/Face z minus",
+"b": "Z rail west/Base",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/t-slot-profile.3dcraft",
+"name": "Mid upright east",
+"position": [
+235.0,
+0,
+30
+],
+"rotation": [
+0.0,
+-90.0,
+0.0
+],
+"params": {
+"length": "mid_upright_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Mid_east",
+"a": "Rail Y east bottom/Face z plus",
+"b": "Mid upright east/Start",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-rail.3dcraft",
+"name": "Z rail east",
+"position": [
+220.0,
+0,
+250.0
+],
+"rotation": [
+0.0,
+-90.0,
+0.0
+],
+"params": {
+"rail_length": "z_rail_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zrail_east",
+"a": "Mid upright east/Face z plus",
+"b": "Z rail east/Base",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-rail.3dcraft",
+"name": "Y rail west",
+"position": [
+-235.0,
+-195.0,
+500.0
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"rail_length": "y_rail_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Yrail_west",
+"a": "Rail Y west top/Face z plus",
+"b": "Y rail west/Base",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/mgn-rail.3dcraft",
+"name": "Y rail east",
+"position": [
+235.0,
+-195.0,
+500.0
+],
+"rotation": [
+0,
+0,
+90
+],
+"params": {
+"rail_length": "y_rail_length"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Yrail_east",
+"a": "Rail Y east top/Face z plus",
+"b": "Y rail east/Base",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner.3dcraft",
+"name": "Corner rear left",
+"position": [
+-235.0,
+235.0,
+500.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "-1",
+"front": "0",
+"motor_level": "34 mm",
+"idler_level": "24 mm",
+"frame_size": "frame_size"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Corner_rear_left",
+"a": "Cube west north top/Top",
+"b": "Corner rear left/Cube seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner.3dcraft",
+"name": "Corner rear right",
+"position": [
+235.0,
+235.0,
+500.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "1",
+"front": "0",
+"motor_level": "24 mm",
+"idler_level": "34 mm",
+"frame_size": "frame_size"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Corner_rear_right",
+"a": "Cube east north top/Top",
+"b": "Corner rear right/Cube seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner.3dcraft",
+"name": "Corner front left",
+"position": [
+-235.0,
+-235.0,
+500.0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"hand": "1",
+"front": "1",
+"motor_level": "24 mm",
+"idler_level": "24 mm",
+"frame_size": "frame_size"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Corner_front_left",
+"a": "Cube west south top/Top",
+"b": "Corner front left/Cube seat",
+"flip": true,
+"angle": "180 deg"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/corner.3dcraft",
+"name": "Corner front right",
+"position": [
+235.0,
+-235.0,
+500.0
+],
+"rotation": [
+0,
+0,
+180
+],
+"params": {
+"hand": "-1",
+"front": "1",
+"motor_level": "34 mm",
+"idler_level": "34 mm",
+"frame_size": "frame_size"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Corner_front_right",
+"a": "Cube east south top/Top",
+"b": "Corner front right/Cube seat",
+"flip": true,
+"angle": "180 deg"
+}
+],
+[
+"instance.add",
+{
+"source": "parts/nema17.3dcraft",
+"name": "Motor A stator",
+"position": [
+-197.0,
+197.0,
+514.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"shaft_length": "sizes[\"all\"].motor_a_shaft"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Motor_A_stator",
+"a": "Corner rear left/Motor flange",
+"b": "Motor A stator/Flange",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/nema17.3dcraft",
+"name": "Motor B stator",
+"position": [
+197.0,
+197.0,
+514.0
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"shaft_length": "sizes[\"all\"].motor_shaft"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Motor_B_stator",
+"a": "Corner rear right/Motor flange",
+"b": "Motor B stator/Flange",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/z-mount.3dcraft",
+"name": "Z mount left",
+"position": [
+-235.0,
+0,
+30
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "-1",
+"offset_x": "z_misalignment",
+"offset_y": "0.6 * z_misalignment"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zmount_left",
+"a": "Rail Y west bottom/Face z plus",
+"b": "Z mount left/Rail seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/nema17.3dcraft",
+"name": "Z motor left",
+"position": [
+-197.0,
+40,
+60
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zmotor_left",
+"a": "Z mount left/Motor flange",
+"b": "Z motor left/Flange",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/z-mount.3dcraft",
+"name": "Z mount right",
+"position": [
+235.0,
+0,
+30
+],
+"rotation": [
+0,
+0,
+0
+],
+"params": {
+"hand": "1",
+"offset_x": "-z_misalignment",
+"offset_y": "0.6 * z_misalignment"
+}
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zmount_right",
+"a": "Rail Y east bottom/Face z plus",
+"b": "Z mount right/Rail seat",
+"flip": true
+}
+],
+[
+"instance.add",
+{
+"source": "parts/nema17.3dcraft",
+"name": "Z motor right",
+"position": [
+197.0,
+-40,
+60
+],
+"rotation": [
+0,
+0,
+0
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Zmotor_right",
+"a": "Z mount right/Motor flange",
+"b": "Z motor right/Flange",
+"flip": true
+}
+],
+[
+"document.info",
+{
+"title": "Printer frame",
+"description": "The 3030 T-slot frame of a CoreXY printer with its corner cubes, top corner brackets, MGN12 rails, stationary motors and static belt runs: one rigid block in the machine.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

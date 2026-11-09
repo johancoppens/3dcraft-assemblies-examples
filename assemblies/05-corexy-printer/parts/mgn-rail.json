@@ -1,0 +1,341 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "rail_width",
+"unit": "mm"
+},
+{
+"name": "rail_height",
+"unit": "mm"
+},
+{
+"name": "hole_pitch",
+"unit": "mm"
+},
+{
+"name": "bore",
+"unit": "mm"
+},
+{
+"name": "counterbore",
+"unit": "mm"
+},
+{
+"name": "counterbore_depth",
+"unit": "mm"
+},
+{
+"name": "groove_start",
+"unit": "mm"
+},
+{
+"name": "groove_depth",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+12,
+8,
+25,
+3.5,
+6,
+4.5,
+3.5,
+0.8
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "rail_length",
+"expr": "400 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "rail_length",
+"label": "Rail length",
+"group": "Rail",
+"order": 1,
+"description": "Cut length of the MGN12 rail",
+"min": "100 mm",
+"max": "1000 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hole_count",
+"expr": "floor(rail_length / sizes[\"all\"].hole_pitch)"
+}
+],
+[
+"variable.set",
+{
+"name": "first_hole",
+"expr": "(rail_length - (hole_count - 1) * sizes[\"all\"].hole_pitch) / 2"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rail section",
+"plane": "yz"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Rail section",
+"points": [
+[
+"-sizes[\"all\"].rail_width / 2",
+"0 mm"
+],
+[
+"sizes[\"all\"].rail_width / 2",
+"0 mm"
+],
+[
+"sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].groove_start"
+],
+[
+"sizes[\"all\"].rail_width / 2 - sizes[\"all\"].groove_depth",
+"sizes[\"all\"].groove_start + 0.7 mm"
+],
+[
+"sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].groove_start + 1.4 mm"
+],
+[
+"sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].rail_height - 0.8 mm"
+],
+[
+"sizes[\"all\"].rail_width / 2 - 0.8 mm",
+"sizes[\"all\"].rail_height"
+],
+[
+"0.8 mm - sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].rail_height"
+],
+[
+"-sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].rail_height - 0.8 mm"
+],
+[
+"-sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].groove_start + 1.4 mm"
+],
+[
+"sizes[\"all\"].groove_depth - sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].groove_start + 0.7 mm"
+],
+[
+"-sizes[\"all\"].rail_width / 2",
+"sizes[\"all\"].groove_start"
+]
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rail section",
+"distance": "rail_length",
+"name": "Rail blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bores",
+"plane": "xy",
+"offset": "sizes[\"all\"].rail_height"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bores",
+"center": [
+"first_hole",
+"0 mm"
+],
+"radius": "sizes[\"all\"].bore / 2"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Bores",
+"entities": [
+"e2"
+],
+"count": "hole_count",
+"step": [
+"sizes[\"all\"].hole_pitch",
+"0 mm"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bores",
+"distance": "sizes[\"all\"].rail_height",
+"reversed": true,
+"cut": "Rail blank",
+"name": "Rail bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Counterbores",
+"plane": "xy",
+"offset": "sizes[\"all\"].rail_height"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Counterbores",
+"center": [
+"first_hole",
+"0 mm"
+],
+"radius": "sizes[\"all\"].counterbore / 2"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Counterbores",
+"entities": [
+"e2"
+],
+"count": "hole_count",
+"step": [
+"sizes[\"all\"].hole_pitch",
+"0 mm"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Counterbores",
+"distance": "sizes[\"all\"].counterbore_depth",
+"reversed": true,
+"cut": "Rail bored",
+"name": "Linear rail"
+}
+],
+[
+"material.preset",
+{
+"body": "Linear rail",
+"preset": "steel",
+"color": "#aeb4bb",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"datum.plane",
+{
+"name": "Base",
+"through": [
+[
+"rail_length / 2",
+"0 mm",
+"0 mm"
+],
+[
+"rail_length / 2 + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"rail_length / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Rail line",
+"through": [
+[
+"rail_length / 2",
+"0 mm",
+"0 mm"
+],
+[
+"rail_length / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"rail_length / 2 + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Rail section is MGN12",
+"measure": "extent",
+"of": "Linear rail",
+"axis": "y",
+"eq": "sizes[\"all\"].rail_width",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Rail height is MGN12",
+"measure": "extent",
+"of": "Linear rail",
+"axis": "z",
+"eq": "sizes[\"all\"].rail_height",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "MGN12 rail",
+"description": "Miniature profile rail, HIWIN MGN12 section (12 x 8 mm), bored at 25 mm pitch with M3 counterbores, cut to length.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": [
+"linear motion"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

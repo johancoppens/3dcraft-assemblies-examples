@@ -1,0 +1,498 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "inset",
+"unit": "mm"
+},
+{
+"name": "screw_side",
+"unit": "mm"
+},
+{
+"name": "plate_bottom",
+"unit": "mm"
+},
+{
+"name": "plate_top",
+"unit": "mm"
+},
+{
+"name": "half_depth",
+"unit": "mm"
+},
+{
+"name": "post_half",
+"unit": "mm"
+},
+{
+"name": "plate_reach",
+"unit": "mm"
+},
+{
+"name": "boss_bore",
+"unit": "mm"
+},
+{
+"name": "motor_bolt_spacing",
+"unit": "mm"
+},
+{
+"name": "motor_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "rail_screw_pitch",
+"unit": "mm"
+},
+{
+"name": "rail_screw_clear",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+38,
+40,
+30,
+35,
+23,
+15,
+62,
+12,
+31,
+1.7,
+30,
+2.75
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "hand",
+"expr": "-1"
+}
+],
+[
+"variable.publish",
+{
+"name": "hand",
+"label": "Hand",
+"group": "Z mount",
+"order": 1,
+"description": "-1: the left mount, +1: the right mount (mirror image)",
+"min": "-1",
+"max": "1",
+"step": "2"
+}
+],
+[
+"variable.set",
+{
+"name": "offset_x",
+"expr": "0 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "offset_x",
+"label": "Axis offset x",
+"group": "Z mount",
+"order": 2,
+"description": "Misalignment of the lead screw axis against the bed's nominal nut seat, along the world X axis",
+"min": "-1 mm",
+"max": "1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "offset_y",
+"expr": "0 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "offset_y",
+"label": "Axis offset y",
+"group": "Z mount",
+"order": 3,
+"description": "Misalignment of the lead screw axis against the bed's nominal nut seat, along the world Y axis",
+"min": "-1 mm",
+"max": "1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "inboard",
+"expr": "-hand"
+}
+],
+[
+"variable.set",
+{
+"name": "axis_x",
+"expr": "inboard * sizes[\"all\"].inset + offset_x"
+}
+],
+[
+"variable.set",
+{
+"name": "axis_y",
+"expr": "-hand * sizes[\"all\"].screw_side + offset_y"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].post_half) - (-sizes[\"all\"].post_half))",
+"((-hand * sizes[\"all\"].screw_side + sizes[\"all\"].half_depth) - (-hand * sizes[\"all\"].screw_side - sizes[\"all\"].half_depth))",
+"((sizes[\"all\"].plate_bottom) - (0 mm))"
+],
+"position": [
+"inboard * ((-sizes[\"all\"].post_half) + (sizes[\"all\"].post_half)) / 2 - ((sizes[\"all\"].post_half) - (-sizes[\"all\"].post_half)) / 2",
+"(-hand * sizes[\"all\"].screw_side - sizes[\"all\"].half_depth)",
+"(0 mm)"
+],
+"name": "Mount post block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "1 mm",
+"name": "Mount post"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].plate_reach) - (-sizes[\"all\"].post_half))",
+"((-hand * sizes[\"all\"].screw_side + sizes[\"all\"].half_depth) - (-hand * sizes[\"all\"].screw_side - sizes[\"all\"].half_depth))",
+"((sizes[\"all\"].plate_top) - (sizes[\"all\"].plate_bottom))"
+],
+"position": [
+"inboard * ((-sizes[\"all\"].post_half) + (sizes[\"all\"].plate_reach)) / 2 - ((sizes[\"all\"].plate_reach) - (-sizes[\"all\"].post_half)) / 2",
+"(-hand * sizes[\"all\"].screw_side - sizes[\"all\"].half_depth)",
+"(sizes[\"all\"].plate_bottom)"
+],
+"name": "Mount plate block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(0)",
+"F3:face(2)"
+],
+[
+"F3:face(0)",
+"F3:face(3)"
+],
+[
+"F3:face(0)",
+"F3:face(4)"
+],
+[
+"F3:face(0)",
+"F3:face(5)"
+],
+[
+"F3:face(1)",
+"F3:face(2)"
+],
+[
+"F3:face(1)",
+"F3:face(3)"
+],
+[
+"F3:face(1)",
+"F3:face(4)"
+],
+[
+"F3:face(1)",
+"F3:face(5)"
+],
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Mount plate"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Mount post",
+"tool": "Mount plate",
+"name": "Mount printed"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "sizes[\"all\"].boss_bore",
+"height": "sizes[\"all\"].plate_top - sizes[\"all\"].plate_bottom + 2 mm",
+"position": [
+"axis_x",
+"axis_y",
+"sizes[\"all\"].plate_bottom - 1 mm"
+],
+"name": "Boss bore tool"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Mount printed",
+"tool": "Boss bore tool",
+"name": "Mount bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Motor bolts",
+"plane": "xy",
+"offset": "sizes[\"all\"].plate_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Motor bolts",
+"center": [
+"axis_x - sizes[\"all\"].motor_bolt_spacing / 2",
+"axis_y - sizes[\"all\"].motor_bolt_spacing / 2"
+],
+"radius": "sizes[\"all\"].motor_bolt_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Motor bolts",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"sizes[\"all\"].motor_bolt_spacing",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].motor_bolt_spacing"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Motor bolts",
+"distance": "sizes[\"all\"].plate_top - sizes[\"all\"].plate_bottom + 1 mm",
+"reversed": true,
+"cut": "Mount bored",
+"name": "Mount plate drilled"
+}
+],
+[
+"sketch.create",
+{
+"name": "Rail screws",
+"plane": "xy",
+"offset": "sizes[\"all\"].plate_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Rail screws",
+"center": [
+"0 mm",
+"-hand * sizes[\"all\"].screw_side - sizes[\"all\"].rail_screw_pitch / 2"
+],
+"radius": "sizes[\"all\"].rail_screw_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Rail screws",
+"center": [
+"0 mm",
+"-hand * sizes[\"all\"].screw_side + sizes[\"all\"].rail_screw_pitch / 2"
+],
+"radius": "sizes[\"all\"].rail_screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Rail screws",
+"distance": "sizes[\"all\"].plate_top + 1 mm",
+"reversed": true,
+"cut": "Mount plate drilled",
+"name": "Z mount"
+}
+],
+[
+"material.preset",
+{
+"body": "Z mount",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"datum.plane",
+{
+"name": "Rail seat",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (-1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Motor flange",
+"through": [
+[
+"axis_x",
+"axis_y",
+"sizes[\"all\"].plate_bottom"
+],
+[
+"axis_x + (1) * 1 mm",
+"axis_y + (0) * 1 mm",
+"sizes[\"all\"].plate_bottom + (0) * 1 mm"
+],
+[
+"axis_x + (0) * 1 mm",
+"axis_y + (1) * 1 mm",
+"sizes[\"all\"].plate_bottom + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Printable wall",
+"measure": "thickness",
+"of": "Z mount",
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Z motor mount",
+"description": "Printed bracket on the bottom side rail that hangs a NEMA 17 Z motor with its integrated T8 lead screw; the axis can be set off the bed's nut seat to model misalignment.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

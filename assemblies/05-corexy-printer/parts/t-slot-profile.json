@@ -1,0 +1,841 @@
+[
+[
+"variable.set",
+{
+"name": "length",
+"expr": "300 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "thread_depth",
+"expr": "20 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "length",
+"label": "Length",
+"description": "Cut length of the profile",
+"group": "Profile",
+"order": 1,
+"min": "100 mm",
+"max": "3000 mm",
+"step": "1 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "thread_depth",
+"label": "Thread depth",
+"description": "Depth of the M8 thread tapped into the core bore at each end",
+"group": "Profile",
+"order": 2,
+"min": "12 mm",
+"max": "30 mm",
+"step": "1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "profile_width",
+"expr": "30 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "slot_opening",
+"expr": "8.2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "slot_depth",
+"expr": "9 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "wall_thickness",
+"expr": "2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "undercut_width",
+"expr": "16.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "minimum_wall",
+"expr": "1.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "core_bore",
+"expr": "6.8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tap_major_diameter",
+"expr": "8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_radius",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "mouth_radius",
+"expr": "0.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "die_corner_radius",
+"expr": "0.3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "catalogue_area",
+"expr": "332 * (1 mm)^2"
+}
+],
+[
+"variable.set",
+{
+"name": "catalogue_ix",
+"expr": "28300 * (1 mm)^4"
+}
+],
+[
+"variable.set",
+{
+"name": "half_width",
+"expr": "profile_width / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "lip_level",
+"expr": "half_width - wall_thickness"
+}
+],
+[
+"variable.set",
+{
+"name": "slot_floor_level",
+"expr": "half_width - slot_depth"
+}
+],
+[
+"variable.set",
+{
+"name": "slot_floor_width",
+"expr": "2 * (slot_floor_level - wall_thickness / sqrt(2))"
+}
+],
+[
+"variable.set",
+{
+"name": "flank_height",
+"expr": "(undercut_width - slot_floor_width) / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "flank_top_level",
+"expr": "slot_floor_level + flank_height"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_hole_offset",
+"expr": "(profile_width + undercut_width) / 4"
+}
+],
+[
+"variable.set",
+{
+"name": "corner_hole_diameter",
+"expr": "half_width - undercut_width / 2 - 2 * minimum_wall"
+}
+],
+[
+"variable.set",
+{
+"name": "slot_polar_moment",
+"expr": "slot_opening^3 / 12 * wall_thickness + slot_opening * (half_width^3 - lip_level^3) / 3 + undercut_width^3 / 12 * (lip_level - flank_top_level) + undercut_width * (lip_level^3 - flank_top_level^3) / 3 + ((undercut_width / 2)^4 - (slot_floor_width / 2)^4) / 6 + slot_floor_width * slot_floor_level^2 * flank_height + (slot_floor_width * slot_floor_level + slot_floor_level^2) * flank_height^2 + (slot_floor_width + 4 * slot_floor_level) * flank_height^3 / 3 + flank_height^4 / 2"
+}
+],
+[
+"variable.set",
+{
+"name": "rounds_polar_moment",
+"expr": "4 * (2 * corner_radius^4 * (1 / 3 - pi / 16) + 2 * corner_radius^3 * (half_width - corner_radius) / 3 + 2 * corner_radius^2 * (1 - pi / 4) * (half_width - corner_radius)^2) + 8 * (2 * mouth_radius^4 * (1 / 3 - pi / 16) + mouth_radius^3 * (half_width - slot_opening / 2 - 2 * mouth_radius) / 3 + mouth_radius^2 * (1 - pi / 4) * ((slot_opening / 2 + mouth_radius)^2 + (half_width - mouth_radius)^2)) - 8 * (die_corner_radius^3 * (undercut_width / 2 + slot_opening / 2 + 2 * lip_level) / 3 + die_corner_radius^2 * (1 - pi / 4) * ((undercut_width / 2 - die_corner_radius)^2 + (lip_level - die_corner_radius)^2 - (slot_opening / 2 + die_corner_radius)^2 - (lip_level + die_corner_radius)^2) + 2 * die_corner_radius^4 * (tan(22.5 deg) * (2 + 1 / cos(22.5 deg)^2) / 6 - pi / 16) + 2 * die_corner_radius^3 * (tan(22.5 deg) * (cos(22.5 deg) + 1 / cos(22.5 deg)) / 3 - 2 * sin(22.5 deg) / 3) * ((undercut_width / 2 - die_corner_radius) * cos(22.5 deg) - (flank_top_level + die_corner_radius * tan(22.5 deg)) * sin(22.5 deg) + (slot_floor_width / 2 - die_corner_radius * tan(22.5 deg)) * sin(22.5 deg) - (slot_floor_level + die_corner_radius) * cos(22.5 deg)) + die_corner_radius^2 * (tan(22.5 deg) - pi / 8) * ((undercut_width / 2 - die_corner_radius)^2 + (flank_top_level + die_corner_radius * tan(22.5 deg))^2 + (slot_floor_width / 2 - die_corner_radius * tan(22.5 deg))^2 + (slot_floor_level + die_corner_radius)^2))"
+}
+],
+[
+"variable.set",
+{
+"name": "section_area_closed_form",
+"expr": "profile_width^2 - (4 * corner_radius^2 + 8 * mouth_radius^2) * (1 - pi / 4) + 16 * die_corner_radius^2 * (tan(22.5 deg) - pi / 8) - pi * core_bore^2 / 4 - pi * corner_hole_diameter^2 - 4 * (slot_opening * wall_thickness + undercut_width * (lip_level - flank_top_level) + (undercut_width + slot_floor_width) / 2 * flank_height)"
+}
+],
+[
+"variable.set",
+{
+"name": "section_ix_closed_form",
+"expr": "(profile_width^4 / 6 - rounds_polar_moment - pi * core_bore^4 / 32 - 4 * (pi * corner_hole_diameter^4 / 32 + pi * corner_hole_diameter^2 / 2 * corner_hole_offset^2) - 4 * slot_polar_moment) / 2"
+}
+],
+[
+"sketch.create",
+{
+"name": "Cross section",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Cross section",
+"start": [
+"half_width - corner_radius * (1 - cos(45 deg))",
+"half_width - corner_radius * (1 - cos(45 deg))"
+],
+"segments": [
+{
+"arc": [
+"half_width - corner_radius",
+"half_width"
+],
+"center": [
+"half_width - corner_radius",
+"half_width - corner_radius"
+]
+},
+{
+"line": [
+"slot_opening / 2 + mouth_radius",
+"half_width"
+]
+},
+{
+"arc": [
+"slot_opening / 2",
+"half_width - mouth_radius"
+],
+"center": [
+"slot_opening / 2 + mouth_radius",
+"half_width - mouth_radius"
+]
+},
+{
+"line": [
+"slot_opening / 2",
+"lip_level"
+]
+},
+{
+"line": [
+"undercut_width / 2",
+"lip_level"
+]
+},
+{
+"line": [
+"undercut_width / 2",
+"flank_top_level"
+]
+},
+{
+"line": [
+"slot_floor_width / 2",
+"slot_floor_level"
+]
+},
+{
+"line": [
+"-slot_floor_width / 2",
+"slot_floor_level"
+]
+},
+{
+"line": [
+"-undercut_width / 2",
+"flank_top_level"
+]
+},
+{
+"line": [
+"-undercut_width / 2",
+"lip_level"
+]
+},
+{
+"line": [
+"-slot_opening / 2",
+"lip_level"
+]
+},
+{
+"line": [
+"-slot_opening / 2",
+"half_width - mouth_radius"
+]
+},
+{
+"arc": [
+"-slot_opening / 2 - mouth_radius",
+"half_width"
+],
+"center": [
+"-slot_opening / 2 - mouth_radius",
+"half_width - mouth_radius"
+]
+},
+{
+"line": [
+"corner_radius - half_width",
+"half_width"
+]
+},
+{
+"arc": [
+"corner_radius * (1 - cos(45 deg)) - half_width",
+"half_width - corner_radius * (1 - cos(45 deg))"
+],
+"center": [
+"corner_radius - half_width",
+"half_width - corner_radius"
+]
+}
+]
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Cross section",
+"entities": [
+"e4",
+"e6",
+"e9",
+"e11",
+"e13",
+"e15",
+"e17",
+"e19",
+"e21",
+"e23",
+"e25",
+"e27",
+"e30",
+"e32",
+"e35"
+],
+"chain": [
+"e1",
+"e33"
+],
+"angle": "90 deg",
+"center": [
+0,
+0
+],
+"count": 4
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Cross section",
+"center": [
+0,
+"0 mm"
+],
+"radius": "core_bore / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Cross section",
+"center": [
+"corner_hole_offset",
+"corner_hole_offset"
+],
+"radius": "corner_hole_diameter / 2"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Cross section",
+"entities": [
+"e39"
+],
+"angle": "90 deg",
+"center": [
+0,
+0
+],
+"count": 4
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Cross section",
+"distance": "length",
+"name": "Extruded profile"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F2:side(e13)",
+"F2:side(e15)"
+],
+[
+"F2:side(e15)",
+"F2:side(e17)"
+],
+[
+"F2:side(e17)",
+"F2:side(e19)"
+],
+[
+"F2:side(e19)",
+"F2:side(e21)"
+],
+[
+"F2:side(e21)",
+"F2:side(e23)"
+],
+[
+"F2:side(e23)",
+"F2:side(e25)"
+],
+[
+"F2:side(e11)",
+"F2:side(e13)"
+],
+[
+"F2:side(e25)",
+"F2:side(e27)"
+],
+[
+"F2:side(e13[1])",
+"F2:side(e15[1])"
+],
+[
+"F2:side(e15[1])",
+"F2:side(e17[1])"
+],
+[
+"F2:side(e17[1])",
+"F2:side(e19[1])"
+],
+[
+"F2:side(e19[1])",
+"F2:side(e21[1])"
+],
+[
+"F2:side(e21[1])",
+"F2:side(e23[1])"
+],
+[
+"F2:side(e23[1])",
+"F2:side(e25[1])"
+],
+[
+"F2:side(e11[1])",
+"F2:side(e13[1])"
+],
+[
+"F2:side(e25[1])",
+"F2:side(e27[1])"
+],
+[
+"F2:side(e13[2])",
+"F2:side(e15[2])"
+],
+[
+"F2:side(e15[2])",
+"F2:side(e17[2])"
+],
+[
+"F2:side(e17[2])",
+"F2:side(e19[2])"
+],
+[
+"F2:side(e19[2])",
+"F2:side(e21[2])"
+],
+[
+"F2:side(e21[2])",
+"F2:side(e23[2])"
+],
+[
+"F2:side(e23[2])",
+"F2:side(e25[2])"
+],
+[
+"F2:side(e11[2])",
+"F2:side(e13[2])"
+],
+[
+"F2:side(e25[2])",
+"F2:side(e27[2])"
+],
+[
+"F2:side(e13[3])",
+"F2:side(e15[3])"
+],
+[
+"F2:side(e15[3])",
+"F2:side(e17[3])"
+],
+[
+"F2:side(e17[3])",
+"F2:side(e19[3])"
+],
+[
+"F2:side(e19[3])",
+"F2:side(e21[3])"
+],
+[
+"F2:side(e21[3])",
+"F2:side(e23[3])"
+],
+[
+"F2:side(e23[3])",
+"F2:side(e25[3])"
+],
+[
+"F2:side(e11[3])",
+"F2:side(e13[3])"
+],
+[
+"F2:side(e25[3])",
+"F2:side(e27[3])"
+]
+],
+"radius": "die_corner_radius",
+"name": "Die corner rounds"
+}
+],
+[
+"feature.thread",
+{
+"face": "F2:side(e37)",
+"start": "F2:startCap(e4[*],e6[*],e9[*],e11[*],e13[*],e15[*],e17[*],e19[*],e21[*],e23[*],e25[*],e27[*],e30[*],e32[*],e35[*])",
+"length": "thread_depth",
+"name": "Tapped first end"
+}
+],
+[
+"feature.thread",
+{
+"face": "F2:side(e37)",
+"start": "F2:endCap(e4[*],e6[*],e9[*],e11[*],e13[*],e15[*],e17[*],e19[*],e21[*],e23[*],e25[*],e27[*],e30[*],e32[*],e35[*])",
+"length": "thread_depth",
+"name": "Tapped second end"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F2:side(e37)",
+"F2:startCap(e4[*],e6[*],e9[*],e11[*],e13[*],e15[*],e17[*],e19[*],e21[*],e23[*],e25[*],e27[*],e30[*],e32[*],e35[*])"
+],
+[
+"F2:side(e37)",
+"F2:endCap(e4[*],e6[*],e9[*],e11[*],e13[*],e15[*],e17[*],e19[*],e21[*],e23[*],e25[*],e27[*],e30[*],e32[*],e35[*])"
+]
+],
+"distance": "(tap_major_diameter - core_bore) / 2",
+"name": "Countersunk thread entries"
+}
+],
+[
+"material.preset",
+{
+"body": "Countersunk thread entries",
+"preset": "steel",
+"color": "#14161a",
+"metallic": 0.0,
+"roughness": 0.46
+}
+],
+[
+"variable.measure",
+{
+"name": "section_area",
+"measure": "sectionArea",
+"of": "Countersunk thread entries",
+"plane": "yz",
+"offset": "length / 2",
+"label": "Section area",
+"unit": "mm^2"
+}
+],
+[
+"variable.measure",
+{
+"name": "section_ix",
+"measure": "sectionInertia",
+"about": "x",
+"of": "Countersunk thread entries",
+"plane": "yz",
+"offset": "length / 2",
+"label": "Second moment of area",
+"unit": "mm^4"
+}
+],
+[
+"variable.output",
+{
+"name": "mass_per_metre",
+"expr": "section_area * 2700 kg / (1 m)^3",
+"label": "Mass per metre",
+"unit": "kg/m"
+}
+],
+[
+"assert.add",
+{
+"name": "Section area in closed form",
+"measure": "value",
+"expr": "section_area",
+"eq": "section_area_closed_form",
+"tol": "0.0001"
+}
+],
+[
+"assert.add",
+{
+"name": "Second moment of area in closed form",
+"measure": "value",
+"expr": "section_ix",
+"eq": "section_ix_closed_form",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Area and second moment within 3 % of the catalogue profile",
+"measure": "value",
+"expr": "max(abs(section_area / catalogue_area - 1), abs(section_ix / catalogue_ix - 1))",
+"max": "0.03"
+}
+],
+[
+"assert.add",
+{
+"name": "Core wall round the M8 thread",
+"measure": "distance",
+"from": {
+"kind": "face",
+"where": {
+"name": "*F2:side(e37)"
+}
+},
+"to": {
+"kind": "face",
+"where": {
+"name": "*F2:side(e19)"
+}
+},
+"min": "(tap_major_diameter - core_bore) / 2 + minimum_wall"
+}
+],
+[
+"datum.plane",
+{
+"name": "Start",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "End",
+"through": [
+[
+"length",
+"0 mm",
+"0 mm"
+],
+[
+"length + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"length + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Face y plus",
+"through": [
+[
+"length / 2",
+"15 mm",
+"0 mm"
+],
+[
+"length / 2 + (1) * 1 mm",
+"15 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"length / 2 + (0) * 1 mm",
+"15 mm + (0) * 1 mm",
+"0 mm + (-1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Face y minus",
+"through": [
+[
+"length / 2",
+"-15 mm",
+"0 mm"
+],
+[
+"length / 2 + (1) * 1 mm",
+"-15 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"length / 2 + (0) * 1 mm",
+"-15 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Face z plus",
+"through": [
+[
+"length / 2",
+"0 mm",
+"15 mm"
+],
+[
+"length / 2 + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"15 mm + (0) * 1 mm"
+],
+[
+"length / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"15 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Face z minus",
+"through": [
+[
+"length / 2",
+"0 mm",
+"-15 mm"
+],
+[
+"length / 2 + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"-15 mm + (0) * 1 mm"
+],
+[
+"length / 2 + (0) * 1 mm",
+"0 mm + (-1) * 1 mm",
+"-15 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"document.info",
+{
+"title": "T-slot aluminium profile",
+"description": "A 30 x 30 mm B-type aluminium profile with four 8 mm T-slots and a core bore tapped M8 at both ends, cut to length, in black anodised EN AW-6063 T66.",
+"author": "3DCraft examples",
+"licence": "MIT",
+"tags": [
+"machine building",
+"frames",
+"aluminium extrusion"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

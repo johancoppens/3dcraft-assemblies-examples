@@ -1,0 +1,515 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "cube_size",
+"unit": "mm"
+},
+{
+"name": "profile_half",
+"unit": "mm"
+},
+{
+"name": "chamfer",
+"unit": "mm"
+},
+{
+"name": "core_offset",
+"unit": "mm"
+},
+{
+"name": "screw_clear",
+"unit": "mm"
+},
+{
+"name": "z_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "z_head_clear",
+"unit": "mm"
+},
+{
+"name": "z_head_depth",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+32,
+15,
+0.3,
+11.625,
+2.75,
+4.25,
+7,
+8.5
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "frame_size",
+"expr": "500 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "frame_size",
+"label": "Frame size",
+"group": "Corner",
+"order": 1,
+"description": "Outer size of the cubic frame: the frame centre datum follows it",
+"min": "300 mm",
+"max": "800 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"sizes[\"all\"].cube_size",
+"sizes[\"all\"].cube_size",
+"sizes[\"all\"].cube_size"
+],
+"position": [
+"-sizes[\"all\"].cube_size / 2",
+"-sizes[\"all\"].cube_size / 2",
+"-sizes[\"all\"].cube_size / 2"
+],
+"name": "Corner block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "sizes[\"all\"].chamfer",
+"name": "Cube blank"
+}
+],
+[
+"sketch.create",
+{
+"name": "X screws",
+"plane": "yz"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "X screws",
+"center": [
+"-sizes[\"all\"].core_offset",
+"sizes[\"all\"].core_offset"
+],
+"radius": "sizes[\"all\"].screw_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "X screws",
+"center": [
+"sizes[\"all\"].core_offset",
+"sizes[\"all\"].core_offset"
+],
+"radius": "sizes[\"all\"].screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "X screws",
+"distance": "sizes[\"all\"].cube_size + 2 mm",
+"symmetric": true,
+"cut": "Cube blank",
+"name": "Cube X bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Y screws",
+"plane": "zx"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Y screws",
+"center": [
+"-sizes[\"all\"].core_offset",
+"-sizes[\"all\"].core_offset"
+],
+"radius": "sizes[\"all\"].screw_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Y screws",
+"center": [
+"-sizes[\"all\"].core_offset",
+"sizes[\"all\"].core_offset"
+],
+"radius": "sizes[\"all\"].screw_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Y screws",
+"distance": "sizes[\"all\"].cube_size + 2 mm",
+"symmetric": true,
+"cut": "Cube X bored",
+"name": "Cube Y bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Z bolt",
+"plane": "xy"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Z bolt",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].z_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Z bolt",
+"distance": "sizes[\"all\"].cube_size + 2 mm",
+"symmetric": true,
+"cut": "Cube Y bored",
+"name": "Cube Z bored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Top counterbore",
+"plane": "xy",
+"offset": "sizes[\"all\"].cube_size / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Top counterbore",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].z_head_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Top counterbore",
+"distance": "sizes[\"all\"].z_head_depth",
+"reversed": true,
+"cut": "Cube Z bored",
+"name": "Cube top counterbored"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bottom counterbore",
+"plane": "xy",
+"offset": "-sizes[\"all\"].cube_size / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Bottom counterbore",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].z_head_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Bottom counterbore",
+"distance": "sizes[\"all\"].z_head_depth",
+"cut": "Cube top counterbored",
+"name": "Corner cube"
+}
+],
+[
+"datum.plane",
+{
+"name": "Frame centre",
+"through": [
+[
+"frame_size / 2 - sizes[\"all\"].profile_half",
+"frame_size / 2 - sizes[\"all\"].profile_half",
+"-sizes[\"all\"].profile_half"
+],
+[
+"frame_size / 2 - sizes[\"all\"].profile_half + (1) * 1 mm",
+"frame_size / 2 - sizes[\"all\"].profile_half + (0) * 1 mm",
+"-sizes[\"all\"].profile_half + (0) * 1 mm"
+],
+[
+"frame_size / 2 - sizes[\"all\"].profile_half + (0) * 1 mm",
+"frame_size / 2 - sizes[\"all\"].profile_half + (1) * 1 mm",
+"-sizes[\"all\"].profile_half + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "East",
+"through": [
+[
+"sizes[\"all\"].cube_size / 2",
+"0 mm",
+"0 mm"
+],
+[
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "West",
+"through": [
+[
+"-sizes[\"all\"].cube_size / 2",
+"0 mm",
+"0 mm"
+],
+[
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "North",
+"through": [
+[
+"0 mm",
+"sizes[\"all\"].cube_size / 2",
+"0 mm"
+],
+[
+"0 mm + (-1) * 1 mm",
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "South",
+"through": [
+[
+"0 mm",
+"-sizes[\"all\"].cube_size / 2",
+"0 mm"
+],
+[
+"0 mm + (-1) * 1 mm",
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm",
+"0 mm + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Top",
+"through": [
+[
+"0 mm",
+"0 mm",
+"sizes[\"all\"].cube_size / 2"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"sizes[\"all\"].cube_size / 2 + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Bottom",
+"through": [
+[
+"0 mm",
+"0 mm",
+"-sizes[\"all\"].cube_size / 2"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"-sizes[\"all\"].cube_size / 2 + (0) * 1 mm"
+]
+]
+}
+],
+[
+"material.preset",
+{
+"body": "Corner cube",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"assert.add",
+{
+"name": "Cube edge",
+"measure": "extent",
+"of": "Corner cube",
+"axis": "x",
+"eq": "sizes[\"all\"].cube_size",
+"tol": "0.01"
+}
+],
+[
+"assert.add",
+{
+"name": "Printable wall",
+"measure": "thickness",
+"of": "Corner cube",
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Corner cube",
+"description": "A printed PETG three-way corner cube, 32 mm so that the M5 bores keep a real wall, joining three 30 mm profiles at a frame corner; carries the datum of the frame's centre.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

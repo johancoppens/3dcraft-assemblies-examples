@@ -1,0 +1,237 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "plate_thickness",
+"unit": "mm"
+},
+{
+"name": "arm_inset",
+"unit": "mm"
+},
+{
+"name": "corner_radius",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+8,
+30,
+12
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "plate_size",
+"expr": "300 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "plate_size",
+"label": "Plate size",
+"group": "Bed",
+"order": 1,
+"description": "Side of the square build plate",
+"min": "150 mm",
+"max": "500 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bed_shift",
+"expr": "57 mm"
+}
+],
+[
+"variable.publish",
+{
+"name": "bed_shift",
+"label": "Bed shift",
+"group": "Bed",
+"order": 2,
+"description": "How far the plate's centre stands in front of the cross beam, so the build area suits the nozzle's reach",
+"min": "0 mm",
+"max": "100 mm"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"plate_size",
+"plate_size",
+"sizes[\"all\"].plate_thickness"
+],
+"position": [
+"-plate_size / 2",
+"-plate_size / 2",
+"-sizes[\"all\"].plate_thickness"
+],
+"name": "Plate blank"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"radius": "sizes[\"all\"].corner_radius",
+"name": "Build plate"
+}
+],
+[
+"material.preset",
+{
+"body": "Build plate",
+"preset": "aluminium-brushed",
+"color": "#23252a",
+"metallic": 0.1,
+"roughness": 0.55
+}
+],
+[
+"datum.plane",
+{
+"name": "Bed origin",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Cross seat",
+"through": [
+[
+"0 mm",
+"bed_shift",
+"-sizes[\"all\"].plate_thickness"
+],
+[
+"0 mm + (1) * 1 mm",
+"bed_shift + (0) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"bed_shift + (1) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Arm seat left",
+"through": [
+[
+"-plate_size / 2 + sizes[\"all\"].arm_inset",
+"0 mm",
+"-sizes[\"all\"].plate_thickness"
+],
+[
+"-plate_size / 2 + sizes[\"all\"].arm_inset + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+],
+[
+"-plate_size / 2 + sizes[\"all\"].arm_inset + (-1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Arm seat right",
+"through": [
+[
+"plate_size / 2 - sizes[\"all\"].arm_inset",
+"0 mm",
+"-sizes[\"all\"].plate_thickness"
+],
+[
+"plate_size / 2 - sizes[\"all\"].arm_inset + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+],
+[
+"plate_size / 2 - sizes[\"all\"].arm_inset + (-1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"-sizes[\"all\"].plate_thickness + (0) * 1 mm"
+]
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Plate is its size wide",
+"measure": "extent",
+"of": "Build plate",
+"axis": "x",
+"eq": "plate_size",
+"tol": "0.01"
+}
+],
+[
+"document.info",
+{
+"title": "Build plate",
+"description": "An 8 mm aluminium tooling plate with a PEI print surface: square with rounded corners.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]

@@ -1,0 +1,1315 @@
+[
+[
+"table.set",
+{
+"name": "sizes",
+"columns": [
+"row",
+{
+"name": "back_idler_radius",
+"unit": "mm"
+},
+{
+"name": "pitch_to_tooth",
+"unit": "mm"
+},
+{
+"name": "pitch_to_back",
+"unit": "mm"
+},
+{
+"name": "belt_gap",
+"unit": "mm"
+},
+{
+"name": "belt_width",
+"unit": "mm"
+},
+{
+"name": "carriage_offset",
+"unit": "mm"
+},
+{
+"name": "plate_top",
+"unit": "mm"
+},
+{
+"name": "roof_bottom",
+"unit": "mm"
+},
+{
+"name": "roof_top",
+"unit": "mm"
+},
+{
+"name": "beam_end",
+"unit": "mm"
+},
+{
+"name": "span_gap",
+"unit": "mm"
+},
+{
+"name": "floor_inboard",
+"unit": "mm"
+},
+{
+"name": "floor_outboard",
+"unit": "mm"
+},
+{
+"name": "floor_half",
+"unit": "mm"
+},
+{
+"name": "web_inner",
+"unit": "mm"
+},
+{
+"name": "web_outer",
+"unit": "mm"
+},
+{
+"name": "roof_inboard",
+"unit": "mm"
+},
+{
+"name": "roof_half",
+"unit": "mm"
+},
+{
+"name": "tab_thickness",
+"unit": "mm"
+},
+{
+"name": "beam_half",
+"unit": "mm"
+},
+{
+"name": "pin_radius",
+"unit": "mm"
+},
+{
+"name": "idler_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "key_clear",
+"unit": "mm"
+},
+{
+"name": "bolt_head_radius",
+"unit": "mm"
+},
+{
+"name": "bolt_head_height",
+"unit": "mm"
+},
+{
+"name": "carriage_bolts",
+"unit": "mm"
+},
+{
+"name": "carriage_screw_clear",
+"unit": "mm"
+},
+{
+"name": "tab_bolt_clear",
+"unit": "mm"
+},
+{
+"name": "bolt_tap",
+"unit": "mm"
+},
+{
+"name": "spacer_inner",
+"unit": "mm"
+},
+{
+"name": "spacer_outer",
+"unit": "mm"
+},
+{
+"name": "toothed_half",
+"unit": "mm"
+},
+{
+"name": "back_half",
+"unit": "mm"
+},
+{
+"name": "spacer_gap",
+"unit": "mm"
+}
+],
+"rows": [
+[
+"all",
+6.5,
+0.2,
+0.5,
+0.055,
+6,
+38,
+5,
+26.5,
+31.5,
+5,
+0.05,
+20,
+54.5,
+26,
+31,
+45,
+12,
+16,
+4,
+15,
+2.5,
+2.65,
+3.25,
+4.25,
+5,
+20,
+1.7,
+4.25,
+2.1,
+2.6,
+4,
+4.5,
+4,
+0.05
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "hand",
+"expr": "-1"
+}
+],
+[
+"variable.publish",
+{
+"name": "hand",
+"label": "Hand",
+"group": "Gantry end",
+"order": 1,
+"description": "-1: left end, +1: right end (mirror image)",
+"min": "-1",
+"max": "1",
+"step": "2"
+}
+],
+[
+"variable.set",
+{
+"name": "toothed_level",
+"expr": "if(hand < 0, 21 mm, 11 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "back_level",
+"expr": "if(hand < 0, 11 mm, 21 mm)"
+}
+],
+[
+"variable.set",
+{
+"name": "belt_pitch_radius",
+"expr": "20 * 2 mm / (2 * pi)"
+}
+],
+[
+"variable.set",
+{
+"name": "back_pitch_radius",
+"expr": "sizes[\"all\"].back_idler_radius + sizes[\"all\"].pitch_to_back + sizes[\"all\"].belt_gap"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_toothed_start",
+"expr": "if(hand > 0, 270 deg, 180 deg)"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_toothed_end",
+"expr": "if(hand > 0, 360 deg, 270 deg)"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_back_start",
+"expr": "if(hand > 0, 0 deg, 90 deg)"
+}
+],
+[
+"variable.set",
+{
+"name": "wrap_back_end",
+"expr": "if(hand > 0, 90 deg, 180 deg)"
+}
+],
+[
+"variable.set",
+{
+"name": "lower_idler",
+"expr": "min(toothed_level, back_level)"
+}
+],
+[
+"variable.set",
+{
+"name": "upper_idler",
+"expr": "max(toothed_level, back_level)"
+}
+],
+[
+"variable.set",
+{
+"name": "lower_half",
+"expr": "if(toothed_level < back_level, sizes[\"all\"].toothed_half, sizes[\"all\"].back_half)"
+}
+],
+[
+"variable.set",
+{
+"name": "upper_half",
+"expr": "if(toothed_level < back_level, sizes[\"all\"].back_half, sizes[\"all\"].toothed_half)"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].floor_outboard) - (-sizes[\"all\"].floor_inboard))",
+"((sizes[\"all\"].floor_half) - (-sizes[\"all\"].floor_half))",
+"((sizes[\"all\"].plate_top) - (0 mm))"
+],
+"position": [
+"hand * ((-sizes[\"all\"].floor_inboard) + (sizes[\"all\"].floor_outboard)) / 2 - ((sizes[\"all\"].floor_outboard) - (-sizes[\"all\"].floor_inboard)) / 2",
+"(-sizes[\"all\"].floor_half)",
+"(0 mm)"
+],
+"name": "Gantry floor block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F1:face(0)",
+"F1:face(2)"
+],
+[
+"F1:face(0)",
+"F1:face(3)"
+],
+[
+"F1:face(0)",
+"F1:face(4)"
+],
+[
+"F1:face(0)",
+"F1:face(5)"
+],
+[
+"F1:face(1)",
+"F1:face(2)"
+],
+[
+"F1:face(1)",
+"F1:face(3)"
+],
+[
+"F1:face(1)",
+"F1:face(4)"
+],
+[
+"F1:face(1)",
+"F1:face(5)"
+],
+[
+"F1:face(2)",
+"F1:face(4)"
+],
+[
+"F1:face(2)",
+"F1:face(5)"
+],
+[
+"F1:face(3)",
+"F1:face(4)"
+],
+[
+"F1:face(3)",
+"F1:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Gantry floor"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].web_outer) - (sizes[\"all\"].web_inner))",
+"((sizes[\"all\"].floor_half) - (-sizes[\"all\"].floor_half))",
+"((sizes[\"all\"].roof_bottom) - (sizes[\"all\"].plate_top))"
+],
+"position": [
+"hand * ((sizes[\"all\"].web_inner) + (sizes[\"all\"].web_outer)) / 2 - ((sizes[\"all\"].web_outer) - (sizes[\"all\"].web_inner)) / 2",
+"(-sizes[\"all\"].floor_half)",
+"(sizes[\"all\"].plate_top)"
+],
+"name": "Gantry web block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F3:face(0)",
+"F3:face(2)"
+],
+[
+"F3:face(0)",
+"F3:face(3)"
+],
+[
+"F3:face(0)",
+"F3:face(4)"
+],
+[
+"F3:face(0)",
+"F3:face(5)"
+],
+[
+"F3:face(1)",
+"F3:face(2)"
+],
+[
+"F3:face(1)",
+"F3:face(3)"
+],
+[
+"F3:face(1)",
+"F3:face(4)"
+],
+[
+"F3:face(1)",
+"F3:face(5)"
+],
+[
+"F3:face(2)",
+"F3:face(4)"
+],
+[
+"F3:face(2)",
+"F3:face(5)"
+],
+[
+"F3:face(3)",
+"F3:face(4)"
+],
+[
+"F3:face(3)",
+"F3:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Gantry web"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].web_outer) - (-sizes[\"all\"].roof_inboard))",
+"((sizes[\"all\"].roof_half) - (-sizes[\"all\"].roof_half))",
+"((sizes[\"all\"].roof_top) - (sizes[\"all\"].roof_bottom))"
+],
+"position": [
+"hand * ((-sizes[\"all\"].roof_inboard) + (sizes[\"all\"].web_outer)) / 2 - ((sizes[\"all\"].web_outer) - (-sizes[\"all\"].roof_inboard)) / 2",
+"(-sizes[\"all\"].roof_half)",
+"(sizes[\"all\"].roof_bottom)"
+],
+"name": "Gantry roof block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F5:face(0)",
+"F5:face(2)"
+],
+[
+"F5:face(0)",
+"F5:face(3)"
+],
+[
+"F5:face(0)",
+"F5:face(4)"
+],
+[
+"F5:face(0)",
+"F5:face(5)"
+],
+[
+"F5:face(1)",
+"F5:face(2)"
+],
+[
+"F5:face(1)",
+"F5:face(3)"
+],
+[
+"F5:face(1)",
+"F5:face(4)"
+],
+[
+"F5:face(1)",
+"F5:face(5)"
+],
+[
+"F5:face(2)",
+"F5:face(4)"
+],
+[
+"F5:face(2)",
+"F5:face(5)"
+],
+[
+"F5:face(3)",
+"F5:face(4)"
+],
+[
+"F5:face(3)",
+"F5:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Gantry roof"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"((sizes[\"all\"].beam_end + sizes[\"all\"].tab_thickness) - (sizes[\"all\"].beam_end))",
+"((sizes[\"all\"].beam_half) - (-sizes[\"all\"].beam_half))",
+"((0 mm) - (-2 * sizes[\"all\"].beam_half))"
+],
+"position": [
+"hand * ((sizes[\"all\"].beam_end) + (sizes[\"all\"].beam_end + sizes[\"all\"].tab_thickness)) / 2 - ((sizes[\"all\"].beam_end + sizes[\"all\"].tab_thickness) - (sizes[\"all\"].beam_end)) / 2",
+"(-sizes[\"all\"].beam_half)",
+"(-2 * sizes[\"all\"].beam_half)"
+],
+"name": "Beam tab block"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F7:face(0)",
+"F7:face(2)"
+],
+[
+"F7:face(0)",
+"F7:face(3)"
+],
+[
+"F7:face(0)",
+"F7:face(4)"
+],
+[
+"F7:face(0)",
+"F7:face(5)"
+],
+[
+"F7:face(1)",
+"F7:face(2)"
+],
+[
+"F7:face(1)",
+"F7:face(3)"
+],
+[
+"F7:face(1)",
+"F7:face(4)"
+],
+[
+"F7:face(1)",
+"F7:face(5)"
+],
+[
+"F7:face(2)",
+"F7:face(4)"
+],
+[
+"F7:face(2)",
+"F7:face(5)"
+],
+[
+"F7:face(3)",
+"F7:face(4)"
+],
+[
+"F7:face(3)",
+"F7:face(5)"
+]
+],
+"distance": "0.8 mm",
+"name": "Beam tab"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Gantry floor",
+"tool": "Gantry web",
+"name": "Floor and web"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Floor and web",
+"tool": "Gantry roof",
+"name": "Floor, web and roof"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Floor, web and roof",
+"tool": "Beam tab",
+"name": "Gantry printed"
+}
+],
+[
+"sketch.create",
+{
+"name": "Roof holes",
+"plane": "xy",
+"offset": "sizes[\"all\"].roof_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof holes",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].idler_bolt_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof holes",
+"center": [
+"hand * (sizes[\"all\"].carriage_offset - sizes[\"all\"].carriage_bolts / 2)",
+"-sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].key_clear"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Roof holes",
+"center": [
+"hand * (sizes[\"all\"].carriage_offset - sizes[\"all\"].carriage_bolts / 2)",
+"sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].key_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Roof holes",
+"distance": "sizes[\"all\"].roof_top - sizes[\"all\"].roof_bottom + 1 mm",
+"reversed": true,
+"cut": "Gantry printed",
+"name": "Gantry roof holed"
+}
+],
+[
+"sketch.create",
+{
+"name": "Floor thread",
+"plane": "xy",
+"offset": "sizes[\"all\"].plate_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Floor thread",
+"center": [
+"0 mm",
+"0 mm"
+],
+"radius": "sizes[\"all\"].bolt_tap"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Floor thread",
+"distance": "sizes[\"all\"].plate_top + 1 mm",
+"reversed": true,
+"cut": "Gantry roof holed",
+"name": "Gantry floor tapped"
+}
+],
+[
+"sketch.create",
+{
+"name": "Carriage screws",
+"plane": "xy",
+"offset": "sizes[\"all\"].plate_top"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Carriage screws",
+"center": [
+"hand * (sizes[\"all\"].carriage_offset - sizes[\"all\"].carriage_bolts / 2)",
+"-sizes[\"all\"].carriage_bolts / 2"
+],
+"radius": "sizes[\"all\"].carriage_screw_clear"
+}
+],
+[
+"sketch.pattern",
+{
+"sketch": "Carriage screws",
+"entities": [
+"e2"
+],
+"count": 2,
+"step": [
+"hand * sizes[\"all\"].carriage_bolts",
+"0 mm"
+],
+"count2": 2,
+"step2": [
+"0 mm",
+"sizes[\"all\"].carriage_bolts"
+]
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Carriage screws",
+"distance": "sizes[\"all\"].plate_top + 1 mm",
+"reversed": true,
+"cut": "Gantry floor tapped",
+"name": "Gantry screws drilled"
+}
+],
+[
+"sketch.create",
+{
+"name": "Tab bolt",
+"plane": "yz",
+"offset": "hand * (sizes[\"all\"].beam_end + sizes[\"all\"].tab_thickness / 2)"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Tab bolt",
+"center": [
+"0 mm",
+"-sizes[\"all\"].beam_half"
+],
+"radius": "sizes[\"all\"].tab_bolt_clear"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Tab bolt",
+"distance": "sizes[\"all\"].tab_thickness + 2 mm",
+"symmetric": true,
+"cut": "Gantry screws drilled",
+"name": "Gantry end"
+}
+],
+[
+"material.preset",
+{
+"body": "Gantry end",
+"preset": "abs",
+"color": "#e7701d",
+"roughness": 0.42
+}
+],
+[
+"datum.axis",
+{
+"name": "Idler bolt axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"0 mm"
+],
+[
+"0 mm",
+"0 mm",
+"1 mm"
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Idler bolt section",
+"plane": "zx",
+"offset": "0 mm"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Idler bolt section",
+"start": [
+"1 mm",
+"0 mm"
+],
+"segments": [
+{
+"line": [
+"1 mm",
+"0 mm + sizes[\"all\"].bolt_tap"
+]
+},
+{
+"line": [
+"sizes[\"all\"].plate_top",
+"0 mm + sizes[\"all\"].bolt_tap"
+]
+},
+{
+"line": [
+"sizes[\"all\"].plate_top",
+"0 mm + sizes[\"all\"].pin_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top",
+"0 mm + sizes[\"all\"].pin_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top",
+"0 mm + sizes[\"all\"].bolt_head_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top + sizes[\"all\"].bolt_head_height",
+"0 mm + sizes[\"all\"].bolt_head_radius"
+]
+},
+{
+"line": [
+"sizes[\"all\"].roof_top + sizes[\"all\"].bolt_head_height",
+"0 mm"
+]
+}
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Idler bolt section",
+"axis": "Idler bolt axis",
+"name": "Idler bolt"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler bolt",
+"preset": "steel",
+"color": "#aeb4bb",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"sketch.create",
+{
+"name": "Spacer sections",
+"plane": "zx",
+"offset": "0 mm"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Spacer sections",
+"closed": true,
+"points": [
+[
+"sizes[\"all\"].plate_top",
+"0 mm + sizes[\"all\"].spacer_inner"
+],
+[
+"sizes[\"all\"].plate_top",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"lower_idler - lower_half - sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"lower_idler - lower_half - sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_inner"
+]
+]
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Spacer sections",
+"closed": true,
+"points": [
+[
+"lower_idler + lower_half + sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_inner"
+],
+[
+"lower_idler + lower_half + sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"upper_idler - upper_half - sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"upper_idler - upper_half - sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_inner"
+]
+]
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Spacer sections",
+"closed": true,
+"points": [
+[
+"upper_idler + upper_half + sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_inner"
+],
+[
+"upper_idler + upper_half + sizes[\"all\"].spacer_gap",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"sizes[\"all\"].roof_bottom",
+"0 mm + sizes[\"all\"].spacer_outer"
+],
+[
+"sizes[\"all\"].roof_bottom",
+"0 mm + sizes[\"all\"].spacer_inner"
+]
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Spacer sections",
+"axis": "Idler bolt axis",
+"name": "Idler spacers"
+}
+],
+[
+"material.preset",
+{
+"body": "Idler spacers",
+"preset": "steel",
+"color": "#d3d7dc",
+"metallic": 0.85,
+"roughness": 0.34
+}
+],
+[
+"sketch.create",
+{
+"name": "Toothed wrap outline",
+"plane": "xy",
+"offset": "(toothed_level) - sizes[\"all\"].belt_width / 2"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Toothed wrap outline",
+"start": [
+"(0 mm) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_toothed_start)",
+"(0 mm) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_toothed_start)"
+],
+"segments": [
+{
+"arc": [
+"(0 mm) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * cos(wrap_toothed_end)",
+"(0 mm) + (belt_pitch_radius + sizes[\"all\"].pitch_to_back) * sin(wrap_toothed_end)"
+],
+"center": [
+"0 mm",
+"0 mm"
+]
+},
+{
+"line": [
+"(0 mm) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_toothed_end)",
+"(0 mm) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_toothed_end)"
+]
+},
+{
+"arc": [
+"(0 mm) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * cos(wrap_toothed_start)",
+"(0 mm) + (belt_pitch_radius - sizes[\"all\"].pitch_to_tooth) * sin(wrap_toothed_start)"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Toothed wrap outline",
+"distance": "2 * sizes[\"all\"].belt_width / 2",
+"name": "Toothed wrap"
+}
+],
+[
+"sketch.create",
+{
+"name": "Back wrap outline",
+"plane": "xy",
+"offset": "(back_level) - sizes[\"all\"].belt_width / 2"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Back wrap outline",
+"start": [
+"(0 mm) + (back_pitch_radius + sizes[\"all\"].pitch_to_tooth) * cos(wrap_back_start)",
+"(0 mm) + (back_pitch_radius + sizes[\"all\"].pitch_to_tooth) * sin(wrap_back_start)"
+],
+"segments": [
+{
+"arc": [
+"(0 mm) + (back_pitch_radius + sizes[\"all\"].pitch_to_tooth) * cos(wrap_back_end)",
+"(0 mm) + (back_pitch_radius + sizes[\"all\"].pitch_to_tooth) * sin(wrap_back_end)"
+],
+"center": [
+"0 mm",
+"0 mm"
+]
+},
+{
+"line": [
+"(0 mm) + (back_pitch_radius - sizes[\"all\"].pitch_to_back) * cos(wrap_back_end)",
+"(0 mm) + (back_pitch_radius - sizes[\"all\"].pitch_to_back) * sin(wrap_back_end)"
+]
+},
+{
+"arc": [
+"(0 mm) + (back_pitch_radius - sizes[\"all\"].pitch_to_back) * cos(wrap_back_start)",
+"(0 mm) + (back_pitch_radius - sizes[\"all\"].pitch_to_back) * sin(wrap_back_start)"
+],
+"center": [
+"0 mm",
+"0 mm"
+],
+"clockwise": true
+}
+],
+"closed": true
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Back wrap outline",
+"distance": "2 * sizes[\"all\"].belt_width / 2",
+"name": "Back wrap"
+}
+],
+[
+"material.preset",
+{
+"body": "Toothed wrap",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"material.preset",
+{
+"body": "Back wrap",
+"preset": "abs",
+"color": "#141416",
+"roughness": 0.75
+}
+],
+[
+"datum.plane",
+{
+"name": "Beam seat",
+"through": [
+[
+"hand * sizes[\"all\"].beam_end",
+"0 mm",
+"-sizes[\"all\"].beam_half"
+],
+[
+"hand * sizes[\"all\"].beam_end + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"-sizes[\"all\"].beam_half + (0) * 1 mm"
+],
+[
+"hand * sizes[\"all\"].beam_end + (0) * 1 mm",
+"0 mm + (0) * 1 mm",
+"-sizes[\"all\"].beam_half + (1) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Carriage seat",
+"through": [
+[
+"hand * sizes[\"all\"].carriage_offset",
+"0 mm",
+"0 mm"
+],
+[
+"hand * sizes[\"all\"].carriage_offset + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm"
+],
+[
+"hand * sizes[\"all\"].carriage_offset + (-1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"0 mm + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Toothed axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"toothed_level"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"toothed_level + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"toothed_level + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Back axis",
+"through": [
+[
+"0 mm",
+"0 mm",
+"back_level"
+],
+[
+"0 mm + (1) * 1 mm",
+"0 mm + (0) * 1 mm",
+"back_level + (0) * 1 mm"
+],
+[
+"0 mm + (0) * 1 mm",
+"0 mm + (1) * 1 mm",
+"back_level + (0) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Toothed span start",
+"through": [
+[
+"-hand * sizes[\"all\"].span_gap",
+"-belt_pitch_radius",
+"toothed_level"
+],
+[
+"-hand * sizes[\"all\"].span_gap + (0) * 1 mm",
+"-belt_pitch_radius + (-1) * 1 mm",
+"toothed_level + (0) * 1 mm"
+],
+[
+"-hand * sizes[\"all\"].span_gap + (0) * 1 mm",
+"-belt_pitch_radius + (0) * 1 mm",
+"toothed_level + (hand) * 1 mm"
+]
+]
+}
+],
+[
+"datum.plane",
+{
+"name": "Back span start",
+"through": [
+[
+"-hand * sizes[\"all\"].span_gap",
+"back_pitch_radius",
+"back_level"
+],
+[
+"-hand * sizes[\"all\"].span_gap + (0) * 1 mm",
+"back_pitch_radius + (-1) * 1 mm",
+"back_level + (0) * 1 mm"
+],
+[
+"-hand * sizes[\"all\"].span_gap + (0) * 1 mm",
+"back_pitch_radius + (0) * 1 mm",
+"back_level + (hand) * 1 mm"
+]
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Toothed span tangent",
+"at": [
+"0 mm",
+"-belt_pitch_radius",
+"toothed_level"
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Back span tangent",
+"at": [
+"0 mm",
+"back_pitch_radius",
+"back_level"
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Toothed tangent",
+"at": [
+"hand * belt_pitch_radius",
+"0 mm",
+"toothed_level"
+]
+}
+],
+[
+"datum.point",
+{
+"name": "Back tangent",
+"at": [
+"hand * back_pitch_radius",
+"0 mm",
+"back_level"
+]
+}
+],
+[
+"assert.add",
+{
+"name": "Wall around the bores",
+"measure": "thickness",
+"of": {
+"kind": "face",
+"where": {
+"hole": true
+}
+},
+"min": "1.2 mm"
+}
+],
+[
+"document.info",
+{
+"title": "Gantry end",
+"description": "The printed end of the X beam: rides on its Y carriage, carries one idler pin with a toothed idler and a smooth idler stacked, and the two belts' quarter wraps.",
+"author": "3DCraft assemblies",
+"licence": "CC-BY-4.0",
+"tags": []
+}
+],
+[
+"document.check",
+{}
+]
+]
