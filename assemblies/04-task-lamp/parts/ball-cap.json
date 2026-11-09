@@ -1,0 +1,225 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "ball_radius",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_gap",
+   "expr": "0.15 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_radius",
+   "expr": "ball_radius + seat_gap"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cup_radius",
+   "expr": "11 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_gap",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "face_gap",
+   "expr": "0.05 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "mouth_height",
+   "expr": "4.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "crown_height",
+   "expr": "7.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cap_radius",
+   "expr": "13.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "skirt_depth",
+   "expr": "7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "mouth_radius",
+   "expr": "sqrt(seat_radius^2 - mouth_height^2)"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Cap profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Cap profile",
+   "start": [
+    "face_gap",
+    "sqrt(seat_radius^2 - face_gap^2)"
+   ],
+   "segments": [
+    {
+     "arc": [
+      "mouth_height",
+      "mouth_radius"
+     ],
+     "center": [
+      "0 mm",
+      "0 mm"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "crown_height",
+      "mouth_radius + 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "crown_height",
+      "cap_radius - 2 mm"
+     ]
+    },
+    {
+     "arc": [
+      "crown_height - 2 mm",
+      "cap_radius"
+     ],
+     "center": [
+      "crown_height - 2 mm",
+      "cap_radius - 2 mm"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "-skirt_depth",
+      "cap_radius"
+     ]
+    },
+    {
+     "line": [
+      "-skirt_depth",
+      "cup_radius + thread_gap"
+     ]
+    },
+    {
+     "line": [
+      "face_gap",
+      "cup_radius + thread_gap"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Cap profile",
+   "axis": "x",
+   "name": "Ball cap"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Ball cap",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Ball cap",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Ball centre",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Mouth is narrower than the ball",
+   "measure": "value",
+   "expr": "mouth_radius",
+   "max": "ball_radius - 0.5 mm"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Ball cap",
+   "description": "Brass cap screwed over the shade's cup (M22 x 1, thread not drawn); its mouth is narrower than the ball, so the ball stays in once the cap is on.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

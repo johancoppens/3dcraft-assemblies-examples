@@ -1,0 +1,355 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "length",
+   "expr": "330 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "length",
+   "label": "Pivot spacing",
+   "group": "Bar",
+   "order": 1,
+   "min": "280 mm",
+   "max": "450 mm",
+   "description": "Distance between the two pivot holes"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "anchor_position",
+   "expr": "0 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "anchor_position",
+   "label": "Spring pin position",
+   "group": "Bar",
+   "order": 2,
+   "min": "0 mm",
+   "max": "240 mm",
+   "description": "Distance from the near pivot to the spring cross-pin hole; 0 means this bar has no spring pin"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_width",
+   "expr": "15 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "bar_width",
+   "label": "Bar width",
+   "group": "Bar",
+   "order": 3,
+   "min": "14 mm",
+   "max": "16 mm",
+   "description": "Width of the slat"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_thickness",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "bar_thickness",
+   "label": "Bar thickness",
+   "group": "Bar",
+   "order": 4,
+   "min": "8.4 mm",
+   "max": "9.4 mm",
+   "description": "Thickness of the slat, across the pivot"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_bore",
+   "expr": "5.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_bore",
+   "label": "Pivot bore",
+   "group": "Bar",
+   "order": 5,
+   "min": "5.1 mm",
+   "max": "5.8 mm",
+   "description": "Diameter of the oak bore the pivot pin runs in"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_pin_bore",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "spring_pin_bore",
+   "label": "Cross-pin bore",
+   "group": "Bar",
+   "order": 6,
+   "min": "4.8 mm",
+   "max": "5 mm",
+   "description": "Diameter of the bore the spring cross-pin is pressed into"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "edge_round",
+   "expr": "1.5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Bar outline",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Bar outline",
+   "start": [
+    "bar_width / 2",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "arc": [
+      "-bar_width / 2",
+      "0 mm"
+     ],
+     "center": [
+      "0 mm",
+      "0 mm"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "-bar_width / 2",
+      "length"
+     ]
+    },
+    {
+     "arc": [
+      "bar_width / 2",
+      "length"
+     ],
+     "center": [
+      "0 mm",
+      "length"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Bar outline",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Bar outline",
+   "center": [
+    "0 mm",
+    "length"
+   ],
+   "radius": "pivot_bore / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Bar outline",
+   "distance": "bar_thickness",
+   "symmetric": true,
+   "name": "Bar blank"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "name": "Oak bar",
+   "edges": [
+    [
+     "F2:side(e6)",
+     "F2:startCap(e4,e6,e9,e10)"
+    ],
+    [
+     "F2:side(e6)",
+     "F2:endCap(e4,e6,e9,e10)"
+    ]
+   ],
+   "radius": "edge_round",
+   "chain": true
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Spring pin hole",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Spring pin hole",
+   "center": [
+    "0 mm",
+    "anchor_position"
+   ],
+   "radius": "spring_pin_bore / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Spring pin hole",
+   "throughAll": true,
+   "symmetric": true,
+   "cut": "Oak bar",
+   "name": "Spring pin bore",
+   "when": "anchor_position > 0 mm"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot near",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot far",
+   "through": [
+    [
+     "length",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "length + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "length",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Spring pin",
+   "through": [
+    [
+     "anchor_position",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "anchor_position + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "anchor_position",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Spring pin bore",
+   "preset": "oak",
+   "pattern": null,
+   "color": "#6f5a42",
+   "roughness": 0.56,
+   "subsurface": 0
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bar thickness",
+   "measure": "extent",
+   "axis": "y",
+   "eq": "bar_thickness",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Oak arm bar",
+   "description": "Oak slat of a parallelogram arm, rounded at the ends, bored for two pivot pins and optionally for the spring's cross-pin.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

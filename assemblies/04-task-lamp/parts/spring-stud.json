@@ -1,0 +1,256 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "length",
+   "expr": "17.3 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "length",
+   "label": "Shank length",
+   "group": "Stud",
+   "order": 1,
+   "min": "10 mm",
+   "max": "25 mm",
+   "description": "Length from the inner face of the cheek to the head"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_thickness",
+   "expr": "4 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_thickness",
+   "label": "Cheek thickness",
+   "group": "Stud",
+   "order": 2,
+   "min": "3 mm",
+   "max": "4 mm",
+   "description": "Thickness of the cheek the stud is screwed into"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shank_diameter",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shank_diameter",
+   "label": "Shank diameter",
+   "group": "Stud",
+   "order": 3,
+   "min": "4.8 mm",
+   "max": "5 mm",
+   "description": "Diameter of the stud's shank, where the spring's hook hangs"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_diameter",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_height",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_radius",
+   "expr": "shank_diameter / 2 - 0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "collar_diameter",
+   "expr": "8 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "collar_width",
+   "expr": "2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_gap",
+   "expr": "0.05 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Stud profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Stud profile",
+   "start": [
+    "0 mm",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "thread_radius - 0.3 mm",
+      "0 mm"
+     ]
+    },
+    {
+     "line": [
+      "thread_radius",
+      "0.3 mm"
+     ]
+    },
+    {
+     "line": [
+      "thread_radius",
+      "cheek_thickness + seat_gap"
+     ]
+    },
+    {
+     "line": [
+      "collar_diameter / 2",
+      "cheek_thickness + seat_gap"
+     ]
+    },
+    {
+     "line": [
+      "collar_diameter / 2",
+      "cheek_thickness + seat_gap + collar_width"
+     ]
+    },
+    {
+     "line": [
+      "shank_diameter / 2",
+      "cheek_thickness + seat_gap + collar_width"
+     ]
+    },
+    {
+     "line": [
+      "shank_diameter / 2",
+      "length"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "length"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "length + head_height - 1 mm"
+     ]
+    },
+    {
+     "arc": [
+      "head_diameter / 2 - 1 mm",
+      "length + head_height"
+     ],
+     "center": [
+      "head_diameter / 2 - 1 mm",
+      "length + head_height - 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "length + head_height"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Stud profile",
+   "axis": "y",
+   "name": "Spring stud"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Seat",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Spring stud",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Spring stud",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Spring stud",
+   "description": "Brass stud, M5 screwed into the cheek's tapped hole (thread drawn at \u00d8 4.8, clear of the hole) with a collar on the cheek's outer face, that carries one spring's end hook.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

@@ -1,0 +1,187 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "shoulder_length",
+   "expr": "15.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shoulder_length",
+   "label": "Shoulder length",
+   "group": "Screw",
+   "order": 1,
+   "min": "10 mm",
+   "max": "20 mm",
+   "description": "Length of the plain shoulder from the head to the stem's end"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shoulder_radius",
+   "expr": "3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_radius",
+   "expr": "2.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_length",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_radius",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_height",
+   "expr": "4.3 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Screw profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Screw profile",
+   "start": [
+    "-head_height",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "-head_height",
+      "head_radius - 0.8 mm"
+     ]
+    },
+    {
+     "line": [
+      "-head_height + 0.8 mm",
+      "head_radius"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "head_radius"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "shoulder_radius"
+     ]
+    },
+    {
+     "line": [
+      "shoulder_length",
+      "shoulder_radius"
+     ]
+    },
+    {
+     "line": [
+      "shoulder_length",
+      "thread_radius"
+     ]
+    },
+    {
+     "line": [
+      "shoulder_length + thread_length - 0.5 mm",
+      "thread_radius"
+     ]
+    },
+    {
+     "line": [
+      "shoulder_length + thread_length",
+      "thread_radius - 0.5 mm"
+     ]
+    },
+    {
+     "line": [
+      "shoulder_length + thread_length",
+      "0 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Screw profile",
+   "axis": "x",
+   "name": "Retaining screw"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Retaining screw",
+   "preset": "steel",
+   "color": "#8e9398",
+   "metallic": 0.85,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Head seat",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Turret retaining screw",
+   "description": "Steel shoulder screw from under the base into the turret's stem: it keeps the turret in the base and sets the swivel's end float.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

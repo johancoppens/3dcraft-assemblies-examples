@@ -1,0 +1,477 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "link_upper",
+   "expr": "34 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_upper",
+   "label": "Upper bar spacing",
+   "group": "Head",
+   "order": 1,
+   "min": "33 mm",
+   "max": "36 mm",
+   "description": "Distance between the upper arm's two pivots"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_round",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_gap",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_gap",
+   "label": "Slot half-width",
+   "group": "Head",
+   "order": 2,
+   "min": "4.6 mm",
+   "max": "5.4 mm",
+   "description": "Distance from the centre plane to the inner face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_half",
+   "expr": "7.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_half",
+   "label": "Cheek outer half-width",
+   "group": "Head",
+   "order": 3,
+   "min": "7.5 mm",
+   "max": "8.3 mm",
+   "description": "Distance from the centre plane to the outer face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pin_bore",
+   "expr": "5.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pin_bore",
+   "label": "Cheek bore",
+   "group": "Head",
+   "order": 4,
+   "min": "5.1 mm",
+   "max": "5.6 mm",
+   "description": "Diameter of the pivot holes in the cheeks"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nose",
+   "expr": "24 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stem_radius",
+   "expr": "6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ball_drop",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flex_bore",
+   "expr": "3.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bore_mouth",
+   "expr": "1.5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Head outline",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Head outline",
+   "start": [
+    "(link_upper) + (plate_round) * ((((nose) - (0 mm))) / hypot(((link_upper / 2) - (link_upper)), ((nose) - (0 mm))))",
+    "(0 mm) + (plate_round) * (-(((link_upper / 2) - (link_upper))) / hypot(((link_upper / 2) - (link_upper)), ((nose) - (0 mm))))"
+   ],
+   "segments": [
+    {
+     "line": [
+      "(link_upper / 2) + (plate_round) * ((((nose) - (0 mm))) / hypot(((link_upper / 2) - (link_upper)), ((nose) - (0 mm))))",
+      "(nose) + (plate_round) * (-(((link_upper / 2) - (link_upper))) / hypot(((link_upper / 2) - (link_upper)), ((nose) - (0 mm))))"
+     ]
+    },
+    {
+     "arc": [
+      "(link_upper / 2) + (plate_round) * ((((0 mm) - (nose))) / hypot(((0 mm) - (link_upper / 2)), ((0 mm) - (nose))))",
+      "(nose) + (plate_round) * (-(((0 mm) - (link_upper / 2))) / hypot(((0 mm) - (link_upper / 2)), ((0 mm) - (nose))))"
+     ],
+     "center": [
+      "link_upper / 2",
+      "nose"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(0 mm) + (plate_round) * ((((0 mm) - (nose))) / hypot(((0 mm) - (link_upper / 2)), ((0 mm) - (nose))))",
+      "(0 mm) + (plate_round) * (-(((0 mm) - (link_upper / 2))) / hypot(((0 mm) - (link_upper / 2)), ((0 mm) - (nose))))"
+     ]
+    },
+    {
+     "arc": [
+      "(0 mm) + (plate_round) * ((((0 mm) - (0 mm))) / hypot(((link_upper) - (0 mm)), ((0 mm) - (0 mm))))",
+      "(0 mm) + (plate_round) * (-(((link_upper) - (0 mm))) / hypot(((link_upper) - (0 mm)), ((0 mm) - (0 mm))))"
+     ],
+     "center": [
+      "0 mm",
+      "0 mm"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(link_upper) + (plate_round) * ((((0 mm) - (0 mm))) / hypot(((link_upper) - (0 mm)), ((0 mm) - (0 mm))))",
+      "(0 mm) + (plate_round) * (-(((link_upper) - (0 mm))) / hypot(((link_upper) - (0 mm)), ((0 mm) - (0 mm))))"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "link_upper",
+      "0 mm"
+     ],
+     "clockwise": false
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Head outline",
+   "distance": "2 * cheek_half",
+   "symmetric": true,
+   "name": "Head blank"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Head slot",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Head slot",
+   "start": [
+    "-30 mm",
+    "-30 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "link_upper + 30 mm",
+      "-30 mm"
+     ]
+    },
+    {
+     "line": [
+      "link_upper + 30 mm",
+      "plate_round + 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "-30 mm",
+      "plate_round + 1 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Head slot",
+   "distance": "2 * cheek_gap",
+   "symmetric": true,
+   "cut": "Head blank",
+   "name": "Head cheeks"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Head holes",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Head holes",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Head holes",
+   "center": [
+    "link_upper",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Head holes",
+   "throughAll": true,
+   "symmetric": true,
+   "cut": "Head cheeks",
+   "name": "Head bored"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "name": "Head plate",
+   "edges": [
+    [
+     "F2:side(e3)",
+     "F2:startCap(e3,e6,e8,e11,e13,e15)"
+    ],
+    [
+     "F2:side(e3)",
+     "F2:endCap(e3,e6,e8,e11,e13,e15)"
+    ]
+   ],
+   "radius": "1 mm",
+   "chain": true
+  }
+ ],
+ [
+  "feature.cylinder",
+  {
+   "radius": "stem_radius",
+   "height": "ball_drop + link_upper / 2 - plate_round / 2",
+   "position": [
+    "nose",
+    "0 mm",
+    "link_upper / 2 - plate_round / 2"
+   ],
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "name": "Ball stem"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Head plate",
+   "tool": "Ball stem",
+   "name": "Head with stem"
+  }
+ ],
+ [
+  "feature.cylinder",
+  {
+   "radius": "flex_bore",
+   "height": "ball_drop + link_upper / 2 + plate_round + 2 mm",
+   "position": [
+    "nose",
+    "0 mm",
+    "-ball_drop - 1 mm"
+   ],
+   "name": "Flex bore"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "subtract",
+   "target": "Head with stem",
+   "tool": "Flex bore",
+   "name": "Head with flex bore"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "name": "Head block",
+   "edges": [
+    [
+     "F13:copy(0)/F11:copy(1)/F10:face(2)",
+     "F13:copy(1)/F12:face(0)"
+    ]
+   ],
+   "radius": "bore_mouth"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Head block",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Head block",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot main",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot aux",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "link_upper"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "link_upper + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "link_upper"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Ball centre",
+   "through": [
+    [
+     "nose",
+     "0 mm",
+     "-ball_drop"
+    ],
+    [
+     "nose + 1 mm",
+     "0 mm",
+     "-ball_drop"
+    ],
+    [
+     "nose",
+     "0 mm + 1 mm",
+     "-ball_drop"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Stem reaches the ball's centre",
+   "measure": "boxMin",
+   "of": "Head block",
+   "axis": "z",
+   "eq": "-ball_drop",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Lamp head",
+   "description": "Brass head block: two cheeks that close the upper parallelogram, with a hollow stem down to the ball the shade swivels on: the flex runs down its \u00d8 7 bore from the top of the nose to a 1.5 mm radiused mouth at the stem's end, and the ball screws onto its M12 x 1 end (thread not drawn).",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

@@ -1,0 +1,589 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "cheek_outer",
+   "expr": "8.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_outer",
+   "label": "Cheek outer half-width",
+   "group": "Pivot",
+   "order": 1,
+   "min": "7 mm",
+   "max": "10 mm",
+   "description": "Distance from the bar's centre plane to the outer face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "washer_outer",
+   "expr": "7 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "washer_outer",
+   "label": "Friction washer outer radius",
+   "group": "Pivot",
+   "order": 2,
+   "min": "5 mm",
+   "max": "7.4 mm",
+   "description": "Outer radius of the leather washers"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "washer_inner",
+   "expr": "2.75 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "washer_inner",
+   "label": "Friction washer inner radius",
+   "group": "Pivot",
+   "order": 3,
+   "min": "2.6 mm",
+   "max": "4 mm",
+   "description": "Inner radius of the leather washers"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shank_diameter",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shank_diameter",
+   "label": "Screw diameter",
+   "group": "Pivot",
+   "order": 4,
+   "min": "4.8 mm",
+   "max": "5 mm",
+   "description": "Diameter of the tension screw's shank (M5, thread not drawn)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_inner",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_inner",
+   "label": "Slot half-width",
+   "group": "Pivot",
+   "order": 5,
+   "min": "4.6 mm",
+   "max": "5.4 mm",
+   "description": "Distance from the bar's centre plane to the inner face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_half",
+   "expr": "4.5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "bar_half",
+   "label": "Bar half-thickness",
+   "group": "Pivot",
+   "order": 6,
+   "min": "4.2 mm",
+   "max": "4.7 mm",
+   "description": "Half the thickness of the bar the pivot clamps"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leather_thickness",
+   "expr": "0.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shank_radius",
+   "expr": "shank_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_radius",
+   "expr": "4.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_height",
+   "expr": "2.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_gap",
+   "expr": "0.3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leather_centre",
+   "expr": "(bar_half + cheek_inner) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_washer_height",
+   "expr": "0.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_washer_outer",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nut_height",
+   "expr": "4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "thread_clear",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nut_seat",
+   "expr": "cheek_outer + head_gap + spring_washer_height + head_gap"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Screw profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Screw profile",
+   "start": [
+    "0 mm",
+    "-cheek_outer - head_gap - head_height"
+   ],
+   "segments": [
+    {
+     "line": [
+      "head_radius - 1 mm",
+      "-cheek_outer - head_gap - head_height"
+     ]
+    },
+    {
+     "arc": [
+      "head_radius",
+      "-cheek_outer - head_gap - head_height + 1 mm"
+     ],
+     "center": [
+      "head_radius - 1 mm",
+      "-cheek_outer - head_gap - head_height + 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "head_radius",
+      "-cheek_outer - head_gap"
+     ]
+    },
+    {
+     "line": [
+      "shank_radius",
+      "-cheek_outer - head_gap"
+     ]
+    },
+    {
+     "line": [
+      "shank_radius",
+      "nut_seat + nut_height - 0.5 mm"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "nut_seat + nut_height - 0.5 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Screw profile",
+   "axis": "y",
+   "name": "Tension screw"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Nut profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Nut profile",
+   "start": [
+    "shank_radius + thread_clear",
+    "nut_seat"
+   ],
+   "segments": [
+    {
+     "line": [
+      "head_radius",
+      "nut_seat"
+     ]
+    },
+    {
+     "line": [
+      "head_radius",
+      "nut_seat + nut_height - 0.8 mm"
+     ]
+    },
+    {
+     "line": [
+      "head_radius - 0.8 mm",
+      "nut_seat + nut_height"
+     ]
+    },
+    {
+     "line": [
+      "shank_radius + thread_clear",
+      "nut_seat + nut_height"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Nut profile",
+   "axis": "y",
+   "name": "Clamp nut"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Spring washer profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Spring washer profile",
+   "start": [
+    "shank_radius + thread_clear",
+    "cheek_outer + head_gap + 0.35 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "spring_washer_outer",
+      "cheek_outer + head_gap"
+     ]
+    },
+    {
+     "line": [
+      "spring_washer_outer",
+      "cheek_outer + head_gap + 0.5 mm"
+     ]
+    },
+    {
+     "line": [
+      "shank_radius + thread_clear",
+      "cheek_outer + head_gap + spring_washer_height"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Spring washer profile",
+   "axis": "y",
+   "name": "Spring washer"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Washer near profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Washer near profile",
+   "start": [
+    "washer_inner",
+    "leather_centre - leather_thickness / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      "washer_outer",
+      "leather_centre - leather_thickness / 2"
+     ]
+    },
+    {
+     "line": [
+      "washer_outer",
+      "leather_centre + leather_thickness / 2"
+     ]
+    },
+    {
+     "line": [
+      "washer_inner",
+      "leather_centre + leather_thickness / 2"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Washer near profile",
+   "axis": "y",
+   "name": "Leather washer A"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Washer far profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Washer far profile",
+   "start": [
+    "washer_inner",
+    "-leather_centre - leather_thickness / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      "washer_outer",
+      "-leather_centre - leather_thickness / 2"
+     ]
+    },
+    {
+     "line": [
+      "washer_outer",
+      "-leather_centre + leather_thickness / 2"
+     ]
+    },
+    {
+     "line": [
+      "washer_inner",
+      "-leather_centre + leather_thickness / 2"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Washer far profile",
+   "axis": "y",
+   "name": "Leather washer B"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Centre",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Tension screw",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Tension screw",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Clamp nut",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Clamp nut",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Spring washer",
+   "preset": "steel",
+   "color": "#8e9398",
+   "metallic": 0.8,
+   "roughness": 0.4
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Leather washer A",
+   "preset": "wood",
+   "color": "#5a3d28",
+   "metallic": 0.0,
+   "roughness": 0.85
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Leather washer A",
+   "name": "Leather",
+   "density": 900
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Leather washer B",
+   "preset": "wood",
+   "color": "#5a3d28",
+   "metallic": 0.0,
+   "roughness": 0.85
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Leather washer B",
+   "name": "Leather",
+   "density": 900
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Washer lies inside the bar's width",
+   "measure": "value",
+   "expr": "washer_outer",
+   "max": "7.5 mm"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Friction pivot",
+   "description": "M5 tension screw through both cheeks with a clamp nut and conical spring washer; a 0.5 mm leather washer either side of the bar, squeezed into the 0.4 mm space between bar and cheek, sets the pivot's friction.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

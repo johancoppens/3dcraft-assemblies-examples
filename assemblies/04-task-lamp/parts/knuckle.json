@@ -1,0 +1,538 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "link_lower",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_lower",
+   "label": "Lower bar spacing",
+   "group": "Knuckle",
+   "order": 1,
+   "min": "29 mm",
+   "max": "31 mm",
+   "description": "Distance between the lower arm's two pivots on this plate"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_upper",
+   "expr": "34 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_upper",
+   "label": "Upper bar spacing",
+   "group": "Knuckle",
+   "order": 2,
+   "min": "34 mm",
+   "max": "36 mm",
+   "description": "Distance between the upper arm's two pivots on this plate"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "anchor_height",
+   "expr": "21 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "anchor_height",
+   "label": "Spring anchor height",
+   "group": "Knuckle",
+   "order": 3,
+   "min": "16 mm",
+   "max": "28 mm",
+   "description": "Height of the upper spring studs above the upper main pivot"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "riser",
+   "expr": "18 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_round",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_gap",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_gap",
+   "label": "Slot half-width",
+   "group": "Knuckle",
+   "order": 4,
+   "min": "4.6 mm",
+   "max": "5.4 mm",
+   "description": "Distance from the centre plane to the inner face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_half",
+   "expr": "7.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_half",
+   "label": "Cheek outer half-width",
+   "group": "Knuckle",
+   "order": 5,
+   "min": "7.5 mm",
+   "max": "8.3 mm",
+   "description": "Distance from the centre plane to the outer face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pin_bore",
+   "expr": "5.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pin_bore",
+   "label": "Cheek bore",
+   "group": "Knuckle",
+   "order": 6,
+   "min": "5.1 mm",
+   "max": "5.6 mm",
+   "description": "Diameter of the pivot and stud holes in the cheeks"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spacer_radius",
+   "expr": "4.5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Plate outline",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Plate outline",
+   "start": [
+    "(riser + link_upper) + (plate_round) * ((((0 mm) - (0 mm))) / hypot(((0 mm) - (riser + link_upper)), ((0 mm) - (0 mm))))",
+    "(0 mm) + (plate_round) * (-(((0 mm) - (riser + link_upper))) / hypot(((0 mm) - (riser + link_upper)), ((0 mm) - (0 mm))))"
+   ],
+   "segments": [
+    {
+     "line": [
+      "(0 mm) + (plate_round) * ((((0 mm) - (0 mm))) / hypot(((0 mm) - (riser + link_upper)), ((0 mm) - (0 mm))))",
+      "(0 mm) + (plate_round) * (-(((0 mm) - (riser + link_upper))) / hypot(((0 mm) - (riser + link_upper)), ((0 mm) - (0 mm))))"
+     ]
+    },
+    {
+     "arc": [
+      "(0 mm) + (plate_round) * ((((-link_lower) - (0 mm))) / hypot(((0 mm) - (0 mm)), ((-link_lower) - (0 mm))))",
+      "(0 mm) + (plate_round) * (-(((0 mm) - (0 mm))) / hypot(((0 mm) - (0 mm)), ((-link_lower) - (0 mm))))"
+     ],
+     "center": [
+      "0 mm",
+      "0 mm"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(0 mm) + (plate_round) * ((((-link_lower) - (0 mm))) / hypot(((0 mm) - (0 mm)), ((-link_lower) - (0 mm))))",
+      "(-link_lower) + (plate_round) * (-(((0 mm) - (0 mm))) / hypot(((0 mm) - (0 mm)), ((-link_lower) - (0 mm))))"
+     ]
+    },
+    {
+     "arc": [
+      "(0 mm) + (plate_round) * ((((0 mm) - (-link_lower))) / hypot(((riser + link_upper) - (0 mm)), ((0 mm) - (-link_lower))))",
+      "(-link_lower) + (plate_round) * (-(((riser + link_upper) - (0 mm))) / hypot(((riser + link_upper) - (0 mm)), ((0 mm) - (-link_lower))))"
+     ],
+     "center": [
+      "0 mm",
+      "-link_lower"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(riser + link_upper) + (plate_round) * ((((0 mm) - (-link_lower))) / hypot(((riser + link_upper) - (0 mm)), ((0 mm) - (-link_lower))))",
+      "(0 mm) + (plate_round) * (-(((riser + link_upper) - (0 mm))) / hypot(((riser + link_upper) - (0 mm)), ((0 mm) - (-link_lower))))"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "riser + link_upper",
+      "0 mm"
+     ],
+     "clockwise": false
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Plate outline",
+   "distance": "2 * cheek_half",
+   "symmetric": true,
+   "name": "Knuckle blank"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Middle slot",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Middle slot",
+   "start": [
+    "-30 mm",
+    "-link_lower - 30 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "riser + link_upper + 30 mm",
+      "-link_lower - 30 mm"
+     ]
+    },
+    {
+     "line": [
+      "riser + link_upper + 30 mm",
+      "30 mm"
+     ]
+    },
+    {
+     "line": [
+      "-30 mm",
+      "30 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Middle slot",
+   "distance": "2 * cheek_gap",
+   "symmetric": true,
+   "cut": "Knuckle blank",
+   "name": "Knuckle cheeks"
+  }
+ ],
+ [
+  "feature.cylinder",
+  {
+   "radius": "spacer_radius",
+   "height": "2 * cheek_gap + 0.4 mm",
+   "position": [
+    "-link_lower * 0.62",
+    "-cheek_gap - 0.2 mm",
+    "riser + link_upper * 0.32"
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "name": "Cheek spacer"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Knuckle cheeks",
+   "tool": "Cheek spacer",
+   "name": "Knuckle joined"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Pin holes",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "0 mm",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "0 mm",
+    "-link_lower"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "riser",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "riser + link_upper",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "riser + anchor_height",
+    "0 mm"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Pin holes",
+   "throughAll": true,
+   "symmetric": true,
+   "cut": "Knuckle joined",
+   "name": "Knuckle holes"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "name": "Knuckle",
+   "edges": [
+    [
+     "F2:side(e3)",
+     "F2:startCap(e3,e6,e8,e11,e13,e15)"
+    ],
+    [
+     "F2:side(e3)",
+     "F2:endCap(e3,e6,e8,e11,e13,e15)"
+    ]
+   ],
+   "radius": "1.5 mm",
+   "chain": true
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Knuckle",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Knuckle",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Lower main",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Lower aux",
+   "through": [
+    [
+     "-link_lower",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "-link_lower",
+     "0 mm",
+     "0 mm + 1 mm"
+    ],
+    [
+     "-link_lower + 1 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Upper main",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "riser"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "riser + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "riser"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Upper aux",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "riser + link_upper"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "riser + link_upper + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "riser + link_upper"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Anchor",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "riser + anchor_height"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "riser + anchor_height + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "riser + anchor_height"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Cheeks are the bar gap apart",
+   "measure": "extent",
+   "of": "Knuckle",
+   "axis": "y",
+   "eq": "2 * cheek_half",
+   "tol": "0.001"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Elbow knuckle",
+   "description": "Brass elbow: two triangular cheeks joined by a spacer, holding the four pivots of the two parallelograms and the upper springs' studs.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

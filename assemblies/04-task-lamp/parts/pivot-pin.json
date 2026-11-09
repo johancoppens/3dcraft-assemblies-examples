@@ -1,0 +1,201 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "span",
+   "expr": "18.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "span",
+   "label": "Length between heads",
+   "group": "Pin",
+   "order": 1,
+   "min": "12 mm",
+   "max": "55 mm",
+   "description": "Length of the shank between the two heads"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shank_diameter",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shank_diameter",
+   "label": "Shank diameter",
+   "group": "Pin",
+   "order": 2,
+   "min": "4.8 mm",
+   "max": "5 mm",
+   "description": "Diameter of the pin's shank"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_diameter",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_height",
+   "expr": "2.2 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Pin profile",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Pin profile",
+   "start": [
+    "0 mm",
+    "-span / 2 - head_height"
+   ],
+   "segments": [
+    {
+     "line": [
+      "head_diameter / 2 - 1 mm",
+      "-span / 2 - head_height"
+     ]
+    },
+    {
+     "arc": [
+      "head_diameter / 2",
+      "-span / 2 - head_height + 1 mm"
+     ],
+     "center": [
+      "head_diameter / 2 - 1 mm",
+      "-span / 2 - head_height + 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "-span / 2"
+     ]
+    },
+    {
+     "line": [
+      "shank_diameter / 2",
+      "-span / 2"
+     ]
+    },
+    {
+     "line": [
+      "shank_diameter / 2",
+      "span / 2"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "span / 2"
+     ]
+    },
+    {
+     "line": [
+      "head_diameter / 2",
+      "span / 2 + head_height - 1 mm"
+     ]
+    },
+    {
+     "arc": [
+      "head_diameter / 2 - 1 mm",
+      "span / 2 + head_height"
+     ],
+     "center": [
+      "head_diameter / 2 - 1 mm",
+      "span / 2 + head_height - 1 mm"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "span / 2 + head_height"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Pin profile",
+   "axis": "y",
+   "name": "Pivot pin"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Centre",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + -1 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Pivot pin",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Pivot pin",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Pivot pin",
+   "description": "Brass pivot pin with a domed head at each end, drawn in one piece; in the real thing one head is riveted over.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

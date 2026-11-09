@@ -1,0 +1,603 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "shade_diameter",
+   "expr": "170 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shade_diameter",
+   "label": "Shade diameter",
+   "group": "Shade",
+   "order": 1,
+   "min": "150 mm",
+   "max": "200 mm",
+   "description": "Diameter of the shade's rim"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "sheet",
+   "expr": "0.7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bell_top",
+   "expr": "-28 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hole_radius",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rim_bead",
+   "expr": "1.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "ball_radius",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_gap",
+   "expr": "0.15 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_radius",
+   "expr": "ball_radius + seat_gap"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cup_radius",
+   "expr": "11 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cup_bore",
+   "expr": "5.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "liner_thickness",
+   "expr": "0.25 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shell_sheet",
+   "expr": "sheet - liner_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "waist_lean",
+   "expr": "22 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "top_radius",
+   "expr": "0.13 * shade_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "waist_z",
+   "expr": "bell_top - 0.34 * shade_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "waist_r",
+   "expr": "0.32 * shade_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rim_z",
+   "expr": "bell_top - 0.66 * shade_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rim_r",
+   "expr": "shade_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "waist_normal_z",
+   "expr": "-sin(waist_lean)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "waist_normal_r",
+   "expr": "-cos(waist_lean)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shoulder_rho",
+   "expr": "((bell_top - waist_z)^2 + (top_radius - waist_r)^2) / (2 * ((bell_top - waist_z) * waist_normal_z + (top_radius - waist_r) * waist_normal_r))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flare_rho",
+   "expr": "((rim_z - waist_z)^2 + (rim_r - waist_r)^2) / (2 * (-(rim_z - waist_z) * waist_normal_z - (rim_r - waist_r) * waist_normal_r))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cz1",
+   "expr": "waist_z + shoulder_rho * waist_normal_z"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cr1",
+   "expr": "waist_r + shoulder_rho * waist_normal_r"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cz2",
+   "expr": "waist_z - flare_rho * waist_normal_z"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cr2",
+   "expr": "waist_r - flare_rho * waist_normal_r"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "liner_end_z",
+   "expr": "rim_z + 2.2 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Bell profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Bell profile",
+   "start": [
+    "bell_top",
+    "hole_radius"
+   ],
+   "segments": [
+    {
+     "line": [
+      "bell_top",
+      "top_radius"
+     ]
+    },
+    {
+     "arc": [
+      "waist_z",
+      "waist_r"
+     ],
+     "center": [
+      "cz1",
+      "cr1"
+     ],
+     "clockwise": false
+    },
+    {
+     "arc": [
+      "rim_z",
+      "rim_r"
+     ],
+     "center": [
+      "cz2",
+      "cr2"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "cz2 + (rim_z - cz2) * (flare_rho + shell_sheet) / flare_rho",
+      "cr2 + (rim_r - cr2) * (flare_rho + shell_sheet) / flare_rho"
+     ]
+    },
+    {
+     "arc": [
+      "waist_z + shell_sheet * waist_normal_z",
+      "waist_r + shell_sheet * waist_normal_r"
+     ],
+     "center": [
+      "cz2",
+      "cr2"
+     ],
+     "clockwise": false
+    },
+    {
+     "arc": [
+      "cz1 + (bell_top - cz1) * (shoulder_rho - shell_sheet) / shoulder_rho",
+      "cr1 + (top_radius - cr1) * (shoulder_rho - shell_sheet) / shoulder_rho"
+     ],
+     "center": [
+      "cz1",
+      "cr1"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "bell_top - shell_sheet",
+      "hole_radius"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Bell profile",
+   "axis": "x",
+   "name": "Spun shade"
+  }
+ ],
+ [
+  "feature.torus",
+  {
+   "major": "rim_r",
+   "minor": "rim_bead",
+   "position": [
+    "0 mm",
+    "0 mm",
+    "rim_z"
+   ],
+   "name": "Rim bead"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Spun shade",
+   "tool": "Rim bead",
+   "name": "Shade"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Shade",
+   "preset": "car-paint",
+   "color": "#123f33",
+   "metallic": 0.05,
+   "roughness": 0.3,
+   "clearcoat": 1.0,
+   "clearcoatRoughness": 0.08
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Shade",
+   "name": "Steel, enamelled",
+   "density": 7850
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Liner profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Liner profile",
+   "start": [
+    "bell_top - shell_sheet",
+    "hole_radius"
+   ],
+   "segments": [
+    {
+     "line": [
+      "cz1 + (bell_top - cz1) * (shoulder_rho - shell_sheet) / shoulder_rho",
+      "cr1 + (top_radius - cr1) * (shoulder_rho - shell_sheet) / shoulder_rho"
+     ]
+    },
+    {
+     "arc": [
+      "waist_z + shell_sheet * waist_normal_z",
+      "waist_r + shell_sheet * waist_normal_r"
+     ],
+     "center": [
+      "cz1",
+      "cr1"
+     ],
+     "clockwise": false
+    },
+    {
+     "arc": [
+      "liner_end_z",
+      "cr2 - sqrt((flare_rho + shell_sheet)^2 - (liner_end_z - cz2)^2)"
+     ],
+     "center": [
+      "cz2",
+      "cr2"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "liner_end_z",
+      "cr2 - sqrt((flare_rho + sheet)^2 - (liner_end_z - cz2)^2)"
+     ]
+    },
+    {
+     "arc": [
+      "waist_z + sheet * waist_normal_z",
+      "waist_r + sheet * waist_normal_r"
+     ],
+     "center": [
+      "cz2",
+      "cr2"
+     ],
+     "clockwise": false
+    },
+    {
+     "arc": [
+      "cz1 + (bell_top - cz1) * (shoulder_rho - sheet) / shoulder_rho",
+      "cr1 + (top_radius - cr1) * (shoulder_rho - sheet) / shoulder_rho"
+     ],
+     "center": [
+      "cz1",
+      "cr1"
+     ],
+     "clockwise": true
+    },
+    {
+     "line": [
+      "bell_top - sheet",
+      "hole_radius"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Liner profile",
+   "axis": "x",
+   "name": "Liner"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Liner",
+   "preset": "abs",
+   "color": "#efe6d3",
+   "metallic": 0.0,
+   "roughness": 0.5
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Liner",
+   "name": "Steel, enamelled cream inside",
+   "density": 7850
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Cup profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Cup profile",
+   "start": [
+    "bell_top",
+    "cup_bore"
+   ],
+   "segments": [
+    {
+     "line": [
+      "bell_top",
+      "cup_radius"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "cup_radius"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "seat_radius"
+     ]
+    },
+    {
+     "arc": [
+      "-sqrt(seat_radius^2 - cup_bore^2)",
+      "cup_bore"
+     ],
+     "center": [
+      "0 mm",
+      "0 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Cup profile",
+   "axis": "x",
+   "name": "Cup"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Cup",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Cup",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Ball centre",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Lamp seat",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "bell_top"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "bell_top"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "bell_top"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Rim diameter",
+   "measure": "extent",
+   "of": "Shade",
+   "axis": "x",
+   "min": "shade_diameter",
+   "max": "shade_diameter + 3 * rim_bead"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Seat lets the ball in from above",
+   "measure": "value",
+   "expr": "seat_radius - ball_radius",
+   "min": "0.1 mm"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Spun shade",
+   "description": "Spun steel shade, enamelled deep green outside with a cream liner layer inside and a rolled rim, with a brass cup whose open seat takes the ball (a screwed cap keeps it in) and whose bore, open from the seat to the shade's top, takes the lamp holder's nipple and lets the flex down the axis.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

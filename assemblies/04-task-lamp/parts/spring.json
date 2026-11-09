@@ -1,0 +1,410 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "span",
+   "expr": "150 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "span",
+   "label": "Eye span",
+   "group": "Spring",
+   "order": 1,
+   "min": "100 mm",
+   "max": "200 mm",
+   "description": "Distance between the two end hooks' centres (it follows the arm: the span is a formula of t)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wire_diameter",
+   "expr": "1.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "wire_diameter",
+   "label": "Wire diameter",
+   "group": "Spring",
+   "order": 2,
+   "min": "1.4 mm",
+   "max": "1.8 mm",
+   "description": "The spring's wire diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coil_diameter",
+   "expr": "17.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "coil_diameter",
+   "label": "Mean coil diameter",
+   "group": "Spring",
+   "order": 3,
+   "min": "15 mm",
+   "max": "20 mm",
+   "description": "Mean diameter of the coils"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hook_length",
+   "expr": "14.1 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "hook_length",
+   "label": "End hook length",
+   "group": "Spring",
+   "order": 5,
+   "min": "12 mm",
+   "max": "16 mm",
+   "description": "Distance from an end hook's centre to the coils"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "eye_radius",
+   "expr": "3.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "active_coils",
+   "expr": "26"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "active_coils",
+   "label": "Active coils",
+   "group": "Spring",
+   "order": 4,
+   "min": "22",
+   "max": "30",
+   "description": "Number of active coils",
+   "step": "1"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coil_radius",
+   "expr": "coil_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wire_radius",
+   "expr": "wire_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coiled_length",
+   "expr": "span - 2 * hook_length"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pitch",
+   "expr": "coiled_length / active_coils"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tilt",
+   "expr": "atan(pitch / (4 * coil_radius))"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Rear hook wire",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Rear hook wire",
+   "center": [
+    "eye_radius",
+    "0 mm"
+   ],
+   "radius": "wire_radius"
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Rear hook wire",
+   "axis": "y",
+   "angle": "180 deg",
+   "name": "Rear loop"
+  }
+ ],
+ [
+  "feature.cylinder",
+  {
+   "radius": "wire_radius",
+   "height": "hypot(coil_radius - eye_radius, hook_length)",
+   "position": [
+    "eye_radius",
+    "0 mm",
+    "0 mm"
+   ],
+   "axis": [
+    "(coil_radius - eye_radius) / hypot(coil_radius - eye_radius, hook_length)",
+    0,
+    "hook_length / hypot(coil_radius - eye_radius, hook_length)"
+   ],
+   "name": "Rear leg"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Rear loop",
+   "tool": "Rear leg",
+   "name": "Rear hook"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Near wire",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Near wire",
+   "center": [
+    "hook_length + pitch / 4 - coil_radius * sin(tilt)",
+    "coil_radius * cos(tilt)"
+   ],
+   "radius": "wire_radius"
+  }
+ ],
+ [
+  "datum.axis",
+  {
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "hook_length + pitch / 4"
+    ],
+    [
+     "sin(tilt) * 10 mm",
+     "0 mm",
+     "hook_length + pitch / 4 + cos(tilt) * 10 mm"
+    ]
+   ],
+   "name": "Near axis"
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Near wire",
+   "axis": "Near axis",
+   "angle": "180 deg",
+   "name": "Near half coil"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Far wire",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Far wire",
+   "center": [
+    "hook_length + 3 * pitch / 4 - coil_radius * sin(tilt)",
+    "-coil_radius * cos(tilt)"
+   ],
+   "radius": "wire_radius"
+  }
+ ],
+ [
+  "datum.axis",
+  {
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "hook_length + 3 * pitch / 4"
+    ],
+    [
+     "-sin(tilt) * 10 mm",
+     "0 mm",
+     "hook_length + 3 * pitch / 4 + cos(tilt) * 10 mm"
+    ]
+   ],
+   "name": "Far axis"
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Far wire",
+   "axis": "Far axis",
+   "angle": "180 deg",
+   "name": "Far half coil"
+  }
+ ],
+ [
+  "feature.pattern",
+  {
+   "source": "Near half coil",
+   "count": "active_coils",
+   "step": [
+    "0 mm",
+    "0 mm",
+    "pitch"
+   ],
+   "name": "Near coils"
+  }
+ ],
+ [
+  "feature.pattern",
+  {
+   "source": "Far half coil",
+   "count": "active_coils",
+   "step": [
+    "0 mm",
+    "0 mm",
+    "pitch"
+   ],
+   "name": "Far coils"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Near coils are the real wire and coil count",
+   "measure": "volume",
+   "of": "Near coils",
+   "eq": "active_coils * (pi * wire_radius^2) * (pi * coil_radius)",
+   "tol": "0.5"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Rear eye",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Far end",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "span"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "span"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "span"
+    ]
+   ]
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Rear hook",
+   "preset": "steel",
+   "color": "#cdd3d9",
+   "metallic": 0.9,
+   "roughness": 0.32
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Near coils",
+   "preset": "steel",
+   "color": "#cdd3d9",
+   "metallic": 0.9,
+   "roughness": 0.32
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Far coils",
+   "preset": "steel",
+   "color": "#cdd3d9",
+   "metallic": 0.9,
+   "roughness": 0.32
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Extension spring",
+   "description": "Close-wound extension spring of real wire and coil count, drawn as joined half turns at the pitch its stretched length gives, with an open end hook at the rear.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

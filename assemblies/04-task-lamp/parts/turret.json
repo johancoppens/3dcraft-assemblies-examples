@@ -1,0 +1,626 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "pivot_height",
+   "expr": "52 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pivot_height",
+   "label": "Pivot height",
+   "group": "Turret",
+   "order": 1,
+   "min": "50 mm",
+   "max": "54 mm",
+   "description": "Height of the arm pivots above the seat"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_spacing",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "link_spacing",
+   "label": "Bar spacing",
+   "group": "Turret",
+   "order": 2,
+   "min": "29 mm",
+   "max": "31 mm",
+   "description": "Distance between the two arm pivots of the parallelogram"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "anchor_height",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "anchor_height",
+   "label": "Spring anchor height",
+   "group": "Turret",
+   "order": 3,
+   "min": "21 mm",
+   "max": "36 mm",
+   "description": "Height of the spring stud above the main pivot"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_round",
+   "expr": "11 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_gap",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_gap",
+   "label": "Slot half-width",
+   "group": "Turret",
+   "order": 5,
+   "min": "4.6 mm",
+   "max": "5.4 mm",
+   "description": "Distance from the centre plane to the inner face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_half",
+   "expr": "8.9 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "cheek_half",
+   "label": "Cheek outer half-width",
+   "group": "Turret",
+   "order": 6,
+   "min": "8.5 mm",
+   "max": "9.3 mm",
+   "description": "Distance from the centre plane to the outer face of a cheek"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pin_bore",
+   "expr": "5.2 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "pin_bore",
+   "label": "Cheek bore",
+   "group": "Turret",
+   "order": 7,
+   "min": "5.1 mm",
+   "max": "5.6 mm",
+   "description": "Diameter of the pivot and stud holes in the cheeks"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "plate_edge",
+   "expr": "0.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stem_diameter",
+   "expr": "16 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stem_length",
+   "expr": "24 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "stem_length",
+   "label": "Stem length",
+   "group": "Turret",
+   "order": 4,
+   "min": "22 mm",
+   "max": "26 mm",
+   "description": "Length of the stem below the seat"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tap_radius",
+   "expr": "2.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tap_depth",
+   "expr": "11 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_radius",
+   "expr": "24 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "flange_height",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Foot profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Foot profile",
+   "start": [
+    "-stem_length + tap_depth",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "-stem_length + tap_depth",
+      "tap_radius"
+     ]
+    },
+    {
+     "line": [
+      "-stem_length",
+      "tap_radius"
+     ]
+    },
+    {
+     "line": [
+      "-stem_length",
+      "stem_diameter / 2 - 0.8 mm"
+     ]
+    },
+    {
+     "line": [
+      "-stem_length + 0.8 mm",
+      "stem_diameter / 2"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "stem_diameter / 2"
+     ]
+    },
+    {
+     "line": [
+      "0 mm",
+      "flange_radius"
+     ]
+    },
+    {
+     "line": [
+      "flange_height - 2 mm",
+      "flange_radius"
+     ]
+    },
+    {
+     "arc": [
+      "flange_height",
+      "flange_radius - 2 mm"
+     ],
+     "center": [
+      "flange_height - 2 mm",
+      "flange_radius - 2 mm"
+     ]
+    },
+    {
+     "line": [
+      "flange_height",
+      "0 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Foot profile",
+   "axis": "x",
+   "name": "Turret foot"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Cheek outline",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Cheek outline",
+   "start": [
+    "(pivot_height + anchor_height) + (plate_round) * ((((flange_radius - plate_round) - (link_spacing / 2))) / hypot(((plate_round) - (pivot_height + anchor_height)), ((flange_radius - plate_round) - (link_spacing / 2))))",
+    "(link_spacing / 2) + (plate_round) * (-(((plate_round) - (pivot_height + anchor_height))) / hypot(((plate_round) - (pivot_height + anchor_height)), ((flange_radius - plate_round) - (link_spacing / 2))))"
+   ],
+   "segments": [
+    {
+     "line": [
+      "(plate_round) + (plate_round) * ((((flange_radius - plate_round) - (link_spacing / 2))) / hypot(((plate_round) - (pivot_height + anchor_height)), ((flange_radius - plate_round) - (link_spacing / 2))))",
+      "(flange_radius - plate_round) + (plate_round) * (-(((plate_round) - (pivot_height + anchor_height))) / hypot(((plate_round) - (pivot_height + anchor_height)), ((flange_radius - plate_round) - (link_spacing / 2))))"
+     ]
+    },
+    {
+     "arc": [
+      "(plate_round) + (plate_round) * ((((-flange_radius + plate_round) - (flange_radius - plate_round))) / hypot(((plate_round) - (plate_round)), ((-flange_radius + plate_round) - (flange_radius - plate_round))))",
+      "(flange_radius - plate_round) + (plate_round) * (-(((plate_round) - (plate_round))) / hypot(((plate_round) - (plate_round)), ((-flange_radius + plate_round) - (flange_radius - plate_round))))"
+     ],
+     "center": [
+      "plate_round",
+      "flange_radius - plate_round"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(plate_round) + (plate_round) * ((((-flange_radius + plate_round) - (flange_radius - plate_round))) / hypot(((plate_round) - (plate_round)), ((-flange_radius + plate_round) - (flange_radius - plate_round))))",
+      "(-flange_radius + plate_round) + (plate_round) * (-(((plate_round) - (plate_round))) / hypot(((plate_round) - (plate_round)), ((-flange_radius + plate_round) - (flange_radius - plate_round))))"
+     ]
+    },
+    {
+     "arc": [
+      "(plate_round) + (plate_round) * ((((-link_spacing / 2) - (-flange_radius + plate_round))) / hypot(((pivot_height) - (plate_round)), ((-link_spacing / 2) - (-flange_radius + plate_round))))",
+      "(-flange_radius + plate_round) + (plate_round) * (-(((pivot_height) - (plate_round))) / hypot(((pivot_height) - (plate_round)), ((-link_spacing / 2) - (-flange_radius + plate_round))))"
+     ],
+     "center": [
+      "plate_round",
+      "-flange_radius + plate_round"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(pivot_height) + (plate_round) * ((((-link_spacing / 2) - (-flange_radius + plate_round))) / hypot(((pivot_height) - (plate_round)), ((-link_spacing / 2) - (-flange_radius + plate_round))))",
+      "(-link_spacing / 2) + (plate_round) * (-(((pivot_height) - (plate_round))) / hypot(((pivot_height) - (plate_round)), ((-link_spacing / 2) - (-flange_radius + plate_round))))"
+     ]
+    },
+    {
+     "arc": [
+      "(pivot_height) + (plate_round) * ((((link_spacing / 2) - (-link_spacing / 2))) / hypot(((pivot_height + anchor_height) - (pivot_height)), ((link_spacing / 2) - (-link_spacing / 2))))",
+      "(-link_spacing / 2) + (plate_round) * (-(((pivot_height + anchor_height) - (pivot_height))) / hypot(((pivot_height + anchor_height) - (pivot_height)), ((link_spacing / 2) - (-link_spacing / 2))))"
+     ],
+     "center": [
+      "pivot_height",
+      "-link_spacing / 2"
+     ],
+     "clockwise": false
+    },
+    {
+     "line": [
+      "(pivot_height + anchor_height) + (plate_round) * ((((link_spacing / 2) - (-link_spacing / 2))) / hypot(((pivot_height + anchor_height) - (pivot_height)), ((link_spacing / 2) - (-link_spacing / 2))))",
+      "(link_spacing / 2) + (plate_round) * (-(((pivot_height + anchor_height) - (pivot_height))) / hypot(((pivot_height + anchor_height) - (pivot_height)), ((link_spacing / 2) - (-link_spacing / 2))))"
+     ]
+    },
+    {
+     "arc": "start",
+     "center": [
+      "pivot_height + anchor_height",
+      "link_spacing / 2"
+     ],
+     "clockwise": false
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Cheek outline",
+   "distance": "2 * cheek_half",
+   "symmetric": true,
+   "name": "Cheek plate"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "name": "Rounded plate",
+   "edges": [
+    [
+     "F4:side(e3)",
+     "F4:startCap(e3,e6,e8,e11,e13,e16,e18,e20)"
+    ],
+    [
+     "F4:side(e3)",
+     "F4:endCap(e3,e6,e8,e11,e13,e16,e18,e20)"
+    ]
+   ],
+   "radius": "plate_edge",
+   "chain": true
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Turret foot",
+   "tool": "Rounded plate",
+   "name": "Turret blank"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Slot",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Slot",
+   "start": [
+    "pivot_height - plate_round - 1 mm",
+    "-flange_radius - 10 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "pivot_height + anchor_height + 2 * plate_round",
+      "-flange_radius - 10 mm"
+     ]
+    },
+    {
+     "line": [
+      "pivot_height + anchor_height + 2 * plate_round",
+      "flange_radius + 10 mm"
+     ]
+    },
+    {
+     "line": [
+      "pivot_height - plate_round - 1 mm",
+      "flange_radius + 10 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Slot",
+   "distance": "2 * cheek_gap",
+   "symmetric": true,
+   "cut": "Turret blank",
+   "name": "Turret cheeks"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Pin holes",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "pivot_height",
+    "link_spacing / 2"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "pivot_height",
+    "-link_spacing / 2"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Pin holes",
+   "center": [
+    "pivot_height + anchor_height",
+    "link_spacing / 2"
+   ],
+   "radius": "pin_bore / 2"
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Pin holes",
+   "throughAll": true,
+   "symmetric": true,
+   "cut": "Turret cheeks",
+   "name": "Turret"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Turret",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.38
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Turret",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Swivel",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot main",
+   "through": [
+    [
+     "link_spacing / 2",
+     "0 mm",
+     "pivot_height"
+    ],
+    [
+     "link_spacing / 2",
+     "0 mm",
+     "pivot_height + 1 mm"
+    ],
+    [
+     "link_spacing / 2 + 1 mm",
+     "0 mm",
+     "pivot_height"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Pivot aux",
+   "through": [
+    [
+     "-link_spacing / 2",
+     "0 mm",
+     "pivot_height"
+    ],
+    [
+     "-link_spacing / 2",
+     "0 mm",
+     "pivot_height + 1 mm"
+    ],
+    [
+     "-link_spacing / 2 + 1 mm",
+     "0 mm",
+     "pivot_height"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Anchor",
+   "through": [
+    [
+     "link_spacing / 2",
+     "0 mm",
+     "pivot_height + anchor_height"
+    ],
+    [
+     "link_spacing / 2",
+     "0 mm",
+     "pivot_height + anchor_height + 1 mm"
+    ],
+    [
+     "link_spacing / 2 + 1 mm",
+     "0 mm",
+     "pivot_height + anchor_height"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Cheek span",
+   "measure": "extent",
+   "of": "Turret",
+   "axis": "y",
+   "min": "2 * flange_radius - 0.5 mm"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Turret",
+   "description": "Brass turret: a foot that turns in the base and two cheeks that carry the lower arm's two pivots and the stud for the springs.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

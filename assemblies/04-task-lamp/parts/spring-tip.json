@@ -1,0 +1,204 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "wire_diameter",
+   "expr": "1.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "wire_diameter",
+   "label": "Wire diameter",
+   "group": "Spring",
+   "order": 2,
+   "min": "1.4 mm",
+   "max": "1.8 mm",
+   "description": "The spring's wire diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coil_diameter",
+   "expr": "17.6 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "coil_diameter",
+   "label": "Mean coil diameter",
+   "group": "Spring",
+   "order": 3,
+   "min": "15 mm",
+   "max": "20 mm",
+   "description": "Mean diameter of the coils"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hook_length",
+   "expr": "14.1 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "hook_length",
+   "label": "End hook length",
+   "group": "Spring",
+   "order": 5,
+   "min": "12 mm",
+   "max": "16 mm",
+   "description": "Distance from an end hook's centre to the coils"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "eye_radius",
+   "expr": "3.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coil_radius",
+   "expr": "coil_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wire_radius",
+   "expr": "wire_diameter / 2"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Front hook wire",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.circle",
+  {
+   "sketch": "Front hook wire",
+   "center": [
+    "eye_radius",
+    "0 mm"
+   ],
+   "radius": "wire_radius"
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Front hook wire",
+   "axis": "y",
+   "angle": "-180 deg",
+   "name": "Front loop"
+  }
+ ],
+ [
+  "feature.cylinder",
+  {
+   "radius": "wire_radius",
+   "height": "hypot(coil_radius - eye_radius, hook_length)",
+   "position": [
+    "eye_radius",
+    "0 mm",
+    "0 mm"
+   ],
+   "axis": [
+    "(coil_radius - eye_radius) / hypot(coil_radius - eye_radius, hook_length)",
+    0,
+    "-hook_length / hypot(coil_radius - eye_radius, hook_length)"
+   ],
+   "name": "Front leg"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Front loop",
+   "tool": "Front leg",
+   "name": "Spring tip"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Spring tip",
+   "preset": "steel",
+   "color": "#cdd3d9",
+   "metallic": 0.9,
+   "roughness": 0.32
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Eye",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm + 1 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Slide",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Spring tip",
+   "description": "The far open end hook of an extension spring and its short leg to the last coil; its sliding joint is the spring's extension.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

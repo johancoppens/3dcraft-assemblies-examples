@@ -1,0 +1,285 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "nipple_radius",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "skirt_radius",
+   "expr": "17 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "skirt_wall",
+   "expr": "1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "skirt_length",
+   "expr": "35 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nipple_length",
+   "expr": "12 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "nipple_bore",
+   "expr": "3.5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bore_mouth",
+   "expr": "1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shoulder_drop",
+   "expr": "0.75 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bulb_radius",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Holder profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Holder profile",
+   "start": [
+    "nipple_length - bore_mouth",
+    "nipple_bore"
+   ],
+   "segments": [
+    {
+     "arc": [
+      "nipple_length",
+      "nipple_bore + bore_mouth"
+     ],
+     "center": [
+      "nipple_length - bore_mouth",
+      "nipple_bore + bore_mouth"
+     ]
+    },
+    {
+     "line": [
+      "nipple_length",
+      "nipple_radius"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop",
+      "nipple_radius"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop",
+      "skirt_radius"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop - skirt_length",
+      "skirt_radius"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop - skirt_length",
+      "skirt_radius - skirt_wall"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop - 1 mm",
+      "skirt_radius - skirt_wall"
+     ]
+    },
+    {
+     "line": [
+      "-shoulder_drop - 1 mm",
+      "nipple_bore"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Holder profile",
+   "axis": "x",
+   "name": "Holder"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Holder",
+   "preset": "steel",
+   "color": "#ab9868",
+   "metallic": 1.0,
+   "roughness": 0.42
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Holder",
+   "name": "Brass",
+   "density": 8500
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Bulb profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Bulb profile",
+   "start": [
+    "-38 mm",
+    "0 mm"
+   ],
+   "segments": [
+    {
+     "line": [
+      "-38 mm",
+      "13 mm"
+     ]
+    },
+    {
+     "arc": [
+      "-78 mm",
+      "bulb_radius"
+     ],
+     "through": [
+      "-50 mm",
+      "20.5 mm"
+     ]
+    },
+    {
+     "arc": [
+      "-112 mm",
+      "0 mm"
+     ],
+     "through": [
+      "-103 mm",
+      "19 mm"
+     ]
+    },
+    {
+     "line": "start"
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Bulb profile",
+   "axis": "x",
+   "name": "Bulb"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Bulb",
+   "preset": "abs",
+   "color": "#fff6df",
+   "metallic": 0.0,
+   "roughness": 0.25
+  }
+ ],
+ [
+  "body.material",
+  {
+   "body": "Bulb",
+   "name": "Opal glass bulb, drawn solid at the mass of a hollow A60 bulb (about 60 g)",
+   "density": 450
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Seat",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Bulb present",
+   "measure": "volume",
+   "of": "Bulb",
+   "min": "50000"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Lamp",
+   "description": "E27 holder with a brass sleeve and an A60-size opal bulb, drawn as seen from outside: its hollow nipple, for the flex, screws into the shade's cup and its shoulder clamps the shade's top; the bulb is drawn solid at the mass of a hollow one.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

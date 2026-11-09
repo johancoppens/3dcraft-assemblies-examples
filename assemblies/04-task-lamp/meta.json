@@ -1,0 +1,122 @@
+{
+  "id": "task-lamp",
+  "title": "Spring-balanced task lamp",
+  "summary": "parallelogram arms, real springs, balance proven",
+  "description": "A two-arm desk lamp in oak and brass on a cast-iron base, balanced by four real extension springs. The torque about each arm's pivot, from the measured masses and the real springs, stays within a stated pivot friction over a sweep of poses.",
+  "domain": "Product design, lighting",
+  "process": "Oak milling, brass turning and sheet work, iron casting, metal spinning and enamelling, spring winding",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "Two parallelograms and four spring loops closed through sliders, springs as configurations following t, statics from measured masses, and a solver drift to work around; no couplings or subassemblies."
+  },
+  "standards": [
+    "E27 lamp cap and A60 bulb size (named; the sizes were read from a secondary source, the standards were not read)",
+    "ASTM A228 music wire (properties from a spring maker's table, the standard was not read)"
+  ],
+  "materials": [
+    "European oak (arms)",
+    "Brass (pivot plates, pins, shade cup and cap)",
+    "Music wire to ASTM A228 (springs, stated calculation)",
+    "Leather (friction washers)",
+    "Cast iron, enamelled black (base)",
+    "Spun steel, enamelled deep green outside and cream inside (shade)"
+  ],
+  "units": "mm",
+  "motion": {
+    "cycle": "a closed sweep of poses: each arm swings on a cosine law and returns to the start at t = 1",
+    "samples": 73,
+    "dof": 3
+  },
+  "contacts": [
+    {
+      "pair": [
+        "Spring */Rear hook",
+        "Spring */Near coils"
+      ],
+      "why": "the rear end hook's leg runs into the first coil: one wire, drawn as two bodies"
+    },
+    {
+      "pair": [
+        "Spring */Far coils",
+        "Tip *"
+      ],
+      "why": "the far end hook's leg runs into the last coil: one wire, drawn as a separate instance so the slider can carry it"
+    },
+    {
+      "pair": [
+        "Spring pin *",
+        "* main bar"
+      ],
+      "why": "the spring cross-pin is pressed into the oak bar, 0.05 mm radial interference"
+    },
+    {
+      "pair": [
+        "Shade/Shade",
+        "Shade/Liner"
+      ],
+      "why": "the cream liner is the shade's inner sheet layer: one sheet, drawn as two bodies (the assembly loses a face colour otherwise)"
+    },
+    {
+      "pair": [
+        "Friction pivot */Leather washer *",
+        "* main bar"
+      ],
+      "why": "the 0.5 mm leather washers are drawn at their free thickness in the 0.4 mm space: squeezed against the bar by the tension screw"
+    },
+    {
+      "pair": [
+        "Friction pivot lower/Leather washer *",
+        "Turret"
+      ],
+      "why": "the leather washers squeezed against the turret's cheeks"
+    },
+    {
+      "pair": [
+        "Friction pivot upper/Leather washer *",
+        "Knuckle"
+      ],
+      "why": "the leather washers squeezed against the knuckle's cheeks"
+    }
+  ],
+  "preview": {
+    "zoom": 1.35,
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/task-lamp.step"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-10",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Built a balanced lamp: two real parallelogram loops, 3 dof (the shade's ball only), 4 public parameters, head level within 4e-8 degrees, elbow height on the closed form within 0.01 mm, net torque within its stated pivot friction over the sweep at the defaults, springs within their limits, shade rim 84.5 mm above the desk, leather squeezed and listed, no unintended collisions at the moments it reached. Not met: it tipped over the base in half the sweep (the prompt gave no base mass: its base was 3.2 kg against this model's 5.8 kg), its leather squeeze was 0.2 mm a side, and it skipped the range corners and 6 collision moments (memory cap). It had to guess the base mass and height, the bar pairs' layout, the spring's shear modulus and cross-pin positions, the timeline's phase, the parameter ranges, the friction coefficient and the leather sizes; those were added to the prompt afterwards, and that wording was not retested. About 118 CLI calls."
+  },
+  "stats": {
+    "steps": 716,
+    "parts": 15,
+    "instances": 35,
+    "configurations": 22,
+    "mates": 41,
+    "couplings": 0,
+    "dof": 3,
+    "parameters": 4,
+    "assertions": 42,
+    "part_assertions": 13,
+    "warnings": 0,
+    "build_s": 5.01,
+    "load_s": 1.93,
+    "load_cpu_s": 5.82,
+    "bake_s": 1.61,
+    "bake_mb": 14.2,
+    "file_bytes": 615817,
+    "range_worst_s": 0.826
+  },
+  "craft3d": {
+    "commit": "45233bdc84c4",
+    "format_version": 69
+  }
+}

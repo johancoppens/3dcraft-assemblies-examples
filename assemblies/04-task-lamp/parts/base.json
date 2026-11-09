@@ -1,0 +1,299 @@
+[
+ [
+  "variable.set",
+  {
+   "name": "base_diameter",
+   "expr": "180 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "base_diameter",
+   "label": "Base diameter",
+   "group": "Base",
+   "order": 1,
+   "min": "160 mm",
+   "max": "220 mm",
+   "description": "Diameter of the cast base"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "base_radius",
+   "expr": "base_diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "edge_height",
+   "expr": "20 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shoulder_height",
+   "expr": "31 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_radius",
+   "expr": "25 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "boss_height",
+   "expr": "44 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stem_bore",
+   "expr": "16.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bore_depth",
+   "expr": "28 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "screw_hole",
+   "expr": "6.4 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "counterbore",
+   "expr": "14 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "counterbore_depth",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Base profile",
+   "plane": "zx"
+  }
+ ],
+ [
+  "sketch.path",
+  {
+   "sketch": "Base profile",
+   "start": [
+    0,
+    "counterbore / 2"
+   ],
+   "segments": [
+    {
+     "line": [
+      0,
+      "base_radius - 2 mm"
+     ]
+    },
+    {
+     "line": [
+      "2 mm",
+      "base_radius"
+     ]
+    },
+    {
+     "line": [
+      "edge_height",
+      "base_radius - 0.7 mm"
+     ]
+    },
+    {
+     "arc": [
+      "shoulder_height",
+      "base_radius - 22 mm"
+     ],
+     "radius": "19 mm",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "boss_height - 8 mm",
+      "boss_radius + 8 mm"
+     ]
+    },
+    {
+     "arc": [
+      "boss_height - 2 mm",
+      "boss_radius"
+     ],
+     "radius": "8 mm",
+     "clockwise": false
+    },
+    {
+     "arc": [
+      "boss_height",
+      "boss_radius - 2 mm"
+     ],
+     "radius": "2 mm",
+     "clockwise": true
+    },
+    {
+     "line": [
+      "boss_height",
+      "stem_bore / 2"
+     ]
+    },
+    {
+     "line": [
+      "boss_height - bore_depth",
+      "stem_bore / 2"
+     ]
+    },
+    {
+     "line": [
+      "boss_height - bore_depth",
+      "screw_hole / 2"
+     ]
+    },
+    {
+     "line": [
+      "counterbore_depth",
+      "screw_hole / 2"
+     ]
+    },
+    {
+     "line": [
+      "counterbore_depth",
+      "counterbore / 2"
+     ]
+    },
+    {
+     "line": [
+      0,
+      "counterbore / 2"
+     ]
+    }
+   ]
+  }
+ ],
+ [
+  "feature.revolve",
+  {
+   "sketch": "Base profile",
+   "axis": "x",
+   "name": "Base"
+  }
+ ],
+ [
+  "material.preset",
+  {
+   "body": "Base",
+   "preset": "cast-iron",
+   "color": "#17181b",
+   "metallic": 0.0,
+   "roughness": 0.34,
+   "pattern": null
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Swivel seat",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "boss_height"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "boss_height"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "boss_height"
+    ]
+   ]
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Mounting",
+   "through": [
+    [
+     "0 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm + 1 mm",
+     "0 mm",
+     "0 mm"
+    ],
+    [
+     "0 mm",
+     "0 mm + 1 mm",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Outer wall has its casting draft",
+   "measure": "draft",
+   "faces": {
+    "kind": "face",
+    "where": {
+     "name": "*F2:side(e7)"
+    }
+   },
+   "direction": "z",
+   "min": "1 deg"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Base diameter",
+   "measure": "extent",
+   "of": "Base",
+   "axis": "x",
+   "eq": "base_diameter",
+   "tol": "0.5"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Lamp base",
+   "description": "Cast-iron task-lamp base, turned and enamelled black; a heavy disc with a boss that takes the turret's stem, held from below by a shoulder screw.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0",
+   "tags": []
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

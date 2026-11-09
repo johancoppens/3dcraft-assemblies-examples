@@ -1,0 +1,2935 @@
+[
+ [
+  "assembly.new",
+  {
+   "units": "mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "t",
+   "expr": "0"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "arm_length",
+   "expr": "330 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "base_diameter",
+   "expr": "180 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shade_diameter",
+   "expr": "170 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "base_turn",
+   "expr": "0 deg"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "arm_length",
+   "label": "Arm length",
+   "group": "Lamp",
+   "order": 1,
+   "min": "290 mm",
+   "max": "350 mm",
+   "description": "Length of each of the two arms between pivots; the spring anchors follow",
+   "step": "10 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "base_diameter",
+   "label": "Base diameter",
+   "group": "Lamp",
+   "order": 2,
+   "min": "180 mm",
+   "max": "220 mm",
+   "description": "Diameter of the cast base",
+   "step": "5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "shade_diameter",
+   "label": "Shade diameter",
+   "group": "Lamp",
+   "order": 3,
+   "min": "150 mm",
+   "max": "190 mm",
+   "description": "Diameter of the shade's rim; the spring anchors follow its weight",
+   "step": "5 mm"
+  }
+ ],
+ [
+  "variable.publish",
+  {
+   "name": "base_turn",
+   "label": "Base turn",
+   "group": "Lamp",
+   "order": 4,
+   "min": "-170 deg",
+   "max": "170 deg",
+   "description": "Where the lamp is swivelled on its base, by hand",
+   "step": "5 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_lower",
+   "expr": "30 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "link_upper",
+   "expr": "34 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pivot_height",
+   "expr": "52 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "seat_gap",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stem_length",
+   "expr": "24 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "counterbore_depth",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "screw_float",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "screw_seat_height",
+   "expr": "counterbore_depth - screw_float"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pin_diameter",
+   "expr": "5 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_bore",
+   "expr": "5.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "oak_bore",
+   "expr": "5.3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cross_pin_bore",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_width",
+   "expr": "15 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_thickness",
+   "expr": "9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_side",
+   "expr": "21 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_half_turret",
+   "expr": "8.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_half_arm",
+   "expr": "7.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "cheek_inner",
+   "expr": "4.9 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_gap",
+   "expr": "0.3 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stud_clear",
+   "expr": "1.2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stud_length",
+   "expr": "spring_side + stud_clear - cheek_inner"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wire_diameter",
+   "expr": "1.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "coil_diameter",
+   "expr": "17.6 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "active_coils",
+   "expr": "26"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hook_length",
+   "expr": "0.8 * coil_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shear_modulus",
+   "expr": "79300 MPa"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "initial_stress",
+   "expr": "83 MPa"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_rate",
+   "expr": "shear_modulus * wire_diameter^4 / (8 * coil_diameter^3 * active_coils)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "initial_tension",
+   "expr": "pi * initial_stress * wire_diameter^3 / (8 * coil_diameter)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "free_length",
+   "expr": "1.03 * (active_coils + 1) * wire_diameter + 2 * hook_length"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "springs_per_arm",
+   "expr": "2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_index",
+   "expr": "coil_diameter / wire_diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wahl_factor",
+   "expr": "(4 * spring_index - 1) / (4 * spring_index - 4) + 0.615 / spring_index"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "wire_tensile_minimum",
+   "expr": "2020 MPa"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "allowable_shear",
+   "expr": "0.45 * wire_tensile_minimum"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_max_force",
+   "expr": "allowable_shear * pi * wire_diameter^3 / (8 * coil_diameter * wahl_factor)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "spring_max_span",
+   "expr": "free_length + (spring_max_force - initial_tension) / spring_rate"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stroke_margin",
+   "expr": "50 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leather_squeeze_min",
+   "expr": "0.02 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leather_squeeze_max",
+   "expr": "0.1 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "span_quantum",
+   "expr": "0.25 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "friction_washer_outer",
+   "expr": "7 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "friction_washer_inner",
+   "expr": "2.75 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "clamp_force",
+   "expr": "100 N"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "leather_on_oak",
+   "expr": "0.3"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "friction_mean_radius",
+   "expr": "(friction_washer_outer + friction_washer_inner) / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "friction_washer_area",
+   "expr": "pi * (friction_washer_outer^2 - friction_washer_inner^2)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "arm_friction",
+   "expr": "2 * leather_on_oak * clamp_force * friction_mean_radius"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_margin",
+   "expr": "10 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "desk_clearance",
+   "expr": "20 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "base_top",
+   "expr": "44 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "gravity",
+   "expr": "9.81 N / (1 kg)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "oak_density",
+   "expr": "750 kg / (1 m)^3"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_section",
+   "expr": "bar_width * bar_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "bar_mass",
+   "expr": "oak_density * bar_section * arm_length"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_fittings_mass",
+   "expr": "0.355 kg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "shade_reference_mass",
+   "expr": "0.262 kg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "elbow_fittings_mass",
+   "expr": "0.157 kg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_spring_set_mass",
+   "expr": "0.057 kg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_spring_share_mass",
+   "expr": "0.01 kg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "head_mass",
+   "expr": "head_fittings_mass + shade_reference_mass * (shade_diameter / 170 mm)^2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "elbow_mass",
+   "expr": "elbow_fittings_mass + 2 * bar_mass + upper_spring_set_mass + head_mass"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_reach",
+   "expr": "180 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_reach",
+   "expr": "170 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_load_moment",
+   "expr": "gravity * (head_mass * arm_length + bar_mass * arm_length)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_load_moment",
+   "expr": "gravity * (elbow_mass * arm_length + bar_mass * arm_length + lower_spring_share_mass * lower_reach)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_force_at_reach",
+   "expr": "initial_tension + spring_rate * (upper_reach - free_length)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_force_at_reach",
+   "expr": "initial_tension + spring_rate * (lower_reach - free_length)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_first_height",
+   "expr": "upper_load_moment / (springs_per_arm * upper_force_at_reach)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_first_height",
+   "expr": "lower_load_moment / (springs_per_arm * lower_force_at_reach)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_mean_lean",
+   "expr": "80 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_mean_lean",
+   "expr": "25 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_reference_span",
+   "expr": "sqrt(upper_reach^2 + upper_first_height^2 - 2 * upper_reach * upper_first_height * cos(upper_mean_lean))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_reference_span",
+   "expr": "sqrt(lower_reach^2 + lower_first_height^2 - 2 * lower_reach * lower_first_height * cos(lower_mean_lean))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_anchor_height",
+   "expr": "upper_load_moment * upper_reference_span / (springs_per_arm * (initial_tension + spring_rate * (upper_reference_span - free_length)) * upper_reach)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_anchor_height",
+   "expr": "lower_load_moment * lower_reference_span / (springs_per_arm * (initial_tension + spring_rate * (lower_reference_span - free_length)) * lower_reach)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stored_lower_angle",
+   "expr": "-10 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "stored_upper_angle",
+   "expr": "78 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_mid_angle",
+   "expr": "9 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_amplitude",
+   "expr": "37 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_mid_angle",
+   "expr": "76 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_amplitude",
+   "expr": "32 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_phase",
+   "expr": "acos((stored_lower_angle - lower_mid_angle) / lower_amplitude)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_phase",
+   "expr": "acos((stored_upper_angle - upper_mid_angle) / upper_amplitude)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_angle",
+   "expr": "lower_mid_angle + lower_amplitude * cos(360 deg * t + lower_phase)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_angle",
+   "expr": "upper_mid_angle + upper_amplitude * cos(360 deg * t + upper_phase)"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_span_exact",
+   "expr": "sqrt(lower_reach^2 + lower_anchor_height^2 - 2 * lower_reach * lower_anchor_height * cos(lower_angle))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "lower_span",
+   "expr": "round(lower_span_exact / span_quantum) * span_quantum"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_span_exact",
+   "expr": "sqrt(upper_reach^2 + upper_anchor_height^2 - 2 * upper_reach * upper_anchor_height * cos(upper_angle))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "upper_span",
+   "expr": "round(upper_span_exact / span_quantum) * span_quantum"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/base.3dcraft",
+   "name": "Base",
+   "params": {
+    "base_diameter": "base_diameter"
+   }
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/turret.3dcraft",
+   "name": "Turret",
+   "params": {
+    "pivot_height": "pivot_height",
+    "link_spacing": "link_lower",
+    "anchor_height": "lower_anchor_height",
+    "stem_length": "stem_length",
+    "pin_bore": "cheek_bore",
+    "cheek_gap": "cheek_inner",
+    "cheek_half": "cheek_half_turret"
+   },
+   "position": [
+    0,
+    0,
+    44.1
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/turret-screw.3dcraft",
+   "name": "Retaining screw",
+   "params": {
+    "shoulder_length": "base_top + seat_gap - stem_length - screw_seat_height"
+   },
+   "position": [
+    0,
+    0,
+    4.9
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/arm-bar.3dcraft",
+   "name": "Lower main bar",
+   "params": {
+    "length": "arm_length",
+    "anchor_position": "lower_reach",
+    "pivot_bore": "oak_bore",
+    "bar_thickness": "bar_thickness",
+    "bar_width": "bar_width",
+    "spring_pin_bore": "cross_pin_bore"
+   },
+   "position": [
+    15.0,
+    0,
+    96.1
+   ],
+   "rotation": [
+    0,
+    -100.0,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/arm-bar.3dcraft",
+   "name": "Lower aux bar",
+   "params": {
+    "length": "arm_length",
+    "pivot_bore": "oak_bore",
+    "bar_thickness": "bar_thickness",
+    "bar_width": "bar_width",
+    "spring_pin_bore": "cross_pin_bore"
+   },
+   "position": [
+    -15.0,
+    0,
+    96.1
+   ],
+   "rotation": [
+    0,
+    -100.0,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/knuckle.3dcraft",
+   "name": "Knuckle",
+   "params": {
+    "link_lower": "link_lower",
+    "link_upper": "link_upper",
+    "anchor_height": "upper_anchor_height",
+    "pin_bore": "cheek_bore",
+    "cheek_gap": "cheek_inner",
+    "cheek_half": "cheek_half_arm"
+   },
+   "position": [
+    -42.3039,
+    0,
+    421.0866
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/arm-bar.3dcraft",
+   "name": "Upper main bar",
+   "params": {
+    "length": "arm_length",
+    "anchor_position": "upper_reach",
+    "pivot_bore": "oak_bore",
+    "bar_thickness": "bar_thickness",
+    "bar_width": "bar_width",
+    "spring_pin_bore": "cross_pin_bore"
+   },
+   "position": [
+    -42.3039,
+    0,
+    439.0866
+   ],
+   "rotation": [
+    0,
+    -12.0,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/arm-bar.3dcraft",
+   "name": "Upper aux bar",
+   "params": {
+    "length": "arm_length",
+    "pivot_bore": "oak_bore",
+    "bar_thickness": "bar_thickness",
+    "bar_width": "bar_width",
+    "spring_pin_bore": "cross_pin_bore"
+   },
+   "position": [
+    -42.3039,
+    0,
+    473.0866
+   ],
+   "rotation": [
+    0,
+    -12.0,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/head-block.3dcraft",
+   "name": "Head",
+   "params": {
+    "link_upper": "link_upper",
+    "pin_bore": "cheek_bore",
+    "cheek_gap": "cheek_inner",
+    "cheek_half": "cheek_half_arm"
+   },
+   "position": [
+    280.4848,
+    0,
+    507.6974
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/shade.3dcraft",
+   "name": "Shade",
+   "params": {
+    "shade_diameter": "shade_diameter"
+   },
+   "position": [
+    304.4848,
+    0,
+    477.6974
+   ],
+   "rotation": [
+    0,
+    10.0,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/lamp.3dcraft",
+   "name": "Lamp",
+   "position": [
+    299.6227,
+    0,
+    450.1228
+   ],
+   "rotation": [
+    0,
+    10.0,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Mounted",
+   "a": "world/xy",
+   "b": "Base/Mounting",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Turret_swivel",
+   "a": "Base/Swivel seat",
+   "b": "Turret/Swivel",
+   "flip": true,
+   "offset": "seat_gap",
+   "limits": [
+    "-170 deg",
+    "170 deg"
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Lower_main",
+   "a": "Turret/Pivot main",
+   "b": "Lower main bar/Pivot near",
+   "flip": true,
+   "limits": [
+    "-30 deg",
+    "48 deg"
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Lower_aux",
+   "a": "Turret/Pivot aux",
+   "b": "Lower aux bar/Pivot near",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Elbow_main",
+   "a": "Lower main bar/Pivot far",
+   "b": "Knuckle/Lower main",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Elbow_aux",
+   "a": "Lower aux bar/Pivot far",
+   "b": "Knuckle/Lower aux",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Upper_main",
+   "a": "Knuckle/Upper main",
+   "b": "Upper main bar/Pivot near",
+   "flip": true,
+   "limits": [
+    "42 deg",
+    "110 deg"
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Upper_aux",
+   "a": "Knuckle/Upper aux",
+   "b": "Upper aux bar/Pivot near",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Head_main",
+   "a": "Upper main bar/Pivot far",
+   "b": "Head/Pivot main",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Head_aux",
+   "a": "Upper aux bar/Pivot far",
+   "b": "Head/Pivot aux",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "ball",
+   "name": "Shade_swivel",
+   "a": "Head/Ball centre",
+   "b": "Shade/Ball centre",
+   "flip": false
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Lamp_in_shade",
+   "a": "Shade/Lamp seat",
+   "b": "Lamp/Seat",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/ball.3dcraft",
+   "name": "Ball",
+   "position": [
+    304.4848,
+    0,
+    477.6974
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Ball_on_stem",
+   "a": "Head/Ball centre",
+   "b": "Ball/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/ball-cap.3dcraft",
+   "name": "Ball cap",
+   "position": [
+    304.4848,
+    0,
+    477.6974
+   ],
+   "rotation": [
+    0,
+    10.0,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Ball_cap_on_cup",
+   "a": "Shade/Ball centre",
+   "b": "Ball cap/Ball centre",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Screw_in_stem",
+   "a": "Turret/Swivel",
+   "b": "Retaining screw/Head seat",
+   "flip": true,
+   "offset": "screw_seat_height - base_top - seat_gap"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/friction-pivot.3dcraft",
+   "name": "Friction pivot lower",
+   "params": {
+    "cheek_outer": "cheek_half_turret",
+    "washer_outer": "friction_washer_outer",
+    "washer_inner": "friction_washer_inner",
+    "shank_diameter": "pin_diameter",
+    "cheek_inner": "cheek_inner",
+    "bar_half": "bar_thickness / 2"
+   },
+   "position": [
+    15.0,
+    0,
+    96.1
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Friction_pivot_lower",
+   "a": "Turret/Pivot main",
+   "b": "Friction pivot lower/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/friction-pivot.3dcraft",
+   "name": "Friction pivot upper",
+   "params": {
+    "cheek_outer": "cheek_half_arm",
+    "washer_outer": "friction_washer_outer",
+    "washer_inner": "friction_washer_inner",
+    "shank_diameter": "pin_diameter",
+    "cheek_inner": "cheek_inner",
+    "bar_half": "bar_thickness / 2"
+   },
+   "position": [
+    -42.3039,
+    0,
+    439.0866
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Friction_pivot_upper",
+   "a": "Knuckle/Upper main",
+   "b": "Friction pivot upper/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin turret aux",
+   "params": {
+    "span": "2 * cheek_half_turret + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    -15.0,
+    0,
+    96.1
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_turret_aux",
+   "a": "Turret/Pivot aux",
+   "b": "Pin turret aux/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin knuckle lower main",
+   "params": {
+    "span": "2 * cheek_half_arm + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    -42.3039,
+    0,
+    421.0866
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_knuckle_lower_main",
+   "a": "Knuckle/Lower main",
+   "b": "Pin knuckle lower main/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin knuckle lower aux",
+   "params": {
+    "span": "2 * cheek_half_arm + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    -72.3039,
+    0,
+    421.0866
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_knuckle_lower_aux",
+   "a": "Knuckle/Lower aux",
+   "b": "Pin knuckle lower aux/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin knuckle upper aux",
+   "params": {
+    "span": "2 * cheek_half_arm + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    -42.3039,
+    0,
+    473.0866
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_knuckle_upper_aux",
+   "a": "Knuckle/Upper aux",
+   "b": "Pin knuckle upper aux/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin head main",
+   "params": {
+    "span": "2 * cheek_half_arm + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    280.4848,
+    0,
+    507.6974
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_head_main",
+   "a": "Head/Pivot main",
+   "b": "Pin head main/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Pin head aux",
+   "params": {
+    "span": "2 * cheek_half_arm + 2 * head_gap",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    280.4848,
+    0,
+    541.6974
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Pin_head_aux",
+   "a": "Head/Pivot aux",
+   "b": "Pin head aux/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Spring pin lower",
+   "params": {
+    "span": "2 * (spring_side + stud_clear)",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    -16.2567,
+    0,
+    273.3654
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Spring_pin_lower",
+   "a": "Lower main bar/Spring pin",
+   "b": "Spring pin lower/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/pivot-pin.3dcraft",
+   "name": "Spring pin upper",
+   "params": {
+    "span": "2 * (spring_side + stud_clear)",
+    "shank_diameter": "pin_diameter"
+   },
+   "position": [
+    123.9812,
+    0,
+    474.4315
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Spring_pin_upper",
+   "a": "Upper main bar/Spring pin",
+   "b": "Spring pin upper/Centre",
+   "flip": true
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-stud.3dcraft",
+   "name": "Stud lower left",
+   "params": {
+    "length": "stud_length",
+    "shank_diameter": "pin_diameter",
+    "cheek_thickness": "cheek_half_turret - cheek_inner"
+   },
+   "position": [
+    15.0,
+    4.9,
+    124.7923
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Stud_lower_left",
+   "a": "Turret/Anchor",
+   "b": "Stud lower left/Seat",
+   "flip": true,
+   "offset": "cheek_inner"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-stud.3dcraft",
+   "name": "Stud upper left",
+   "params": {
+    "length": "stud_length",
+    "shank_diameter": "pin_diameter",
+    "cheek_thickness": "cheek_half_arm - cheek_inner"
+   },
+   "position": [
+    -42.3039,
+    4.9,
+    459.4014
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Stud_upper_left",
+   "a": "Knuckle/Anchor",
+   "b": "Stud upper left/Seat",
+   "flip": true,
+   "offset": "cheek_inner"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-stud.3dcraft",
+   "name": "Stud lower right",
+   "params": {
+    "length": "stud_length",
+    "shank_diameter": "pin_diameter",
+    "cheek_thickness": "cheek_half_turret - cheek_inner"
+   },
+   "position": [
+    15.0,
+    -4.9,
+    124.7923
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Stud_lower_right",
+   "a": "Turret/Anchor",
+   "b": "Stud lower right/Seat",
+   "flip": false,
+   "offset": "-cheek_inner"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-stud.3dcraft",
+   "name": "Stud upper right",
+   "params": {
+    "length": "stud_length",
+    "shank_diameter": "pin_diameter",
+    "cheek_thickness": "cheek_half_arm - cheek_inner"
+   },
+   "position": [
+    -42.3039,
+    -4.9,
+    459.4014
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "fixed",
+   "name": "Stud_upper_right",
+   "a": "Knuckle/Anchor",
+   "b": "Stud upper right/Seat",
+   "flip": false,
+   "offset": "-cheek_inner"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring.3dcraft",
+   "name": "Spring lower left",
+   "params": {
+    "span": "lower_span",
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "active_coils": "active_coils",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    15.0,
+    21.0,
+    124.7923
+   ],
+   "rotation": [
+    0,
+    -11.881,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-tip.3dcraft",
+   "name": "Tip lower left",
+   "params": {
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    -16.2567,
+    21.0,
+    273.3654
+   ],
+   "rotation": [
+    0,
+    -11.881,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_lower_left_rear",
+   "a": "Turret/Anchor",
+   "b": "Spring lower left/Rear eye",
+   "flip": true,
+   "offset": "spring_side"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "slider",
+   "name": "Spring_lower_left_slide",
+   "a": "Spring lower left/Far end",
+   "b": "Tip lower left/Slide",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_lower_left_front",
+   "a": "Lower main bar/Spring pin",
+   "b": "Tip lower left/Eye",
+   "flip": true,
+   "offset": "spring_side"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring.3dcraft",
+   "name": "Spring upper left",
+   "params": {
+    "span": "upper_span",
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "active_coils": "active_coils",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    -42.3039,
+    21.0,
+    459.4014
+   ],
+   "rotation": [
+    0,
+    84.835,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-tip.3dcraft",
+   "name": "Tip upper left",
+   "params": {
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    123.9812,
+    21.0,
+    474.4315
+   ],
+   "rotation": [
+    0,
+    84.835,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_upper_left_rear",
+   "a": "Knuckle/Anchor",
+   "b": "Spring upper left/Rear eye",
+   "flip": true,
+   "offset": "spring_side"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "slider",
+   "name": "Spring_upper_left_slide",
+   "a": "Spring upper left/Far end",
+   "b": "Tip upper left/Slide",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_upper_left_front",
+   "a": "Upper main bar/Spring pin",
+   "b": "Tip upper left/Eye",
+   "flip": true,
+   "offset": "spring_side"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring.3dcraft",
+   "name": "Spring lower right",
+   "params": {
+    "span": "lower_span",
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "active_coils": "active_coils",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    15.0,
+    -21.0,
+    124.7923
+   ],
+   "rotation": [
+    0,
+    -11.881,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-tip.3dcraft",
+   "name": "Tip lower right",
+   "params": {
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    -16.2567,
+    -21.0,
+    273.3654
+   ],
+   "rotation": [
+    0,
+    -11.881,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_lower_right_rear",
+   "a": "Turret/Anchor",
+   "b": "Spring lower right/Rear eye",
+   "flip": true,
+   "offset": "-spring_side"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "slider",
+   "name": "Spring_lower_right_slide",
+   "a": "Spring lower right/Far end",
+   "b": "Tip lower right/Slide",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_lower_right_front",
+   "a": "Lower main bar/Spring pin",
+   "b": "Tip lower right/Eye",
+   "flip": true,
+   "offset": "-spring_side"
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring.3dcraft",
+   "name": "Spring upper right",
+   "params": {
+    "span": "upper_span",
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "active_coils": "active_coils",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    -42.3039,
+    -21.0,
+    459.4014
+   ],
+   "rotation": [
+    0,
+    84.835,
+    0
+   ]
+  }
+ ],
+ [
+  "instance.add",
+  {
+   "source": "parts/spring-tip.3dcraft",
+   "name": "Tip upper right",
+   "params": {
+    "wire_diameter": "wire_diameter",
+    "coil_diameter": "coil_diameter",
+    "hook_length": "hook_length"
+   },
+   "position": [
+    123.9812,
+    -21.0,
+    474.4315
+   ],
+   "rotation": [
+    0,
+    84.835,
+    0
+   ]
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_upper_right_rear",
+   "a": "Knuckle/Anchor",
+   "b": "Spring upper right/Rear eye",
+   "flip": true,
+   "offset": "-spring_side"
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "slider",
+   "name": "Spring_upper_right_slide",
+   "a": "Spring upper right/Far end",
+   "b": "Tip upper right/Slide",
+   "flip": true
+  }
+ ],
+ [
+  "mate.add",
+  {
+   "kind": "revolute",
+   "name": "Spring_upper_right_front",
+   "a": "Upper main bar/Spring pin",
+   "b": "Tip upper right/Eye",
+   "flip": true,
+   "offset": "-spring_side"
+  }
+ ],
+ [
+  "joint.set",
+  {
+   "mate": "Lower_main",
+   "value": "lower_angle"
+  }
+ ],
+ [
+  "joint.set",
+  {
+   "mate": "Upper_main",
+   "value": "upper_angle"
+  }
+ ],
+ [
+  "joint.set",
+  {
+   "mate": "Turret_swivel",
+   "value": "base_turn"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "head_group_mass",
+   "measure": "mass",
+   "of": [
+    "Head",
+    "Ball",
+    "Shade/Shade",
+    "Shade/Liner",
+    "Shade/Cup",
+    "Ball cap",
+    "Lamp/Holder",
+    "Lamp/Bulb",
+    "Pin head main",
+    "Pin head aux"
+   ],
+   "label": "Load on the upper arm"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "elbow_group_mass",
+   "measure": "mass",
+   "of": [
+    "Knuckle",
+    "Pin knuckle lower main",
+    "Pin knuckle lower aux",
+    "Friction pivot upper/Tension screw",
+    "Friction pivot upper/Clamp nut",
+    "Friction pivot upper/Spring washer",
+    "Friction pivot upper/Leather washer A",
+    "Friction pivot upper/Leather washer B",
+    "Pin knuckle upper aux",
+    "Upper main bar",
+    "Upper aux bar",
+    "Head",
+    "Ball",
+    "Shade/Shade",
+    "Shade/Liner",
+    "Shade/Cup",
+    "Ball cap",
+    "Lamp/Holder",
+    "Lamp/Bulb",
+    "Pin head main",
+    "Pin head aux",
+    "Spring upper left/Rear hook",
+    "Spring upper left/Near coils",
+    "Spring upper left/Far coils",
+    "Spring upper right/Rear hook",
+    "Spring upper right/Near coils",
+    "Spring upper right/Far coils",
+    "Tip upper left",
+    "Tip upper right",
+    "Stud upper left",
+    "Stud upper right",
+    "Spring pin upper"
+   ],
+   "label": "Load on the lower arm"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_bars_mass",
+   "measure": "mass",
+   "of": [
+    "Upper main bar",
+    "Upper aux bar"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_bars_mass",
+   "measure": "mass",
+   "of": [
+    "Lower main bar",
+    "Lower aux bar"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_spring_group_mass",
+   "measure": "mass",
+   "of": [
+    "Spring upper left/Rear hook",
+    "Spring upper left/Near coils",
+    "Spring upper left/Far coils",
+    "Spring upper right/Rear hook",
+    "Spring upper right/Near coils",
+    "Spring upper right/Far coils",
+    "Tip upper left",
+    "Tip upper right",
+    "Spring pin upper"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_spring_group_mass",
+   "measure": "mass",
+   "of": [
+    "Spring lower left/Rear hook",
+    "Spring lower left/Near coils",
+    "Spring lower left/Far coils",
+    "Spring lower right/Rear hook",
+    "Spring lower right/Near coils",
+    "Spring lower right/Far coils",
+    "Tip lower left",
+    "Tip lower right",
+    "Spring pin lower"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_leather_volume",
+   "measure": "volume",
+   "of": [
+    "Friction pivot lower/Leather washer A",
+    "Friction pivot lower/Leather washer B"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_leather_volume",
+   "measure": "volume",
+   "of": [
+    "Friction pivot upper/Leather washer A",
+    "Friction pivot upper/Leather washer B"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_lean",
+   "measure": "jointAngle",
+   "mate": "Lower_main",
+   "label": "Lower arm lean",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_lean",
+   "measure": "jointAngle",
+   "mate": "Upper_main",
+   "label": "Upper arm lean",
+   "unit": "deg"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_span_error",
+   "measure": "jointDistance",
+   "mate": "Spring_lower_left_slide"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_span_error",
+   "measure": "jointDistance",
+   "mate": "Spring_upper_left_slide"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lower_span_error_right",
+   "measure": "jointDistance",
+   "mate": "Spring_lower_right_slide"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "upper_span_error_right",
+   "measure": "jointDistance",
+   "mate": "Spring_upper_right_slide"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "elbow_height",
+   "measure": "position",
+   "instance": "Knuckle",
+   "axis": "z"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "head_tilt_x",
+   "measure": "rotation",
+   "instance": "Head",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "head_tilt_y",
+   "measure": "rotation",
+   "instance": "Head",
+   "axis": "y"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lamp_center_x",
+   "measure": "centerOfMass",
+   "axis": "x"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "lamp_center_y",
+   "measure": "centerOfMass",
+   "axis": "y"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_span_solved",
+   "expr": "lower_span + lower_span_error"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_span_solved",
+   "expr": "upper_span + upper_span_error"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_anchor_measured",
+   "expr": "lower_reach * cos(lower_lean) + if(lower_anchor_height > lower_reach * cos(lower_lean), 1, -1) * sqrt(max(lower_span_solved^2 - lower_reach^2 * sin(lower_lean)^2, 0 mm^2))",
+   "label": "Lower anchor height, from the solved span",
+   "unit": "mm"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_anchor_measured",
+   "expr": "upper_reach * cos(upper_lean) + if(upper_anchor_height > upper_reach * cos(upper_lean), 1, -1) * sqrt(max(upper_span_solved^2 - upper_reach^2 * sin(upper_lean)^2, 0 mm^2))",
+   "label": "Upper anchor height, from the solved span",
+   "unit": "mm"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_spring_force",
+   "expr": "initial_tension + spring_rate * (lower_span_solved - free_length)",
+   "label": "Lower spring force",
+   "unit": "N"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_spring_force",
+   "expr": "initial_tension + spring_rate * (upper_span_solved - free_length)",
+   "label": "Upper spring force",
+   "unit": "N"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_gravity_torque",
+   "expr": "gravity * sin(lower_lean) * (lower_bars_mass * arm_length / 2 + elbow_group_mass * arm_length + lower_spring_group_mass / 2 * lower_reach)",
+   "label": "Gravity torque on the lower arm",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_gravity_torque",
+   "expr": "gravity * sin(upper_lean) * (upper_bars_mass * arm_length / 2 + head_group_mass * arm_length + upper_spring_group_mass / 2 * upper_reach)",
+   "label": "Gravity torque on the upper arm",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_spring_torque",
+   "expr": "springs_per_arm * lower_spring_force * lower_reach * lower_anchor_measured * sin(lower_lean) / lower_span_solved",
+   "label": "Spring torque on the lower arm",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_spring_torque",
+   "expr": "springs_per_arm * upper_spring_force * upper_reach * upper_anchor_measured * sin(upper_lean) / upper_span_solved",
+   "label": "Spring torque on the upper arm",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "lower_net_torque",
+   "expr": "lower_gravity_torque - lower_spring_torque",
+   "label": "Net torque about the lower pivots",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.output",
+  {
+   "name": "upper_net_torque",
+   "expr": "upper_gravity_torque - upper_spring_torque",
+   "label": "Net torque about the upper pivots",
+   "unit": "N m"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "oak_play_lower_main",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot lower/Tension screw",
+    "Pin knuckle lower main"
+   ],
+   "to": "Lower main bar"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "oak_play_lower_aux",
+   "measure": "clearance",
+   "from": [
+    "Pin turret aux",
+    "Pin knuckle lower aux"
+   ],
+   "to": "Lower aux bar"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "oak_play_upper_main",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot upper/Tension screw",
+    "Pin head main"
+   ],
+   "to": "Upper main bar"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "oak_play_upper_aux",
+   "measure": "clearance",
+   "from": [
+    "Pin knuckle upper aux",
+    "Pin head aux"
+   ],
+   "to": "Upper aux bar"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cheek_play_turret",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot lower/Tension screw",
+    "Pin turret aux"
+   ],
+   "to": "Turret"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cheek_play_knuckle",
+   "measure": "clearance",
+   "from": [
+    "Pin knuckle lower main",
+    "Pin knuckle lower aux",
+    "Friction pivot upper/Tension screw",
+    "Pin knuckle upper aux"
+   ],
+   "to": "Knuckle"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cheek_play_head",
+   "measure": "clearance",
+   "from": [
+    "Pin head main",
+    "Pin head aux"
+   ],
+   "to": "Head"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "side_play_lower_main",
+   "measure": "clearance",
+   "from": "Lower main bar",
+   "to": [
+    "Turret",
+    "Knuckle"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "side_play_lower_aux",
+   "measure": "clearance",
+   "from": "Lower aux bar",
+   "to": [
+    "Turret",
+    "Knuckle"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "side_play_upper_main",
+   "measure": "clearance",
+   "from": "Upper main bar",
+   "to": [
+    "Knuckle",
+    "Head"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "side_play_upper_aux",
+   "measure": "clearance",
+   "from": "Upper aux bar",
+   "to": [
+    "Knuckle",
+    "Head"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "slot_play_turret",
+   "measure": "clearance",
+   "from": "Turret",
+   "to": [
+    "Lower main bar",
+    "Lower aux bar"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "slot_play_knuckle",
+   "measure": "clearance",
+   "from": "Knuckle",
+   "to": [
+    "Lower main bar",
+    "Lower aux bar",
+    "Upper main bar",
+    "Upper aux bar"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "slot_play_head",
+   "measure": "clearance",
+   "from": "Head",
+   "to": [
+    "Upper main bar",
+    "Upper aux bar"
+   ]
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "stud_seat_lower_left",
+   "measure": "clearance",
+   "from": "Stud lower left",
+   "to": "Turret"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "stud_seat_lower_right",
+   "measure": "clearance",
+   "from": "Stud lower right",
+   "to": "Turret"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "stud_seat_upper_left",
+   "measure": "clearance",
+   "from": "Stud upper left",
+   "to": "Knuckle"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "stud_seat_upper_right",
+   "measure": "clearance",
+   "from": "Stud upper right",
+   "to": "Knuckle"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "nipple_play",
+   "measure": "clearance",
+   "from": "Lamp/Holder",
+   "to": "Shade/Cup"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "shoulder_gap",
+   "measure": "clearance",
+   "from": "Lamp/Holder",
+   "to": "Shade/Liner"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cap_seat_play",
+   "measure": "clearance",
+   "from": "Ball cap",
+   "to": "Ball"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "cup_seat_play",
+   "measure": "clearance",
+   "from": "Shade/Cup",
+   "to": "Ball"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "screw_end_float",
+   "measure": "clearance",
+   "from": "Retaining screw",
+   "to": "Base"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lower arm balances within its pivot friction",
+   "measure": "value",
+   "expr": "abs(lower_net_torque)",
+   "max": "arm_friction"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Upper arm balances within its pivot friction",
+   "measure": "value",
+   "expr": "abs(upper_net_torque)",
+   "max": "arm_friction"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Load estimates match the measured masses",
+   "measure": "value",
+   "expr": "abs(elbow_group_mass / elbow_mass - 1)",
+   "max": "0.06"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Springs stay within their stroke, lower",
+   "measure": "value",
+   "expr": "lower_span_solved",
+   "min": "free_length + stroke_margin",
+   "max": "spring_max_span"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Springs stay within their stroke, upper",
+   "measure": "value",
+   "expr": "upper_span_solved",
+   "min": "free_length + stroke_margin",
+   "max": "spring_max_span"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Drawn lower springs reach their pins",
+   "measure": "value",
+   "expr": "max(abs(lower_span_error), abs(lower_span_error_right))",
+   "max": "span_quantum / 2 + 0.01 mm"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Drawn upper springs reach their pins",
+   "measure": "value",
+   "expr": "max(abs(upper_span_error), abs(upper_span_error_right))",
+   "max": "span_quantum / 2 + 0.01 mm"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Elbow follows the lower arm",
+   "measure": "value",
+   "expr": "elbow_height",
+   "eq": "pivot_height + base_top + seat_gap + arm_length * cos(lower_angle)",
+   "tol": "0.02"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Head stays level",
+   "measure": "value",
+   "expr": "hypot(head_tilt_x, head_tilt_y)",
+   "max": "0.05 deg"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lower main bar: pins clear their oak bores",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot lower/Tension screw",
+    "Pin knuckle lower main"
+   ],
+   "to": "Lower main bar",
+   "min": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lower aux bar: pins clear their oak bores",
+   "measure": "clearance",
+   "from": [
+    "Pin turret aux",
+    "Pin knuckle lower aux"
+   ],
+   "to": "Lower aux bar",
+   "min": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Upper main bar: pins clear their oak bores",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot upper/Tension screw",
+    "Pin head main"
+   ],
+   "to": "Upper main bar",
+   "min": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Upper aux bar: pins clear their oak bores",
+   "measure": "clearance",
+   "from": [
+    "Pin knuckle upper aux",
+    "Pin head aux"
+   ],
+   "to": "Upper aux bar",
+   "min": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Every bar's pins have their running fit in the oak",
+   "measure": "value",
+   "expr": "max(oak_play_lower_main, oak_play_lower_aux, oak_play_upper_main, oak_play_upper_aux)",
+   "max": "0.25 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Turret: pins clear their cheek bores",
+   "measure": "clearance",
+   "from": [
+    "Friction pivot lower/Tension screw",
+    "Pin turret aux"
+   ],
+   "to": "Turret",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knuckle: pins clear their cheek bores",
+   "measure": "clearance",
+   "from": [
+    "Pin knuckle lower main",
+    "Pin knuckle lower aux",
+    "Friction pivot upper/Tension screw",
+    "Pin knuckle upper aux"
+   ],
+   "to": "Knuckle",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Head: pins clear their cheek bores",
+   "measure": "clearance",
+   "from": [
+    "Pin head main",
+    "Pin head aux"
+   ],
+   "to": "Head",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Every plate's pins have their fit in the cheek bores",
+   "measure": "value",
+   "expr": "max(cheek_play_turret, cheek_play_knuckle, cheek_play_head)",
+   "max": "0.2 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Turret: bars clear its slot",
+   "measure": "clearance",
+   "from": "Turret",
+   "to": [
+    "Lower main bar",
+    "Lower aux bar"
+   ],
+   "min": "0.2 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knuckle: bars clear its slot",
+   "measure": "clearance",
+   "from": "Knuckle",
+   "to": [
+    "Lower main bar",
+    "Lower aux bar",
+    "Upper main bar",
+    "Upper aux bar"
+   ],
+   "min": "0.2 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Head: bars clear its slot",
+   "measure": "clearance",
+   "from": "Head",
+   "to": [
+    "Upper main bar",
+    "Upper aux bar"
+   ],
+   "min": "0.2 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Every bar has its side play in every slot",
+   "measure": "value",
+   "expr": "max(side_play_lower_main, side_play_lower_aux, side_play_upper_main, side_play_upper_aux, slot_play_turret, slot_play_knuckle, slot_play_head)",
+   "max": "0.6 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Turret studs clear their cheeks",
+   "measure": "clearance",
+   "from": [
+    "Stud lower left",
+    "Stud lower right"
+   ],
+   "to": "Turret",
+   "min": "0.02 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Knuckle studs clear their cheeks",
+   "measure": "clearance",
+   "from": [
+    "Stud upper left",
+    "Stud upper right"
+   ],
+   "to": "Knuckle",
+   "min": "0.02 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Every stud seats on its cheek",
+   "measure": "value",
+   "expr": "max(stud_seat_lower_left, stud_seat_lower_right, stud_seat_upper_left, stud_seat_upper_right)",
+   "max": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Leather washers fill the slot at the lower friction pivot",
+   "measure": "value",
+   "expr": "lower_leather_volume / (2 * friction_washer_area) - slot_play_turret",
+   "min": "2 * leather_squeeze_min",
+   "max": "2 * leather_squeeze_max",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Spring cross-pin is pressed into the lower bar",
+   "measure": "overlap",
+   "of": "Spring pin lower",
+   "to": "Lower main bar",
+   "is": true,
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Leather washers fill the slot at the upper friction pivot",
+   "measure": "value",
+   "expr": "upper_leather_volume / (2 * friction_washer_area) - slot_play_knuckle",
+   "min": "2 * leather_squeeze_min",
+   "max": "2 * leather_squeeze_max",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Spring cross-pin is pressed into the upper bar",
+   "measure": "overlap",
+   "of": "Spring pin upper",
+   "to": "Upper main bar",
+   "is": true,
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lamp nipple is in the cup's bore: clear",
+   "measure": "clearance",
+   "from": "Lamp/Holder",
+   "to": "Shade/Cup",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lamp nipple is in the cup's bore: seated",
+   "measure": "value",
+   "expr": "nipple_play",
+   "max": "0.2 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Holder shoulder clamps the shade's top: clear",
+   "measure": "clearance",
+   "from": "Lamp/Holder",
+   "to": "Shade/Liner",
+   "min": "0.02 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Holder shoulder clamps the shade's top: seated",
+   "measure": "value",
+   "expr": "shoulder_gap",
+   "max": "0.1 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Ball sits in the cap's seat: clear",
+   "measure": "clearance",
+   "from": "Ball cap",
+   "to": "Ball",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Ball sits in the cap's seat: seated",
+   "measure": "value",
+   "expr": "cap_seat_play",
+   "max": "0.3 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Ball sits in the cup's seat: clear",
+   "measure": "clearance",
+   "from": "Shade/Cup",
+   "to": "Ball",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Ball sits in the cup's seat: seated",
+   "measure": "value",
+   "expr": "cup_seat_play",
+   "max": "0.3 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Turret is retained by its screw: clear",
+   "measure": "clearance",
+   "from": "Retaining screw",
+   "to": "Base",
+   "min": "0.05 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Turret is retained by its screw: seated",
+   "measure": "value",
+   "expr": "screw_end_float",
+   "max": "0.15 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Upper studs clear the knuckle's aux pivot pin",
+   "measure": "clearance",
+   "from": "Pin knuckle upper aux",
+   "to": [
+    "Stud upper left",
+    "Stud upper right"
+   ],
+   "min": "0.3 mm",
+   "when": "t < 0.001"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Shade rim clears the desk",
+   "measure": "boxMin",
+   "of": "Shade/Shade",
+   "axis": "z",
+   "min": "desk_clearance"
+  }
+ ],
+ [
+  "assert.add",
+  {
+   "name": "Lamp does not tip",
+   "measure": "value",
+   "expr": "hypot(lamp_center_x, lamp_center_y)",
+   "max": "base_diameter / 2 - tip_margin"
+  }
+ ],
+ [
+  "document.info",
+  {
+   "title": "Spring-balanced task lamp",
+   "description": "A two-arm desk lamp balanced by four extension springs: oak parallelogram arms, brass elbows, a cast-iron base, a spun-steel shade on a ball joint. The net torque about each arm's pivot, from the measured masses and the real springs, stays within a stated pivot friction over a sweep of poses.",
+   "author": "3DCraft assemblies",
+   "licence": "CC-BY-4.0"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]
