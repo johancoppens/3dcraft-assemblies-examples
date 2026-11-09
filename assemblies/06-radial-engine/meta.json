@@ -7,8 +7,8 @@
   "process": "Casting, forging, machining",
   "tier": "complex",
   "difficulty": {
-    "score": null,
-    "rationale": ""
+    "score": 7,
+    "rationale": "Seven closed loops on one master rod solved as one, a rigid cylinder subassembly placed seven times, a built-up crank and a halved case placed twice by configuration, and closed-form proofs over the motion; no couplings or configurations that follow t."
   },
   "standards": [],
   "materials": [

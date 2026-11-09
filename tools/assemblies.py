@@ -704,8 +704,10 @@ def cmd_check(ids, quick):
                             notes.append(f"check-range passed in {seconds:.0f} s")
                             worst = range_worst(result.stdout + result.stderr)
                             if worst is not None:
-                                meta.setdefault("stats", {})["range_worst_s"] = worst
-                                write_meta(directory, meta)
+                                # Read meta.json again: it may have been edited while the check ran.
+                                current = read_json(directory / "meta.json")
+                                current.setdefault("stats", {})["range_worst_s"] = worst
+                                write_meta(directory, current)
                                 budget = BUDGET_FACTOR * BUDGET_LOAD_S.get(meta.get("tier"), 4.0)
                                 sink, note = timing_sink(problems, notes)
                                 if worst > budget and not meta.get("budget_exception"):
