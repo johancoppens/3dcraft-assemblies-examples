@@ -8,7 +8,7 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `45233bdc` unless they say otherwise.
 
-**Status (2026-11-09):** 41 entries: 15 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
+**Status (2026-11-09):** 42 entries: 16 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
 friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps
 while a motion plays), A-013 and A-012 (solve and rebuild cost in machines with many legs), A-016 (an unreported branch
 jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
@@ -56,6 +56,7 @@ jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
 | [A-039](#a-039) | Agent friction | `motion.check` reports an angle's least and greatest value in radians beside an expectation in degrees | every assembly | convert by hand |
 | [A-040](#a-040) | Performance (file size) | A packed assembly carries the thumbnail of every part with public parameters | radial engine (valve train) | barrel fins redrawn as a chained pattern to stay under 1 MB |
 | [A-041](#a-041) | Bug | An output of `clearance` is known at the gap found where the same assertion reads not proven | task-lamp (review) | used deliberately: a fit's upper side asserted on the output |
+| [A-042](#a-042) | Bug | `clearance` reports clear when one body lies wholly inside another | radial engine (valve train, review) | the collision check over the motion catches enclosure |
 
 ## A-001
 
@@ -265,3 +266,7 @@ motion, in every renderer. Reproducer:
 ## A-041
 
 **Bug.** `clearance` finds a gap between a pair of points (an upper bound of the true gap) and proves a lower bound. Where the two are far apart (A-034), an assertion with a `max` reads *not proven*, as it should. The same measure as an output (`variable.measure`) is `known` at the gap found, with no bound, though `variable.measure` says an output is unknown when "what it proves is wider than the document's tolerance". In the task lamp with its turret slot 1 mm wider, one gap reads `known` 0.9 mm as an output, `failed` as a `value` assertion on that output, and `notProven` (at least 0.416 mm) as a `clearance` assertion. Yet at a small gap with a much closer bound the output is `unknown` ("clearance is not proven closely enough to be a value: found 0.01 mm (at least 0.0095)", a pressed pin in the radial's valve train), so whether an output is known does not follow from how close its proof is. **Should:** one contract: the output unknown as documented, or carrying the interval it proves, with an assertion on it saying what the interval decides. Reproducer: [`findings/A-041-clearance-output-known-unproven/`](findings/A-041-clearance-output-known-unproven/). **Used deliberately:** a `value` assertion with a `max` on the output passes exactly when the clearance assertion's `max` would, and fails where that one only reads not proven, so a loosened fit fails a mutation test; the lower side stays with the `clearance` assertion, whose bound is proven. Where the output is unknown (small pressed gaps), the fit is measured face to face with `distance`.
+
+## A-042
+
+**Bug.** `measure.clearance` from a plate to a ring that lies wholly inside it answers `"status": "clear", "clearance": 3.25` (the ring's distance to the plate's faces), though its description lists "overlap (one in the other, or a common volume)". In an assembly of the two as parts, a `motion.check` of `clearance` with `min` 0 passes at 3.25 mm while `view.motion` with `collisions` reports 870.5 mm³ in common, the ring's whole volume. **Should:** a body inside another is an overlap, and a `clearance` assertion on it fails. Reproducer: [`findings/A-042-clearance-misses-enclosed-body/`](findings/A-042-clearance-misses-enclosed-body/). **Impact:** a clearance assertion with a minimum can pass on an enclosed body; here the collision check over the motion catches enclosure for every pair not listed as a contact, and only the valve train's `spring_gap` outputs read wrongly at an open valve, where retainer and spring are a listed contact.

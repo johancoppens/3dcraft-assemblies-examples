@@ -1,0 +1,4 @@
+[["sketch.create",{"name":"One ring","plane":"yz"}],
+["sketch.circle",{"sketch":"One ring","center":["14.4 mm","5 mm"],"radius":"1.75 mm"}],
+["feature.revolve",{"sketch":"One ring","axis":"y","name":"Ring"}],
+["datum.plane",{"name":"Base","through":[["0 mm","0 mm","0 mm"],["1 mm","0 mm","0 mm"],["0 mm","1 mm","0 mm"]]}]]
