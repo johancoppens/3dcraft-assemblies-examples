@@ -1,0 +1,1 @@
+[["assembly.new",{"units":"mm"}],["instance.add",{"source":"part.3dcraft","name":"Inner"}],["mate.add",{"kind":"fixed","name":"F","a":"world/xy","b":"Inner/Seat","flip":true}],["document.check",{}]]

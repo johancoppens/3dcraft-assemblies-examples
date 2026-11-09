@@ -1,0 +1,6 @@
+[["variable.set",{"name":"corner","expr":"1 mm"}],
+["variable.publish",{"name":"corner","label":"Corner radius","group":"Plate","order":1,"min":"0.5 mm","max":"30 mm"}],
+["feature.block",{"size":["30 mm","20 mm","4 mm"],"name":"Blank"}],
+["feature.fillet",{"name":"Plate","edges":[["F1:face(0)","F1:face(2)"]],"radius":"corner"}],
+["material.preset",{"body":"Plate","preset":"steel"}],
+["document.check",{}]]

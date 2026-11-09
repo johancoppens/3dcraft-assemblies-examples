@@ -1,0 +1,6 @@
+[["feature.block",{"size":["30 mm","20 mm","10 mm"],"name":"Plate"}],
+["material.preset",{"body":"Plate","preset":"oak"}],
+["feature.cylinder",{"radius":"3 mm","height":"30 mm","position":["15 mm","10 mm","-5 mm"],"name":"Tool"}],
+["feature.boolean",{"op":"subtract","target":"Plate","tool":"Tool","name":"Plate cut"}],
+["assert.add",{"name":"Part knows its mass","measure":"mass","of":"Plate cut","min":"0.001 kg"}],
+["document.check",{}]]

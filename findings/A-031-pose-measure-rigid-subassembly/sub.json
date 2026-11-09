@@ -1,0 +1,6 @@
+[
+["assembly.new",{"units":"mm"}],
+["instance.add",{"source":"block.3dcraft","name":"Block"}],
+["mate.add",{"kind":"fixed","name":"Ground","a":"world/xy","b":"Block/Top"}],
+["document.check",{}]
+]

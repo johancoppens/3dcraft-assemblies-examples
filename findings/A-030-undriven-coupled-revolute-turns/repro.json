@@ -1,0 +1,222 @@
+[
+[
+"assembly.new",
+{
+"units": "mm"
+}
+],
+[
+"variable.set",
+{
+"name": "t",
+"expr": "0"
+}
+],
+[
+"variable.set",
+{
+"name": "lead",
+"expr": "8 mm"
+}
+],
+[
+"instance.add",
+{
+"source": "plate.3dcraft",
+"name": "Base",
+"position": [
+0,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "plate.3dcraft",
+"name": "Bed",
+"position": [
+0,
+0,
+50
+]
+}
+],
+[
+"instance.add",
+{
+"source": "block.3dcraft",
+"name": "Screw A",
+"position": [
+-100,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "block.3dcraft",
+"name": "Screw B",
+"position": [
+100,
+0,
+0
+]
+}
+],
+[
+"instance.add",
+{
+"source": "block.3dcraft",
+"name": "Nut A",
+"position": [
+-100,
+0,
+50
+]
+}
+],
+[
+"instance.add",
+{
+"source": "block.3dcraft",
+"name": "Nut B",
+"position": [
+100,
+0,
+50
+]
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Base_on_floor",
+"a": "world/xy",
+"b": "Base/Seat A",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "slider",
+"name": "Bed_slide",
+"a": "Base/Seat A",
+"b": "Bed/Seat A",
+"flip": true,
+"offset": "50 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Screw_A",
+"a": "Base/Seat A",
+"b": "Screw A/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "revolute",
+"name": "Screw_B",
+"a": "Base/Seat B",
+"b": "Screw B/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Nut_A_on_screw",
+"a": "Screw A/Seat",
+"b": "Nut A/Seat",
+"flip": true,
+"offset": "50 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "cylindrical",
+"name": "Nut_B_on_screw",
+"a": "Screw B/Seat",
+"b": "Nut B/Seat",
+"flip": true,
+"offset": "50 mm"
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Nut_A_on_bed",
+"a": "Bed/Seat A",
+"b": "Nut A/Seat",
+"flip": true
+}
+],
+[
+"mate.add",
+{
+"kind": "fixed",
+"name": "Nut_B_on_bed",
+"a": "Bed/Seat B",
+"b": "Nut B/Seat",
+"flip": true
+}
+],
+[
+"coupling.add",
+{
+"kind": "screw",
+"name": "Thread_A",
+"mates": [
+"Nut_A_on_screw",
+"Screw_A"
+],
+"value": "lead"
+}
+],
+[
+"coupling.add",
+{
+"kind": "screw",
+"name": "Thread_B",
+"mates": [
+"Nut_B_on_screw",
+"Screw_B"
+],
+"value": "lead"
+}
+],
+[
+"joint.set",
+{
+"mate": "Screw_A",
+"value": "-24 * 360 deg * t"
+}
+],
+[
+"assert.add",
+{
+"name": "Screw B follows the bed",
+"measure": "jointDistance",
+"mate": "Bed_slide",
+"min": "-500 mm",
+"max": "500 mm"
+}
+],
+[
+"document.check",
+{}
+]
+]

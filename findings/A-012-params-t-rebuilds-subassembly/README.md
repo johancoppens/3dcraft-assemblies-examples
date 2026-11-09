@@ -11,7 +11,7 @@ though nothing of its geometry changes:
 | | configurations built | `motion.bake` 120 frames |
 |---|---|---|
 | `t + phase` in `params` (twelve 8-body legs) | 2097 (659 wanted) | 7.5 s |
-| undriven legs, crankshaft mated in the parent (`../A-new-solver-hub-cost/parent5.json`) | 3 | 6.5 s at the same load, and it is 12 legs on one real shaft |
+| undriven legs, crankshaft mated in the parent (`../A-013-solver-hub-cost/parent5.json`) | 3 | 6.5 s at the same load, and it is 12 legs on one real shaft |
 
 (Load average 20 to 38 on 14 CPUs, so the absolute numbers are inflated; the ratio is what matters. The bake of the
 params variant grows with every body added to the leg, since each moment re-makes the whole subassembly placement.)

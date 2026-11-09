@@ -228,9 +228,9 @@ branch limit to navigate.
   `"params": {"t": "t + phase"}` plays correctly (the feet match the closed form at their phases), but every moment
   becomes a new configuration of the subassembly, and by 3DCraft's own rule the leg keeps its drive in the parent, so one
   real crankshaft would add a second driver per leg (that combination was not tried; reproducer
-  `findings/A-new-params-t-rebuilds-subassembly/`). The legs
+  `findings/A-012-params-t-rebuilds-subassembly/`). The legs
   are therefore flexible and undriven, and the phase lives in the key flats of the journal rods.
-- **The solve cost grows with the mates on one body** (reproducer `findings/A-new-solver-hub-cost/`): one chassis
+- **The solve cost grows with the mates on one body** (reproducer `findings/A-013-solver-hub-cost/`): one chassis
   carrying all 24 hip pivots took about twice as long as a rib per leg, so each leg has its own rib, grounded
   separately.
 - [A-015](../../3DCRAFT-FEEDBACK.md#a-015): a solid texture does not turn with an instance's placement, so every wooden part is a
@@ -241,7 +241,7 @@ branch limit to navigate.
   degrees in steps of 60; all 45 combinations with the scale were scanned leg by leg against the closed form (540 solves,
   none off the branch; 300 of them again on the final file) and the gait box checks it over the motion. The limit is really on the rest pose, the crank start plus the stored `t`: storing `t = 0`
   at the default start goes off the branch too, the same total angle the published range excludes. See
-  `findings/A-new-rest-solve-branch-jump/`.
+  `findings/A-016-rest-solve-branch-jump/`.
 - [A-002](../../3DCRAFT-FEEDBACK.md#a-002): no pattern of instances, so `build.json` repeats six modules by hand; with
   the parts it comes to 775 steps, against the guide of 600.
 - [A-005](../../3DCRAFT-FEEDBACK.md#a-005): the foot's trace is not saved in the file; the command to draw it is under

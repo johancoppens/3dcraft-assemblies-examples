@@ -8,6 +8,11 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `45233bdc` unless they say otherwise.
 
+**Status (2026-11-09):** 39 entries: 14 bugs (one also performance), 11 missing capabilities, 7 performance, 7 agent
+friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps
+while a motion plays), A-013 and A-012 (solve and rebuild cost in machines with many legs), A-016 (an unreported branch
+jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
+
 | Id | Kind | Title | Found in | Impact |
 |---|---|---|---|---|
 | [A-001](#a-001) | Bug | `check-range` cannot read the parts of an assembly that is not packed | building the tool | subassemblies are not range-checked on their own |
@@ -21,8 +26,34 @@ All entries are against 3DCraft `45233bdc` unless they say otherwise.
 | [A-009](#a-009) | Bug | `motion.check` with an inline measure is refused after `param.set` in the same run | toggle-clamp (review) | a probe assertion instead |
 | [A-010](#a-010) | Agent friction | A multi-body instance is not a measure subject by its own name | toggle-clamp | measured body by body |
 | [A-011](#a-011) | Agent friction | An instance parameter from a formula is refused when off the part's step | toggle-clamp | parameters published without a step |
+| [A-012](#a-012) | Performance | A flexible subassembly whose `t` comes through `params` is rebuilt at every moment | jansen-walker | phase moved into the crankshaft's keyed mates |
+| [A-013](#a-013) | Performance | The solve cost grows steeply with the number of mates on one body | jansen-walker | a rib per leg instead of one chassis |
 | [A-014](#a-014) | Bug | The window's camera refits at every moment of a motion | seen by the developer while playing the assemblies | the view jumps while it plays |
 | [A-015](#a-015) | Bug | A solid texture does not turn with an instance's placement | task-lamp, jansen-walker, seen by the developer while playing | wood grain crosses moving parts; workaround: no texture on moving wood |
+| [A-016](#a-016) | Bug | The rest solve of a flexible subassembly can land on another branch unreported | jansen-walker | crank start limited to scanned values, gait asserted |
+| [A-017](#a-017) | Missing capability | `bendable` has no one-stroke U-forming of two parallel bends | toggle-clamp, scissor-jack | U-sections not proven bendable |
+| [A-018](#a-018) | Missing capability | No fillet of a sketch corner | toggle-clamp | literal tangent factors, exact only at the defaults |
+| [A-019](#a-019) | Bug | A sheet-metal part fails when `param.set` reaches values a fresh build accepts | scissor-jack | arm keeps its own defaults; 0.3 mm root fillet |
+| [A-020](#a-020) | Bug | A screw coupling cannot name one cylindrical mate twice | scissor-jack | a revolute drives, the coupling ties it to the slide |
+| [A-021](#a-021) | Bug, performance | A flange outline with a formula curve renders blank at the default framing, and costs 13× a polyline | scissor-jack | chords and an explicit camera |
+| [A-022](#a-022) | Agent friction | `sketch.path` refuses a pattern point as its start, `sketch.line` accepts it | scissor-jack | one extra step per flange |
+| [A-023](#a-023) | Bug | A configuration whose feature fails is placed and the assembly's `document.check` says ok | task-lamp | narrow part ranges and their own `check-range` |
+| [A-024](#a-024) | Bug | A material set before a later feature is lost to an instance | task-lamp, radial-engine | material set on the last feature |
+| [A-025](#a-025) | Performance | A helical spring that follows `t` costs 200 to 350 ms per moment | task-lamp | half-turn revolves in patterns |
+| [A-026](#a-026) | Agent friction | An instance's `position` and `rotation` cannot be expressions | corexy-printer | the frame is held by chains of fixed mates |
+| [A-027](#a-027) | Missing capability | A mesh export cannot be turned into the print orientation | corexy-printer | 3MFs in the mating orientation, the README says how to lay them |
+| [A-028](#a-028) | Performance | A part shared by several subassemblies is packed once inside each | corexy-printer | box beams on the bed; file size exception |
+| [A-029](#a-029) | Performance | A revolved formula curve regenerates 8 to 20 times slower than a polyline of the same outline | corexy-printer | polyline vase |
+| [A-030](#a-030) | Bug | An undriven revolute tied to a screw coupling stops converging after about 15 turns | corexy-printer | both lead screws driven |
+| [A-031](#a-031) | Agent friction | Pose measures do not reach an instance inside a rigid subassembly; `clearance` does | radial-engine | firing order measured on the subassembly |
+| [A-032](#a-032) | Bug | A union along a shared plane with half-revolved pads is refused by the kernel | radial-engine | overrun the plane and cut it away |
+| [A-033](#a-033) | Performance | A fillet of seven pad junctions costs 15 to 25 s of CPU | radial-engine | heptagon crankcase with flats |
+| [A-034](#a-034) | Performance | `clearance` proves only a coarse lower bound on some near-coaxial bodies, so a bounded fit reads not proven | walker, lamp, printer, radial | bounds widened, or `extent` of each body |
+| [A-035](#a-035) | Bug | A face's own appearance is lost on an assembly instance | task-lamp | a separate liner body |
+| [A-036](#a-036) | Bug | A free revolute that nothing drives moves in the rest solve | task-lamp | the base turn is a driven parameter |
+| [A-037](#a-037) | Missing capability | No assertion of a measure's minimum, maximum or range over the motion; `measure.ray` cannot be asserted | radial-engine | strokes checked against an independent table |
+| [A-038](#a-038) | Missing capability | `feature.thread` knows only ISO metric threads | scissor-jack | nominal size and pitch; thread cosmetic |
+| [A-039](#a-039) | Agent friction | `motion.check` reports an angle's least and greatest value in radians beside an expectation in degrees | every assembly | convert by hand |
 
 ## A-001
 
@@ -95,6 +126,14 @@ computes. **Should:** a step limits interactive input and `param.set`, not a par
 remove the step. Reproducer: [`findings/A-011-computed-param-off-step/`](findings/A-011-computed-param-off-step/).
 **Workaround:** publish such a parameter without a step.
 
+## A-012
+
+**Performance.** A leg subassembly placed twelve times with `"mode": "flexible"` and `"params": {"t": "t + phase"}` works, but the configuration key of an instance is its parameter values, so every moment of the motion is a new configuration of the subassembly although nothing of its geometry changes: 2097 configurations built and 7.5 s of bake against 3 configurations and 6.5 s with the phase in the parent's mates. **Should:** a parameter that only reaches a subassembly's drives is not a new configuration; reuse the parts and drive the joints. Reproducer: [`findings/A-012-params-t-rebuilds-subassembly/`](findings/A-012-params-t-rebuilds-subassembly/).
+
+## A-013
+
+**Performance.** Twelve legs on one crankshaft: with all 24 hip pivots mated to one chassis instance the bake takes 11 to 13 s; with a rib per leg (4 mates per body) 6.5 s; four legs on one chassis 0.87 s. Three times the legs on one body costs thirteen times the time. **Should:** the solve grows with the bodies, not with the square of the mates on one body (a frame or a crankshaft is the normal case). Reproducer: [`findings/A-013-solver-hub-cost/`](findings/A-013-solver-hub-cost/).
+
 ## A-014
 
 **Bug.** While a motion plays in the window the view keeps refitting, so the model appears to zoom and shift. With the
@@ -118,3 +157,99 @@ same material reading two ways). **Should:** the texture's frame follows the ins
 motion, in every renderer. Reproducer:
 [`findings/A-015-solid-texture-ignores-placement/`](findings/A-015-solid-texture-ignores-placement/).
 **Workaround:** `{"preset": "oak", "pattern": null}` on moving parts: oak's colour and density without the texture.
+
+## A-016
+
+**Bug.** Every instance of a flexible subassembly starts from the poses stored in that one document, and the parent's rest solve is one Newton solve from them. A leg whose crank lies far from its stored pose converges to the mirrored assembly of a loop and stays there for the whole motion; `assembly.solve` is ok with 0 degrees of freedom and nothing is reported (6 of 432 legs over crank starts every 10°). **Should:** report a branch change against the stored pose, or let a parent give an instance's start pose. Notes: [`findings/A-016-rest-solve-branch-jump/`](findings/A-016-rest-solve-branch-jump/).
+
+## A-017
+
+**Missing capability.** A U-section is formed in one stroke of a punch into a U-die. `bendable` can only put flanges on one line in one stroke ("flanges 0 and 1 cannot be bent in one stroke: they are not on one line"), and two strokes on a press brake collide, as on a real brake. On a part with a single bend `bendable` passes whatever the tools are, since it leaves out the bend's own strip. **Should:** a stroke of parallel bends formed together by a shaped die, and a note on what a single-bend check covers. Reproducer: [`findings/A-017-bendable-one-stroke-u/`](findings/A-017-bendable-one-stroke-u/).
+
+## A-018
+
+**Missing capability.** No sketch command rounds a corner between two lines (`sketch.fillet` is unknown). `sketch.path` can draw the arcs only from end points the author computes, so a variable-driven outline needs long expressions or literal tangent factors, exact at the defaults only. `feature.fillet` afterwards does not reach a sheet-metal flat. **Should:** a sketch corner fillet. Reproducer: [`findings/A-018-no-sketch-corner-fillet/`](findings/A-018-no-sketch-corner-fillet/).
+
+## A-019
+
+**Bug.** The scissor jack's arm built fresh at `inner_width` 34 mm and `tooth_hand` 1 is valid, but the saved part with other defaults fails when `param.set` reaches those values: "plate produced an invalid body: loop 3 of face 2 ... is outside the region they bound". 34.01 mm works. Small root fillets fail non-monotonically (0.25, 0.4, 0.5 mm fail, 0.3 does not). **Should:** a regeneration depends on the values, not on the path to them. Reproducer: [`findings/A-019-param-set-state-dependent/`](findings/A-019-param-set-state-dependent/).
+
+## A-020
+
+**Bug.** `docs/design/assemblies.md` says a screw coupling's two mates may be the same cylindrical mate; `coupling.add {"kind": "screw", "mates": ["Thread", "Thread"]}` is refused: "couples a mate to itself". **Should:** accept it, as the design says. Reproducer: [`findings/A-020-screw-coupling-one-mate/`](findings/A-020-screw-coupling-one-mate/).
+
+## A-021
+
+**Bug, performance.** A sheet-metal flange whose outline uses `sketch.curve` (an involute flank) regenerates and measures fine, but `view.render` at the default framing draws nothing (coverage 0, a box far larger than the body); chords of the same flank frame normally, and the formula curve costs about 13 times the regeneration. **Should:** frame on the body; a formula curve close to a polyline's cost. Reproducer: [`findings/A-021-curve-flange-default-view/`](findings/A-021-curve-flange-default-view/).
+
+## A-022
+
+**Agent friction.** After a chained `sketch.pattern`, `sketch.line {"from": "e4[last]"}` works and `sketch.path {"start": "e4[last]"}` fails ("e6 is a image, not a point"). **Should:** `sketch.path` takes pattern points as the other sketch commands do. Reproducer: [`findings/A-022-path-start-on-pattern-point/`](findings/A-022-path-start-on-pattern-point/).
+
+## A-023
+
+**Bug.** A part with a fillet whose radius is a published parameter, placed with a value too large for it: the part alone fails `document.check` ("radius: too large"), but the instance is placed from a partial regeneration and the assembly's `document.check` is ok. **Should:** an instance whose configuration has a failed feature fails the assembly's check, by name. Reproducer: [`findings/A-023-failed-configuration-reported-ok/`](findings/A-023-failed-configuration-reported-ok/).
+
+## A-024
+
+**Bug.** A part gives a body `material.preset` and a later feature (a boolean) takes that body. The part's own `mass` works; an instance of it answers "has no material, so no mass". **Should:** an instance sees the material its part's final body has. Reproducer: [`findings/A-024-instance-material-before-boolean/`](findings/A-024-instance-material-before-boolean/).
+
+## A-025
+
+**Performance.** A 30-coil spring (a `datum.helix` and one sweep) whose span follows `t` is rebuilt per moment: 200 to 350 ms each, 43 to 75 s for a 120-frame bake. Half-turn revolves in two patterns look the same and cost 5 s; tilted rings cost 0.06 s but read as rings. Collision checks on patterned multi-lump coils also cost 8 to 11 s per moment. **Should:** a helical sweep that is cheap to rebuild at another length, or a spring primitive. Reproducer: [`findings/A-025-helix-spring-per-moment/`](findings/A-025-helix-spring-per-moment/).
+
+## A-026
+
+**Agent friction.** `instance.add` `position` and `rotation` must be plain numbers (`["gap/2", 0, 0]` is refused), so an instance cannot start where the assembly's parameters put it. **Should:** expressions, re-evaluated when the parameters change. Reproducer: [`findings/A-026-instance-position-numbers-only/`](findings/A-026-instance-position-numbers-only/).
+
+## A-027
+
+**Missing capability.** `file.export` to 3MF writes a part in its own axes; a printed part drawn in the frame in which it mates cannot be exported in the frame in which it prints. **Should:** an orientation for the export (a rotation, or a face to lay on the bed). Notes: [`findings/A-027-no-export-orientation/`](findings/A-027-no-export-orientation/).
+
+## A-028
+
+**Performance (file size).** `assembly.pack` packs each subassembly with its own parts inside, so a part used by two subassemblies and by the parent is stored three times. In the printer one 66 KB T-slot profile is packed three times. **Should:** each source once per packed file, whatever subassemblies refer to it. Reproducer: [`findings/A-028-part-packed-per-subassembly/`](findings/A-028-part-packed-per-subassembly/).
+
+## A-029
+
+**Performance.** A thin-walled vase revolved from two `sketch.curve` walls regenerates about 8 to 20 times slower than a polyline of 32 points per wall on the same formula. **Should:** a formula curve close to a polyline's cost. Reproducer: [`findings/A-029-revolve-formula-curve-cost/`](findings/A-029-revolve-formula-curve-cost/).
+
+## A-030
+
+**Bug.** Two lead screws with screw couplings to their nuts on one bed: screw A driven, screw B left undriven but fully determined by its coupling. `assembly.solve` is ok, but `motion.check` stops at about 15.7 turns: "did not converge in 200 iterations". **Should:** an angle that a coupling fixes is solved at any number of turns. Reproducer: [`findings/A-030-undriven-coupled-revolute-turns/`](findings/A-030-undriven-coupled-revolute-turns/).
+
+## A-031
+
+**Agent friction.** In a parent with a rigid subassembly `Sub` holding `Inner`, `clearance` from `Sub/Inner` works, but `rotation` of `Sub/Inner` fails ("no instance Sub/Inner") while `Sub` is accepted. The guide says measures reach inner instances by their path. **Should:** one rule. Reproducer: [`findings/A-031-pose-measure-rigid-subassembly/`](findings/A-031-pose-measure-rigid-subassembly/).
+
+## A-032
+
+**Bug.** A revolved ring and seven pads, each a half revolve whose flat half lies in the ring's plane: the union is refused as "a bug in the kernel; please report the model". **Should:** a union along a shared plane succeeds. Reproducer: [`findings/A-032-coplanar-half-revolve-boolean/`](findings/A-032-coplanar-half-revolve-boolean/).
+
+## A-033
+
+**Performance.** A fillet (or chamfer) of the seven junction edges between cone pads and a revolved ring makes the part take 15 to 25 s of CPU to regenerate, against under 2 s without it. **Should:** seven similar blends cost a small part of a regeneration. Reproducer: [`findings/A-033-fillet-cost-pad-junction/`](findings/A-033-fillet-cost-pad-junction/).
+
+## A-034
+
+**Performance (precision).** `clearance` reports its proven lower bound beside the value it finds. On simple coaxial cylinders the bound is close (found 0.5 mm, at least 0.45, so a fit bounded at 0.2 mm fails as it should). On some bodies the bound is coarse: a printer carriage found 0.5 mm with at least 0.256 mm against a 0.35 mm maximum, a walker key 0.2 with at least 0.0525, a radial piston 0.16 with at least 0. A two-sided fit then reads *not proven* rather than failed or passed, and `document.check` only warns. **Should:** a bound tight enough to decide a fit of tenths of a millimetre on turned and printed parts. No minimal reproducer: the coarse cases are in the assemblies named.
+
+## A-035
+
+**Bug.** A body's appearance reaches an instance; a face's own (`face.appearance`) does not: a green block with one cream face shows the face cream as a part and green as an instance. The task lamp's shade lost its cream inside. **Should:** an instance shows its part's face appearances. Reproducer: [`findings/A-035-face-appearance-lost-on-instance/`](findings/A-035-face-appearance-lost-on-instance/).
+
+## A-036
+
+**Bug.** In the task lamp, the base's turn left as a free revolute (nothing drives it) ends 7.1° from its start value after the rest solve, with 4 degrees of freedom reported; smaller subsets of the lamp keep it at 0. `docs/design/assemblies.md` says free directions are not moved. **Should:** a free motion keeps its value unless something drives it. No minimal reproducer: the lamp with `Turret_swivel`'s `joint.set` removed shows it.
+
+## A-037
+
+**Missing capability.** An assertion checks a measure at each sample of the motion, but cannot assert what the motion does as a whole: the stroke of a piston (greatest minus least position), the lift of a foot. `motion.check` reports the least and greatest values, but nothing in the document can assert them. Nor can `measure.ray` (a depth along a line) be used in an assertion or an output. **Should:** a measure over the motion (its least, greatest or range) usable in assertions and outputs, and `measure.ray` as a measure kind.
+
+## A-038
+
+**Missing capability.** `feature.thread` knows ISO metric threads only; a lead screw (trapezoidal, ACME, a multi-start T8) cannot be drawn. **Should:** the trapezoidal and ACME families, and starts.
+
+## A-039
+
+**Agent friction.** `motion.check` of a joint angle gives `expected` in degrees and the least and greatest values with `"unit": "rad"`, so a reader compares numbers in two units. **Should:** the values in the expectation's unit.

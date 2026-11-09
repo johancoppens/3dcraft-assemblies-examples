@@ -1,0 +1,8 @@
+[
+["assembly.new",{"units":"mm"}],
+["instance.add",{"source":"sub.3dcraftasm","name":"Sub"}],
+["mate.add",{"kind":"fixed","name":"Ground","a":"world/xy","b":"Sub/Block/Top"}],
+["assert.add",{"name":"subassembly itself answers","measure":"rotation","instance":"Sub","axis":"y","eq":"0 deg","tol":"0.01 deg"}],
+["assert.add",{"name":"its inner instance is refused by name","measure":"rotation","instance":"Sub/Block","axis":"y","eq":"0 deg","tol":"0.01 deg"}],
+["document.check",{}]
+]

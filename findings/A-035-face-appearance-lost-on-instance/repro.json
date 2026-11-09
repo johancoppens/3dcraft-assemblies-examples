@@ -1,0 +1,1 @@
+[["assembly.new", {"units": "mm"}], ["instance.add", {"source": "plate.3dcraft", "name": "Plate"}], ["assembly.pack", {}], ["document.check", {}]]

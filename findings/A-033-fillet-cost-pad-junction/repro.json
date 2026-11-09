@@ -1,0 +1,173 @@
+[
+[
+"sketch.create",
+{
+"name": "Ring",
+"plane": "xy"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Ring",
+"start": [
+"176 mm",
+"-12 mm"
+],
+"segments": [
+{
+"line": [
+"214 mm",
+"-12 mm"
+]
+},
+{
+"line": [
+"212 mm",
+"92 mm"
+]
+},
+{
+"line": [
+"176 mm",
+"92 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Ring",
+"axis": "y",
+"name": "Shell"
+}
+],
+[
+"sketch.create",
+{
+"name": "Pad profile",
+"plane": "yz"
+}
+],
+[
+"sketch.path",
+{
+"sketch": "Pad profile",
+"start": [
+"0 mm",
+"182 mm"
+],
+"segments": [
+{
+"line": [
+"88.6 mm",
+"182 mm"
+]
+},
+{
+"line": [
+"88 mm",
+"222.5 mm"
+]
+},
+{
+"line": [
+"86.5 mm",
+"224 mm"
+]
+},
+{
+"line": [
+"0 mm",
+"224 mm"
+]
+},
+{
+"line": "start"
+}
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Pad profile",
+"axis": "y",
+"name": "Pad"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Pad",
+"count": 7,
+"angle": "-360 deg / 7",
+"axis": [
+0,
+1,
+0
+],
+"point": [
+"0 mm",
+"0 mm",
+"0 mm"
+],
+"name": "Pads"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Shell",
+"tool": "Pads",
+"name": "Case"
+}
+],
+[
+"feature.fillet",
+{
+"name": "Blended",
+"radius": "3.5 mm",
+"edges": [
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,1)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,2)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,3)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,4)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,5)/F4:side(e5)"
+],
+[
+"F6:copy(0)/F2:side(e5)",
+"F6:copy(1,6)/F4:side(e5)"
+]
+]
+}
+],
+[
+"document.check",
+{}
+]
+]

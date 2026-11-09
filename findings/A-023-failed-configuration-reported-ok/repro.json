@@ -1,0 +1,5 @@
+[["assembly.new",{"units":"mm"}],
+["instance.add",{"source":"plate.3dcraft","name":"Plate","params":{"corner":"12 mm"}}],
+["mate.add",{"kind":"fixed","name":"Ground","a":"world/xy","b":"Plate/F1:face(1)","flip":true}],
+["assembly.inspect",{}],
+["document.check",{}]]

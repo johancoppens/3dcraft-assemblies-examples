@@ -1,0 +1,11 @@
+[
+["sketch.create",{"name":"Ring","plane":"xy"}],
+["sketch.path",{"sketch":"Ring","start":["168 mm","0 mm"],"segments":[{"line":["204 mm","0 mm"]},{"line":["202.5 mm","78 mm"]},{"line":["168 mm","78 mm"]},{"line":"start"}]}],
+["feature.revolve",{"sketch":"Ring","axis":"y","name":"Shell"}],
+["sketch.create",{"name":"Pad profile","plane":"yz"}],
+["sketch.path",{"sketch":"Pad profile","start":["0 mm","178 mm"],"segments":[{"line":["88 mm","178 mm"]},{"line":["87 mm","212.5 mm"]},{"line":["85.5 mm","214 mm"]},{"line":["0 mm","214 mm"]},{"line":"start"}]}],
+["feature.revolve",{"sketch":"Pad profile","axis":"y","angle":"180 deg","symmetric":true,"name":"Pad half"}],
+["feature.pattern",{"source":"Pad half","count":7,"angle":"-360 deg / 7","axis":[0,1,0],"point":["0 mm","0 mm","0 mm"],"name":"Pads"}],
+["feature.boolean",{"op":"union","target":"Shell","tool":"Pads","name":"Case"}],
+["document.check",{}]
+]

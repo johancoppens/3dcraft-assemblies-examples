@@ -1,0 +1,5 @@
+[
+["feature.block",{"name":"Block","size":["20 mm","20 mm","20 mm"]}],
+["datum.plane",{"name":"Top","from":"xy","distance":"20 mm"}],
+["document.check",{}]
+]

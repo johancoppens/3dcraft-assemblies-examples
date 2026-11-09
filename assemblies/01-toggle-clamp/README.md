@@ -222,9 +222,9 @@ configurations and an independent closed form over the motion.
 
 ## Platform notes
 
-- There is no sketch corner fillet, so about 130 corner tangent factors in the outlines are literals (`-0.269584 * (corner)`), exact at the defaults only ([`findings/A-new-no-sketch-corner-fillet/`](../../findings/A-new-no-sketch-corner-fillet/)).
+- There is no sketch corner fillet, so about 130 corner tangent factors in the outlines are literals (`-0.269584 * (corner)`), exact at the defaults only ([`findings/A-018-no-sketch-corner-fillet/`](../../findings/A-018-no-sketch-corner-fillet/)).
 - The press-brake check `bendable` has no one-stroke U-forming of two parallel bends, so the U-bar's forming is not
-  proven by it ([`findings/A-new-bendable-one-stroke-u/`](../../findings/A-new-bendable-one-stroke-u/)).
+  proven by it ([`findings/A-017-bendable-one-stroke-u/`](../../findings/A-017-bendable-one-stroke-u/)).
 - The fit assertions' lower bound: the `clearance` measure's proven bound for a pin in a bore is well below the value it
   finds (reported as "not proven" against a tight lower bound), so the lower bound is set to what it proves.
 - A multi-body instance is not a measure subject by its name ([`findings/A-010-multibody-instance-subject/`](../../findings/A-010-multibody-instance-subject/)).

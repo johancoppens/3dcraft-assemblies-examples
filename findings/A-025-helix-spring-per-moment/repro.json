@@ -1,0 +1,5 @@
+[["assembly.new", {"units": "mm"}],
+ ["variable.set", {"name": "t", "expr": "0"}],
+ ["instance.add", {"source": "helix_spring.3dcraft", "name": "Spring", "params": {"span": "150 mm + 80 mm * sin(360 deg * t)"}}],
+ ["assembly.pack", {}],
+ ["motion.bake", {"frames": 120}]]

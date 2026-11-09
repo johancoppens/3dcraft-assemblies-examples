@@ -1,0 +1,4 @@
+[["assembly.new",{"units":"mm"}],
+["variable.set",{"name":"gap","expr":"120 mm"}],
+["instance.add",{"source":"tslot.3dcraft","name":"Rail[1]","params":{"length":"gap"},"position":["gap/2",0,0],"rotation":[0,0,0]}],
+["document.check",{}]]
