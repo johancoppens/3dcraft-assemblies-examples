@@ -1,0 +1,12 @@
+[
+["assembly.new",{"units":"mm"}],
+["instance.add",{"source":"plate.3dcraft","name":"Plate"}],
+["instance.add",{"source":"ring.3dcraft","name":"Ring"}],
+["mate.add",{"kind":"fixed","name":"Ground","a":"world/xy","b":"Plate/Axis","flip":true}],
+["mate.add",{"kind":"revolute","name":"Turn","a":"Plate/Axis","b":"Ring/Axis","flip":true}],
+["assert.add",{"name":"journal gap","measure":"distance",
+  "from":{"kind":"face","where":{"in":"Ring","surface":"cylinder","radius":{"min":"149.5 mm","max":"150.01 mm"}}},
+  "to":{"kind":"face","where":{"in":"Plate","surface":"cylinder","radius":{"min":"150.01 mm","max":"155 mm"}}},
+  "min":"0.04 mm","max":"0.12 mm"}],
+["document.check",{}]
+]

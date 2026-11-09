@@ -1,0 +1,9 @@
+[
+["variable.set",{"name":"bore_radius","expr":"150.5 mm"}],
+["variable.publish",{"name":"bore_radius","label":"Bore radius","group":"Plate","order":1,"min":"150.01 mm","max":"152 mm"}],
+["sketch.create",{"name":"Plate profile","plane":"xy"}],
+["sketch.path",{"sketch":"Plate profile","start":["128 mm","0 mm"],"segments":[{"line":["128 mm","-5 mm"]},{"line":["200 mm","-5 mm"]},{"line":["200 mm","10 mm"]},{"line":["bore_radius","10 mm"]},{"line":["bore_radius","0 mm"]},{"line":"start"}]}],
+["feature.revolve",{"sketch":"Plate profile","axis":"y","name":"Plate"}],
+["datum.plane",{"name":"Axis","through":[["0 mm","0 mm","0 mm"],["1 mm","0 mm","0 mm"],["0 mm","0 mm","1 mm"]]}],
+["document.check",{}]
+]

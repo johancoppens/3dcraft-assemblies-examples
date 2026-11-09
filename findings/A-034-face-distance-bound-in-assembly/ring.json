@@ -1,0 +1,7 @@
+[
+["sketch.create",{"name":"Ring profile","plane":"xy"}],
+["sketch.path",{"sketch":"Ring profile","start":["130 mm","0.1 mm"],"segments":[{"line":["150 mm","0.1 mm"]},{"line":["150 mm","20 mm"]},{"line":["130 mm","20 mm"]},{"line":"start"}]}],
+["feature.revolve",{"sketch":"Ring profile","axis":"y","name":"Ring"}],
+["datum.plane",{"name":"Axis","through":[["0 mm","0 mm","0 mm"],["1 mm","0 mm","0 mm"],["0 mm","0 mm","1 mm"]]}],
+["document.check",{}]
+]

@@ -221,7 +221,8 @@ independently computed:
   `meta.json` `unproven` with why and explain it in the README. The tool fails any other. For a fit, assert the
   `clearance`'s `min` (its lower bound is proven) and the `max` on an output of the same clearance with a `value`
   assertion: the gap found is a real pair of points, so that passes when the clearance's own `max` would and fails
-  where that one only reads not proven ([A-041](3DCRAFT-FEEDBACK.md#a-041)). The check over the public ranges is `check-range`.
+  where that one only reads not proven ([A-041](3DCRAFT-FEEDBACK.md#a-041)). Where that output is unknown (a small
+  pressed gap), measure the fit face to face with `distance`. The check over the public ranges is `check-range`.
 - **Over the motion:** `motion.check` at no fewer than 73 samples, at the defaults and at the corners of the public
   ranges. A joint's solved value against a closed form (`jointAngle`, `jointDistance`, `position`, `rotation`); the
   ratio you see is the ratio asked; the extremes that matter (stroke, height, reach); `clearance` where a gap is the
