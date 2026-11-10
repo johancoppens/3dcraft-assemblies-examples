@@ -4,8 +4,10 @@ Copyright (c) 2026 Johan Coppens
 
 This licence covers the code in this repository: the tool under `tools/` and the
 reproducers under `findings/` (the scripts and the part and assembly files they
-run). The assemblies, their parts, the pages, the previews and the other text are
-under CC BY 4.0: see LICENSE-CC-BY-4.0.md.
+run). It also covers one part, copied from the 3DCraft examples with its MIT
+licence: assemblies/05-corexy-printer/parts/t-slot-profile.json (its copyright
+notice in ATTRIBUTION.md). The assemblies, their other parts, the pages, the
+previews and the other text are under CC BY 4.0: see LICENSE-CC-BY-4.0.md.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

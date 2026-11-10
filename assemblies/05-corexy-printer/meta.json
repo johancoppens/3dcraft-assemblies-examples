@@ -287,5 +287,5 @@
     "commit": "843981c20577",
     "format_version": 69
   },
-  "budget_exception": "File size 1.18 MB: the T-slot profile and the MGN parts shared by the frame, gantry, toolhead and bed subassemblies are packed once per subassembly (findings/A-028-part-packed-per-subassembly). Granted by the coordinator up to 1.2 MB."
+  "budget_exception": "File size 1.18 MB: the T-slot profile and the MGN parts shared by the frame, gantry, toolhead and bed subassemblies are packed once per subassembly (findings/A-028-part-packed-per-subassembly). Granted up to 1.2 MB by the agent session that coordinated the build and the review (AGENTS.md section 4.5)."
 }
