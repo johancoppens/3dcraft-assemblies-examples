@@ -25,7 +25,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each assembly must be)
   repository is English: files, names inside the models, commit messages.
 - **3DCraft is pinned.** Every assembly is built and checked with one 3DCraft commit, recorded in
   [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli`. `tools/assemblies.py`
-  refuses any other build. Only the coordinator moves the pin, after rebuilding and checking all six.
+  refuses any other build, except the release named there ([README.md](README.md#rebuild-and-check)). Only the coordinator moves the pin, after rebuilding and checking all six.
 - **Do not change 3DCraft from here.** What 3DCraft gets wrong or lacks is *collected* in
   [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) (§7); the developer takes it to 3DCraft in one go. Do not build
   around a limit in silence.
@@ -292,7 +292,8 @@ what is free, what drives what); *Parameters*; *Checks* (at rest, over the motio
 }
 ```
 
-`summary` is the card's line (a few words). `motion.dof` is the degrees of freedom `assembly.solve` must report; each
+`summary` is the card's line (a few words). `standards` lists the standards and references the assembly is sized to:
+a standard where one applies, otherwise the paper, catalogue or product the page cites. `motion.dof` is the degrees of freedom `assembly.solve` must report; each
 is named in the README. `contacts` lists every pair that may overlap, each with its reason (`*` matches any text in a
 name); everything else must be clear. `unproven` (only when needed) lists `{"name", "why"}` for each assertion
 that reads not proven at rest (a part's as `"<part>: <name>"`). `stats` (load, bake, file, steps, parts, instances, degrees of freedom) and
