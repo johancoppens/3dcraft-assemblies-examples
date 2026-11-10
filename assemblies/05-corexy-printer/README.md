@@ -45,10 +45,10 @@ follow. Every motion comes from mates and couplings; the belts' straight runs ar
 | Rubix catalogue listing of Gates 2MGT | pitch 2.0 mm, tooth height 0.71 mm, belt height 1.52 mm | backing thickness (own judgement of 0.7 mm drawn) |
 | Gates PowerGrip GT2 design manual, section II-3 | the groove profile is Gates' own and is not published ("designed and developed exclusively by The Gates Rubber Company") | why the groove here is simplified |
 | NMB and NSK F695ZZ data sheets (5 x 13 x 4 mm, flange 15 x 1 mm) | | the two back-to-back smooth idlers |
-| Makerstore listing 17HD40005-300N, seen in a web search result (the page refused fetching) | that a 40 mm NEMA 17 with an integrated TR8x8 lead screw is a catalogue item | the Z motors; their axial capacity is not stated anywhere I read |
+| Makerstore listing 17HD40005-300N, seen in a web search result (the page refused fetching) | that a 40 mm NEMA 17 with an integrated TR8x8 lead screw is a catalogue item | the Z motors; their axial capacity is not stated in any source read |
 | Handson Technology data sheet, flanged T8 nut (SKU MCH1178) | Flange Ø22 x 3.5, 4 x Ø3.5 on a Ø16 circle, body Ø10.2, 15 mm overall; Tr8x8-2P, 4 starts, 8 mm lead | `float-nut` |
 | Wikipedia, *CoreXY*, citing Moyer's corexy.com; corexy.com/theory page | `Δx = ½(ΔA + ΔB)`, `Δy = ½(ΔA − ΔB)`; both motors one way is X motion, opposite is Y | the coupling equations (after renaming, see *The motion*) |
-| RepRap wiki, *Groove Mount* | Overall diameter 16 mm, groove diameter 12 mm, groove width 4.64 mm | the heat sink's neck and its clamp; the 3.7 and 3 mm collars either side are my own judgement |
+| RepRap wiki, *Groove Mount* | Overall diameter 16 mm, groove diameter 12 mm, groove width 4.64 mm | the heat sink's neck and its clamp; the 3.7 and 3 mm collars either side are a judgement made for this model |
 | E3D V6 heater block drawing (Edition 8.1, 24/06/2016) | block 23 x 16 x 11.5 mm, M6 x 1 nozzle, 6 mm cartridge bore | `hot-end`'s heater block |
 | 3dprint.wiki (E3D V6 page); reseller copy of E3D's description | 22.3 mm heat sink diameter; 62 mm overall length | `hot-end` |
 | SolidCore CoreXY guide; *mechanical-design-handbook* z-banding page | an Oldham coupling takes a screw's misalignment; a sliding middle disc allows up to 2 mm off-centre | the floating nut plate |
@@ -74,9 +74,9 @@ angle is held at 0 instead. The drawn belts leave a 0.05 mm gap to their wraps, 
 
 **The belt pitch line.** The strands' positions come from the pitch radius of the toothed pulleys (12.73 / 2 mm, from
 the Gates table) and for the smooth back-idlers from the backing thickness: the idler's rolling radius 6.5 mm plus
-0.555 mm to the pitch line (my reading of a 0.81 mm backing, `1.52 - 0.71`, with the pitch line 0.25 mm in from the
+0.555 mm to the pitch line (a reading of a 0.81 mm backing, `1.52 - 0.71`, with the pitch line 0.25 mm in from the
 land, an approximation of Gates' pitch differential). The drawn strip is the backing only (0.7 mm, no teeth); teeth are
-drawn only on the 20-tooth pulleys and idlers, and the groove's round form is my simplification, not Gates' curve (its
+drawn only on the 20-tooth pulleys and idlers, and the groove's round form is a simplification, not Gates' curve (its
 real profile is proprietary; only its P.D. and O.D. are published).
 
 At the default size each belt has a pitch length of 1586.5 mm: 724.0 mm of moving straight spans (four per belt), 801.4 mm of static runs and 61.1 mm of wraps (`belt_a_length`, `belt_b_length` are outputs of the measured value).
