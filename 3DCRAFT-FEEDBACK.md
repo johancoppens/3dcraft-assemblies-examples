@@ -20,7 +20,7 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `150f0015` unless they say otherwise.
 
-**Status (2026-11-10):** the assemblies are built and checked on 3DCraft `dc449d5a`, which fixed A-014. Before 3DCraft 0.1.0 was released, 3DCraft's session triaged all 42 entries with the developer: A-042, A-023, A-039, A-022, A-009, A-001, A-020, A-011 and the naming of subjects (A-007, A-010, A-031) were chosen to be fixed for R1, the milestone that became 0.1.0, and the rest was ordered for after it. This file does not record which of them 0.1.0 fixed: an entry's reproducer shows whether it still holds in your version.
+**Status (2026-11-10):** the assemblies are built and checked on 3DCraft `b99d70cf`, the commit in `tools/pin.json`, whose engine and command line are those of 3DCraft 0.1.0: every assembly rebuilt byte for byte, its exports too, and passed its full check as before, with the same assertions not proven. The pin before it, `dc449d5a`, fixed A-014. Before 3DCraft 0.1.0 was released, 3DCraft's session triaged all 42 entries with the developer: A-042, A-023, A-039, A-022, A-009, A-001, A-020, A-011 and the naming of subjects (A-007, A-010, A-031) were chosen to be fixed for R1, the milestone that became 0.1.0, and the rest was ordered for after it. This file does not record which of them 0.1.0 fixed: an entry's reproducer shows whether it still holds in your version.
 
 **Status (2026-11-09):** 42 entries: 16 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
 friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps

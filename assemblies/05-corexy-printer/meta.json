@@ -275,16 +275,17 @@
     "assertions": 28,
     "part_assertions": 28,
     "warnings": 4,
-    "build_s": 4.46,
-    "load_s": 1.25,
-    "load_cpu_s": 3.97,
-    "bake_s": 1.49,
+    "build_s": 3.74,
+    "load_s": 1.01,
+    "load_cpu_s": 3.53,
+    "bake_s": 1.27,
     "bake_mb": 31.3,
     "file_bytes": 1182160,
-    "range_worst_s": 1.101
+    "range_worst_s": 0.908
   },
   "craft3d": {
-    "commit": "843981c20577",
+    "commit": "b99d70cfe19e",
+    "version": "0.1.0",
     "format_version": 69
   },
   "budget_exception": "File size 1.18 MB: the T-slot profile and the MGN parts shared by the frame, gantry, toolhead and bed subassemblies are packed once per subassembly (findings/A-028-part-packed-per-subassembly). Granted up to 1.2 MB by the agent session that coordinated the build and the review (AGENTS.md section 4.5)."
