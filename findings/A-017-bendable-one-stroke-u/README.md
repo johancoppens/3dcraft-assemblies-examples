@@ -1,6 +1,6 @@
 # Missing capability: bendable has no one-stroke U-forming of two parallel bends
 
-Found while building `toggle-clamp` at 3DCraft 45233bdc.
+Found while building `toggle-clamp` at 3DCraft 150f0015.
 
 A U-section (a narrow web with two legs bent the same way) is formed in one stroke of a punch into a U-die. `bendable`
 accepts an `order` of strokes, but one stroke can only hold flanges on one line of one flat: `repro.json` builds a U

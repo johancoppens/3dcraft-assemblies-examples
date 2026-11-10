@@ -1,6 +1,6 @@
 # One start pose for every instance of a flexible subassembly: the rest solve can land on another branch
 
-Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `45233bdc`.
+Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `150f0015`.
 
 **What happens.** Twelve instances of one flexible leg subassembly start from the poses stored in that one document
 (`position` and `rotation` belong to the subassembly as a whole, so a leg's parts cannot start per instance). The parent's rest

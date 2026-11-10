@@ -1,6 +1,6 @@
 # Bug: an undriven revolute tied to a screw coupling stops converging after about 15 turns
 
-Provisional finding (coordinator numbers it) from `assemblies/05-corexy-printer` at 3DCraft `45233bdc`.
+Provisional finding (coordinator numbers it) from `assemblies/05-corexy-printer` at 3DCraft `150f0015`.
 
 **What happens.** Two lead screws, each a `revolute` on a base and a `cylindrical` nut tied to it by a `screw`
 coupling, the two nuts fixed on one bed that slides on a `slider` (`repro.json`, `block.json`, `plate.json`). Screw A

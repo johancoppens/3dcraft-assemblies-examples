@@ -1,9 +1,9 @@
 # A flexible subassembly whose `t` comes through `params` is rebuilt per moment
 
-Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `45233bdc`.
+Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `150f0015`.
 
 **What happens.** A leg subassembly (`leg.json`: eight instances, its crank driven by its own `t`) is placed twelve
-times with `"mode": "flexible"` and `"params": {"t": "t + phase"}` (`parent.json`). It works: at 3DCraft `45233bdc`
+times with `"mode": "flexible"` and `"params": {"t": "t + phase"}` (`parent.json`). It works: at 3DCraft `150f0015`
 every foot follows the closed form at its phase, including legs turned half a turn about z. But the configuration key
 of an instance is its parameter values, so every moment of the motion is a new configuration of the subassembly, even
 though nothing of its geometry changes:

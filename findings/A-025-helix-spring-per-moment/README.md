@@ -1,6 +1,6 @@
 # Performance: a helical spring that follows `t` is very expensive per moment
 
-Found while building `task-lamp` at 3DCraft 45233bdc.
+Found while building `task-lamp` at 3DCraft 150f0015.
 
 ```sh
 craft3d-cli run --new '{"units":"mm"}' --script helix_spring.json --out helix_spring.3dcraft

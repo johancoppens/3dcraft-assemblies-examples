@@ -1,6 +1,6 @@
 # Agent friction: a multi-body instance is not a measure subject by its own name
 
-Found while building `toggle-clamp` at 3DCraft 45233bdc.
+Found while building `toggle-clamp` at 3DCraft 150f0015.
 
 Build `two_bodies.json` to `two_bodies.3dcraft`, then run `repro.json`. `assert.add` with `from: "Handle"` answers
 `cannot be measured: there is no feature named 'Handle'`, though `Handle` is the instance. The same subject works as

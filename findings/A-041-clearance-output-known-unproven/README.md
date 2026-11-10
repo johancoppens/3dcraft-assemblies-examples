@@ -1,6 +1,6 @@
 # A-041: an output of `clearance` is known where the same assertion is not proven
 
-**Bug. 3DCraft 45233bdc, found in the task lamp's review.** `clearance` finds a gap between a pair of points (an upper
+**Bug. 3DCraft 150f0015, found in the task lamp's review.** `clearance` finds a gap between a pair of points (an upper
 bound of the true gap) and proves a lower bound. Where the two are far apart (A-034), an assertion with a `max` reads
 *not proven*, as it should. The same measure as an output (`variable.measure`) is `known` at the gap found, with no bound,
 though the command's own text says an output is unknown when "what it proves is wider than the document's tolerance".

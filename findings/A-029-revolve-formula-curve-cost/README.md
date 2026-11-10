@@ -1,6 +1,6 @@
 # Performance: a revolved formula curve (`sketch.curve`) regenerates about 8 to 20 times slower than a polyline of the same outline
 
-Provisional finding (coordinator numbers it) from `assemblies/05-corexy-printer` at 3DCraft `45233bdc`.
+Provisional finding (coordinator numbers it) from `assemblies/05-corexy-printer` at 3DCraft `150f0015`.
 
 **What happens.** A thin-walled vase of revolution is revolved from a closed outline of two `sketch.curve` formula
 curves (`curve.json`) or from a polyline with 32 points per wall on the same formula (`polyline.json`): same outline to

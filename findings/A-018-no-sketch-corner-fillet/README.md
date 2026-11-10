@@ -1,6 +1,6 @@
 # Missing capability: no fillet of a sketch corner
 
-Found while building `toggle-clamp` at 3DCraft 45233bdc.
+Found while building `toggle-clamp` at 3DCraft 150f0015.
 
 A stamped outline is lines with a radius at every corner. There is no sketch command that rounds a corner between two
 lines (`repro.json` asks for `sketch.fillet`: unknown command). `sketch.path` can draw the arcs, but only from end

@@ -1,6 +1,6 @@
 # File size: a part shared by several subassemblies is packed once inside each of them
 
-Provisional finding from `assemblies/05-corexy-printer` at 3DCraft `45233bdc`.
+Provisional finding from `assemblies/05-corexy-printer` at 3DCraft `150f0015`.
 
 **What happens.** `assembly.pack` packs each subassembly first, its own parts inside it, and the parent then packs the
 subassemblies. A part used by two subassemblies and by the parent is stored three times in the packed file: inside each

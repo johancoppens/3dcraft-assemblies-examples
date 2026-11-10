@@ -1,6 +1,6 @@
 # A-040: a packed assembly carries a thumbnail for every part with public parameters
 
-**Performance (file size). 3DCraft 45233bdc, found in 16-radial-engine-valves.** `assembly.pack` stores each source
+**Performance (file size). 3DCraft 150f0015, found in 16-radial-engine-valves.** `assembly.pack` stores each source
 document as it was saved, and a document with public parameters is saved with its 400 x 300 `thumb.png` (`file.save`
 draws one for a Jig). Inside a packed assembly nobody shows those pictures, but they count against the size. Together
 with pretty-printed manifests in an uncompressed ZIP (examples F-138, F-080), they take the radial engine with its valve

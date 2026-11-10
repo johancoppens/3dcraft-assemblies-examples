@@ -1,6 +1,6 @@
 # A-042: `clearance` reports clear when one body lies wholly inside another
 
-**Bug. 3DCraft 45233bdc, found in the radial engine's valve train (review).** A ring (a torus of major radius 14.4 mm,
+**Bug. 3DCraft 150f0015, found in the radial engine's valve train (review).** A ring (a torus of major radius 14.4 mm,
 section radius 1.75 mm) lies wholly inside a 40 × 40 × 10 mm plate. `measure.clearance` from the plate to the ring
 answers `"status": "clear", "clearance": 3.25`, the distance from the ring to the plate's faces, though its own
 description lists "overlap (one in the other, or a common volume)". In an assembly with the two as parts, a

@@ -1,6 +1,6 @@
 # A-034: in an assembly, `distance` between two coaxial cylinder faces proves only a loose lower bound
 
-**Performance (precision), a case of A-034. 3DCraft 45233bdc, found in the radial engine's valve train.** A ring (outer radius 150 mm) turns in the bore of
+**Performance (precision), a case of A-034. 3DCraft 150f0015, found in the radial engine's valve train.** A ring (outer radius 150 mm) turns in the bore of
 a plate (radius 150.5 mm). In an assembly, `distance` between the ring's outer face and the plate's bore face, found by
 query (`in`, `surface`, `radius`), reports "found 0.5 mm (at least 0.049 mm)". An assertion bounded 0.04 to 0.12 mm is
 then `notProven`, never `failed`, so a loose fit cannot fail cleanly. In a single part with the same two faces,

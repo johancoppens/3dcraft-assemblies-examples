@@ -1,6 +1,6 @@
 # Agent friction: an instance parameter from a formula is refused when off the part's step
 
-Found while building `toggle-clamp` at 3DCraft 45233bdc.
+Found while building `toggle-clamp` at 3DCraft 150f0015.
 
 A part publishes a length with a step of 0.1 mm for its own form; an assembly passes it a value computed by a formula
 (`sqrt(2) * 7 mm`, here the closed-form position of a pivot). The instance fails: `its configuration failed: ... its value

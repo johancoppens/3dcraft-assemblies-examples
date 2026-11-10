@@ -1,6 +1,6 @@
 # A configuration whose feature fails is placed and `document.check` of the assembly says ok
 
-Found while building `task-lamp` at 3DCraft 45233bdc.
+Found while building `task-lamp` at 3DCraft 150f0015.
 
 ```sh
 craft3d-cli run --new '{"units":"mm"}' --script plate.json --out plate.3dcraft

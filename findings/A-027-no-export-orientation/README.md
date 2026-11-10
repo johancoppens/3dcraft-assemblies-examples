@@ -1,6 +1,6 @@
 # Missing capability: a mesh export cannot be turned into the print orientation
 
-Provisional finding from `assemblies/05-corexy-printer` at 3DCraft `45233bdc`.
+Provisional finding from `assemblies/05-corexy-printer` at 3DCraft `150f0015`.
 
 `file.export` of a part to 3MF writes the body in the part's own axes (no `orientation`, `axis` or `rotation`
 parameter). A printed part is drawn in the frame in which it mates, which is rarely the frame in which it prints best

@@ -1,6 +1,6 @@
 # A material set before a later feature is lost to an instance, though the part itself keeps it
 
-Found while building `task-lamp` at 3DCraft 45233bdc.
+Found while building `task-lamp` at 3DCraft 150f0015.
 
 ```sh
 craft3d-cli run --new '{"units":"mm"}' --script plate.json --out plate.3dcraft
