@@ -111,7 +111,7 @@ checks every configuration's assertions.
 
 ## A-007
 
-**Agent friction.** `overlap` takes `of` and `to`, `clearance` takes `from` and `to`; chapter 17 of the guide shows the
+**Agent friction.** `overlap` takes `of` and `to`, `clearance` takes `from` and `to`; the guide's chapter on assemblies shows the
 one and lists the other as working "as in a part". And a measure on a subassembly by its name answers "there is no
 feature named `Arm`", though it is an instance of the assembly; only a path into it works. **Should:** one spelling, and
 a subassembly as a subject, meaning its bodies.

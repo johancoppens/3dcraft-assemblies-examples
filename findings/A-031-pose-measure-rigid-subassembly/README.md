@@ -3,7 +3,7 @@
 **3DCraft at the pin, found in assemblies/06-radial-engine.** In a parent assembly with a rigid subassembly placed as
 `Sub`, whose instance is `Inner`: `clearance` from `Sub/Inner` to another instance works (a body path), but
 `{"measure": "rotation", "instance": "Sub/Inner", "axis": "y"}` fails with `the assembly has no instance Sub/Inner`,
-while `"instance": "Sub"` (the subassembly's own name) is accepted. AGENTS.md (and guide chapter 17) state that a
+while `"instance": "Sub"` (the subassembly's own name) is accepted. AGENTS.md (and the guide's chapter on assemblies) state that a
 measure reaches an instance inside a subassembly by its path and that the subassembly's own name is not a subject:
 the two kinds of measure resolve subjects differently. Expected: one rule. Either a pose measure on `Sub/Inner`
 answers with the inner instance's pose (subassembly pose composed with its placement), or the guide states that

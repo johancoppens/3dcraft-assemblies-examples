@@ -285,8 +285,8 @@ geometry; the couplings stay serial and linear.
   without a step (except where the value is a whole number).
 - `measure.thickness` reports *not proven* on the whole body of `gantry-end`, `head-plate`, the hot end clamp and cap and `z-mount` (it finds 1.95, 1.3 to 1.9, and 4.25 mm but proves no lower bound); it proves `bed-bracket`, the float plate, the corner cube and the walls around the bores of the belt clamp and `gantry-end` (`gantry-end` asserts only the latter, deliberately: an unproven wall assertion would only warn, as a part's `check-range` passes it unless `--strict` is given, and on the bore faces, where it was thin, the wall is proven). The `corner` has no wall assertion: it finds 1.45 mm but proves only 0.12 mm, the corner-to-corner distance between its blind tap and the motor's boss recess (see *Printing*).
 - The packed file is 1.18 MB, over the 1 MB budget, because the T-slot profile and the MGN parts are packed once per subassembly
-  (`A-028-part-packed-per-subassembly`); the coordinator granted an exception (`budget_exception` in `meta.json`) up to 1.2 MB.
-- The source has 1010 steps against the guide of 600 for a complex assembly (980 accepted by the coordinator, 30 added by the fixes to the printed parts' bolts, spacers and clamps): the two belts'
+  (`A-028-part-packed-per-subassembly`); an exception up to 1.2 MB was granted (`budget_exception` in `meta.json`).
+- The source has 1010 steps against the guide of 600 for a complex assembly (980 accepted when it was reviewed, 30 added by the fixes to the printed parts' bolts, spacers and clamps): the two belts'
   measures, a 36-instance frame and the fasteners' holes in the printed parts account for the rest.
 - The vase's rim cut by `height` is flat at this moment of the time-lapse: the real spiral's one-layer step is not drawn
   (it would only be a thousandth of its height).

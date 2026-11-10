@@ -14,8 +14,8 @@ its palette line only with the coordinator.
   zinc-plated steel sheet: a base of two mirrored L-halves, a U-bar clamp arm carrying an M6 spindle with a rubber
   pressure cap and two lock nuts, a stamped handle with a red PVC grip, a stamped link, and rivet pivots. A real clamp's
   proportions, cited. The steel parts are real sheet metal in 3DCraft (`feature.sheetMetal`, flat patterns as DXF).
-- **Motion:** a four-bar: base, clamp arm, handle, link. `t` drives the link's joint from open, through the strekpunt
-  (the line through the three toggle pivots), to the stop just past it, and back.
+- **Motion:** a four-bar: base, clamp arm, handle, link. `t` drives the link's joint from open, through the dead centre
+  (the toggle point, on the line through the three toggle pivots), to the stop just past it, and back.
 - **Shows:** one closed loop, `limits` on a joint, the over-centre position, one pivot part in several configurations,
   a joint value as an output (`variable.measure`) for the mechanical advantage.
 - **Look:** bright zinc, red grip, black rubber.

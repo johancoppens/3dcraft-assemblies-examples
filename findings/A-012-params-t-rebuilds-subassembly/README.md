@@ -1,6 +1,6 @@
 # A flexible subassembly whose `t` comes through `params` is rebuilt per moment
 
-Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `150f0015`.
+Found while building `jansen-walker` at 3DCraft `150f0015`.
 
 **What happens.** A leg subassembly (`leg.json`: eight instances, its crank driven by its own `t`) is placed twelve
 times with `"mode": "flexible"` and `"params": {"t": "t + phase"}` (`parent.json`). It works: at 3DCraft `150f0015`

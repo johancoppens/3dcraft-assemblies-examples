@@ -1,6 +1,6 @@
 # Agent friction: an instance's start position cannot be an expression
 
-Provisional finding from `assemblies/05-corexy-printer` at 3DCraft `150f0015`.
+Found while building `corexy-printer` at 3DCraft `150f0015`.
 
 `instance.add` `position` (and `rotation`) must be plain numbers: `["gap/2", 0, 0]` answers `position must be three
 finite numbers`. `repro.json` shows it (place `tslot.3dcraft` beside it, any part with a `length` parameter). An

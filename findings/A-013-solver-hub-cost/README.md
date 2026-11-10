@@ -1,6 +1,6 @@
 # The solve cost grows steeply with the number of mates sharing one body
 
-Provisional finding (coordinator numbers it) from `assemblies/02-jansen-walker` at 3DCraft `150f0015`.
+Found while building `jansen-walker` at 3DCraft `150f0015`.
 
 **What happens.** Twelve legs of six bodies each, on one crankshaft. The two assemblies here place the same legs on
 the same crankshaft and differ only in what the hip pivots are mated to:
