@@ -28,6 +28,31 @@ from are in [`CATALOGUE.md`](CATALOGUE.md).
 | <img src="assemblies/06-radial-engine/preview.png" width="240" alt="Seven-cylinder radial engine with its valve train"> | **[Seven-cylinder radial engine with its valve train](assemblies/06-radial-engine/)**<br>The seven-cylinder radial with its valve train: a double-track cam ring turned at one sixth of the crank speed through reduction gears, roller tappets, pushrods, rockers and poppet valves in a cut-away crankcase and opened cylinders. | Aviation, engines | 8/10 |
 <!-- gallery:end -->
 
+## Rebuild and check
+
+The committed `<id>.3dcraftasm` files and `exports/` are the finished assemblies: open one in 3DCraft, in the app
+or with `craft3d-cli`, and play its motion, without rebuilding anything. Each carries its parts.
+
+The tool that made and checked them, `tools/assemblies.py` (Python 3, standard library only, on Linux or macOS),
+builds every part, then the assembly, packs it and checks it at rest and over its motion. It needs the exact 3DCraft
+build this repository is pinned to, the commit and file format in [`tools/pin.json`](tools/pin.json) as
+`craft3d-cli --version` reports them, and refuses any other: it compares what it rebuilds byte for byte with the
+committed files, which only that build reproduces. When the repository is released the pin is the 3DCraft 0.1.0
+release itself, so the `craft3d-cli` that its installer puts on your `PATH` runs it (or name the binary in
+`CRAFT3D_CLI`).
+
+```sh
+tools/assemblies.py build toggle-clamp          # parts and build.json -> .3dcraftasm and exports; rewrites meta.json
+tools/assemblies.py check --quick toggle-clamp  # rebuild in a scratch folder (.scratch/) and check at rest and over the motion
+tools/assemblies.py check toggle-clamp          # the same, plus the public ranges and their corners
+tools/assemblies.py render toggle-clamp         # preview.png
+```
+
+`build` rewrites the `stats` (timings measured on your machine) and `craft3d` fields of the assembly's `meta.json`.
+Give `check` an id: without one it rebuilds and checks all six, which takes hours. Where `systemd-run` exists,
+every run is capped in memory (in the slice named by `CRAFT3D_SLICE`, default `assemblies.slice`), and on Linux the
+tool waits while less than 1.5 GB of memory is free.
+
 ## Licence
 
 The assemblies, their parts and what is written and drawn about them (the pages, previews, `AGENTS.md`,

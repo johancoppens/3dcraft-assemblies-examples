@@ -216,6 +216,9 @@ tools/assemblies.py render scissor-jack
 tools/assemblies.py check scissor-jack
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 6 out of 10 (reviewer): a closed rhombus with screw and gear couplings plus a spherical Hooke loop, four sheet-metal

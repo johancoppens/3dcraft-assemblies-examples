@@ -361,6 +361,9 @@ tools/assemblies.py render task-lamp
 tools/assemblies.py check task-lamp
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **6/10**, scored by the reviewer: two parallelograms and four spring loops closed through sliders, springs as

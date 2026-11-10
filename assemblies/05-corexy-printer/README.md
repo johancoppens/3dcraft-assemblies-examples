@@ -255,6 +255,9 @@ tools/assemblies.py render corexy-printer
 tools/assemblies.py check corexy-printer
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 8 out of 10 (reviewer): a large coupled machine with subassemblies and configurations following `t`, and full fastener

@@ -305,7 +305,14 @@ compress and the gear teeth are not drawn, so the gear contact is the coupling's
 
 ## Rebuild
 
-`tools/assemblies.py build radial-engine`, then `tools/assemblies.py check radial-engine`.
+```sh
+tools/assemblies.py build radial-engine
+tools/assemblies.py render radial-engine
+tools/assemblies.py check radial-engine
+```
+
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
 
 ## Difficulty
 

@@ -217,6 +217,9 @@ once.
 `tools/assemblies.py build jansen-walker`, `tools/assemblies.py render jansen-walker`,
 `tools/assemblies.py check jansen-walker`. No `gen.py` is committed: `build.json` and the part sources stand alone.
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 8 out of 10 (reviewer): many coupled closed loops, flexible subassemblies, geometry-keyed configurations and a solver

@@ -97,14 +97,22 @@ def cli():
             die("craft3d-cli not found: put it on PATH or set CRAFT3D_CLI")
         version = subprocess.run([path, "--version"], capture_output=True, text=True).stdout
         if PIN["commit"][:12] not in version or f"format {PIN['format_version']}" not in version:
-            die(f"{path} is {version.strip()!r}, not 3DCraft {PIN['commit'][:12]} (tools/pin.json): install that "
-                "build or ask the coordinator to move the pin")
+            die(f"{path} is {version.strip()!r}, not 3DCraft {PIN['commit'][:12]} with file format "
+                f"{PIN['format_version']}, the build this repository is pinned to (tools/pin.json): the committed "
+                "files and their checks are what that build produces, and another build may write other bytes. "
+                "Install that build (README.md, Rebuild and check); the committed .3dcraftasm files open "
+                "without it")
         _cli = path
     return _cli
 
 
 def available_gb():
-    for line in Path("/proc/meminfo").read_text().splitlines():
+    """The memory available, from /proc/meminfo; where there is no such file (not Linux), no wait."""
+    try:
+        meminfo = Path("/proc/meminfo").read_text()
+    except OSError:
+        return float("inf")
+    for line in meminfo.splitlines():
         if line.startswith("MemAvailable:"):
             return int(line.split()[1]) / 1048576
     return float("inf")

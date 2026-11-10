@@ -215,6 +215,9 @@ tools/assemblies.py render toggle-clamp
 tools/assemblies.py check toggle-clamp
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 5 out of 10 (reviewer): one closed four-bar, but four real sheet parts with a joggle, flat patterns, own-frame
