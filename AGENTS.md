@@ -54,7 +54,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each assembly must be)
 ## 2. Layout
 
 ```text
-AGENTS.md README.md CATALOGUE.md 3DCRAFT-FEEDBACK.md ATTRIBUTION.md LICENSE
+AGENTS.md README.md CATALOGUE.md 3DCRAFT-FEEDBACK.md ATTRIBUTION.md LICENSE LICENSE-CC-BY-4.0.md
 tools/assemblies.py     build, render, check, coverage, readme (python3, standard library only)
 tools/pin.json          the pinned 3DCraft commit and file format
 findings/<A-nnn>-<slug>/  minimal reproducers for 3DCRAFT-FEEDBACK.md
