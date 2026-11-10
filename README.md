@@ -14,8 +14,11 @@ Each assembly lives in its own numbered folder under [`assemblies/`](assemblies/
 
 ## Gallery
 
-From simple to complex, each with the difficulty an independent reviewer scored out of 10. The briefs they were built
-from are in [`CATALOGUE.md`](CATALOGUE.md).
+From simple to complex, each with the difficulty its reviewer scored out of 10. The reviewer was an AI agent in the
+role of a professional of the assembly's trade (a toolmaker, an automotive engineer, a lighting designer, a machine
+builder, an engine builder) and of the fitter who must put it together, working apart from the agent that built it;
+every assembly passed that review, and its prompt was tested by a second AI model. [`AGENTS.md`](AGENTS.md) §8 names
+the models and effort levels, and the briefs the assemblies were built from are in [`CATALOGUE.md`](CATALOGUE.md).
 
 <!-- gallery:start -->
 | | Assembly | Domain | Difficulty |
