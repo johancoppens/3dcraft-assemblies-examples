@@ -323,7 +323,7 @@
 "document.info",
 {
 "title": "Bed",
-"description": "The moving bed: an aluminium plate on two 3030 arms and a 3030 cross beam, held by two printed brackets on two MGN12H Z carriages, one rigid block on the Z rails.",
+"description": "The moving bed: an aluminium plate on two 30 x 30 mm box-section arms and a box-section cross beam, held by two printed brackets on two MGN12H Z carriages, one rigid block on the Z rails.",
 "author": "3DCraft assemblies",
 "licence": "CC-BY-4.0",
 "tags": []

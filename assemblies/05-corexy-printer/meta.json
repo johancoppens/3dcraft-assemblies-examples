@@ -258,6 +258,12 @@
     }
   ],
   "stats": {
+    "unproven": [
+      "head-plate: Printable wall",
+      "head-plate: Clamp wall",
+      "head-plate: Cap wall",
+      "z-mount: Printable wall"
+    ],
     "steps": 1010,
     "parts": 24,
     "instances": 27,
@@ -268,13 +274,13 @@
     "parameters": 4,
     "assertions": 28,
     "part_assertions": 28,
-    "warnings": 0,
+    "warnings": 4,
     "build_s": 4.46,
     "load_s": 1.25,
     "load_cpu_s": 3.97,
     "bake_s": 1.49,
     "bake_mb": 31.3,
-    "file_bytes": 1182135,
+    "file_bytes": 1182160,
     "range_worst_s": 1.101
   },
   "craft3d": {
