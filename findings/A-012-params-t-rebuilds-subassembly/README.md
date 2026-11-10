@@ -13,7 +13,7 @@ though nothing of its geometry changes:
 | `t + phase` in `params` (twelve 8-body legs) | 2097 (659 wanted) | 7.5 s |
 | undriven legs, crankshaft mated in the parent (`../A-013-solver-hub-cost/parent5.json`) | 3 | 6.5 s at the same load, and it is 12 legs on one real shaft |
 
-(Load average 20 to 38 on 14 CPUs, so the absolute numbers are inflated; the ratio is what matters. The bake of the
+(Measured on a busy reference machine, load average 20 to 38, so the absolute numbers are inflated; the ratio is what matters. The bake of the
 params variant grows with every body added to the leg, since each moment re-makes the whole subassembly placement.)
 
 **Should.** A parameter that only reaches a subassembly's drives (never a feature's geometry) should not be a new

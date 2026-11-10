@@ -8,7 +8,7 @@ craft3d-cli run --new '{"units":"mm"}' --script repro.json
 ```
 
 A 30-coil spring is a `datum.helix` and one `feature.sweep` (document tolerance 1e-3 mm, already eased from the default
-1e-6). A part regeneration takes 1.1 s (load average 14 to 26, a laptop with 14 cores), and the spring's `span` follows
+1e-6). A part regeneration takes 1.1 s (on a busy reference machine, load average 14 to 26), and the spring's `span` follows
 `t`: `motion.bake` at 120 frames took 43 s, and 75 s on a second run at load 40 (it builds 213 to 214 configurations of the
 spring: 200 to 350 ms each).
 

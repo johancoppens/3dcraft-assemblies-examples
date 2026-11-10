@@ -14,7 +14,7 @@ the same crankshaft and differ only in what the hip pivots are mated to:
 The bake is almost independent of the frame count (24 frames: 11.5 s, 120 frames: 12.9 s): the cost is in the fixed
 steps of `t` the moments are carried through. Three times the legs on one body costs thirteen times the time
 (`parent3b` against the same assembly with twelve legs, 11.5 s). One crankshaft body or a chain of six segments made no
-difference while the chassis stayed one body. Two runs each at load average 16 to 28 on 14 CPUs: the times are
+difference while the chassis stayed one body. Two runs each on a busy reference machine (load average 16 to 28): the times are
 inflated, the ratios less so.
 
 **Should.** The cost of a solve should grow with the number of bodies, not with the square of the mates on one body

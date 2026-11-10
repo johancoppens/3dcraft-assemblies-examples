@@ -4,8 +4,8 @@ Found while building `corexy-printer` at 3DCraft `150f0015`.
 
 **What happens.** A thin-walled vase of revolution is revolved from a closed outline of two `sketch.curve` formula
 curves (`curve.json`) or from a polyline with 32 points per wall on the same formula (`polyline.json`): same outline to
-within the polyline's chord error. Opening and regenerating the part with `craft3d-cli info`, on a laptop with a load
-average of 38 to 47 on 14 CPUs (so absolute numbers are inflated; the ratio is the point):
+within the polyline's chord error. Opening and regenerating the part with `craft3d-cli info`, on a busy reference
+machine (load average 38 to 47, so absolute numbers are inflated; the ratio is the point):
 
 | Outline | `craft3d-cli info` of the part (three runs each) |
 |---|---|
