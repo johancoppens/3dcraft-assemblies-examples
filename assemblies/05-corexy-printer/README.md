@@ -21,7 +21,8 @@ follow. Every motion comes from mates and couplings; the belts' straight runs ar
 - **Configurations that follow `t`.** A vase whose height is a parameter (`params`: a body of revolution re-drawn at
   each moment) and eight belt spans whose length follows the commanded motion, each a new configuration of one cheap
   part.
-- **One T-slot part placed many times**: 15 instances, three lengths (`params`: the 12 frame edges and the two mid uprights at the frame size less 62 and 60 mm, the gantry beam at less 96 mm), copied from `3dcraft-examples`, with
+- **One T-slot part placed many times**: 15 instances, three lengths (`params`: the 12 frame edges and the two mid uprights at the frame size less 62 and 60 mm, the gantry beam at less 96 mm), copied from the 3DCraft examples'
+  [T-slot profile](https://github.com/johancoppens/3dcraft-examples/tree/main/examples/02-t-slot-profile) (MIT), with
   datums added. One corner bracket part mirrored by a `hand` parameter and rotated half a turn gives all four
   top corners.
 - **Limits on the rails.** `Gantry_Y`, `Carriage_X` and `Bed_lift` carry `limits`: the gantry's crash into the corner floors at the rear and, asymmetrically, at the front the fan's on the front rail and the head plate's on the corners, the head's into the gantry ends, the Z carriage's travel on its rail.
@@ -84,7 +85,7 @@ At the default size each belt has a pitch length of 1586.5 mm: 724.0 mm of movin
 
 | Part | Process | Material |
 |---|---|---|
-| `t-slot-profile` (15) | Extruded aluminium 3030 cut to length (the example's section, datums added); black anodised | EN AW-6063 T66, black anodised |
+| `t-slot-profile` (15) | Extruded aluminium 3030 cut to length (the 3DCraft examples' section, MIT, datums added); black anodised | EN AW-6063 T66, black anodised |
 | `box-beam` (3) | 30 x 30 x 3 mm box section cut to length | Aluminium, black anodised |
 | `corner-cube` (8) | FDM printed | PETG, orange |
 | `corner` (4) | FDM printed; one M5 idler bolt through the roof into a tapped floor with steel spacer sleeves, a long M8 through the tower into the upright | PETG, orange; steel bolts and spacers |
@@ -286,3 +287,8 @@ geometry; the couplings stay serial and linear.
   measures, a 36-instance frame and the fasteners' holes in the printed parts account for the rest.
 - The vase's rim cut by `height` is flat at this moment of the time-lapse: the real spiral's one-layer step is not drawn
   (it would only be a thousandth of its height).
+
+## Licence
+
+[CC BY 4.0](../../LICENSE-CC-BY-4.0.md); credit line in the [README](../../README.md#licence). The T-slot
+profile part (`parts/t-slot-profile.json`) is MIT, copied from the 3DCraft examples ([`ATTRIBUTION.md`](../../ATTRIBUTION.md)).

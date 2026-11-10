@@ -19,6 +19,7 @@
     "Aluminium pistons",
     "Copper pushrods and spark plugs, copper-plated hub"
   ],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {
     "cycle": "one engine cycle, two crank turns: the four strokes of every cylinder and one third of a turn of the cam ring; it closes on itself",

@@ -19,6 +19,7 @@
     "Black-painted crank on a Hooke joint with a zinc-plated cross, rubber grip and saddle pad",
     "Brass thrust washer"
   ],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {
     "cycle": "there and back: the screw turns from the lowest position to the highest and back",

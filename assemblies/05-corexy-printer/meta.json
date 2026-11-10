@@ -22,6 +22,7 @@
     "Hardened steel rails and carriages",
     "Aluminium heater block and heat sink, brass nozzle"
   ],
+  "licence": "CC-BY-4.0 AND MIT",
   "units": "mm",
   "motion": {
     "cycle": "one spiral-vase print as a time-lapse: it runs once from the first ring to the finished vase and does not repeat",

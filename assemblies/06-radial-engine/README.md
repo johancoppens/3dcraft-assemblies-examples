@@ -339,3 +339,7 @@ about 200 KB in all (`findings/A-040-packed-part-thumbnails/`), so the barrel's 
 here. A chain cannot be ended by `sketch.path` (A-022): its last line is a `sketch.line`. The compression ratio cannot
 be measured directly: a ray along the cylinder axis (`measure.ray`) is a command, not a measure an assertion or an
 output can use, hence the calibrated head envelope.
+
+## Licence
+
+[CC BY 4.0](../../LICENSE-CC-BY-4.0.md); credit line in the [README](../../README.md#licence).

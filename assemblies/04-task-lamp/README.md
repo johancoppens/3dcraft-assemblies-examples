@@ -394,3 +394,7 @@ subassemblies.
 - A multi-body instance is measured by its body path (`Shade/Shade`, an extension of [A-007](../../3DCRAFT-FEEDBACK.md#a-007)).
 - A ball mate has no variables ([A-004](../../3DCRAFT-FEEDBACK.md#a-004)): the shade cannot be driven or limited, so it
   stays where it is placed.
+
+## Licence
+
+[CC BY 4.0](../../LICENSE-CC-BY-4.0.md); credit line in the [README](../../README.md#licence).

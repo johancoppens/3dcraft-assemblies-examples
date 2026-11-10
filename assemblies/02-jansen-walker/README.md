@@ -252,3 +252,7 @@ branch limit to navigate.
   measure subject, so the centre of mass is taken over a name query and the clearances name single bodies.
 - [A-011](../../3DCRAFT-FEEDBACK.md#a-011): the parts publish their sizes without a step, since the assembly passes them
   from formulas.
+
+## Licence
+
+[CC BY 4.0](../../LICENSE-CC-BY-4.0.md); credit line in the [README](../../README.md#licence).

@@ -21,6 +21,7 @@
     "Red PVC (grip)",
     "Beech (workpiece, a prop)"
   ],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {
     "cycle": "there and back: open, through the toggle line, to the stop just past it, and open again",

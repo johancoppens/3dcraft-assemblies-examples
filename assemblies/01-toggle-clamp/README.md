@@ -232,3 +232,7 @@ configurations and an independent closed form over the motion.
   the parts' pivot parameters are published without a step.
 - Threads are cosmetic (`feature.thread`): the spindle and the nuts are drawn at the thread's major diameter and the tap
   drill, listed as contacts in `meta.json` ([F-014](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md#f-014)).
+
+## Licence
+
+[CC BY 4.0](../../LICENSE-CC-BY-4.0.md); credit line in the [README](../../README.md#licence).

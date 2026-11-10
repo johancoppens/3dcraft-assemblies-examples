@@ -28,11 +28,18 @@ from are in [`CATALOGUE.md`](CATALOGUE.md).
 | <img src="assemblies/06-radial-engine/preview.png" width="240" alt="Seven-cylinder radial engine with its valve train"> | **[Seven-cylinder radial engine with its valve train](assemblies/06-radial-engine/)**<br>The seven-cylinder radial with its valve train: a double-track cam ring turned at one sixth of the crank speed through reduction gears, roller tappets, pushrods, rockers and poppet valves in a cut-away crankcase and opened cylinders. | Aviation, engines | 8/10 |
 <!-- gallery:end -->
 
-## Licences
+## Licence
 
-- The assemblies and their parts: **[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)**, in each document's
-  information. Credit: *3DCraft assemblies*, with a link to this repository.
-- The tools: MIT ([LICENSE](LICENSE)).
-- Sources from elsewhere: [ATTRIBUTION.md](ATTRIBUTION.md).
+The assemblies, their parts and what is written and drawn about them (the pages, previews, `AGENTS.md`,
+`CATALOGUE.md`, the feedback) are under **CC BY 4.0** ([`LICENSE-CC-BY-4.0.md`](LICENSE-CC-BY-4.0.md)), as each
+document's information says; the code, the tool under `tools/` and the reproducers under `findings/`, is MIT
+([`LICENSE`](LICENSE)). One part is MIT too: the CoreXY printer's T-slot profile, copied from the
+[3DCraft examples](https://github.com/johancoppens/3dcraft-examples). Every page and every `meta.json` states its
+licence. Credit an assembly as:
+
+> "Scissor car jack" by Johan Coppens, from the 3DCraft assemblies (CC BY 4.0),
+> https://github.com/johancoppens/3dcraft-assemblies-examples
+
+with its title. Sources from elsewhere, and the products parts are sized after: [`ATTRIBUTION.md`](ATTRIBUTION.md).
 
 Agents and contributors: read [`AGENTS.md`](AGENTS.md) first.

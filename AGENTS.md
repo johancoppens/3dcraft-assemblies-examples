@@ -43,7 +43,9 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each assembly must be)
   repository's pin, with a row in [`ATTRIBUTION.md`](ATTRIBUTION.md). A reused part meets this repository's budgets
   (§4.5) like any other: its load time counts in full, for each configuration used.
 - **Licence.** The assemblies and their parts (documents, sources, READMEs, pictures) are **CC-BY-4.0**, in
-  `document.info` of `build.json` and of every part; the tools are MIT ([`LICENSE`](LICENSE)). A part copied from
+  `document.info` of `build.json` and of every part, and so are the other texts
+  ([`LICENSE-CC-BY-4.0.md`](LICENSE-CC-BY-4.0.md)); the code, the tools and the reproducers under `findings/`, is MIT
+  ([`LICENSE`](LICENSE)). A part copied from
   `3dcraft-examples` keeps its MIT and its copyright notice in `ATTRIBUTION.md`; a Jig is CC-BY-4.0 unless it says
   otherwise. **No share-alike source** enters this repository (`gt2-pulley` is CC-BY-SA-4.0, for a tooth outline taken
   from a CC-BY-SA design): draw the part here from published facts. Data from elsewhere needs a licence that allows it
@@ -261,7 +263,7 @@ reflections smear a surface, said in the README). It takes about a minute.
 part); *Parts and assembly order* (the parts with their counts and how they go together); *The motion* (what `t` plays,
 what is free, what drives what); *Parameters*; *Checks* (at rest, over the motion, what the samples do not cover);
 *Files*; *Rebuild*; *Difficulty* (the reviewer's score out of 10 and one line why); *Platform notes* (links to
-`3DCRAFT-FEEDBACK.md` entries, if any). Every claim must be true of the model.
+`3DCRAFT-FEEDBACK.md` entries, if any); *Licence*. Every claim must be true of the model.
 
 **`meta.json`**:
 
@@ -277,6 +279,7 @@ what is free, what drives what); *Parameters*; *Checks* (at rest, over the motio
   "difficulty": {"score": null, "rationale": ""},
   "standards": [],
   "materials": ["Pressed steel, painted"],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {"cycle": "there and back", "samples": 73, "dof": 0},
   "contacts": [{"pair": ["Spindle", "Nut"], "why": "the thread is the joint (F-014)"}],

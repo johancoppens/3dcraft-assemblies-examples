@@ -22,6 +22,7 @@
     "Cast iron, enamelled black (base)",
     "Spun steel, enamelled deep green outside and cream inside (shade)"
   ],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {
     "cycle": "a closed sweep of poses: each arm swings on a cosine law and returns to the start at t = 1",

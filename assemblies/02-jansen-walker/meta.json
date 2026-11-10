@@ -21,6 +21,7 @@
     "Rubber foot pads",
     "Dark stained boards"
   ],
+  "licence": "CC-BY-4.0",
   "units": "mm",
   "motion": {
     "cycle": "one crank turn; the floor rolls exactly one board, so the loop is seamless",
