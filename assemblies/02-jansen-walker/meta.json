@@ -2,7 +2,7 @@
   "id": "jansen-walker",
   "title": "Jansen linkage walker",
   "summary": "twelve legs, one keyed crankshaft, many closed loops",
-  "description": "A hand-cranked twelve-legged walking machine after Theo Jansen's linkage: laser-cut birch bars and frame ribs, walnut triangles, brass pins and a keyed brass crankshaft, walking on a floor of boards that rolls one board per turn.",
+  "description": "A hand-cranked twelve-legged walking machine after Theo Jansen's linkage: laser-cut birch bars and frame ribs, walnut-faced plywood triangles, brass pins and a keyed brass crankshaft, walking on a floor of boards that rolls one board per turn.",
   "domain": "Kinetic art, laser cutting",
   "process": "Laser cutting, turning, hand assembly",
   "tier": "complex",
@@ -15,7 +15,7 @@
   ],
   "materials": [
     "Birch plywood, 4 mm: bars, crank webs and frame ribs",
-    "Walnut sheet, 4 mm triangles",
+    "Walnut-faced birch plywood, 4 mm: triangles",
     "Walnut dowels and hand crank",
     "Brass rod, 4 mm and 8 mm",
     "Rubber foot pads",
@@ -128,7 +128,7 @@
     "load_cpu_s": 2.23,
     "bake_s": 4.44,
     "bake_mb": 1.2,
-    "file_bytes": 512455,
+    "file_bytes": 512511,
     "range_worst_s": 0.299
   },
   "craft3d": {

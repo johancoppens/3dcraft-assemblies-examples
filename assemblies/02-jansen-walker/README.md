@@ -1,7 +1,7 @@
 # Jansen linkage walker
 
 A hand-cranked walking machine with twelve legs on one crankshaft, after the linkage Theo Jansen devised for his
-*Strandbeesten*. Each leg is his thirteen published numbers in laser-cut 4 mm birch and walnut; six pairs of legs hang
+*Strandbeesten*. Each leg is his thirteen published numbers in laser-cut 4 mm birch and walnut-faced plywood; six pairs of legs hang
 from a row of frame ribs and are driven by a keyed brass crankshaft. One turn of the crank is one step of every leg, and
 a floor of dark boards rolls back under the feet by exactly one board, so the motion loops without a jump.
 
@@ -91,8 +91,8 @@ the plywood are modelled or claimed.
 | Part | Count | What it is |
 |---|---|---|
 | `bar` | 48, in 4 lengths | birch bar with a pin hole at each end |
-| `hip-triangle` | 12 | walnut triangle (b, d, e) with its two pins and washers |
-| `foot-triangle` | 12 | walnut triangle (g, h, i) with its two pins, three washers and rubber pad |
+| `hip-triangle` | 12 | walnut-faced plywood triangle (b, d, e) with its two pins and washers |
+| `foot-triangle` | 12 | walnut-faced plywood triangle (g, h, i) with its two pins, three washers and rubber pad |
 | `leg` | 12 | subassembly of 4 bars and the 2 triangles |
 | `frame-rib` | 12 | birch rib: journal bearing, glued-in hip pin, spacer and washer |
 | `crank-segment` | 6 | one throw: two webs with D-shaped journal bores, crank pin with spacers and washers |
