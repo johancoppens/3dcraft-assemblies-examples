@@ -1,5 +1,14 @@
 # AGENTS.md: guide for AI agents working on the 3DCraft assemblies
 
+> **About this file.** This is the working brief that the AI agents followed while they built and
+> reviewed these six assemblies in November 2026. It is published as it was used, so you can see how
+> each mechanism was made and proven. It is addressed to those agents: "the developer" is 3DCraft's
+> author, "the coordinator" is the agent session that briefed the others and made every commit,
+> and §8 names the AI models and effort levels that did the work. The memory caps and the timings
+> "on a reference machine" describe that workshop, and `log/`, `plan/` and `.scratch/` were local
+> folders that are not in this repository. To open, change or rebuild an assembly you need only
+> [README.md](README.md); the bar in §4 is also the bar a contribution is held to.
+
 This repository holds **six example assemblies** for [3DCraft](https://github.com/johancoppens/3dcraft), the
 parametric CAD modeller built for AI. An assembly places instances of parts, joins them with mates and couplings, and
 plays over the timeline `t`. Together the six show what that can do, from a simple clamp to a machine. Each one must
@@ -24,8 +33,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each assembly must be)
   goes to the developer.
 - **Mechanisms move through the assembly.** Mates, couplings and `t` do the moving. Placing bodies by formulas of a
   drive parameter is how a Jig moves ([`3dcraft-jigs`](https://github.com/johancoppens/3dcraft-jigs)); here it is
-  wrong wherever a mate can do it. The old assemblies at the Jigs' git tag `assemblies-format-58` are not a starting
-  point.
+  wrong wherever a mate can do it.
 - **The start screen is not a concern here.** The assemblies will be integrated into 3DCraft's start screen later,
   and that work happens in 3DCraft itself. Do not shape an assembly around it.
 - **Original designs.** Generic types (a toggle clamp, a scissor jack, a CoreXY motion system, a Jansen linkage) are

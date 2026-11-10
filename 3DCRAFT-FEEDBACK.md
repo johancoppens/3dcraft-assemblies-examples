@@ -1,5 +1,17 @@
 # Feedback for 3DCraft
 
+> **About this file.** While these assemblies were built, everything 3DCraft got wrong or could not
+> yet do was written down here rather than worked around in silence: bugs, each with a minimal
+> reproducer under `findings/`, missing capabilities, performance with numbers, and friction for
+> an agent that drives 3DCraft through its commands. Entries already reported by the examples
+> (`F-nnn`) or the Jigs (`J-nnn`) are cited, not repeated; both lists are public in their own
+> repositories. It is a dated record against the 3DCraft commits named below, not a list of known
+> issues of the current release. Entries fixed since say so in their status line, "R1" is the
+> milestone that became 3DCraft 0.1.0, and "3DCraft's session" is the agent session that works on
+> 3DCraft itself. To see whether an entry still holds in your version, run its reproducer as its
+> `findings/<id>/README.md` says (most with `craft3d-cli run --new '{"units":"mm"}' --script repro.json`
+> in that folder).
+
 What building these assemblies showed 3DCraft gets wrong or lacks, collected for the developer to take to 3DCraft in
 one go (nothing is fixed from here). Kinds: **Bug** (wrong result, crash, a valid request refused; with a reproducer in
 `findings/`), **Missing capability** (phrased for any mechanism and anyone), **Performance** (with numbers), **Agent
