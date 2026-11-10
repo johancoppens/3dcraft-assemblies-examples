@@ -49,14 +49,14 @@ M6 or 1/4; *215 Series* sheet, `static.raptorsupplies.com/catalog/product/datash
 
 The sheet does not list the pivot centres; they were read off its side view (A 13.7/32.8, B 20.9/44.2, C 25.6/25.8, D
 31.3/11.6, ±0.5 mm, in x behind the base's front and z above the bench). The model's pivots are A 13.5/30.6, B
-17.43/43.93, C 24.70/24.13, D 30.92/9.60, found by a search (scratch script, not in the repository) that keeps A's x at
+17.43/43.93, C 24.70/24.13, D 30.92/9.60, found by a search (an unpublished check: its script is not in this repository) that keeps A's x at
 the catalogue's 13.5 mm and the pivots within 3.5 mm of the drawing, puts the knee exactly 3° past the toggle line, and
 maximises the handle's travel at a bar opening of 91°. The pivots read off the drawing themselves stop at about bar 78° and handle 52° (dead point at 76.3° of link rotation), so the read-off cannot deliver the catalogue's stroke either. Link lengths A→B 13.9, B→C 21.1, C→D 15.8 mm.
 
 **The handle travel is 41°, not the catalogue's 61° (+10°).** In this linkage the bar and the handle (A, B and C) come
 into line at about 89.1° of link rotation from the stop, which is the dead point: the bar opens fast there and the
 handle gains more, but the model must stop short of it (it stops at 88.2° of link rotation at the default, 88.9° is the
-hard limit on the mate). I found no set of pivots near the drawing that reaches both 91° and 61°. With 91° kept, the
+hard limit on the mate). No set of pivots near the drawing was found that reaches both 91° and 61°. With 91° kept, the
 handle's travel is 41° at the default, and the parameter stops at 42°. The README names the gap rather than bending
 the bar opening to fit.
 
@@ -65,8 +65,8 @@ spindle. **Holding capacity is not proven here.** Nothing in this model carries 
 manufacturer's.
 
 **Over-centre.** 3°, by judgement: a trade article (Firgelli Automations, *De-sta-co Toggle Clamp Mechanism*, worked
-example) uses three degrees past centre and says "a stop limits further over-center travel". Secondary, the only source
-I read for it.
+example) uses three degrees past centre and says "a stop limits further over-center travel". Secondary, and the only source
+read for it.
 
 **Mechanical advantage.** The output is a virtual-work ratio of the solved pose (below). At `t = 30/72` (knee 7.1°
 short of the toggle line) it is 7.66:1; at the stop it is 21.03:1 at the 28.6 mm reach; the assertions pin the second
@@ -85,7 +85,7 @@ itself was not available).
 
 | Part | Process | Blank (flat) | Notes |
 |---|---|---|---|
-| `base` (2×) | Laser-cut L blank, one 90° bend on a press brake; on a V16 die and R2 punch; `bendable` only shows the punch's stroke is free of collisions (a part with one bend has nothing else for it to hit) | 37.0 × 46.90 mm | Two mirrored halves held by the pivot rivets A and D, the ears 11.6 mm apart inside. By a rule of thumb (our judgement, no source read) an air bend forms about V/6, so V16 gives about R2.7, close to the R2.5 drawn. |
+| `base` (2×) | Laser-cut L blank, one 90° bend on a press brake; on a V16 die and R2 punch; `bendable` only shows the punch's stroke is free of collisions (a part with one bend has nothing else for it to hit) | 37.0 × 46.90 mm | Two mirrored halves held by the pivot rivets A and D, the ears 11.6 mm apart inside. By a rule of thumb (a judgement made for this model, no source read) an air bend forms about V/6, so V16 gives about R2.7, close to the R2.5 drawn. |
 | `bar` | Laser-cut blank, folded into a U | 164.77 × 26.18 mm | One blank: two legs and a narrow web (the bend's neutral width) at the tip. The slot is the gap between the legs, formed, not cut. Formed in a U-die in one stroke, as a press tool does; the press-brake check refuses it (below). |
 | `handle` (2 halves, one part) | Laser-cut blank, two-bend joggle of 0.6 mm | 30.26 × 90.08 mm | Each half is a formed stamping; the two halves are joined face to face at the tang inside the grip by spot welds (not drawn). The joggle is formed in a press tool; `bendable` has no flange to check on it, so none is claimed. |
 | `link` | Two flat stamped plates and a staked spacer | 23.53 × 15.22 mm (bounding box of the oblique capsule, 24.8 × 9.0 mm long by wide) | Flat `feature.sheetMetal` plates with no bends, stock thickness; the spacer is a separate staked pin in the real part, drawn as part of the link. |
@@ -108,7 +108,7 @@ layers. Rivet heads clear the outer plate by 0.2 mm.
   in line across the two halves after forming. The U-bar's and the handle's holes meet the rule (asserted).
 - **Reliefs:** every bend runs the full length of its edge, so no bend ends inside an edge and no relief is needed.
 - **Inner radius R = t is a stated limit.** The sources read say at least the thickness; a smaller radius needs a
-  source I did not find for this steel. With R = t the bend's tangent line is at y = 10.8 mm, 3.4 mm from the slot's
+  source, and none was found for this steel. With R = t the bend's tangent line is at y = 10.8 mm, 3.4 mm from the slot's
   centre, so a screw head or washer over Ø6.8 mm rides up the bend radius, and the slot is held to 5.5 × 6.0 mm (the
   sheet shows about 8.5) to stay on the flat.
 - **Edges** are as-cut, the sheared edge of the blank (a tumbled part breaks them slightly; a 0.4 mm chamfer on a
@@ -179,7 +179,8 @@ and the lower nut (5.2 mm).
 - The ten *… has its running fit* clearances: at most 0.18 mm (the 0.15 mm radial clearance; an upper bound, so a
   loosened bore fails), and at least 0.02 mm (the lower bound is what the measure proves, below).
 - *Advantage at the stop, independently computed*: the output × reach equals 601.57 mm within 0.3 mm (21.03 at 28.6 mm),
-  a value computed outside the model by finite differences of the kinematics.
+  a value computed outside the model by finite differences of the kinematics (an unpublished check: its script
+  is not in this repository).
 
 **Over the motion (`motion.check`, 73 samples, at the defaults and the corners):**
 - *Spindle to grip ratio matches the closed form of the drive*: 1 / the output, against a closed form of the four-bar from

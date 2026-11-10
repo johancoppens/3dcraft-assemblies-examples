@@ -83,7 +83,7 @@ for a real wound spring: its stated free length.
 **Why the springs are not zero-free-length.** Zero effective free length needs `Ti / k = L0`: 33.3 N of initial
 tension, an initial stress of about 364 MPa with the end hooks counted (223 MPa counting the coiled body, `1.03 (N + 1) d`, alone), far
 outside the 55 to 90 MPa RoyMech gives as the best range for this index. French and Widden describe winding springs to
-zero free length as possible; I have no source for how far beyond the published range a winder can go, so this model
+zero free length as possible; no source was found for how far beyond the published range a winder can go, so this model
 stays within it and is honest about `e`. The balance is then not exact: with `φ` the arm's lean from vertical, the net
 torque is `sin φ · (m g r − n F b c / s)`, which does not vanish in every pose. The anchor height `c` is chosen so the
 residual stays small over the sweep, and the check is that it stays within a stated pivot friction.
@@ -291,8 +291,8 @@ fits, bounded from both sides:
   within `arm_friction` (0.293 N m, from the friction pivot above). Gravity comes from the `mass` of the measured groups and
   the measured `jointAngle`; the spring from the real force at the solved span, with the anchor height itself worked out
   from the solved span and angle, so a stud in the wrong place shows. Largest value at the defaults: 0.023 and 0.089 N m.
-- *Springs stay within their stroke, lower/upper*: each span between the free length plus 50 mm (a margin of my own
-  choosing, with no source behind it) and the span at the allowable force (216.4 mm); the
+- *Springs stay within their stroke, lower/upper*: each span between the free length plus 50 mm (a margin chosen for
+  this model, with no source behind it) and the span at the allowable force (216.4 mm); the
   sweep uses 151.3 to 161.4 mm below and 156.0 to 177.3 mm above.
 - *Drawn lower/upper springs reach their pins*: the drawn coil's length, rounded to 0.25 mm, is within half that step of the
   solved span at every sample (largest 0.124 mm).

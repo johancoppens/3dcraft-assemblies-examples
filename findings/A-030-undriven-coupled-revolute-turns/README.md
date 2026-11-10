@@ -11,7 +11,7 @@ did not converge in 200 iterations (residual 0.676...)`. The printer in this rep
 15 turns of its second lead screw.
 
 **Should.** A revolute that follows a screw coupling should follow it for any number of turns, as a driven one does.
-My guess: the undriven angle's representative is not carried turn by turn (`Solver::advance` and the coupling's
+A guess: the undriven angle's representative is not carried turn by turn (`Solver::advance` and the coupling's
 phase, *Couplings* in `docs/design/assemblies.md`), so that after enough turns a restart or a shortened step puts the
 undriven angle a whole number of turns off the coupling's value. Not investigated further.
 

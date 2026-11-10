@@ -9,7 +9,7 @@ the same crankshaft and differ only in what the hip pivots are mated to:
 |---|---|---|---|
 | `parent4.json`: all 24 hip pivots mated to one chassis instance fixed to the world | 79 | 24 on the chassis | 11.0 to 13.3 s |
 | `parent5.json`: each leg's two hip pivots mated to its own rib, each rib fixed to the world | 85 | 4 on each rib | 6.5 s |
-| four legs on one chassis instance (`parent3b`, not committed) | 27 | 8 | 0.87 s |
+| four legs on one chassis instance (`parent3b`, an unpublished variant not in this folder) | 27 | 8 | 0.87 s |
 
 The bake is almost independent of the frame count (24 frames: 11.5 s, 120 frames: 12.9 s): the cost is in the fixed
 steps of `t` the moments are carried through. Three times the legs on one body costs thirteen times the time

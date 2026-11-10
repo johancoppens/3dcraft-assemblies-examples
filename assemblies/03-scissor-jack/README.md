@@ -47,10 +47,10 @@ overload and its manual forces verified against EN 1494 by someone qualified to 
 | Eufab 21032 instruction manual (`manualslib.fr/manual/150063/Eufab-21032.html?page=7`, the French section's page 7) | Maximum load capacity ("Capacité de charge maximale") 1.5 t; minimum lifting height 104 mm; maximum 380 mm; dimensions 430 x 100 x 100 mm; net weight 2.4 kg, all marked approximate | Folded length class (430 mm), lowest and highest height class |
 | Dhamak, Bajaj, Aher, *Design and Optimization of Scissor Jack*, IJAPME vol. 2 issue 1 (2016), pp. 29–34 (`troindia.in/journal/ijapme/vol2iss1/29-34.pdf`) | Link length 200 mm; heights 254 to 355.4 mm; load 700 kg; "maximum load on screw will occur when the jack is at bottom most position. The load in the screw will be tensile"; screw 30C8 with Syt 400 MPa and a factor of safety 4 (100 MPa allowable in tension); the tooth profile on the link ends acts as a gear; failure photographs of tooth wear | The load path, the bottom position as the worst case for the screw, the form of the arm, the stress comparison below |
 
-**EN 1494.** I could read only its scope and structure (the BSI listing for BS EN 1494:2000+A1:2008, the GSO and Genorma
+**EN 1494.** Only its scope and structure could be read (the BSI listing for BS EN 1494:2000+A1:2008, the GSO and Genorma
 catalogue entries): mobile or movable jacks operated under load, working under a raised load not permitted, with sections on
 safety requirements, verification and test procedures; BSI's contents also name "Manual forces and manual force measurement
-methods". **I could not read a requirement, a force or a test value from it**, and neither the Draper data sheets nor the
+methods". **No requirement, force or test value could be read from it**, and neither the Draper data sheets nor the
 manual state one. The model claims no compliance with EN 1494; its requirements, its overload test and its limits on manual
 force stay open, and must be verified against the standard by whoever builds a jack from this.
 
@@ -58,8 +58,8 @@ force stay open, and must be verified against the standard by whoever builds a j
 to about 430 mm long. This model's own numbers come out of its geometry: arms 165 mm pivot to pivot with the arm's slope going
 from 8.7° to 68°, a saddle height of 121.9 mm lowest and 378.0 mm highest, and, folded and without its crank, about
 440 mm from the screw's tail to the end of the drive yoke. The arm length, the gear pitch radius, the pad and the foot (160 x 108 mm,
-the Draper's 166 x 118 mm class) are my reading of those references. The screw is 14 mm with a 3 mm lead (root diameter taken
-as 11 mm); I found no source for a jack's screw thread, so this is a judgement, and the thread is cosmetic in the model.
+the Draper's 166 x 118 mm class) are a reading of those references made for this model. The screw is 14 mm with a 3 mm lead (root diameter taken
+as 11 mm); no source was found for a jack's screw thread, so this is a judgement, and the thread is cosmetic in the model.
 
 **Materials and processes (judgement, except where a source is named).**
 
@@ -75,7 +75,7 @@ as 11 mm); I found no source for a jack's screw thread, so this is a judgement, 
 | `crank` (5 instances) | Socket yoke, cross and rod yoke (a Hooke joint), a formed rod, a flat folding handle, a rubber grip | Black painted steel; zinc-plated cross; rubber |
 
 The bend allowance uses the correction factor k = 0.65 + 0.5 lg(r/s), K = k/2 (= 0.325 at r = s), as the DIN 6935 form used
-in `3dcraft-examples/examples/06-steel-bookend`; I did not read DIN 6935 itself. Inner bend radius equal to the sheet is the same
+in `3dcraft-examples/examples/06-steel-bookend`; DIN 6935 itself was not read. Inner bend radius equal to the sheet is the same
 judgement as the toggle clamp's (no source read here). All sheet parts keep 2.5 t + r between holes and bend lines (asserted).
 
 **Bend reliefs.** Each arm's flange runs on past the web at both ends, towards the gear and towards the trunnion. At those
@@ -90,7 +90,7 @@ sheet. Drawn as one fused body, the welds not modelled.
 **Gear teeth.** An equivalent full gear of 10 teeth, pitch radius 20 mm (module 4 mm), 25° pressure angle, stub addendum
 0.8 m, dedendum 1.0 m, 0.4 mm backlash on the pitch circle, a 0.3 mm root fillet (a blanking die's corner; 0.25, 0.4 and 0.5 mm fail in the kernel, [A-019](../../3DCRAFT-FEEDBACK.md#a-019)), involute flanks **drawn as four chords on the
 true curve** (see *Platform notes*: a formula-curve flank costs 13 times the regeneration of chords, four arm configurations
-would break the budget). The contact ratio of this tooth form is 1.06 (my own closed form from those numbers, not the model's). Each gear has three or four teeth (the two hands of a pair stand half a pitch apart, so they mesh): enough to stay engaged over the 59° of travel; the mesh is proven by measure, not by stating the ratio (*Checks*).
+would break the budget). The contact ratio of this tooth form is 1.06 (a closed form from those numbers, worked out apart from the model). Each gear has three or four teeth (the two hands of a pair stand half a pitch apart, so they mesh): enough to stay engaged over the 59° of travel; the mesh is proven by measure, not by stating the ratio (*Checks*).
 
 **Fits.** Pivot rivets Ø10 in Ø10.4 holes; trunnion pins Ø12 in Ø12.4 arm holes; 0.75 mm side clearance between lower and upper arm flanges, 0.8 mm inside the base and saddle walls; the trunnion body 33 mm long between the upper arms' flanges 34 mm apart; heads of rivets and pins 0.3 mm off the walls they hold. These are stated clearances, not standard fit classes; the pin-hole and bore fits are asserted two-sided (*Checks*). The screw's shank Ø14 turns in a Ø14.4 bearing bore and the thrust collar stands 0.1 mm off a 2 mm brass washer (Ø21.5, inside the 22 mm block face). The nut's bore is drawn at the tap drill (the thread is the joint, listed in `contacts`). The trunnion pins are pressed 6 mm into flat-bottomed blind holes in the trunnion, a floor 3.3 mm from the bearing bore and 3.5 mm from the thread's major; the thinnest wall of the block is at the bearing bore's mouth, 2.3 mm between the Ø14.4 bore and the block's R1.5 corner (`measure.thickness`, asserted at least 1.9 mm over the part's range). The pins are drawn line-on-line across the bore and listed as contacts; the rubber pad is bonded to the saddle (listed).
 
@@ -108,15 +108,15 @@ collar.
 | 0.5 | 378.0 mm | 68.0° | 3.96 kN | 42 MPa | 22 MPa | 56 MPa | 11.0 N·m | 100 N | 1.8 N·m |
 
 The paper above says the screw is worst at the bottom position, and the model agrees: the tension is highest low down
-and falls with the height. Read those numbers as outputs of a screw model, not as a rating. **I state only this:** the root
+and falls with the height. Read those numbers as outputs of a screw model, not as a rating. **Only this is stated:** the root
 tension stress alone reaches an assumed 200 MPa (`height_tension_at_two`, an assumed yield of 400 MPa, half of it, a judgement) at
 a saddle height of 223.3 mm; with the factor of 4 the paper uses (100 MPa allowable tension, `height_tension_at_four`), at
 309.0 mm. That is the tension only: the thread torque adds torsion, and the von Mises stress at 223 mm is about 269 MPa
 (by the same formulas as the table: a factor of 1.49 on the assumed yield, not 2). **None of
 this is a statement of where the jack may lift a car.** The arms, the pins, the bearing pressure and the thread shear are not computed at
 all; the 1000 kg is an input to the arithmetic, not a capacity. The hand force is what a person would need to wind it: 429 N at
-`t = 0.1`, 276 N at `t = 0.2`, over 67 turns; that is the kind of force EN 1494's manual-force section governs, which I
-could not read.
+`t = 0.1`, 276 N at `t = 0.2`, over 67 turns; that is the kind of force EN 1494's manual-force section governs, which
+could not be read.
 
 **Assumptions in those numbers:** the thread friction coefficient μ = 0.15 (not sourced), the torque formula T = F · (d_m/2 · tan(λ + φ) + μ_c · R_c) for a square-profile screw (the trapezoidal thread's flank angle is ignored), the thrust collar friction 0.15 on a 9.0 mm mean radius, load shared equally by the symmetry the gears hold, an assumed screw steel of 400 MPa yield, and no bending or friction elsewhere.
 

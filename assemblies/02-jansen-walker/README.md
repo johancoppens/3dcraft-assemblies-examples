@@ -240,9 +240,10 @@ branch limit to navigate.
   plain colour (no grain pattern): grain on moving or turned parts would not follow them.
 - **One stored pose, many solves.** A leg's stored poses are one set, whatever its throw's phase, and the rest solve is a single
   Newton solve from them. Away from the published values a leg can land on another branch: at a crank start of 180 degrees
-  two legs do, and earlier scans at other angles showed the same. The published crank start is therefore limited to -120 to 120
+  two legs do, and earlier scans at other angles showed the same (unpublished checks: their scripts are not in this
+  repository). The published crank start is therefore limited to -120 to 120
   degrees in steps of 60; all 45 combinations with the scale were scanned leg by leg against the closed form (540 solves,
-  none off the branch; 300 of them again on the final file) and the gait box checks it over the motion. The limit is really on the rest pose, the crank start plus the stored `t`: storing `t = 0`
+  none off the branch; 300 of them again on the final file; an unpublished check) and the gait box checks it over the motion. The limit is really on the rest pose, the crank start plus the stored `t`: storing `t = 0`
   at the default start goes off the branch too, the same total angle the published range excludes. See
   `findings/A-016-rest-solve-branch-jump/`.
 - [A-002](../../3DCRAFT-FEEDBACK.md#a-002): no pattern of instances, so `build.json` repeats six modules by hand; with

@@ -8,7 +8,7 @@ solve is a single Newton solve at the driven values from those poses. A leg whos
 can converge to the mirrored assembly of a loop (another branch of the linkage) and then stays there for the whole
 motion: nothing is reported; `assembly.solve` is ok with 0 degrees of freedom.
 
-Measured on the walker (scratch scans, the closed form of the leg against every foot): 6 of 432 legs off the branch over crank start
+Measured on the walker (unpublished scans, not in this folder: the closed form of the leg against every foot): 6 of 432 legs off the branch over crank start
 angles every 10 degrees with the stored pose at 30 degrees of crank; 16, 99 and 40 of 432 with stored poses at 100, 190 and 250
 degrees; with the crank pins re-ordered to 0, 60, 120, 180, 240, 300 degrees (the reviewer's mutation), `Aft[6]` was off the
 branch. The same parameters with the segments started elsewhere give other legs, so the outcome is sensitive to the start.
@@ -23,5 +23,5 @@ the assembly), and run `motion.check` at 73 samples: `Every foot stays inside th
 solve is ok and has no dead points; the default (0 degrees) passes.
 
 **Impact on the assembly.** Workaround used: the published crank start is -120 to 120 degrees in steps of 60; all 45
-public values were scanned against the closed form (540 leg solves, none off the branch), and assertions report a
+public values were scanned against the closed form (540 leg solves, none off the branch; an unpublished check), and assertions report a
 leg off the branch over the motion.

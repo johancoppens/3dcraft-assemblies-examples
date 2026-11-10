@@ -75,7 +75,7 @@ roller and lobe and between rocker and valve tip is measured over the motion, no
 | G. D. Angle, *Positioning of Link Rod Wrist Pins in Articulated Connecting Rods*, Aviation Engineering, January 1932 | L/R "3.2 to 4.4"; the link radius kept small to limit bending of the master rod; strokes of link cylinders come out longer and differ with the link radius and its angle to the rod axis, and equal strokes need a different link radius per cylinder | The rod ratio of this model (L/R = 4), and the reason its cylinders differ |
 
 Everything else (crank pin 70 mm, knuckle pin 26 mm, wrist pin 34 mm, flange and web sizes, the fit values, the fin
-pitch and the counterweights) is my own judgement of the class, stated here and not proven to any manufacturer's
+pitch and the counterweights) is a judgement of the class made for this model, stated here and not proven to any manufacturer's
 drawing. The enginehistory.org details are of the A-70, the R-670's predecessor, whose layout the R-670 kept. The
 model's overall diameter across the rockers is about 1040 mm (`boxMax` of `Rocker[1I]`, 519.8 mm from the crank axis), against
 the 1079.5 mm quoted for the R-670. **This model is a demonstration: it is not a design and carries no load calculations.**
@@ -106,7 +106,7 @@ the valve is shut), and it does not compress: while the valve is open the retain
 in `meta.json`; at full lift the top coil shows above the retainer. A spring that compresses was probed and costs too much bake (see *Platform notes*). The rocker pad
 stands 0.05 mm off the valve tip, and that gap is kept constant over the motion: it stands for the valve lash but is
 not taken up, so the valve moves as soon as the tappet does. The lobe follows a cos² lift over the lobe's duration
-(tappet lift 10 mm, intake 260°, exhaust 265°), the rocker ratio is 46 to 40: my own judgement for this class; the
+(tappet lift 10 mm, intake 260°, exhaust 265°), the rocker ratio is 46 to 40: a judgement for this class; the
 opening and closing angles are within the ranges FAA-H-8083-32B gives. The spark plug enters the chamber through a
 14 mm hole in its boss; its thread is not drawn.
 
@@ -211,7 +211,8 @@ crank turns clockwise seen from the rear, and the cylinders are numbered the sam
 
 Because all six knuckle pins sit at one radius, the cylinders do not all behave alike. The table below gives the
 piston's distance from the crank axis at top and bottom dead centre, from a separate numerical solution of the
-linkage with no 3DCraft in it (a Newton iteration on the loop equations, 72,000 steps per turn). The model agrees: at
+linkage with no 3DCraft in it (a Newton iteration on the loop equations, 72,000 steps per turn; an unpublished check:
+its script is not in this repository). The model agrees: at
 721 samples over the two turns (one per degree of crank) `motion.check` of the pistons' `jointDistance` reads strokes
 of 117.50, 117.56, 118.61 and 118.26 mm for cylinders 1, 2 and 7, 3 and 6, 4 and 5 (the small differences from the table are the sampling: an
 extreme falls between samples).
@@ -254,7 +255,7 @@ head follow `bore`; the crank, the rods and the deck height follow `stroke` and 
 
 At rest (`document.check`): every mate solved, 0 degrees of freedom; pin and bearing fits measured from above and below;
 every piston's and ring pack's diameter against the bore, and the barrels and heads by volume (barrel 1 against an
-independent integration of its drawn profile, at the default sizes; the others against cylinder 1; the opened 2 and 3
+independent integration of its drawn profile, an unpublished check, at the default sizes; the others against cylinder 1; the opened 2 and 3
 against the share the section cut leaves); the firing order against the measured placement of every cylinder; the
 master cylinder's compression ratio. **That ratio is not an independent measurement of the chamber:** the head's measured
 volume is subtracted from a constant calibrated from this same head, so it detects a head that has changed, and away
