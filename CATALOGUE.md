@@ -1,5 +1,10 @@
 # Catalogue: the six assemblies
 
+> **About this file.** The briefs the AI agents built the assemblies from, as written in November 2026: "the
+> coordinator" is the agent session that briefed them, a *probe* a feasibility test run before a risky assembly was
+> built, an A-number an entry in [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) and an F-number one in the [examples'
+> feedback](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md).
+
 The brief for every assembly: what the real thing is, how it moves, what it must show of 3DCraft, its line of the
 palette, its public parameters, what it must prove, and its risks. The order runs from simple to complex. Sizes named
 here are starting points: the builder verifies every number against the standard or source and cites it.
