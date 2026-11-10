@@ -1,6 +1,7 @@
 # Seven-cylinder radial engine with its valve train
 
-A generic seven-cylinder four-stroke air-cooled radial of the 220 hp class with its valve train, drawn at full size: a
+A seven-cylinder four-stroke air-cooled radial of the 220 hp class, with the bore, stroke and compression ratio of the
+Continental R-670 (*References read*) but not a copy of it, and with its valve train, drawn at full size: a
 two-piece cast-grey crankcase cut away at the front, a built-up single-throw crankshaft, a one-piece master rod with six
 articulated rods on knuckle pins, seven pistons with rings, seven finned cylinders (two of them opened), and the valve
 gear: a double-track cam ring that turns at one sixth of the crank speed against it, through reduction gears, in a nose
