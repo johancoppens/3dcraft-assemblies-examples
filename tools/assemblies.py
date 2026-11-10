@@ -11,8 +11,9 @@
 
 Without an ID: every assembly under assemblies/. Every craft3d-cli run is capped in memory (systemd-run, when there
 is one) and in time, and waits while the machine is short of memory. CRAFT3D_CLI names the binary (default:
-craft3d-cli on PATH); it must be the 3DCraft commit pinned in tools/pin.json. CRAFT3D_SLICE names the shared slice
-(default assemblies.slice). Exit code 0 when all passed.
+craft3d-cli on PATH); by what its --version reports, it must be the 3DCraft commit pinned in tools/pin.json, or the
+release named there, with the pinned file format. CRAFT3D_SLICE names the shared slice (default assemblies.slice).
+Linux and macOS only. Exit code 0 when all passed.
 """
 
 import argparse
@@ -75,7 +76,11 @@ JOINT_VARIABLE = re.compile(r"^(?P<mate>.+)_(angle|distance|x|y)$")
 GALLERY_START = "<!-- gallery:start -->"
 GALLERY_END = "<!-- gallery:end -->"
 
+# What `craft3d-cli --version` prints: the program, the version, the commit when the build knows it, the file format.
+VERSION_LINE = re.compile(r"^craft3d-cli (?P<version>\S+) \((?:(?P<commit>[0-9A-Za-z]+), )?format (?P<format>[0-9]+)\)$")
+
 _cli = None
+_build = None  # (version, commit or None, format) of _cli
 MEASURED_AT_LOAD = 0.0  # the 1-minute load average when the last timings were taken
 
 
@@ -88,22 +93,64 @@ def die(message):
     sys.exit(2)
 
 
+def version_of(path):
+    """What `craft3d-cli --version` prints, and what it says: (line, (version, commit or None, format) or None).
+    The line is `craft3d-cli 0.1.0 (8c8383e9c89a, format 69)`; a build that does not know its commit leaves it out."""
+    try:
+        result = subprocess.run([path, "--version"], capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.SubprocessError) as e:
+        return str(e), None
+    lines = result.stdout.strip().splitlines()
+    line = lines[-1].strip() if lines else (result.stderr.strip() or f"exit code {result.returncode}")
+    match = VERSION_LINE.match(line)
+    if result.returncode != 0 or not match:
+        return line, None
+    return line, (match["version"], match["commit"], int(match["format"]))
+
+
+def pinned(build):
+    """How a build meets tools/pin.json: "commit" when it is the pinned commit (the check the assemblies were built
+    with), "release" when it reports itself as the pinned release, or None; either way with the pinned file format.
+    `--version` marks nothing else that tells a release build from a development build of the same version."""
+    version, commit, file_format = build
+    if file_format != PIN["format_version"]:
+        return None
+    pin = PIN["commit"].lower()
+    if commit and len(commit) >= 12 and (pin.startswith(commit.lower()) or commit.lower().startswith(pin)):
+        return "commit"
+    if PIN.get("release") and version == PIN["release"]:
+        return "release"
+    return None
+
+
 def cli():
-    """The craft3d-cli binary, checked once against the pinned commit."""
-    global _cli
+    """The craft3d-cli binary, checked once against tools/pin.json by what its --version reports."""
+    global _cli, _build
     if _cli is None:
         path = os.environ.get("CRAFT3D_CLI") or shutil.which("craft3d-cli")
         if not path or not os.access(path, os.X_OK):
-            die("craft3d-cli not found: put it on PATH or set CRAFT3D_CLI")
-        version = subprocess.run([path, "--version"], capture_output=True, text=True).stdout
-        if PIN["commit"][:12] not in version or f"format {PIN['format_version']}" not in version:
-            die(f"{path} is {version.strip()!r}, not 3DCraft {PIN['commit'][:12]} with file format "
+            die("craft3d-cli not found: put it on PATH or set CRAFT3D_CLI (README.md, Rebuild and check)")
+        line, build = version_of(path)
+        how = pinned(build) if build else None
+        if how is None:
+            release = f" or the release {PIN['release']}" if PIN.get("release") else ""
+            die(f"{path} reports {line!r}, not 3DCraft {PIN['commit'][:12]}{release} with file format "
                 f"{PIN['format_version']}, the build this repository is pinned to (tools/pin.json): the committed "
                 "files and their checks are what that build produces, and another build may write other bytes. "
                 "Install that build (README.md, Rebuild and check); the committed .3dcraftasm files open "
                 "without it")
-        _cli = path
+        if how == "release":
+            print(f"note: {line}: accepted as 3DCraft {PIN['release']}, the release in tools/pin.json, but it is "
+                  f"not the pinned commit {PIN['commit'][:12]}: if its files differ in bytes, check reports them "
+                  "as stale", file=sys.stderr)
+        _cli, _build = path, build
     return _cli
+
+
+def built_with(file_format):
+    """meta.json's `craft3d`: the build that wrote the files, as its --version reports it."""
+    version, commit, _ = _build
+    return {"commit": commit[:12] if commit else None, "version": version, "format_version": file_format}
 
 
 def available_gb():
@@ -626,7 +673,7 @@ def cmd_build(ids):
                 copy_results(aid, meta, target, directory)
             kept = (meta.get("stats") or {}).get("range_worst_s")
             meta["stats"] = stats | ({"range_worst_s": kept} if kept is not None else {})
-            meta["craft3d"] = {"commit": PIN["commit"][:12], "format_version": documents[None][0].get("format_version")}
+            meta["craft3d"] = built_with(documents[None][0].get("format_version"))
             write_meta(directory, meta)
             errors, warnings = lint(aid, meta, documents, stats)
             for w in warnings:
