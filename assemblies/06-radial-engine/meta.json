@@ -85,10 +85,10 @@
     "bake_s": 8.0,
     "bake_mb": 8.2,
     "file_bytes": 988454,
-    "range_worst_s": 1.503
+    "range_worst_s": 0.743
   },
   "craft3d": {
-    "commit": "45233bdc84c4",
+    "commit": "843981c20577",
     "format_version": 69
   }
 }

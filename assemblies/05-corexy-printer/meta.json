@@ -238,6 +238,24 @@
     "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
     "result": "Built and checked: 0 dof, CoreXY couplings, nozzle on the rim within 0.02 mm and one layer above it at 73 samples, each belt's length constant to 2e-12 mm, bed drop and floats within 0.02 mm, no collisions at 73 samples and at 16 slider corners (13 samples each); the 121-moment collision run was not done. About 65 CLI calls. It guessed the origin, the belt levels, the coupling signs, the Z motors' corners and the slider ranges; these were added to the prompt afterwards, and that wording was not retested."
   },
+  "unproven": [
+    {
+      "name": "head-plate: Printable wall",
+      "why": "measure.thickness finds this wall but proves no lower bound on the whole body (3DCraft feedback F-020; README, Platform notes): the value is read, not proven"
+    },
+    {
+      "name": "head-plate: Clamp wall",
+      "why": "measure.thickness finds this wall but proves no lower bound on the whole body (3DCraft feedback F-020; README, Platform notes): the value is read, not proven"
+    },
+    {
+      "name": "head-plate: Cap wall",
+      "why": "measure.thickness finds this wall but proves no lower bound on the whole body (3DCraft feedback F-020; README, Platform notes): the value is read, not proven"
+    },
+    {
+      "name": "z-mount: Printable wall",
+      "why": "measure.thickness finds this wall but proves no lower bound on the whole body (3DCraft feedback F-020; README, Platform notes): the value is read, not proven"
+    }
+  ],
   "stats": {
     "steps": 1010,
     "parts": 24,
@@ -256,10 +274,10 @@
     "bake_s": 1.49,
     "bake_mb": 31.3,
     "file_bytes": 1182135,
-    "range_worst_s": 4.796
+    "range_worst_s": 1.101
   },
   "craft3d": {
-    "commit": "45233bdc84c4",
+    "commit": "843981c20577",
     "format_version": 69
   },
   "budget_exception": "File size 1.18 MB: the T-slot profile and the MGN parts shared by the frame, gantry, toolhead and bed subassemblies are packed once per subassembly (findings/A-028-part-packed-per-subassembly). Granted by the coordinator up to 1.2 MB."

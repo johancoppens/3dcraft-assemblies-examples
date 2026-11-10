@@ -118,10 +118,10 @@
     "bake_s": 0.47,
     "bake_mb": 0.7,
     "file_bytes": 393336,
-    "range_worst_s": 0.239
+    "range_worst_s": 0.209
   },
   "craft3d": {
-    "commit": "45233bdc84c4",
+    "commit": "843981c20577",
     "format_version": 69
   }
 }

@@ -8,6 +8,8 @@ the examples (`F-nnn`) or the Jigs (`J-nnn`) are cited there, not repeated.
 
 All entries are against 3DCraft `45233bdc` unless they say otherwise.
 
+**Status (2026-11-10):** the assemblies are built and checked on 3DCraft `843981c2`, which fixed A-014. 3DCraft's session triaged all 42 entries with the developer: A-042, A-023, A-039, A-022, A-009, A-001, A-020, A-011 and the naming of subjects (A-007, A-010, A-031) are being fixed for R1; the rest is ordered for after R1.
+
 **Status (2026-11-09):** 42 entries: 16 bugs (one also performance), 11 missing capabilities, 8 performance, 7 agent
 friction. The most costly for the assemblies: A-015 (wood grain wrong on every moving part), A-014 (the camera jumps
 while a motion plays), A-013 and A-012 (solve and rebuild cost in machines with many legs), A-016 (an unreported branch
@@ -28,7 +30,7 @@ jump), A-002 (no pattern of instances) and A-034 (fits that read not proven).
 | [A-011](#a-011) | Agent friction | An instance parameter from a formula is refused when off the part's step | toggle-clamp | parameters published without a step |
 | [A-012](#a-012) | Performance | A flexible subassembly whose `t` comes through `params` is rebuilt at every moment | jansen-walker | phase moved into the crankshaft's keyed mates |
 | [A-013](#a-013) | Performance | The solve cost grows steeply with the number of mates on one body | jansen-walker | a rib per leg instead of one chassis |
-| [A-014](#a-014) | Bug | The window's camera refits at every moment of a motion | seen by the developer while playing the assemblies | the view jumps while it plays |
+| [A-014](#a-014) | Bug | **Fixed in 843981c2:** The window's camera refits at every moment of a motion | seen by the developer while playing the assemblies | the view jumps while it plays |
 | [A-015](#a-015) | Bug | A solid texture does not turn with an instance's placement | task-lamp, jansen-walker, seen by the developer while playing | wood grain crosses moving parts; workaround: no texture on moving wood |
 | [A-016](#a-016) | Bug | The rest solve of a flexible subassembly can land on another branch unreported | jansen-walker | crank start limited to scanned values, gait asserted |
 | [A-017](#a-017) | Missing capability | `bendable` has no one-stroke U-forming of two parallel bends | toggle-clamp, scissor-jack | U-sections not proven bendable |
@@ -151,6 +153,8 @@ assembly cannot prevent it: the camera is not part of the document. **Should:** 
 on the box over the whole motion, or hold the camera as it was when the play started. **Reproduce:** open any assembly
 with a large motion (`assemblies/01-toggle-clamp/toggle-clamp.3dcraftasm`) and play it without having zoomed or panned.
 **Workaround:** zoom or pan once before playing (either turns the automatic fit off; orbiting does not).
+
+**Status: fixed** in 3DCraft `843981c2` (2026-11-08, with `0476e43f`): while a moment of a motion is shown the camera keeps what it framed and only backs away from a moment that leaves it. Still open there: dragging a joint refits per step.
 
 ## A-015
 
