@@ -12,6 +12,12 @@ Each assembly lives in its own numbered folder under [`assemblies/`](assemblies/
 - **`prompt.md`**: a conversation you can have with an AI connected to 3DCraft to build it yourself.
 - **`exports/`**: files for the workshop where they make sense.
 
+To open them, install 3DCraft 0.1.0 or later from [3dcraft.dev](https://3dcraft.dev/) (the installers are also on
+[its release page](https://github.com/johancoppens/3dcraft/releases)), or use no installer at all: the gallery at
+[3dcraft.dev/examples](https://3dcraft.dev/examples/#assemblies) opens every assembly in 3DCraft's
+[web version](https://3dcraft.dev/app/), in your browser, at
+`https://3dcraft.dev/app/?open=/examples/assemblies/<id>.3dcraftasm`.
+
 ## Gallery
 
 From simple to complex, each with the difficulty its reviewer scored out of 10. The reviewer was an AI agent in the
@@ -33,28 +39,53 @@ the models and effort levels, and the briefs the assemblies were built from are 
 
 ## Rebuild and check
 
-The committed `<id>.3dcraftasm` files and `exports/` are the finished assemblies: open one in 3DCraft, in the app
-or with `craft3d-cli`, and play its motion, without rebuilding anything. Each carries its parts.
+The committed `<id>.3dcraftasm` files and `exports/` are the finished assemblies: open one in 3DCraft 0.1.0 or later,
+in the window, in the browser or with `craft3d-cli`, and play its motion, without rebuilding anything. Each carries its
+parts.
 
-The tool that made and checked them, `tools/assemblies.py` (Python 3, standard library only, on Linux or macOS),
-builds every part, then the assembly, packs it and checks it at rest and over its motion. It needs the exact 3DCraft
-build this repository is pinned to, the commit and file format in [`tools/pin.json`](tools/pin.json) as
-`craft3d-cli --version` reports them, and refuses any other: it compares what it rebuilds byte for byte with the
-committed files, which only that build reproduces. When the repository is released the pin is the 3DCraft 0.1.0
-release itself, so the `craft3d-cli` that its installer puts on your `PATH` runs it (or name the binary in
-`CRAFT3D_CLI`).
+**The command line.** Every installer of 3DCraft has `craft3d-cli`. The Linux tarball's `install.sh` puts it in
+`~/.local/bin` and the Windows installer puts it on your `PATH`; on macOS and with the AppImage you reach it as
+[the install chapter of 3DCraft's guide](https://3dcraft.dev/guide/0.1/install) says: on macOS a link to
+`/Applications/3DCraft.app/Contents/MacOS/craft3d-cli` on your `PATH`, with the AppImage a link named `craft3d-cli`
+that points at it. Instead of `PATH`, `CRAFT3D_CLI` may name the binary (or that link).
+
+**The tool.** `tools/assemblies.py` (Python 3, standard library only) made and checked every assembly: it builds
+every part, then the assembly, packs it and checks it at rest and over its motion. It runs on Linux and macOS, not on
+Windows. It needs the 3DCraft build this repository is pinned to, as `craft3d-cli --version` reports it: the commit
+in [`tools/pin.json`](tools/pin.json), or the release named there (0.1.0) with the file format named there (69), so
+the installed 3DCraft 0.1.0 runs it. It refuses any other build, because it compares what it rebuilds byte for byte
+with the committed files and another build may write other bytes. `--version` names the version, the commit and the
+file format, and nothing in it tells the released 0.1.0 from a development build that still carries the same version
+number: the tool accepts both, and with a build that is not the pinned commit, `check` may report files as stale that
+differ only in their bytes.
+
+To rebuild and check one assembly with the installed 3DCraft 0.1.0:
 
 ```sh
-tools/assemblies.py build toggle-clamp          # parts and build.json -> .3dcraftasm and exports; rewrites meta.json
+craft3d-cli --version                           # craft3d-cli 0.1.0 (<commit>, format 69)
 tools/assemblies.py check --quick toggle-clamp  # rebuild in a scratch folder (.scratch/) and check at rest and over the motion
-tools/assemblies.py check toggle-clamp          # the same, plus the public ranges and their corners
+tools/assemblies.py check toggle-clamp          # the same, plus check-range and the motion at up to 8 corners of the ranges
+tools/assemblies.py build toggle-clamp          # parts and build.json -> .3dcraftasm and exports; rewrites meta.json
 tools/assemblies.py render toggle-clamp         # preview.png
 ```
 
-`build` rewrites the `stats` (timings measured on your machine) and `craft3d` fields of the assembly's `meta.json`.
-Give `check` an id: without one it rebuilds and checks all six, which takes hours. Where `systemd-run` exists,
-every run is capped in memory (in the slice named by `CRAFT3D_SLICE`, default `assemblies.slice`), and on Linux the
-tool waits while less than 1.5 GB of memory is free.
+`build` rewrites the assembly's `.3dcraftasm`, its exports, and the `stats` (timings measured on your machine) and
+`craft3d` (the build that wrote them) fields of its `meta.json`; `check` without `--quick` writes only the slowest
+point of the ranges into `stats` (`range_worst_s`); `git diff` shows what changed. Give `check` an id: without one it
+rebuilds and checks all six, which takes hours. Where `systemd-run` exists, every run is capped in memory (in the
+slice named by `CRAFT3D_SLICE`, default `assemblies.slice`), and on Linux the tool waits while less than 1.5 GB of
+memory is free.
+
+## Problems and feedback
+
+A problem with an assembly (a wrong size, a check that fails, a part that cannot be put together, a page that says
+what the model does not do): open an issue in
+[this repository](https://github.com/johancoppens/3dcraft-assemblies-examples/issues). A problem with 3DCraft itself:
+[3DCraft's issues](https://github.com/johancoppens/3dcraft/issues).
+
+[`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) is the dated record of what 3DCraft got wrong or could not yet do while
+these assemblies were built, each bug with a reproducer under `findings/`; it is not a list of the known issues of a
+release.
 
 ## Licence
 
