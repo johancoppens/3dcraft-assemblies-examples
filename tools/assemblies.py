@@ -93,11 +93,25 @@ def die(message):
     sys.exit(2)
 
 
+def capped(command, memory, timeout):
+    """command under a memory cap (systemd-run, where there is one, in the slice CRAFT3D_SLICE names, default
+    assemblies.slice) and a timeout: every craft3d-cli run of the tool goes through here. CRAFT3D_NO_CAP=1 leaves the
+    memory cap out."""
+    command = [str(c) for c in command]
+    if shutil.which("systemd-run") and not os.environ.get("CRAFT3D_NO_CAP"):
+        slice_ = f"--slice={os.environ.get('CRAFT3D_SLICE', 'assemblies.slice')}"
+        return ["systemd-run", "--user", "--scope", "-q", slice_, "-p", f"MemoryMax={memory}",
+                "-p", "MemorySwapMax=0", "timeout", str(timeout)] + command
+    if shutil.which("timeout"):
+        return ["timeout", str(timeout)] + command
+    return command
+
+
 def version_of(path):
     """What `craft3d-cli --version` prints, and what it says: (line, (version, commit or None, format) or None).
     The line is `craft3d-cli 0.1.0 (8c8383e9c89a, format 69)`; a build that does not know its commit leaves it out."""
     try:
-        result = subprocess.run([path, "--version"], capture_output=True, text=True, timeout=120)
+        result = subprocess.run(capped([path, "--version"], "1G", 60), capture_output=True, text=True, timeout=120)
     except (OSError, subprocess.SubprocessError) as e:
         return str(e), None
     lines = result.stdout.strip().splitlines()
@@ -177,13 +191,7 @@ def wait_for_memory(patience=1800):
 def run_cli(args, cwd, memory="3G", timeout=900):
     """Runs craft3d-cli under a memory cap and a timeout; returns (result, seconds)."""
     wait_for_memory()
-    command = [cli()] + [str(a) for a in args]
-    if shutil.which("systemd-run") and not os.environ.get("CRAFT3D_NO_CAP"):
-        slice_ = f"--slice={os.environ.get('CRAFT3D_SLICE', 'assemblies.slice')}"
-        command = ["systemd-run", "--user", "--scope", "-q", slice_, "-p", f"MemoryMax={memory}",
-                   "-p", "MemorySwapMax=0", "timeout", str(timeout)] + command
-    elif shutil.which("timeout"):
-        command = ["timeout", str(timeout)] + command
+    command = capped([cli()] + list(args), memory, timeout)
     start = time.monotonic()
     before = resource.getrusage(resource.RUSAGE_CHILDREN)
     result = subprocess.run(command, cwd=cwd, capture_output=True, text=True)
@@ -195,7 +203,9 @@ def run_cli(args, cwd, memory="3G", timeout=900):
 
 def explain_failure(result, what):
     code = result.returncode
-    reason = {137: "killed at the memory cap", 124: "timed out"}.get(code, f"exit code {code}")
+    # The cap's kill reaches the whole scope: systemd-run itself dies by SIGKILL (-9), or timeout reports it (137).
+    reason = {137: "killed at the memory cap", -9: "killed at the memory cap", 124: "timed out"}.get(
+        code, f"exit code {code}")
     tail = "\n".join((result.stdout.strip().splitlines() + result.stderr.strip().splitlines())[-8:])
     return f"{what}: {reason}\n{tail[:3000]}"
 
