@@ -15,7 +15,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each assembly must be)
 - **Language.** The developer writes in Dutch: answer in Dutch. Everything that lands in this
   repository is English: files, names inside the models, commit messages.
 - **3DCraft is pinned.** Every assembly is built and checked with one 3DCraft commit, recorded in
-  [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli` (`~/.local/bin/craft3d-cli`). `tools/assemblies.py`
+  [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli`. `tools/assemblies.py`
   refuses any other build. Only the coordinator moves the pin, after rebuilding and checking all six.
 - **Do not change 3DCraft from here.** What 3DCraft gets wrong or lacks is *collected* in
   [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) (§7); the developer takes it to 3DCraft in one go. Do not build
@@ -68,18 +68,20 @@ log/ plan/              local only (gitignored): dev log, plans
 - **Build headless.** Edit the sources, then `tools/assemblies.py build <id>`: it builds every part in a scratch
   folder, runs `build.json` beside them, packs, refuses to save when `document.check` is not ok, writes the exports,
   measures, and lints names and budgets. To look around: `craft3d-cli run assemblies/NN-<id>/<id>.3dcraftasm --cmd
-  assembly.inspect` (or `assembly.solve`). To learn a command: `craft3d-cli commands --filter <id>`. Guide chapters 17
-  (assemblies) and 4 (the timeline) in `~/code/3dcraft/docs/guide/`, and the method and limits in
-  `~/code/3dcraft/docs/design/assemblies.md` and `motion.md`; read them, never edit them.
+  assembly.inspect` (or `assembly.solve`). To learn a command: `craft3d-cli commands --filter <id>`. The
+  [user guide](https://3dcraft.dev/guide/)'s chapters on assemblies and on the window (its timeline), and the method
+  and limits in 3DCraft's
+  [`docs/design/assemblies.md`](https://github.com/johancoppens/3dcraft/blob/main/docs/design/assemblies.md) and
+  [`motion.md`](https://github.com/johancoppens/3dcraft/blob/main/docs/design/motion.md); read them, never edit them.
 - **Never use the session's 3DCraft MCP tools** (`mcp__craft3d__*`): they drive the developer's own window. Work
   through `craft3d-cli`; its commands are the same ones MCP runs.
-- **Memory and time.** The developer's laptop has crashed on runaway processes. `tools/assemblies.py` caps every run;
+- **Memory and time.** Runaway processes have crashed the reference machine. `tools/assemblies.py` caps every run;
   by hand, always `systemd-run --user --scope -q -p MemoryMax=3G -p MemorySwapMax=0 timeout 900 craft3d-cli …`. Exit
   137 means the cap was hit: that is a finding, never a reason to raise the cap. When several agents work at once, the
   coordinator sets a shared slice sized to what the machine has free (`systemctl --user set-property --runtime
   assemblies.slice MemoryMax=3G MemorySwapMax=0`, since other sessions run beside this one): the tool uses that slice
   and waits while memory is short; add `--slice=assemblies.slice` to every `systemd-run` you type. Scratch files go in
-  `.scratch/` (gitignored, on disk): `/tmp` is held in memory on this laptop. One render, bake or `check-range` at a time per agent.
+  `.scratch/` (gitignored, on disk): `/tmp` is held in memory on the reference machine. One render, bake or `check-range` at a time per agent.
   No cargo builds are needed here; never build 3DCraft from this repo. A 3DCraft window you start gets
   `--recovery-dir none`.
 - **Python.** Everything an assembly decides lives in its documents: variables, tables, formulas, mates, couplings,
@@ -189,7 +191,7 @@ Name the process of every part; prove with assertions what can be proven, in the
 
 ### 4.5 Light
 Loading means opening the packed `.3dcraftasm` and regenerating it; the tool measures it (`stats.load_s`, `craft3d-cli
-info`, the least of two openings). Budgets on the developer's laptop: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
+info`, the least of two openings). Budgets on a reference machine: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
 file ≤ 1 MB, CPU time (all threads, `stats.load_cpu_s`) at most 3 × the load budget, since the web build is
 single-threaded. **A whole motion is at most 3 × the load budget**: `motion.bake` at 120 frames (`stats.bake_s`), with
 every configuration `t` asks for. The slowest point of the public ranges is at most 3 × the load budget too
@@ -300,8 +302,9 @@ Collect, never fix. [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) has four kinds:
 
 Each entry: id (`A-001` …, so as not to clash with the examples' `F-nnn` and the Jigs' `J-nnn`), kind, title, the
 assembly it was found in, the 3DCraft commit, what happens and what should happen, the reproducer, the impact on the
-assembly (blocked, workaround used, cosmetic) and the workaround. Check `~/code/3dcraft-examples/3DCRAFT-FEEDBACK.md`
-and `~/code/3dcraft-jigs/3DCRAFT-FEEDBACK.md` first and cite an entry that already covers it. An assembly that works
+assembly (blocked, workaround used, cosmetic) and the workaround. Check the examples'
+[`3DCRAFT-FEEDBACK.md`](https://github.com/johancoppens/3dcraft-examples/blob/main/3DCRAFT-FEEDBACK.md) and the
+Jigs' [`3DCRAFT-FEEDBACK.md`](https://github.com/johancoppens/3dcraft-jigs/blob/main/3DCRAFT-FEEDBACK.md) first and cite an entry that already covers it. An assembly that works
 around something links its entry from its README, so it can be improved once 3DCraft is fixed. Builders propose
 entries in their report and write the reproducer; the coordinator numbers them and edits `3DCRAFT-FEEDBACK.md`.
 

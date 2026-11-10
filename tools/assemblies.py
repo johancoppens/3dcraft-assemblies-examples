@@ -33,7 +33,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSEMBLIES = ROOT / "assemblies"
-SCRATCH = ROOT / ".scratch"  # on disk: /tmp is held in memory on the developer's laptop
+SCRATCH = ROOT / ".scratch"  # on disk: /tmp may be held in memory
 PIN = json.loads((ROOT / "tools" / "pin.json").read_text())
 
 # The gallery look (AGENTS.md, The preview). meta.json "preview" may change only the framing keys below.
@@ -111,7 +111,7 @@ def available_gb():
 
 
 def wait_for_memory(patience=1800):
-    """Waits while the machine is short of memory: the laptop has crashed on runaway processes."""
+    """Waits while the machine is short of memory: runaway processes have crashed the reference machine."""
     start = time.monotonic()
     while available_gb() < MIN_AVAILABLE_GB:
         if time.monotonic() - start > patience:
