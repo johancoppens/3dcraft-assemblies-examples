@@ -88,7 +88,7 @@ roots of its two long sides, in the open, reachable from outside; no joint prepa
 sheet. Drawn as one fused body, the welds not modelled.
 
 **Gear teeth.** An equivalent full gear of 10 teeth, pitch radius 20 mm (module 4 mm), 25° pressure angle, stub addendum
-0.8 m, dedendum 1.0 m, 0.4 mm backlash on the pitch circle, a 0.3 mm root fillet (a blanking die's corner; larger ones tripped the kernel failure noted under *Platform notes*), involute flanks **drawn as four chords on the
+0.8 m, dedendum 1.0 m, 0.4 mm backlash on the pitch circle, a 0.3 mm root fillet (a blanking die's corner; 0.25, 0.4 and 0.5 mm fail in the kernel, [A-019](../../3DCRAFT-FEEDBACK.md#a-019)), involute flanks **drawn as four chords on the
 true curve** (see *Platform notes*: a formula-curve flank costs 13 times the regeneration of chords, four arm configurations
 would break the budget). The contact ratio of this tooth form is 1.06 (my own closed form from those numbers, not the model's). Each gear has three or four teeth (the two hands of a pair stand half a pitch apart, so they mesh): enough to stay engaged over the 59° of travel; the mesh is proven by measure, not by stating the ratio (*Checks*).
 
@@ -161,7 +161,7 @@ The arms' angle `arm_elevation` goes from 8.7° to 68.0°.
 
 ## Checks
 
-**At rest and over the motion (`motion.check`, 73 samples, at the defaults and at the 8 corners of the public ranges):**
+**At rest and over the motion (`motion.check`, 73 samples, at the defaults and at 8 of the 16 corners of the public ranges):**
 - *Saddle follows the rhombus closed form*: the solved `saddle_z` against `base_pivot_height + sqrt(4 L² − (D − 2 r)²) + saddle_pivot_drop`, D the span the screw should have reached, within 0.02 mm at every sample.
 - *Saddle stays level* (rotation about y) within 0.02° and *Saddle stays centred* (x) within 0.02 mm, at every sample.
 - *Trunnion span is lead times turns*: the measured span against `low_span − lift_fraction × full_turns × lead`, within 0.02 mm: the thread's advance from the solved poses against the screw's turns.
@@ -177,7 +177,7 @@ The arms' angle `arm_elevation` goes from 8.7° to 68.0°.
 - *Upper arm is as wide as the assembly's sheet thickness says*: the arm's measured width against the assembly's table, at the first sample.
 - Fits, checked at the first sample of the motion: rivet in the arm's hole and in the wall's hole, trunnion pin in both arms' holes, and the screw shank in the bearing bore (`clearance`, 0.12 to 0.25 mm, 0.20 mm each).
 
-**Collisions:** `tools/assemblies.py check` finds none at 121 moments and at the range corners except the listed contacts (`meta.json`).
+**Collisions:** `tools/assemblies.py check` finds none at 121 moments at the defaults and 31 at each of 8 of the 16 range corners, except the listed contacts (`meta.json`).
 
 **Process (each part's own document):** inner bend radius at least the sheet, holes at least 2.5 t + r from a bend (10.5 mm), the widths and lengths of the arms against their parameters, the trunnion's thinnest wall at least 1.9 mm (`measure.thickness`, across its range of bores and pin depths), the cross's clearance in the ears of the yokes.
 

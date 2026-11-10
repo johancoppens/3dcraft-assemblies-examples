@@ -189,7 +189,7 @@ assertions compare the solved nozzle with the point `Rim point` of the vase inst
 
 ## Checks
 
-**Over the motion (`motion.check`, 73 samples, at the defaults and at the corners of the public ranges, all
+**Over the motion (`motion.check`, 73 samples, at the defaults and at 8 of the 16 corners of the public ranges, all
 assertions pass):**
 - *Motor A/B turns by the CoreXY equation for the measured carriage and the drawn pulley*: the motor's solved angle times the pitch radius **measured on the pulley instance** (`Pitch point` against its axis) against the measured gantry and carriage positions, within 0.02 mm. A wrong tooth count in the coupling or the drawn pulley fails it.
 - *Belt A / B is one constant length*: the sum of the four moving straight spans measured from solved positions (clamp seats, gantry idler tangents, frame tangents), which is what a real belt makes constant, against `4 x half-track - 2 x clamp distance` within 0.02 mm.
@@ -208,7 +208,7 @@ assertions pass):**
 - *Toolhead/Gantry stays on its rail*: the carriage travel within the rail, less the carriage's half length. The mates' `limits` stop `Gantry_Y` at the rear where the gantry floor meets the corner floor, at the front before the fan reaches the front rail and the head plate the corners, and `Carriage_X` where the head meets the gantry end (the build area is reachable within them; the motion itself covers only the vase's circle).
 - Fits with both bounds: the three carriages' clearance to their rails between 0.25 and 0.35 mm (`clearance`).
 
-**Collisions** at 121 moments at the defaults and 31 at each corner of the ranges: none except the pairs listed in
+**Collisions** at 121 moments at the defaults and 31 at each of 8 of the 16 corners of the ranges: none except the pairs listed in
 `meta.json`: the nut on the screw's crest (`F-014`) and the Z motor's shaft and boss inside the lead screw (the screw is
 the motor's integrated shaft).
 

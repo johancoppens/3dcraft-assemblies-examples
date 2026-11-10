@@ -285,7 +285,7 @@ fits, bounded from both sides:
 - the upper studs clear the knuckle's aux pivot pin by at least 0.3 mm (5.2 mm at the defaults; a minimum only);
 - *Load estimates match the measured masses*: the design estimate of the load on the lower arm within 6 % of the measure.
 
-**Over the motion (`motion.check`, 73 samples, at the defaults and at the corners of the ranges):**
+**Over the motion (`motion.check`, 73 samples, at the defaults and at 8 of the 16 corners of the ranges):**
 
 - *Lower arm balances within its pivot friction* and *Upper arm balances within its pivot friction*: the net torque is
   within `arm_friction` (0.293 N m, from the friction pivot above). Gravity comes from the `mass` of the measured groups and
@@ -305,8 +305,8 @@ fits, bounded from both sides:
   this is a measurement, not an assertion.
 - *Lamp does not tip*: the measured centre of mass of the whole lamp stays at least 10 mm inside the base's rim (at most
   62.5 mm from the axis at the defaults, against a base radius of 90 mm).
-- No collision between bodies at the 121 moments the tool checks at the defaults and the 31 it checks at each corner of
-  the ranges, other than the listed contacts in `meta.json`: each spring's two end hooks, where the wire of the hook
+- No collision between bodies at the 121 moments the tool checks at the defaults and the 31 it checks at each of 8 of the 16
+  corners of the ranges, other than the listed contacts in `meta.json`: each spring's two end hooks, where the wire of the hook
   runs into the coil (one wire, drawn as separate bodies); the cross-pins pressed into the oak; the shade's shell and its
   cream liner (one sheet, drawn as two bodies).
 

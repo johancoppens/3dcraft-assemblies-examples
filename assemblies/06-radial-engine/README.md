@@ -246,7 +246,7 @@ The rocker is a real closed loop (tappet, pushrod, rocker, solved), the rocker r
 Public parameters (`variable.publish`): **bore** (126–134 mm), **stroke** (116–122 mm), **rod ratio** (3.95–4.20, the
 master rod length over the crank radius), and **start angle** (0–355°, where the crank stands at `t` = 0, on the firing turn of cylinder 1). The ranges
 are limited by the pistons of neighbouring cylinders: their skirts come close near the bottom of the stroke (the
-clearance is asserted over the motion at every corner of these ranges). A short stroke with a short rod would collide. The piston, barrel and
+clearance is asserted over the motion at the defaults and at 8 of the 16 corners of these ranges). A short stroke with a short rod would collide. The piston, barrel and
 head follow `bore`; the crank, the rods and the deck height follow `stroke` and `rod ratio`.
 
 ## Checks
@@ -290,7 +290,7 @@ Over the motion (`motion.check` at 145 samples, one every 5° of crank; all of i
 In the parts: the split locks in the stem's groove and the retainer on the locks, the roller on its axle and the axle
 in the fork, the rocker pin in its bracket, each from above and below.
 
-No collision at 121 moments at the defaults and 31 at each corner of the ranges, except the listed contact of the valve
+No collision at 121 moments at the defaults and 31 at each of 8 of the 16 corners of the ranges, except the listed contact of the valve
 retainers with the springs while the valves are open (the springs are drawn at their installed height and do not
 compress).
 
